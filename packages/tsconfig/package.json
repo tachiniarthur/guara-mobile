@@ -1,0 +1,10 @@
+{
+  "name": "@guara/tsconfig",
+  "version": "0.0.0",
+  "private": true,
+  "license": "UNLICENSED",
+  "files": [
+    "base.json",
+    "react-native.json"
+  ]
+}

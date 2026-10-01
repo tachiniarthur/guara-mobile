@@ -1,0 +1,20 @@
+packages:
+  - 'apps/*'
+  - 'packages/*'
+
+# pnpm 11+ reads node-linker from here (it is ignored in .npmrc).
+# Hoisted layout keeps React Native / Gradle tooling happy in the monorepo.
+nodeLinker: hoisted
+
+# pnpm blocks dependency lifecycle scripts by default; allow only the ones we need.
+allowBuilds:
+  '@shopify/react-native-skia': true
+  '@swc/core': true
+  unrs-resolver: true
+
+minimumReleaseAgeExclude:
+  - globals@17.13.0
+
+# Keep React Native tooling aligned with the RN version pinned by the Expo SDK.
+overrides:
+  '@react-native/metro-config': 0.86.3

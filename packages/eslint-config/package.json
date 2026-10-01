@@ -1,0 +1,26 @@
+{
+  "name": "@guara/eslint-config",
+  "version": "0.0.0",
+  "private": true,
+  "license": "UNLICENSED",
+  "main": "./base.js",
+  "exports": {
+    "./base": "./base.js",
+    "./expo": "./expo.js"
+  },
+  "files": [
+    "base.js",
+    "expo.js",
+    "shared.js"
+  ],
+  "dependencies": {
+    "@eslint/js": "^9.39.5",
+    "eslint-config-expo": "~57.0.2",
+    "eslint-config-prettier": "^10.1.8",
+    "globals": "^17.13.0",
+    "typescript-eslint": "^8.71.0"
+  },
+  "peerDependencies": {
+    "eslint": "^9.0.0"
+  }
+}

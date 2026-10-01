@@ -1,0 +1,10 @@
+node_modules
+.turbo
+.expo
+dist
+build
+coverage
+pnpm-lock.yaml
+apps/*/android
+apps/*/ios
+expo-env.d.ts

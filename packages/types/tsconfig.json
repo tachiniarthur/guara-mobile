@@ -1,0 +1,4 @@
+{
+  "extends": "@guara/tsconfig/base.json",
+  "include": ["src"]
+}
