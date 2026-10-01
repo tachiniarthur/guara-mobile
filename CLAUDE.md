@@ -84,9 +84,10 @@ apps/mobile/
     screens/           telas (hoje placeholders)
     components/ hooks/ api/ schemas/ store/
     index.ts           API pública da feature (importe sempre de '@/features/<x>')
-  src/components/      compartilhados: ui/, charts/, feedback/, layout/ (PlaceholderScreen, ResponsiveContainer)
+  src/components/      compartilhados: ui/ (primitivos e controles), feedback/, layout/, charts/ (vazio)
+  src/dev/             ferramentas só de desenvolvimento (catálogo de UI em /ui)
   src/lib/             infraestrutura: env, runtime, supabase, auth-oauth, api-client, sse,
-                       query-client, storage, notifications, logger
+                       query-client, storage, notifications, logger, cn, haptics
   src/providers/       AppProviders, QueryProvider, AuthProvider, ThemeProvider
   src/hooks/ src/stores/ src/theme/ src/constants/ src/types/
 packages/
@@ -120,6 +121,36 @@ packages/
 - **Alias:** `@/` → `apps/mobile/src`, `@assets/` → `apps/mobile/assets`.
 - **Sessão simulada:** `devSession.status` em `src/providers/AuthProvider.tsx`
   (`signedOut` → (auth), `onboarding` → (onboarding), `signedIn` → (app)).
+
+### Componentes base (`src/components/`)
+
+- **Catálogo vivo:** abra `/ui` no app em desenvolvimento ("Catálogo de UI (dev)" em qualquer
+  placeholder). Componente novo ou variante nova → acrescente ao catálogo (`src/dev/ui-catalog`).
+- **Texto:** todo texto passa por `Text` (variantes `display/title/subtitle/body/caption/label`,
+  tons semânticos). Dinheiro com `MoneyText` (`Cents | null`), percentuais com `PercentText`,
+  variação com `DeltaBadge`, ausência com `EmptyValue`. Nunca formate valores na mão.
+- **Variantes:** `cva` + `cn()` (`src/lib/cn.ts`, tailwind-merge v2 configurado com nossos tokens).
+  Classes sempre escritas por extenso (o Tailwind não enxerga classes montadas dinamicamente).
+- **Cores em props** (ícones Lucide, Switch, ActivityIndicator): use `toneColor`/tokens de
+  `@guara/ui-tokens`, nunca hex no componente. Contraste AA é testado em `ui-tokens`.
+- **Toque e acessibilidade:** `hitSlopFor(size)` garante 44×44; `accessibilityRole/State` em todo
+  controle; `haptics` (`src/lib/haptics.ts`) em ações principais e seleção.
+- **Feedback:** `toast.success/error/info()` funciona de qualquer lugar; `Sheet` e `ConfirmDialog`
+  são controlados por `open`.
+
+### Armadilhas conhecidas
+
+- **NativeWind + classe nova:** se uma classe recém-criada não aparecer no app, reinicie o Metro com
+  `--clear` e force o reload do Expo Go (o deep link não recarrega o bundle).
+- **Texto cortado no Android:** em linhas curtas (badges, chips) use `numberOfLines={1}` — o
+  Android às vezes quebra a linha mesmo com largura sobrando.
+- **`@gorhom/bottom-sheet`:** nunca chame `dismiss()` num modal que não foi apresentado (trava em
+  `DISMISSING` e ignora `present()` depois). O `Sheet` já trata isso.
+- **Testes:** `expo-router/testing-library` registra o próprio mock do Reanimated (sem
+  `useReducedMotion`) — prefira `ReduceMotion.System` nas animações. Use os matchers do RNTL 13
+  (`toBeChecked`, `toBeSelected`, `toBeBusy`); `jest-native` está descontinuado.
+- **Código só de dev:** carregue com `__DEV__ ? require(...) : null` para o Metro remover do bundle
+  de produção (veja `app/(dev)/ui.tsx`).
 
 ### Comandos
 
