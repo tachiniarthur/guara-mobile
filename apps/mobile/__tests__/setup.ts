@@ -1,7 +1,8 @@
 /* Global test setup (jest-expo preset). RNTL 13+ registers its matchers automatically. */
 import 'react-native-gesture-handler/jestSetup';
 
-// Official mocks for animation-heavy libraries.
+// Official mocks for animation-heavy libraries (Reanimated 4 runs on react-native-worklets).
+jest.mock('react-native-worklets', () => jest.requireActual('react-native-worklets/src/mock'));
 jest.mock('react-native-reanimated', () => jest.requireActual('react-native-reanimated/mock'));
 jest.mock('@gorhom/bottom-sheet', () => jest.requireActual('@gorhom/bottom-sheet/mock'));
 
