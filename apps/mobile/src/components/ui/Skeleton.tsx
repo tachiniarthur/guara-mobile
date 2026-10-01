@@ -1,8 +1,8 @@
 import { duration } from '@guara/ui-tokens';
 import { useEffect } from 'react';
 import Animated, {
+  ReduceMotion,
   useAnimatedStyle,
-  useReducedMotion,
   useSharedValue,
   withRepeat,
   withTiming,
@@ -16,17 +16,22 @@ export interface SkeletonProps {
 }
 
 /**
- * Loading placeholder with a soft pulse (static when the system asks to reduce motion).
- * Hidden from screen readers — announce loading once on the container instead.
+ * Loading placeholder with a soft pulse. `ReduceMotion.System` keeps it static when the
+ * system asks to reduce motion. Hidden from screen readers — announce loading once on the
+ * container instead.
  */
 export function Skeleton({ className }: SkeletonProps) {
-  const reduceMotion = useReducedMotion();
   const opacity = useSharedValue(1);
 
   useEffect(() => {
-    if (reduceMotion) return;
-    opacity.value = withRepeat(withTiming(0.45, { duration: duration.pulse }), -1, true);
-  }, [opacity, reduceMotion]);
+    opacity.value = withRepeat(
+      withTiming(0.45, { duration: duration.pulse, reduceMotion: ReduceMotion.System }),
+      -1,
+      true,
+      undefined,
+      ReduceMotion.System,
+    );
+  }, [opacity]);
 
   const animatedStyle = useAnimatedStyle(() => ({ opacity: opacity.value }));
 
