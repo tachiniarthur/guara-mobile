@@ -56,11 +56,11 @@ export function DeltaBadge({
       )}
     >
       <Icon size={iconSize.sm} color={toneColor[tone]} />
-      <Text variant="caption" weight="medium" tone={tone} tabular>
+      <Text variant="caption" weight="medium" tone={tone} tabular numberOfLines={1}>
         {text}
       </Text>
       {label ? (
-        <Text variant="caption" tone="muted">
+        <Text variant="caption" tone="muted" numberOfLines={1}>
           {label}
         </Text>
       ) : null}

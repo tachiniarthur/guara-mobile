@@ -35,19 +35,35 @@ function Backdrop(props: BottomSheetBackdropProps) {
 /** Bottom sheet with the app look, controlled by `open`. Requires BottomSheetModalProvider. */
 export function Sheet({ open, onClose, title, children, snapPoints }: SheetProps) {
   const ref = useRef<BottomSheetModal>(null);
+  /** Whether the modal is currently presented (avoids dismissing a closed modal). */
+  const presented = useRef(false);
   const insets = useSafeAreaInsets();
 
   useEffect(() => {
-    if (open) ref.current?.present();
-    else ref.current?.dismiss();
+    if (open && !presented.current) {
+      presented.current = true;
+      ref.current?.present();
+    } else if (!open && presented.current) {
+      // Only dismiss what is on screen: calling dismiss() on a modal that was never
+      // presented leaves @gorhom/bottom-sheet stuck in DISMISSING, and later present()
+      // calls are silently ignored.
+      presented.current = false;
+      ref.current?.dismiss();
+    }
   }, [open]);
+
+  const handleDismiss = () => {
+    // Closed by the user (swipe, backdrop, back button): already off screen.
+    presented.current = false;
+    onClose();
+  };
 
   return (
     <BottomSheetModal
       ref={ref}
       snapPoints={snapPoints}
       enableDynamicSizing={!snapPoints}
-      onDismiss={onClose}
+      onDismiss={handleDismiss}
       backdropComponent={Backdrop}
       backgroundStyle={{ backgroundColor: colors.background.elevated }}
       handleIndicatorStyle={{ backgroundColor: colors.border.strong }}

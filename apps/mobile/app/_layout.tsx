@@ -63,6 +63,10 @@ function RootNavigator() {
       <Stack.Protected guard={status === 'signedIn'}>
         <Stack.Screen name="(app)" />
       </Stack.Protected>
+      {/* Dev-only tools (component catalog). Unreachable in production builds. */}
+      <Stack.Protected guard={__DEV__}>
+        <Stack.Screen name="(dev)/ui" />
+      </Stack.Protected>
     </Stack>
   );
 }

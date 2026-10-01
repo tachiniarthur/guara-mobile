@@ -6,6 +6,12 @@ jest.mock('react-native-worklets', () => jest.requireActual('react-native-workle
 jest.mock('react-native-reanimated', () => jest.requireActual('react-native-reanimated/mock'));
 jest.mock('@gorhom/bottom-sheet', () => jest.requireActual('@gorhom/bottom-sheet/mock'));
 
+// Safe-area hooks work without a provider (official mock, fixed metrics).
+jest.mock(
+  'react-native-safe-area-context',
+  () => jest.requireActual<{ default: object }>('react-native-safe-area-context/jest/mock').default,
+);
+
 // In-memory replacements for native storage modules.
 jest.mock('expo-sqlite/kv-store', () => {
   class SQLiteStorage {

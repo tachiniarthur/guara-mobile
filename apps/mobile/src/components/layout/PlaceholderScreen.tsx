@@ -1,4 +1,5 @@
 import { Link } from 'expo-router';
+import { View } from 'react-native';
 
 import { Text } from '@/components/ui/Text';
 import { COMMON_COPY } from '@/constants/copy';
@@ -27,11 +28,18 @@ export function PlaceholderScreen({ title, subtitle }: PlaceholderScreenProps) {
         </Text>
       ) : null}
       {__DEV__ ? (
-        <Link href="/_sitemap" asChild>
-          <Text variant="caption" tone="subtle" className="mt-6 underline">
-            {COMMON_COPY.devRouteMap}
-          </Text>
-        </Link>
+        <View className="mt-6 flex-row flex-wrap justify-center gap-x-6 gap-y-2">
+          <Link href="/_sitemap" asChild>
+            <Text variant="caption" tone="subtle" className="underline">
+              {COMMON_COPY.devRouteMap}
+            </Text>
+          </Link>
+          <Link href="/ui" asChild>
+            <Text variant="caption" tone="subtle" className="underline">
+              {COMMON_COPY.devUiCatalog}
+            </Text>
+          </Link>
+        </View>
       ) : null}
     </Screen>
   );

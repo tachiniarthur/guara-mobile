@@ -7,10 +7,16 @@ import { FEEDBACK_COPY } from '@/constants/copy';
 import { useOnline } from '@/hooks/useOnline';
 import { cn } from '@/lib/cn';
 
+export interface OfflineBannerProps {
+  /** Force visibility (previews). Default: follows the connection state. */
+  visible?: boolean;
+  className?: string;
+}
+
 /** Shown only while the device is offline. */
-export function OfflineBanner({ className }: { className?: string }) {
+export function OfflineBanner({ visible, className }: OfflineBannerProps) {
   const online = useOnline();
-  if (online) return null;
+  if (!(visible ?? !online)) return null;
 
   return (
     <View
