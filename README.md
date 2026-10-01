@@ -8,14 +8,15 @@ pelo **Expo Go**. Regras de arquitetura e convenções: veja [`CLAUDE.md`](./CLA
 
 ## Pré-requisitos (Ubuntu)
 
-| Ferramenta                      | Obrigatório? | Como instalar                                                                                                                                                                                 |
-| ------------------------------- | ------------ | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Node.js 24 LTS (via nvm)        | sim          | `curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.3/install.sh \| bash` e depois `nvm install` (lê `.nvmrc`)                                                                       |
-| pnpm                            | sim          | `corepack enable` (a versão vem do `packageManager` do `package.json`)                                                                                                                        |
-| Git                             | sim          | `sudo apt install git`                                                                                                                                                                        |
-| Watchman                        | recomendado  | `sudo apt install watchman`                                                                                                                                                                   |
-| Android Studio + SDK + emulador | recomendado  | Baixe em https://developer.android.com/studio (ou `sudo snap install android-studio --classic`). No _Device Manager_, crie um emulador de **celular** e um de **tablet** (ex.: Pixel Tablet). |
-| `libasound2t64`                 | opcional     | `sudo apt install libasound2t64` — necessário para abrir o React Native DevTools (tecla `j`)                                                                                                  |
+| Ferramenta                      | Obrigatório? | Como instalar                                                                                                                                                                                               |
+| ------------------------------- | ------------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Node.js 24 LTS (via nvm)        | sim          | `curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.3/install.sh \| bash` e depois `nvm install` (lê `.nvmrc`)                                                                                     |
+| pnpm                            | sim          | `corepack enable` (a versão vem do `packageManager` do `package.json`)                                                                                                                                      |
+| Git                             | sim          | `sudo apt install git`                                                                                                                                                                                      |
+| GitHub CLI (`gh`)               | sim          | Sem sudo: baixe o `gh_<versão>_linux_amd64.tar.gz` oficial em https://github.com/cli/cli/releases, confira o SHA-256 com o `checksums.txt`, copie `bin/gh` para `~/.local/bin` e rode `gh auth login --web` |
+| Watchman                        | recomendado  | `sudo apt install watchman`                                                                                                                                                                                 |
+| Android Studio + SDK + emulador | recomendado  | Baixe em https://developer.android.com/studio (ou `sudo snap install android-studio --classic`). No _Device Manager_, crie um emulador de **celular** e um de **tablet** (ex.: Pixel Tablet).               |
+| `libasound2t64`                 | opcional     | `sudo apt install libasound2t64` — necessário para abrir o React Native DevTools (tecla `j`)                                                                                                                |
 
 Com o Android Studio instalado, adicione ao `~/.bashrc` (ou `~/.zshrc`):
 
@@ -38,7 +39,7 @@ export PATH="$ANDROID_HOME/emulator:$ANDROID_HOME/platform-tools:$PATH"
 ## Instalação
 
 ```bash
-git clone <repo> guara && cd guara
+gh repo clone GabrielGomesRodrigues/guara && cd guara   # repositório privado
 nvm install && corepack enable
 pnpm install
 cp apps/mobile/.env.example apps/mobile/.env   # ajuste EXPO_PUBLIC_API_URL
