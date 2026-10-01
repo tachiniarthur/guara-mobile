@@ -3,3 +3,4 @@
 // the raw tokens only where a style object is required (navigation, charts).
 export { colors, spacing, radius, fontSize, breakpoints } from '@guara/ui-tokens';
 export * from './navigation';
+export * from './tones';

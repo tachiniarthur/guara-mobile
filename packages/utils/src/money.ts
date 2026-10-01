@@ -149,3 +149,79 @@ export function parseToCents(input: string | null | undefined): Cents | null {
 
   return cents(sign * value || 0);
 }
+
+const COMPACT_UNITS = [
+  { suffix: 'mil', cents: 100_000 }, // R$ 1 mil
+  { suffix: 'mi', cents: 100_000_000 }, // R$ 1 milhão
+  { suffix: 'bi', cents: 100_000_000_000 }, // R$ 1 bilhão
+  { suffix: 'tri', cents: 100_000_000_000_000 }, // R$ 1 trilhão
+] as const;
+
+/**
+ * Short pt-BR format for large amounts, with one decimal: "R$ 1,2 mil", "R$ 3,4 mi".
+ * Below R$ 1.000 it falls back to `formatCents`. Rounds half away from zero.
+ * Missing or invalid values render as "—".
+ */
+export function formatCentsCompact(
+  value: Cents | number | null | undefined,
+  { currency = 'BRL', signDisplay = 'auto' }: Omit<FormatCentsOptions, 'hideSymbol'> = {},
+): string {
+  if (value === null || value === undefined || !Number.isSafeInteger(value)) return EMPTY;
+
+  const abs = Math.abs(value);
+  const first = COMPACT_UNITS[0];
+  if (abs < first.cents) return formatCents(value, { currency, signDisplay });
+
+  let unitIndex = COMPACT_UNITS.findLastIndex((unit) => abs >= unit.cents);
+  let tenths = Math.round(abs / (COMPACT_UNITS[unitIndex]!.cents / 10));
+  // 999,95 mil rounds to 1.000,0 mil → promote to "1 mi".
+  if (tenths >= 10_000 && unitIndex < COMPACT_UNITS.length - 1) {
+    unitIndex += 1;
+    tenths = Math.round(abs / (COMPACT_UNITS[unitIndex]!.cents / 10));
+  }
+
+  const integerPart = groupThousands(String(Math.trunc(tenths / 10)));
+  const decimal = tenths % 10;
+  const number = decimal ? `${integerPart},${decimal}` : integerPart;
+  const body = `${CURRENCY_SYMBOL[currency]}${NBSP}${number}${NBSP}${COMPACT_UNITS[unitIndex]!.suffix}`;
+
+  let sign = '';
+  if (signDisplay !== 'never') {
+    if (value < 0) sign = '-';
+    else if (value > 0 && signDisplay === 'always') sign = '+';
+  }
+  return `${sign}${body}`;
+}
+
+const SPOKEN_CURRENCY: Record<Currency, [singular: string, plural: string]> = {
+  BRL: ['real', 'reais'],
+  USD: ['dólar', 'dólares'],
+  EUR: ['euro', 'euros'],
+};
+
+/** Accessible label read by screen readers when a value is missing. */
+export const EMPTY_SPOKEN = 'sem informação';
+
+/**
+ * Text for screen readers: 123456 → "1.234 reais e 56 centavos", -150 → "menos 1 real e
+ * 50 centavos". Avoids readers spelling out "R cifrão" and the decimal comma.
+ */
+export function formatCentsForSpeech(
+  value: Cents | number | null | undefined,
+  currency: Currency = 'BRL',
+): string {
+  if (value === null || value === undefined || !Number.isSafeInteger(value)) return EMPTY_SPOKEN;
+
+  const abs = Math.abs(value);
+  const units = Math.trunc(abs / 100);
+  const fraction = abs % 100;
+  const [singular, plural] = SPOKEN_CURRENCY[currency];
+
+  const parts: string[] = [];
+  if (units > 0 || fraction === 0) {
+    parts.push(`${groupThousands(String(units))} ${units === 1 ? singular : plural}`);
+  }
+  if (fraction > 0) parts.push(`${fraction} ${fraction === 1 ? 'centavo' : 'centavos'}`);
+
+  return `${value < 0 ? 'menos ' : ''}${parts.join(' e ')}`;
+}

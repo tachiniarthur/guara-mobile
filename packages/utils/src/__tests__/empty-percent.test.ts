@@ -1,6 +1,6 @@
 import { cents } from '../money';
 import { EMPTY, isEmptyValue, orEmpty } from '../empty';
-import { formatPercent, percentChange, ratioToPercent } from '../percent';
+import { formatPercent, formatPercentForSpeech, percentChange, ratioToPercent } from '../percent';
 
 describe('empty', () => {
   it('detects missing values', () => {
@@ -38,5 +38,16 @@ describe('percent', () => {
     expect(percentChange(cents(1000), cents(1250))).toBe(25);
     expect(percentChange(cents(-1000), cents(-500))).toBe(50);
     expect(percentChange(cents(0), cents(100))).toBeNull();
+  });
+});
+
+describe('formatPercentForSpeech', () => {
+  it('reads signs and the percent symbol', () => {
+    expect(formatPercentForSpeech(12.5)).toBe('12,50 por cento');
+    expect(formatPercentForSpeech(-3, { fractionDigits: 1 })).toBe('menos 3,0 por cento');
+    expect(formatPercentForSpeech(2.3, { signDisplay: 'always', fractionDigits: 1 })).toBe(
+      'mais 2,3 por cento',
+    );
+    expect(formatPercentForSpeech(null)).toBe('sem informação');
   });
 });

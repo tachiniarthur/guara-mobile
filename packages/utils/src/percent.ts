@@ -41,3 +41,13 @@ export function percentChange(from: Cents, to: Cents): number | null {
   if (from === 0) return null;
   return ((to - from) / Math.abs(from)) * 100;
 }
+
+/** Screen-reader text: 12.5 → "12,50 por cento", -3 → "menos 3,00 por cento". */
+export function formatPercentForSpeech(
+  value: number | null | undefined,
+  options?: FormatPercentOptions,
+): string {
+  const text = formatPercent(value, options);
+  if (text === EMPTY) return 'sem informação';
+  return text.replace(/^-/, 'menos ').replace(/^\+/, 'mais ').replace(/%$/, ' por cento');
+}
