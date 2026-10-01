@@ -1,6 +1,10 @@
 import '../global.css';
 
-import { colors } from '@guara/ui-tokens';
+import { Inter_400Regular } from '@expo-google-fonts/inter/400Regular';
+import { Inter_500Medium } from '@expo-google-fonts/inter/500Medium';
+import { Inter_600SemiBold } from '@expo-google-fonts/inter/600SemiBold';
+import { Inter_700Bold } from '@expo-google-fonts/inter/700Bold';
+import { colors, fontFamily } from '@guara/ui-tokens';
 import { useFonts } from 'expo-font';
 import { Stack } from 'expo-router';
 import * as SplashScreen from 'expo-splash-screen';
@@ -28,8 +32,13 @@ export default function RootLayout() {
  */
 function RootNavigator() {
   const { status } = useAuth();
-  // Register custom fonts from assets/fonts here when they are added.
-  const [fontsLoaded, fontError] = useFonts({});
+  // Family names come from the tokens (one family per weight).
+  const [fontsLoaded, fontError] = useFonts({
+    [fontFamily.regular]: Inter_400Regular,
+    [fontFamily.medium]: Inter_500Medium,
+    [fontFamily.semibold]: Inter_600SemiBold,
+    [fontFamily.bold]: Inter_700Bold,
+  });
   const ready = status !== 'loading' && (fontsLoaded || fontError !== null);
 
   useEffect(() => {

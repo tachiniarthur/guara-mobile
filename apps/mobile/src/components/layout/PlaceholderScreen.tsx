@@ -21,16 +21,18 @@ export function PlaceholderScreen({ title, subtitle }: PlaceholderScreenProps) {
       <ResponsiveContainer className="flex-1 items-center justify-center px-6">
         <Text
           accessibilityRole="header"
-          className="text-center text-2xl font-semibold text-foreground"
+          className="text-center font-sans-semibold text-title text-foreground"
         >
           {title}
         </Text>
         {detail ? (
-          <Text className="mt-2 text-center text-base text-foreground-muted">{detail}</Text>
+          <Text className="mt-2 text-center font-sans text-body text-foreground-muted">
+            {detail}
+          </Text>
         ) : null}
         {__DEV__ ? (
           <Link href="/_sitemap" asChild>
-            <Text className="mt-8 text-sm text-foreground-subtle underline">
+            <Text className="mt-8 font-sans text-caption text-foreground-subtle underline">
               {COMMON_COPY.devRouteMap}
             </Text>
           </Link>

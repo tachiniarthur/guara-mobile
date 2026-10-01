@@ -9,11 +9,14 @@ export const spacing = {
   4: 16,
   5: 20,
   6: 24,
+  7: 28,
   8: 32,
   10: 40,
   12: 48,
+  14: 56,
   16: 64,
   20: 80,
+  24: 96,
 } as const;
 
 export type SpacingKey = keyof typeof spacing;
