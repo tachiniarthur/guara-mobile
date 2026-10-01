@@ -1,9 +1,9 @@
 import { Link } from 'expo-router';
-import { Text, View } from 'react-native';
 
+import { Text } from '@/components/ui/Text';
 import { COMMON_COPY } from '@/constants/copy';
 
-import { ResponsiveContainer } from './ResponsiveContainer';
+import { Screen } from './Screen';
 
 interface PlaceholderScreenProps {
   /** Screen title in pt-BR. */
@@ -17,27 +17,22 @@ export function PlaceholderScreen({ title, subtitle }: PlaceholderScreenProps) {
   const detail = Array.isArray(subtitle) ? subtitle.join('/') : subtitle;
 
   return (
-    <View className="flex-1 bg-background">
-      <ResponsiveContainer className="flex-1 items-center justify-center px-6">
-        <Text
-          accessibilityRole="header"
-          className="text-center font-sans-semibold text-title text-foreground"
-        >
-          {title}
+    <Screen contentClassName="items-center justify-center gap-2">
+      <Text variant="title" align="center" accessibilityRole="header">
+        {title}
+      </Text>
+      {detail ? (
+        <Text variant="body" tone="muted" align="center">
+          {detail}
         </Text>
-        {detail ? (
-          <Text className="mt-2 text-center font-sans text-body text-foreground-muted">
-            {detail}
+      ) : null}
+      {__DEV__ ? (
+        <Link href="/_sitemap" asChild>
+          <Text variant="caption" tone="subtle" className="mt-6 underline">
+            {COMMON_COPY.devRouteMap}
           </Text>
-        ) : null}
-        {__DEV__ ? (
-          <Link href="/_sitemap" asChild>
-            <Text className="mt-8 font-sans text-caption text-foreground-subtle underline">
-              {COMMON_COPY.devRouteMap}
-            </Text>
-          </Link>
-        ) : null}
-      </ResponsiveContainer>
-    </View>
+        </Link>
+      ) : null}
+    </Screen>
   );
 }
