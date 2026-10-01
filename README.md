@@ -30,17 +30,10 @@ export PATH="$ANDROID_HOME/emulator:$ANDROID_HOME/platform-tools:$PATH"
 
 - **Emulador:** se o Android Studio estiver instalado no **Windows**, rode uma vez
   `bash tools/wsl/setup-android-shim.sh` e adicione as duas linhas que ele imprime ao seu shell.
-  Assim o `npx expo start --android` no WSL controla o `adb.exe`/`emulator.exe` do Windows.
-- **Aparelho físico:** no modo de rede padrão do WSL (NAT), o celular **não alcança** o Metro.
-  Opções:
-  1. Rede espelhada — em `C:\Users\<você>\.wslconfig`:
-     ```ini
-     [wsl2]
-     networkingMode=mirrored
-     ```
-     Rode `wsl --shutdown`, libere a porta 8081 no firewall do Windows e, se o QR code mostrar o IP
-     errado, inicie com `REACT_NATIVE_PACKAGER_HOSTNAME=<IP do Windows na rede> pnpm dev`.
-  2. Túnel: `npx expo start --tunnel` (mais lento, funciona em qualquer rede).
+  Assim o `pnpm dev` / `npx expo start --android` no WSL controla o `adb.exe`/`emulator.exe` do Windows.
+- **Aparelho físico:** no modo de rede padrão do WSL (NAT) o celular **não alcança** o Metro pela
+  rede local — use **`pnpm dev:tunnel`** (veja [Como rodar](#como-rodar)).
+- Alternativa avançada: rede espelhada do WSL (`networkingMode=mirrored` no `.wslconfig` do Windows, com a porta 8081 liberada no firewall), que permite usar `pnpm dev` também no celular.
 
 ## Instalação
 
@@ -53,28 +46,33 @@ cp apps/mobile/.env.example apps/mobile/.env   # ajuste EXPO_PUBLIC_API_URL
 
 ## Como rodar
 
-```bash
-pnpm dev                 # na raiz (equivale a `npx expo start` em apps/mobile)
-```
+| Onde testar                         | Comando (na raiz)                          |
+| ----------------------------------- | ------------------------------------------ |
+| **iPhone / iPad / Android físico**  | `pnpm dev:tunnel` — recomendado            |
+| Emulador Android (celular e tablet) | `pnpm dev` (e tecla `a`) ou `pnpm android` |
 
 O terminal mostra um **QR code** e atalhos (`a` abre no Android, `r` recarrega, `j` abre o DevTools).
+
+O `dev:tunnel` publica o Metro numa URL `exp://….exp.direct` (via `@expo/ngrok`, já instalado no
+projeto), que o celular alcança de qualquer rede — inclusive com o WSL em NAT. É um pouco mais lento
+que a rede local e a URL é pública enquanto o servidor estiver rodando.
 
 ### iPhone / iPad (sem Mac)
 
 1. Instale o **Expo Go** pela App Store.
-2. Deixe o iPhone e o computador na **mesma rede Wi-Fi**.
+2. Rode `pnpm dev:tunnel` e espere aparecer `Tunnel ready.` e o QR code.
 3. Escaneie o QR code com a **câmera** do iPhone e toque na notificação para abrir no Expo Go.
 
 ### Android físico
 
 1. Instale o **Expo Go** pela Play Store.
-2. Mesma rede Wi-Fi do computador.
+2. Rode `pnpm dev:tunnel`.
 3. Abra o Expo Go e use **Scan QR code**.
 
 ### Emulador Android (celular e tablet)
 
 ```bash
-cd apps/mobile && npx expo start --android
+pnpm dev   # depois tecle `a` — ou `pnpm android`, que já abre no emulador
 ```
 
 O Expo CLI abre o emulador, instala o Expo Go automaticamente e carrega o app. Para testar o
@@ -83,10 +81,10 @@ O Expo CLI abre o emulador, instala o Expo Go automaticamente e carrega o app. P
 
 ### Dicas
 
-- Sem a mesma rede (ou rede corporativa/WSL em NAT): `npx expo start --tunnel`.
-- **API local em aparelho físico:** troque `EXPO_PUBLIC_API_URL` para o IP do computador na rede
-  (`http://192.168.x.x:3000`). No emulador Android use `http://10.0.2.2:3000`. Reinicie o
-  `expo start` após mudar o `.env`.
+- **⚠️ Túnel × API local:** o túnel leva o **app** até o Metro, mas **não** expõe uma API rodando em
+  `localhost` no WSL. Quando a API NestJS existir, `EXPO_PUBLIC_API_URL` precisará apontar para uma
+  URL que o celular alcance (um túnel próprio da API ou um ambiente publicado). No emulador Android,
+  `http://10.0.2.2:3000` continua funcionando. Reinicie o `expo start` após mudar o `.env`.
 - **Navegar entre telas placeholder:** toque em "Mapa de rotas (dev)" (abre o `/_sitemap`).
 - **Testar cada área do app:** mude `devSession.status` em
   `apps/mobile/src/providers/AuthProvider.tsx` (`signedOut`, `onboarding`, `signedIn`) e recarregue.
@@ -98,8 +96,8 @@ O Expo CLI abre o emulador, instala o Expo Go automaticamente e carrega o app. P
 - **Login Apple** (só iOS) usa a identidade do Expo Go: no Supabase, adicione `host.exp.Exponent`
   aos _Client IDs_ do provedor Apple.
 - **OAuth:** a URL de retorno gerada pelo `expo-auth-session` (`getOAuthRedirectUri()` em
-  `src/lib/auth-oauth.ts`; no Expo Go algo como `exp://192.168.0.10:8081/--/auth/callback`) precisa
-  estar em _Supabase → Authentication → URL Configuration → Redirect URLs_.
+  `src/lib/auth-oauth.ts`; no Expo Go algo como `exp://xxxx-anonymous-8081.exp.direct/--/auth/callback`
+  com o túnel, ou `exp://192.168.0.10:8081/--/auth/callback` na rede local) precisa estar em _Supabase → Authentication → URL Configuration → Redirect URLs_.
 - Bundle identifier, nome por variante e splash customizado (`SplashScreen.setOptions`) só valem no
   development build. O plano de migração está no `CLAUDE.md`.
 
@@ -107,7 +105,8 @@ O Expo CLI abre o emulador, instala o Expo Go automaticamente e carrega o app. P
 
 | Na raiz                             | O que faz                                                                          |
 | ----------------------------------- | ---------------------------------------------------------------------------------- |
-| `pnpm dev`                          | `expo start` do app mobile (Expo Go)                                               |
+| `pnpm dev`                          | `expo start` do app mobile (Expo Go) — emulador / rede local                       |
+| `pnpm dev:tunnel`                   | `expo start --tunnel` — aparelho físico (iPhone e Android)                         |
 | `pnpm android` / `pnpm ios`         | `expo start --android` / `--ios`                                                   |
 | `pnpm typecheck`                    | gera os tipos das rotas e roda `tsc` em todos os pacotes                           |
 | `pnpm lint`                         | ESLint em todos os pacotes                                                         |

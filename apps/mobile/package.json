@@ -6,6 +6,7 @@
   "main": "expo-router/entry",
   "scripts": {
     "dev": "expo start",
+    "dev:tunnel": "expo start --tunnel",
     "start": "expo start",
     "android": "expo start --android",
     "ios": "expo start --ios",
@@ -71,6 +72,7 @@
     "zustand": "^5.0.15"
   },
   "devDependencies": {
+    "@expo/ngrok": "^4.1.3",
     "@guara/eslint-config": "workspace:*",
     "@guara/tsconfig": "workspace:*",
     "@testing-library/react-native": "~13.3.3",
