@@ -124,7 +124,8 @@ packages/
 ### Comandos
 
 ```bash
-pnpm dev          # expo start (Expo Go)
+pnpm dev          # expo start (Expo Go) — emulador Android / rede local
+pnpm dev:tunnel   # expo start --tunnel — aparelho físico (padrão no WSL2 em NAT)
 pnpm typecheck    # gera tipos de rotas + tsc em todos os pacotes
 pnpm lint
 pnpm test
@@ -133,6 +134,49 @@ cd apps/mobile && npx expo-doctor && npx expo install --check
 ```
 
 Antes de dar uma tarefa por concluída: `pnpm typecheck && pnpm lint && pnpm test`.
+
+### Ambiente de desenvolvimento (WSL2)
+
+- O desenvolvimento roda em **Ubuntu no WSL2 com rede NAT**; o Android SDK e o emulador ficam no
+  **Windows** (`tools/wsl/setup-android-shim.sh` faz a ponte).
+- Aparelho físico usa **`pnpm dev:tunnel`** (`@expo/ngrok`, devDependency do app).
+- **⚠️ URL da API com túnel:** o túnel leva o _app_ até o Metro, mas **não** expõe uma API em
+  `localhost` no WSL. Quando a API NestJS existir, `EXPO_PUBLIC_API_URL` deve apontar para uma URL
+  acessível pelo celular (túnel próprio da API ou ambiente publicado). O emulador Android continua
+  usando `http://10.0.2.2:3000`.
+
+### React Compiler
+
+O **React Compiler está ligado** (`experiments.reactCompiler`, padrão do SDK 57): ele memoiza
+componentes e hooks automaticamente.
+
+- **Não** use `useMemo`, `useCallback` ou `memo` manualmente sem um motivo **medido** (profiler).
+- Em bugs estranhos de renderização (estado "congelado", efeito que não dispara), **suspeite do
+  compilador primeiro**: confira se o código respeita as regras de React (sem mutar props/estado,
+  sem ler refs durante o render) e, para isolar, use a diretiva `'use no memo'` no componente.
+
+## Versões fixadas de propósito
+
+**Regra:** não atualize nenhum pacote desta tabela sem checar o motivo. Ao atualizar (ou ao remover
+a trava), **atualize a tabela no mesmo commit**. Pacotes do Expo/React Native (react, react-native,
+reanimated, skia, flash-list, `expo-*`…) são controlados pelo SDK: mude-os só com
+`npx expo install --fix` / upgrade de SDK, nunca à mão.
+
+| Pacote                                                           | Fixado em                       | Motivo                                                                                                                                                                         | Reavaliar quando                                           |
+| ---------------------------------------------------------------- | ------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ---------------------------------------------------------- |
+| `eslint` (+ `@eslint/js`)                                        | 9.x                             | `eslint-plugin-react` (usado pelo `eslint-config-expo`) ainda não suporta ESLint 10. O lint-staged usa `--flag v10_config_lookup_from_file` para achar a config de cada pacote | `eslint-plugin-react` suportar 10                          |
+| `@testing-library/react-native`                                  | 13.3.x                          | `renderRouter` do `expo-router/testing-library` (SDK 57) é síncrono e não funciona com o `render` assíncrono da v14                                                            | expo-router suportar RNTL 14                               |
+| `react-test-renderer`                                            | 19.2.3                          | Exigido pelo RNTL 13; precisa ser idêntico ao `react`                                                                                                                          | junto com RNTL ou com o React do SDK                       |
+| `nativewind` / `tailwindcss`                                     | 4.2.x / 3.4.x                   | NativeWind 5 ainda em RC; NativeWind 4 (via `react-native-css-interop`) exige Tailwind 3                                                                                       | NativeWind 5 estável                                       |
+| `prettier-plugin-tailwindcss`                                    | 0.8.x, sem `tailwindStylesheet` | A opção `tailwindStylesheet` é só para Tailwind 4; com ela o plugin ignora nosso `tailwind.config.js` e ordena as classes errado                                               | migração para Tailwind 4                                   |
+| `react-dom`                                                      | 19.2.3                          | Não usamos web, mas o `@expo/metro-runtime` pede `react-dom` como peer; sem fixar, o pnpm instala a última (19.3) que exige React 19.3, diferente do React do SDK              | upgrade de SDK (acompanhar o `react`)                      |
+| `@react-native/metro-config` (override no `pnpm-workspace.yaml`) | 0.86.3                          | O pnpm resolvia 0.87.x como peer do `@react-native/community-cli-plugin@0.86.3`, misturando versões de RN                                                                      | upgrade de SDK (acompanhar o `react-native`)               |
+| `jest` / `@types/jest`                                           | 29.x                            | `jest-expo` 57 usa Jest 29 (Jest 30 duplicaria o runner no monorepo)                                                                                                           | `jest-expo` migrar para Jest 30                            |
+| `typescript`                                                     | ~6.0.x                          | Versão do template do SDK 57. TS 6 depreca `baseUrl` e muda o default de `types` para `[]` (por isso cada tsconfig lista `types`)                                              | upgrade de SDK                                             |
+| `jiti` (em `apps/mobile`)                                        | 2.x                             | `tailwind.config.js` carrega os tokens TS de `@guara/ui-tokens` com `createJiti` (API da v2). A raiz tem jiti 1.x, dependência do Tailwind 3                                   | migração para Tailwind 4                                   |
+| `@expo/ngrok`                                                    | ^4.1.x                          | O Expo CLI do SDK 57 exige `@expo/ngrok@^4.1.0` para o `--tunnel`                                                                                                              | Expo CLI mudar o requisito                                 |
+| `@types/node`                                                    | 24.x                            | Acompanha o Node 24 LTS do `.nvmrc`                                                                                                                                            | troca de Node LTS                                          |
+| `globals` (`minimumReleaseAgeExclude`)                           | 17.13.0                         | A política de supply-chain do pnpm 12 bloqueia releases muito recentes; essa versão foi liberada explicitamente                                                                | quando a versão tiver idade suficiente (remover a exceção) |
 
 ## Migração para development build
 
