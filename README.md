@@ -34,7 +34,8 @@ export PATH="$ANDROID_HOME/emulator:$ANDROID_HOME/platform-tools:$PATH"
   Assim o `pnpm dev` / `npx expo start --android` no WSL controla o `adb.exe`/`emulator.exe` do Windows.
 - **Aparelho físico:** no modo de rede padrão do WSL (NAT) o celular **não alcança** o Metro pela
   rede local — use **`pnpm dev:tunnel`** (veja [Como rodar](#como-rodar)).
-- Alternativa avançada: rede espelhada do WSL (`networkingMode=mirrored` no `.wslconfig` do Windows, com a porta 8081 liberada no firewall), que permite usar `pnpm dev` também no celular.
+- Alternativa sem túnel: rede espelhada do WSL, que permite usar `pnpm dev` também no celular —
+  veja [Alternativa sem túnel](#alternativa-sem-túnel-rede-espelhada-do-wsl).
 
 ## Instalação
 
@@ -64,6 +65,61 @@ que a rede local e a URL é pública enquanto o servidor estiver rodando.
 2. Rode `pnpm dev:tunnel` e espere aparecer `Tunnel ready.` e o QR code.
 3. Escaneie o QR code com a **câmera** do iPhone e toque na notificação para abrir no Expo Go.
 
+#### Primeira vez no iPhone: conta Expo
+
+O Expo Go no iPhone exige uma **conta Expo gratuita** (https://expo.dev/signup), logada **com a
+mesma conta** no computador e no app:
+
+1. No computador, dentro de `apps/mobile`: `npx expo login`.
+2. No iPhone, abra o Expo Go e entre com a mesma conta.
+3. Confira com `npx expo whoami`. Se o endereço `exp://…` do túnel tiver **`anonymous`**, o
+   computador não está logado.
+
+Contas criadas com **"Continue with GitHub"** não têm senha, e o `expo login` pede uma. Duas saídas:
+
+- defina uma senha em expo.dev → _Account settings_; ou
+- crie um token de acesso em expo.dev → _Access tokens_ e exporte-o no shell (`~/.zshrc`):
+  `export EXPO_TOKEN=…`. **Nunca** coloque o token no `.env` do projeto — o que está lá pode acabar
+  no bundle ou no Git.
+
+### Quando o túnel falha
+
+Mensagens como `failed to start tunnel` ou `session closed` costumam ser sessão antiga do ngrok
+presa ou instabilidade do serviço:
+
+```bash
+pkill -f ngrok; pkill -f "expo start"
+# espere uns 30 segundos
+pnpm dev:tunnel
+```
+
+Se continuar falhando, confira https://status.ngrok.com/ ou use a rede espelhada abaixo.
+
+### Alternativa sem túnel: rede espelhada do WSL
+
+Com a rede espelhada (Windows 11 22H2+), o WSL usa os mesmos IPs do Windows e o celular na mesma
+Wi-Fi alcança o Metro diretamente — mais rápido que o túnel.
+
+1. No Windows, crie (ou edite) `%UserProfile%\.wslconfig`:
+   ```ini
+   [wsl2]
+   networkingMode=mirrored
+   ```
+   e reinicie o WSL num PowerShell: `wsl --shutdown`.
+2. Libere a porta 8081 no **firewall Hyper-V** para o WSL (PowerShell **como administrador**; o
+   `VMCreatorId` abaixo é o do WSL, conforme a
+   [documentação da Microsoft](https://learn.microsoft.com/windows/wsl/networking#mirrored-mode-networking)):
+   ```powershell
+   New-NetFirewallHyperVRule -Name "ExpoMetro" -DisplayName "Expo Metro (WSL)" -Direction Inbound -VMCreatorId '{40E0AC32-46A5-438A-A0B2-2B479E8F2E90}' -Protocol TCP -LocalPorts 8081
+   ```
+3. Descubra o IP do Windows na Wi-Fi (`ipconfig` no Windows, adaptador Wi-Fi) e rode no WSL:
+   ```bash
+   REACT_NATIVE_PACKAGER_HOSTNAME=<IP do Windows no Wi-Fi> pnpm dev
+   ```
+4. Escaneie o QR code normalmente (o endereço deve ser `exp://<IP>:8081`).
+
+O `tools/wsl/setup-android-shim.sh` não depende do modo de rede (só encaminha para o `adb.exe`/`emulator.exe`).
+
 ### Android físico
 
 1. Instale o **Expo Go** pela Play Store.
@@ -86,6 +142,8 @@ O Expo CLI abre o emulador, instala o Expo Go automaticamente e carrega o app. P
   `localhost` no WSL. Quando a API NestJS existir, `EXPO_PUBLIC_API_URL` precisará apontar para uma
   URL que o celular alcance (um túnel próprio da API ou um ambiente publicado). No emulador Android,
   `http://10.0.2.2:3000` continua funcionando. Reinicie o `expo start` após mudar o `.env`.
+- **Erro `libasound.so.2`** ao abrir o React Native DevTools (tecla `j`): inofensivo — o app
+  continua funcionando. Correção opcional: `sudo apt install libasound2t64`.
 - **Navegar entre telas placeholder:** toque em "Mapa de rotas (dev)" (abre o `/_sitemap`).
 - **Testar cada área do app:** mude `devSession.status` em
   `apps/mobile/src/providers/AuthProvider.tsx` (`signedOut`, `onboarding`, `signedIn`) e recarregue.
