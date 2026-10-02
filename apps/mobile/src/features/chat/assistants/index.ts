@@ -35,8 +35,8 @@ export const ASSISTANTS: Record<AssistantId, AssistantMeta> = {
     role: 'Alertas de preço',
     avatar: require('@assets/images/assistants/caramelo.png'),
   },
-  'quero-quero': {
-    id: 'quero-quero',
+  quero_quero: {
+    id: 'quero_quero',
     name: 'Quero-quero',
     role: 'Compras fora do padrão',
     avatar: require('@assets/images/assistants/quero-quero.png'),
@@ -54,6 +54,6 @@ export const ASSISTANT_ORDER: AssistantId[] = [
   'tamandua',
   'pacu',
   'caramelo',
-  'quero-quero',
+  'quero_quero',
   'onca',
 ];

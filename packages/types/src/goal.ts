@@ -1,12 +1,31 @@
-import type { Entity, ISODate } from './common';
-import type { Cents } from './money';
+/** Savings goals (watched by the Onça assistant). */
+import { z } from 'zod';
 
-export type GoalStatus = 'active' | 'achieved' | 'archived';
+import { IsoDateSchema, timestamps } from './common';
+import { GoalIdSchema, SimulationIdSchema } from './ids';
+import { NonNegativeCentsSchema, PositiveCentsSchema } from './money';
 
-export interface Goal extends Entity {
-  name: string;
-  target: Cents;
-  saved: Cents;
-  deadline: ISODate | null;
-  status: GoalStatus;
-}
+export const GoalStatusSchema = z.enum(['active', 'achieved', 'archived']);
+export type GoalStatus = z.infer<typeof GoalStatusSchema>;
+
+export const GoalSchema = z.object({
+  id: GoalIdSchema,
+  name: z.string().min(1),
+  target: PositiveCentsSchema,
+  /** Amount accumulated so far. */
+  saved: NonNegativeCentsSchema,
+  deadline: IsoDateSchema.nullable(),
+  status: GoalStatusSchema,
+  /** Simulation the goal was created from. */
+  simulationId: SimulationIdSchema.nullable(),
+  ...timestamps,
+});
+export type Goal = z.infer<typeof GoalSchema>;
+
+export const CreateGoalBodySchema = z.object({
+  name: z.string().min(1).max(80),
+  target: PositiveCentsSchema,
+  saved: NonNegativeCentsSchema.optional(),
+  deadline: IsoDateSchema.nullable(),
+});
+export type CreateGoalBody = z.infer<typeof CreateGoalBodySchema>;

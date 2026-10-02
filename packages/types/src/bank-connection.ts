@@ -1,25 +1,47 @@
-import type { Entity, ISODateTime } from './common';
+/** Open Finance connections, made through the Malvo widget (WebView). */
+import { z } from 'zod';
 
-/** Lifecycle of an Open Finance consent (via Malvo). */
-export type BankConnectionStatus =
-  'pending' | 'active' | 'expiring' | 'expired' | 'revoked' | 'error';
+import { IsoDateTimeSchema, timestamps } from './common';
+import { BankAccountSchema } from './bank-account';
+import { BankConnectionIdSchema, InstitutionIdSchema } from './ids';
 
-export interface BankConnection extends Entity {
-  institutionId: string;
-  institutionName: string;
-  institutionLogoUrl: string | null;
-  status: BankConnectionStatus;
-  /** When the consent stops being valid; renewal is required after this date. */
-  consentExpiresAt: ISODateTime | null;
-  lastSyncedAt: ISODateTime | null;
-}
+export const InstitutionSchema = z.object({
+  id: InstitutionIdSchema,
+  name: z.string().min(1),
+  logoUrl: z.url().nullable(),
+});
+export type Institution = z.infer<typeof InstitutionSchema>;
 
-export type BankAccountType = 'checking' | 'savings' | 'credit_card' | 'investment';
+/**
+ * Lifecycle of an Open Finance consent:
+ * `expiring` = still valid but ends soon (the user should renew); `expired` = needs a new
+ * consent; `revoked` = cancelled by the user; `error` = sync failing at the institution.
+ */
+export const BankConnectionStatusSchema = z.enum([
+  'active',
+  'expiring',
+  'expired',
+  'revoked',
+  'error',
+]);
+export type BankConnectionStatus = z.infer<typeof BankConnectionStatusSchema>;
 
-export interface BankAccount extends Entity {
-  connectionId: string;
-  type: BankAccountType;
-  name: string;
-  /** Masked number, e.g. "•••• 1234". */
-  maskedNumber: string | null;
-}
+export const BankConnectionSchema = z.object({
+  id: BankConnectionIdSchema,
+  institution: InstitutionSchema,
+  status: BankConnectionStatusSchema,
+  /** When the consent stops being valid. */
+  consentExpiresAt: IsoDateTimeSchema.nullable(),
+  lastSyncedAt: IsoDateTimeSchema.nullable(),
+  accounts: z.array(BankAccountSchema),
+  ...timestamps,
+});
+export type BankConnection = z.infer<typeof BankConnectionSchema>;
+
+/** Short-lived token used to open the Malvo widget (new connection or consent renewal). */
+export const ConnectTokenSchema = z.object({
+  widgetUrl: z.url(),
+  token: z.string().min(1),
+  expiresAt: IsoDateTimeSchema,
+});
+export type ConnectToken = z.infer<typeof ConnectTokenSchema>;

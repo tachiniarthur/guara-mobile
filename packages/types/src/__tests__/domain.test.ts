@@ -1,0 +1,129 @@
+import {
+  ChatStreamEventSchema,
+  InvestorProfileAnswersSchema,
+  PropertySchema,
+  ResolveDuplicateBodySchema,
+  RunSimulationBodySchema,
+  TransactionSchema,
+  WarningThresholdsSchema,
+} from '../index';
+
+const transaction = {
+  id: 'tx_1',
+  accountId: 'acc_1',
+  amount: 4590,
+  currency: 'BRL',
+  direction: 'out',
+  type: 'pix',
+  date: '2026-09-20',
+  occurredAt: '2026-09-20T15:30:00.000Z',
+  description: 'PIX ENVIADO PADARIA',
+  merchantName: 'Padaria Trigo Dourado',
+  autoCategoryId: 'restaurants',
+  userCategoryId: null,
+  categoryId: 'restaurants',
+  installment: null,
+  isUnusual: false,
+  createdAt: '2026-09-20T15:31:00.000Z',
+  updatedAt: '2026-09-20T15:31:00.000Z',
+};
+
+describe('domain schemas', () => {
+  it('transactions are positive with a direction and an effective category', () => {
+    expect(TransactionSchema.safeParse(transaction).success).toBe(true);
+    expect(TransactionSchema.safeParse({ ...transaction, amount: -4590 }).success).toBe(false);
+    expect(TransactionSchema.safeParse({ ...transaction, amount: 45.9 }).success).toBe(false);
+    // The user correction wins over the automatic category.
+    expect(TransactionSchema.safeParse({ ...transaction, userCategoryId: 'leisure' }).success).toBe(
+      false,
+    );
+    expect(
+      TransactionSchema.safeParse({
+        ...transaction,
+        userCategoryId: 'leisure',
+        categoryId: 'leisure',
+      }).success,
+    ).toBe(true);
+  });
+
+  it('warning thresholds are ascending and below 100', () => {
+    expect(WarningThresholdsSchema.safeParse([50, 80]).success).toBe(true);
+    expect(WarningThresholdsSchema.safeParse([80, 50]).success).toBe(false);
+    expect(WarningThresholdsSchema.safeParse([100]).success).toBe(false);
+  });
+
+  it('the investor questionnaire has six distinct answers', () => {
+    const answers = [
+      'objective',
+      'horizon',
+      'experience',
+      'loss_tolerance',
+      'income_share',
+      'liquidity_needs',
+    ].map((questionId) => ({ questionId, optionId: 'b' }));
+    expect(InvestorProfileAnswersSchema.safeParse(answers).success).toBe(true);
+    expect(InvestorProfileAnswersSchema.safeParse(answers.slice(1)).success).toBe(false);
+    expect(InvestorProfileAnswersSchema.safeParse([...answers.slice(1), answers[1]]).success).toBe(
+      false,
+    );
+  });
+
+  it('delete_one requires the position to delete', () => {
+    expect(ResolveDuplicateBodySchema.safeParse({ resolution: 'sum' }).success).toBe(true);
+    expect(ResolveDuplicateBodySchema.safeParse({ resolution: 'delete_one' }).success).toBe(false);
+    expect(
+      ResolveDuplicateBodySchema.safeParse({ resolution: 'delete_one', deletePositionId: 'pos_1' })
+        .success,
+    ).toBe(true);
+  });
+
+  it('simulation inputs depend on the mode', () => {
+    expect(
+      RunSimulationBodySchema.safeParse({
+        mode: 'cut_expense',
+        inputs: { categoryId: 'restaurants', monthlyCut: 30000, months: 24, annualReturn: 4 },
+      }).success,
+    ).toBe(true);
+    expect(
+      RunSimulationBodySchema.safeParse({
+        mode: 'retirement',
+        inputs: { categoryId: 'restaurants', monthlyCut: 30000, months: 24, annualReturn: 4 },
+      }).success,
+    ).toBe(false);
+  });
+
+  it('properties are discriminated by kind', () => {
+    const base = { id: 'prop_1', name: 'Carro', createdAt: transaction.createdAt };
+    const vehicle = {
+      ...base,
+      kind: 'vehicle',
+      fipeCode: '005340-6',
+      fipeValue: 7850000,
+      fipeReferenceMonth: '2026-09',
+      modelYear: 2021,
+      outstandingDebt: null,
+      updatedAt: transaction.updatedAt,
+    };
+    expect(PropertySchema.safeParse(vehicle).success).toBe(true);
+    expect(PropertySchema.safeParse({ ...vehicle, fipeCode: '5340' }).success).toBe(false);
+  });
+
+  it('chat stream events', () => {
+    expect(ChatStreamEventSchema.safeParse({ type: 'delta', text: 'Olá' }).success).toBe(true);
+    expect(
+      ChatStreamEventSchema.safeParse({
+        type: 'card',
+        block: {
+          type: 'budget_bar',
+          budgetId: null,
+          categoryId: 'groceries',
+          limit: 100000,
+          spent: 5000,
+        },
+      }).success,
+    ).toBe(true);
+    expect(
+      ChatStreamEventSchema.safeParse({ type: 'card', block: { type: 'text', text: 'x' } }).success,
+    ).toBe(false);
+  });
+});

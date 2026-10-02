@@ -1,14 +1,34 @@
-import type { Entity, ISODateTime } from './common';
-import type { Cents } from './money';
+/** Price alerts (watched by the Caramelo assistant). */
+import { z } from 'zod';
 
-export type PriceAlertSide = 'buy' | 'sell';
+import { IsoDateTimeSchema } from './common';
+import { PriceAlertIdSchema, TickerSchema } from './ids';
+import { NonNegativeCentsSchema, PositiveCentsSchema } from './money';
 
-export type PriceAlertStatus = 'active' | 'triggered' | 'disabled';
+/** `buy`: notify when the price falls to the target or below; `sell`: rises to it or above. */
+export const PriceAlertSideSchema = z.enum(['buy', 'sell']);
+export type PriceAlertSide = z.infer<typeof PriceAlertSideSchema>;
 
-export interface PriceAlert extends Entity {
-  ticker: string;
-  side: PriceAlertSide;
-  targetPrice: Cents;
-  status: PriceAlertStatus;
-  triggeredAt: ISODateTime | null;
-}
+export const PriceAlertStatusSchema = z.enum(['active', 'triggered', 'cancelled']);
+export type PriceAlertStatus = z.infer<typeof PriceAlertStatusSchema>;
+
+export const PriceAlertSchema = z.object({
+  id: PriceAlertIdSchema,
+  ticker: TickerSchema,
+  assetName: z.string().min(1),
+  side: PriceAlertSideSchema,
+  targetPrice: PositiveCentsSchema,
+  status: PriceAlertStatusSchema,
+  currentPrice: NonNegativeCentsSchema.nullable(),
+  createdAt: IsoDateTimeSchema,
+  triggeredAt: IsoDateTimeSchema.nullable(),
+  triggeredPrice: NonNegativeCentsSchema.nullable(),
+});
+export type PriceAlert = z.infer<typeof PriceAlertSchema>;
+
+export const CreatePriceAlertBodySchema = z.object({
+  ticker: TickerSchema,
+  side: PriceAlertSideSchema,
+  targetPrice: PositiveCentsSchema,
+});
+export type CreatePriceAlertBody = z.infer<typeof CreatePriceAlertBodySchema>;

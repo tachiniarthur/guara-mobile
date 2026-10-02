@@ -1,4 +1,4 @@
-import type { ISODate } from '@guara/types';
+import type { IsoDate } from '@guara/types';
 import { addDays, isValid, parseISO } from 'date-fns';
 import { ptBR } from 'date-fns/locale/pt-BR';
 import { formatInTimeZone, fromZonedTime, toZonedTime } from 'date-fns-tz';
@@ -65,13 +65,13 @@ export function formatMonthYear(input: DateInput | null | undefined): string {
 }
 
 /** Calendar date in São Paulo ("2026-10-01"), or `null` if invalid. */
-export function toISODate(input: DateInput | null | undefined): ISODate | null {
+export function toISODate(input: DateInput | null | undefined): IsoDate | null {
   const date = parseDate(input);
   return date ? formatInTimeZone(date, APP_TIME_ZONE, 'yyyy-MM-dd') : null;
 }
 
 /** Today's calendar date in São Paulo. */
-export function todayISODate(): ISODate {
+export function todayISODate(): IsoDate {
   return formatInTimeZone(now(), APP_TIME_ZONE, 'yyyy-MM-dd');
 }
 

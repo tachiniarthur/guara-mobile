@@ -1,24 +1,45 @@
-import type { Entity, ISODateTime } from './common';
+import { z } from 'zod';
 
-export type NotificationChannel = 'push' | 'email';
+import { IsoDateTimeSchema } from './common';
+import { NotificationIdSchema } from './ids';
 
-export type NotificationType =
-  | 'budget_warning'
-  | 'budget_exceeded'
-  | 'price_alert'
-  | 'unusual_purchase'
-  | 'goal_progress'
-  | 'bank_consent_expiring'
-  | 'subscription_charge'
-  | 'system';
+export const NotificationChannelSchema = z.enum(['push', 'email']);
+export type NotificationChannel = z.infer<typeof NotificationChannelSchema>;
 
-export interface AppNotification extends Entity {
-  type: NotificationType;
-  title: string;
-  body: string;
-  readAt: ISODateTime | null;
-  /** Deep link handled by Expo Router, e.g. "guara://budgets/123". */
-  url: string | null;
-}
+export const NotificationTypeSchema = z.enum([
+  'budget_warning',
+  'budget_exceeded',
+  'price_alert',
+  'unusual_transaction',
+  'consent_expiring',
+  'subscription_price_increase',
+  'report_ready',
+]);
+export type NotificationType = z.infer<typeof NotificationTypeSchema>;
 
-export type NotificationPreferences = Record<NotificationType, NotificationChannel[]>;
+export const AppNotificationSchema = z.object({
+  id: NotificationIdSchema,
+  type: NotificationTypeSchema,
+  /** pt-BR texts written by the API. */
+  title: z.string().min(1),
+  body: z.string(),
+  /** `null` while unread. */
+  readAt: IsoDateTimeSchema.nullable(),
+  createdAt: IsoDateTimeSchema,
+  /** Internal app path opened on tap, e.g. "/budgets/bud_1". */
+  link: z.string().startsWith('/').nullable(),
+});
+export type AppNotification = z.infer<typeof AppNotificationSchema>;
+
+export const UnreadCountSchema = z.object({ count: z.int().nonnegative() });
+export type UnreadCount = z.infer<typeof UnreadCountSchema>;
+
+const ChannelToggleSchema = z.object({ push: z.boolean(), email: z.boolean() });
+
+/** Which channels deliver each notification type. */
+export const NotificationPreferencesSchema = z.object({
+  push: z.object({ enabled: z.boolean() }),
+  email: z.object({ enabled: z.boolean(), address: z.email().nullable() }),
+  byType: z.record(NotificationTypeSchema, ChannelToggleSchema),
+});
+export type NotificationPreferences = z.infer<typeof NotificationPreferencesSchema>;

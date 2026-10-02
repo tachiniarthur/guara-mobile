@@ -441,6 +441,10 @@ importers:
   packages/tsconfig: {}
 
   packages/types:
+    dependencies:
+      zod:
+        specifier: ^4.6.5
+        version: 4.6.5
     devDependencies:
       '@guara/eslint-config':
         specifier: workspace:*
@@ -448,9 +452,21 @@ importers:
       '@guara/tsconfig':
         specifier: workspace:*
         version: link:../tsconfig
+      '@swc/core':
+        specifier: ^1.16.13
+        version: 1.16.13
+      '@swc/jest':
+        specifier: ^0.2.39
+        version: 0.2.39(@swc/core@1.16.13)
+      '@types/jest':
+        specifier: ^29.5.14
+        version: 29.5.14
       eslint:
         specifier: ^9.39.5
         version: 9.39.5(jiti@1.21.7)(supports-color@8.1.1)
+      jest:
+        specifier: ^29.7.0
+        version: 29.7.0(@types/node@24.19.0)(supports-color@8.1.1)
       typescript:
         specifier: ~6.0.3
         version: 6.0.3
