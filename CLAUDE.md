@@ -86,7 +86,7 @@ apps/mobile/
     index.ts           API pública da feature (importe sempre de '@/features/<x>')
   src/components/      compartilhados: ui/ (primitivos e controles), feedback/, layout/, charts/ (vazio)
   src/dev/             ferramentas só de desenvolvimento (catálogo de UI em /ui)
-  src/lib/             infraestrutura: env, runtime, supabase, auth-oauth, api-client, sse,
+  src/lib/             infraestrutura: env, runtime, supabase, auth-oauth, api (transporte), sse,
                        query-client, storage, notifications, logger, cn, haptics
   src/providers/       AppProviders, QueryProvider, AuthProvider, ThemeProvider
   src/hooks/ src/stores/ src/theme/ src/constants/ src/types/
@@ -110,8 +110,9 @@ packages/
 - **Infra isolada:** features **não** importam `expo-sqlite`, `expo-secure-store`,
   `@supabase/supabase-js`, `expo-auth-session`, `expo-apple-authentication`, `expo-web-browser` nem
   `expo-notifications` — o ESLint bloqueia (`no-restricted-imports`). Use `src/lib/*`.
-- **Chamadas à API:** `api.get/post…` de `src/lib/api-client.ts`; query keys por feature em
-  `src/features/<x>/api`; hooks TanStack em `src/features/<x>/hooks`.
+- **Chamadas à API:** `apiRequest('<endpoint>', …)` de `src/lib/api` (contrato tipado de
+  `@guara/types`), sempre por hooks TanStack da feature. Detalhes em
+  [Dados: contratos e mocks](#dados-contratos-e-mocks).
 - **Modais:** arquivos em `app/(app)/(modals)/` são apresentados como modal automaticamente.
 - **Env:** novas variáveis entram em `.env.example` e no schema zod de `src/lib/env.ts`, lidas com
   `process.env.EXPO_PUBLIC_X` estático.

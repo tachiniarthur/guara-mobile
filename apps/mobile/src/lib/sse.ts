@@ -1,11 +1,9 @@
 /**
  * Server-Sent Events over `expo/fetch` (supports streaming response bodies on
- * iOS/Android, including Expo Go). Used by the AI chat; the endpoint contract is a stub.
+ * iOS/Android, including Expo Go). Low-level: the typed chat stream lives in the API
+ * transport (`src/lib/api`).
  */
-import type { ChatStreamEvent } from '@guara/types';
 import { fetch } from 'expo/fetch';
-
-import { ApiError, buildUrl, getAuthHeaders } from './api-client';
 
 export interface SSEMessage {
   event: string;
@@ -57,28 +55,34 @@ export function createSSEParser(onMessage: (message: SSEMessage) => void) {
   };
 }
 
-export interface StreamOptions {
+export interface StreamSSEOptions {
+  method?: string;
+  headers?: Record<string, string>;
   body?: unknown;
   signal?: AbortSignal;
   onMessage: (message: SSEMessage) => void;
+  /** Builds the error thrown when the server answers with a non-2xx status. */
+  onResponseError: (response: Response) => Promise<Error>;
 }
 
-/** POSTs to an API endpoint and streams its SSE response. Resolves when the stream ends. */
-export async function streamSSE(path: string, { body, signal, onMessage }: StreamOptions) {
-  const response = await fetch(buildUrl(path), {
-    method: 'POST',
+/** Sends a request and streams its SSE response. Resolves when the stream ends. */
+export async function streamSSE(
+  url: string,
+  { method = 'POST', headers, body, signal, onMessage, onResponseError }: StreamSSEOptions,
+) {
+  const response = await fetch(url, {
+    method,
     headers: {
       Accept: 'text/event-stream',
-      'Content-Type': 'application/json',
-      ...(await getAuthHeaders()),
+      ...(body === undefined ? {} : { 'Content-Type': 'application/json' }),
+      ...headers,
     },
     body: body === undefined ? undefined : JSON.stringify(body),
     signal,
   });
 
-  if (!response.ok || !response.body) {
-    throw new ApiError(response.status, 'Streaming request failed');
-  }
+  if (!response.ok) throw await onResponseError(response as unknown as Response);
+  if (!response.body) throw new Error('Streaming response without a body');
 
   const parser = createSSEParser(onMessage);
   const reader = response.body.getReader();
@@ -89,21 +93,4 @@ export async function streamSSE(path: string, { body, signal, onMessage }: Strea
     parser.feed(decoder.decode(value, { stream: true }));
   }
   parser.end();
-}
-
-/**
- * Sends a chat message and streams the assistant reply.
- * TODO: confirm the endpoint path and payload with the NestJS API.
- */
-export function streamChatReply(
-  conversationId: string,
-  content: string,
-  onEvent: (event: ChatStreamEvent) => void,
-  signal?: AbortSignal,
-) {
-  return streamSSE(`/chat/conversations/${encodeURIComponent(conversationId)}/messages`, {
-    body: { content },
-    signal,
-    onMessage: ({ data }) => onEvent(JSON.parse(data) as ChatStreamEvent),
-  });
 }

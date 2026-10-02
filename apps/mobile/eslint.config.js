@@ -18,6 +18,20 @@ const INFRA_ONLY_PACKAGES = [
   'expo-notifications',
 ].map((name) => ({ name, message: 'Use the wrappers in src/lib/ instead.' }));
 
+/**
+ * Fake data is reached only through the API transport (src/lib/api). Screens, features and
+ * components never import src/mocks, so swapping mocks for the real API changes no screen.
+ */
+const MOCKS_PATTERNS = [
+  {
+    group: ['@/mocks', '@/mocks/*'],
+    message: 'Do not use fake data directly: call the feature hooks (they go through src/lib/api).',
+  },
+];
+
+/** Code allowed to touch src/mocks: the mocks themselves, dev tools and tests. */
+const MOCKS_ALLOWED = ['src/mocks/**', 'src/dev/**', '**/__tests__/**'];
+
 module.exports = defineConfig([
   expoConfig,
   {
@@ -34,6 +48,13 @@ module.exports = defineConfig([
   },
   {
     files: ['app/**/*.{ts,tsx}', 'src/**/*.{ts,tsx}'],
+    ignores: ['src/lib/**', ...MOCKS_ALLOWED],
+    rules: {
+      'no-restricted-imports': ['error', { paths: INFRA_ONLY_PACKAGES, patterns: MOCKS_PATTERNS }],
+    },
+  },
+  {
+    files: MOCKS_ALLOWED.map((glob) => `${glob}/*.{ts,tsx}`),
     ignores: ['src/lib/**'],
     rules: {
       'no-restricted-imports': ['error', { paths: INFRA_ONLY_PACKAGES }],

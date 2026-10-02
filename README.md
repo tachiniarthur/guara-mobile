@@ -187,7 +187,7 @@ O hook de `pre-commit` (Husky + lint-staged) roda ESLint e Prettier nos arquivos
 │       ├── src/
 │       │   ├── features/       # um diretório por domínio (screens, components, hooks, api, schemas, store)
 │       │   ├── components/     # ui, charts, feedback, layout
-│       │   ├── lib/            # env, supabase, api-client, sse, storage, notifications, logger…
+│       │   ├── lib/            # env, supabase, api (transporte), sse, storage, notifications, logger…
 │       │   ├── providers/ hooks/ stores/ theme/ constants/ types/
 │       ├── assets/             # brand/, assistants/ (placeholders), fonts/, icons/
 │       └── __tests__/
