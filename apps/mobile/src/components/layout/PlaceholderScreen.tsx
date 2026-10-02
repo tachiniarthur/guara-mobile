@@ -44,6 +44,11 @@ export function PlaceholderScreen({ title, subtitle, children }: PlaceholderScre
               {COMMON_COPY.devUiCatalog}
             </Text>
           </Link>
+          <Link href="/dev/data" asChild>
+            <Text variant="caption" tone="subtle" className="underline">
+              {COMMON_COPY.devData}
+            </Text>
+          </Link>
         </View>
       ) : null}
     </Screen>

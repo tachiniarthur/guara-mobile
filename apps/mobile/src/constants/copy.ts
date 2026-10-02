@@ -17,6 +17,7 @@ export const COMMON_COPY = {
   backToHome: 'Voltar ao início',
   devRouteMap: 'Mapa de rotas (dev)',
   devUiCatalog: 'Catálogo de UI (dev)',
+  devData: 'Dados falsos (dev)',
 } as const;
 
 export const FEEDBACK_COPY = {

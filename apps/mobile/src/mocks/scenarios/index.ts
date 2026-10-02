@@ -10,6 +10,8 @@ import { buildNewUserDb } from './new-user';
 export interface MockScenario {
   /** pt-BR, shown in the /dev/data panel. */
   label: string;
+  /** One word for the segmented control. */
+  shortLabel: string;
   description: string;
   build: () => MockDb;
   /** Endpoints that always fail in this scenario. */
@@ -19,18 +21,21 @@ export interface MockScenario {
 export const SCENARIOS: Record<MockScenarioName, MockScenario> = {
   complete: {
     label: 'Usuário completo',
+    shortLabel: 'Completo',
     description: '3 bancos, 6 meses de lançamentos, carteira, metas, conversas e avisos.',
     build: () => buildCompleteDb(),
     failures: {},
   },
   new_user: {
     label: 'Usuário novo',
+    shortLabel: 'Novo',
     description: 'Sem bancos, lançamentos nem carteira; perfil de investidor não respondido.',
     build: () => buildNewUserDb(),
     failures: {},
   },
   errors: {
     label: 'Erros',
+    shortLabel: 'Erros',
     description:
       'Dados completos, mas vários endpoints falham (500, 503, 429, limite do plano e timeout).',
     build: () => buildCompleteDb(),
