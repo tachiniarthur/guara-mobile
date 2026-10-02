@@ -48,3 +48,10 @@ export type ApiRequestArgs<N extends EndpointName, Extra = unknown> =
   IsRequestOptional<Endpoints[N]> extends true
     ? [request?: ApiRequest<N> & Extra]
     : [request: ApiRequest<N> & Extra];
+
+/** Body a client sends to `N`. */
+export type ApiBody<N extends EndpointName> = NonNullable<ApiRequest<N>['body']>;
+/** Query a client sends to `N`. */
+export type ApiQuery<N extends EndpointName> = NonNullable<ApiRequest<N>['query']>;
+/** Path params a client sends to `N`. */
+export type ApiParams<N extends EndpointName> = NonNullable<ApiRequest<N>['params']>;
