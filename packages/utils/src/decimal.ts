@@ -81,3 +81,17 @@ export function multiplyReaisByDecimal(reaisPerUnit: string, quantity: string): 
   // reais → cents adds two decimal places.
   return toCents(roundScaled(price.units * amount.units * 100n, price.scale + amount.scale));
 }
+
+/**
+ * Total in cents ÷ quantity, rounded to whole cents — e.g. the average price of a position.
+ * Throws when the quantity is zero.
+ * @example divideCentsByDecimal(cents(621000), "200") // 3105 (R$ 31,05)
+ */
+export function divideCentsByDecimal(total: Cents, quantity: string): Cents {
+  if (total < 0) throw new RangeError('Total must not be negative');
+  const { units, scale } = parseDecimal(quantity);
+  if (units === 0n) throw new RangeError('Quantity must not be zero');
+  const numerator = BigInt(total) * 10n ** BigInt(scale);
+  const quotient = numerator / units;
+  return toCents((numerator % units) * 2n >= units ? quotient + 1n : quotient);
+}

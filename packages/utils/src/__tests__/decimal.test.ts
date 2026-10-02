@@ -2,6 +2,7 @@ import type { Cents } from '@guara/types';
 
 import {
   addDecimals,
+  divideCentsByDecimal,
   isDecimalString,
   multiplyCentsByDecimal,
   multiplyReaisByDecimal,
@@ -42,5 +43,18 @@ describe('decimal strings', () => {
   it('rejects invalid input', () => {
     expect(() => addDecimals('1,5')).toThrow(RangeError);
     expect(() => multiplyCentsByDecimal(c(-1), '1')).toThrow(RangeError);
+  });
+});
+
+describe('divideCentsByDecimal', () => {
+  it('computes average prices rounded to cents', () => {
+    expect(divideCentsByDecimal(c(621000), '200')).toBe(3105);
+    expect(divideCentsByDecimal(c(1000), '3')).toBe(333);
+    expect(divideCentsByDecimal(c(2000), '3')).toBe(667);
+    expect(divideCentsByDecimal(c(938700), '0.0315')).toBe(29800000);
+  });
+
+  it('rejects a zero quantity', () => {
+    expect(() => divideCentsByDecimal(c(100), '0')).toThrow(RangeError);
   });
 });

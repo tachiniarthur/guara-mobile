@@ -18,7 +18,7 @@ export const WarningThresholdsSchema = z
     message: 'Thresholds must be strictly ascending',
   });
 
-/** `ok` below the first warning, `warning` from the first warning, `exceeded` above 100%. */
+/** `ok` below the first warning, `warning` from the first warning, `exceeded` from 100%. */
 export const BudgetStatusSchema = z.enum(['ok', 'warning', 'exceeded']);
 export type BudgetStatus = z.infer<typeof BudgetStatusSchema>;
 

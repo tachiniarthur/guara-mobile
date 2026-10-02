@@ -51,3 +51,31 @@ export function formatPercentForSpeech(
   if (text === EMPTY) return 'sem informação';
   return text.replace(/^-/, 'menos ').replace(/^\+/, 'mais ').replace(/%$/, ' por cento');
 }
+
+/**
+ * Share of each amount in the total, in percent with `decimals` places, adjusted with the
+ * largest-remainder method so the result sums to exactly 100 (e.g. portfolio slices).
+ * Returns zeros when the total is zero.
+ *
+ * @example sharesOf([cents(1), cents(1), cents(1)]) // [33.34, 33.33, 33.33]
+ */
+export function sharesOf(values: readonly Cents[], decimals = 2): number[] {
+  if (values.some((value) => value < 0)) throw new RangeError('Values must not be negative');
+  const total = values.reduce((sum, value) => sum + value, 0);
+  if (total === 0) return values.map(() => 0);
+
+  const scale = 10 ** decimals;
+  const units = 100 * scale;
+  const exact = values.map((value) => (value * units) / total);
+  const floors = exact.map(Math.floor);
+  let missing = units - floors.reduce((sum, value) => sum + value, 0);
+  const order = exact
+    .map((value, index) => ({ index, remainder: value - floors[index]! }))
+    .sort((a, b) => b.remainder - a.remainder || a.index - b.index);
+  for (const { index } of order) {
+    if (missing <= 0) break;
+    floors[index]! += 1;
+    missing -= 1;
+  }
+  return floors.map((value) => value / scale);
+}
