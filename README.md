@@ -144,6 +144,9 @@ O Expo CLI abre o emulador, instala o Expo Go automaticamente e carrega o app. P
   `http://10.0.2.2:3000` continua funcionando. Reinicie o `expo start` após mudar o `.env`.
 - **Erro `libasound.so.2`** ao abrir o React Native DevTools (tecla `j`): inofensivo — o app
   continua funcionando. Correção opcional: `sudo apt install libasound2t64`.
+- **Dados falsos:** em desenvolvimento o app usa dados falsos (`EXPO_PUBLIC_DATA_SOURCE=mock`).
+  Toque em "Dados falsos (dev)" (rota `/dev/data`) para trocar o cenário (completo, usuário novo,
+  erros), a latência e a taxa de erro, ou reiniciar os dados. Detalhes no `CLAUDE.md`.
 - **Navegar entre telas placeholder:** toque em "Mapa de rotas (dev)" (abre o `/_sitemap`).
 - **Testar cada área do app:** mude `devSession.status` em
   `apps/mobile/src/providers/AuthProvider.tsx` (`signedOut`, `onboarding`, `signedIn`) e recarregue.
@@ -188,11 +191,13 @@ O hook de `pre-commit` (Husky + lint-staged) roda ESLint e Prettier nos arquivos
 │       │   ├── features/       # um diretório por domínio (screens, components, hooks, api, schemas, store)
 │       │   ├── components/     # ui, charts, feedback, layout
 │       │   ├── lib/            # env, supabase, api (transporte), sse, storage, notifications, logger…
+│       │   ├── mocks/          # dados falsos (só desenvolvimento e testes)
+│       │   ├── dev/            # catálogo de UI (/ui) e painel de dados falsos (/dev/data)
 │       │   ├── providers/ hooks/ stores/ theme/ constants/ types/
 │       ├── assets/             # brand/, assistants/ (placeholders), fonts/, icons/
 │       └── __tests__/
 ├── packages/
-│   ├── types/                  # @guara/types — tipos de domínio
+│   ├── types/                  # @guara/types — schemas zod, tipos e contrato da API
 │   ├── ui-tokens/              # @guara/ui-tokens — tokens do tema escuro
 │   ├── utils/                  # @guara/utils — dinheiro (centavos), datas (America/Sao_Paulo), "—"
 │   ├── tsconfig/               # @guara/tsconfig

@@ -82,18 +82,20 @@ apps/mobile/
   app/                 SOMENTE rotas (Expo Router). Cada arquivo só importa e exporta a tela.
   src/features/<x>/    um diretório por domínio:
     screens/           telas (hoje placeholders)
-    components/ hooks/ api/ schemas/ store/
+    api/               query keys + hooks de dados (TanStack) da feature
+    components/ hooks/ schemas/ store/
     index.ts           API pública da feature (importe sempre de '@/features/<x>')
   src/components/      compartilhados: ui/ (primitivos e controles), feedback/, layout/, charts/ (vazio)
-  src/dev/             ferramentas só de desenvolvimento (catálogo de UI em /ui)
+  src/dev/             ferramentas só de desenvolvimento (catálogo de UI em /ui, dados falsos em /dev/data)
+  src/mocks/           dados falsos (fixtures, cenários, handlers, store) — só dev e testes
   src/lib/             infraestrutura: env, runtime, supabase, auth-oauth, api (transporte), sse,
                        query-client, storage, notifications, logger, cn, haptics
   src/providers/       AppProviders, QueryProvider, AuthProvider, ThemeProvider
   src/hooks/ src/stores/ src/theme/ src/constants/ src/types/
 packages/
-  types/               tipos de domínio e DTOs (só tipos)
+  types/               schemas zod de domínio + tipos inferidos + contrato da API (src/api)
   ui-tokens/           tokens de design (tema escuro)
-  utils/               funções puras e testadas (money, date, percent, empty)
+  utils/               funções puras e testadas (money, date, percent, decimal, empty)
   tsconfig/            base.json, react-native.json
   eslint-config/       base (TS puro) e expo (app)
 ```
@@ -150,6 +152,11 @@ packages/
 - **Testes:** `expo-router/testing-library` registra o próprio mock do Reanimated (sem
   `useReducedMotion`) — prefira `ReduceMotion.System` nas animações. Use os matchers do RNTL 13
   (`toBeChecked`, `toBeSelected`, `toBeBusy`); `jest-native` está descontinuado.
+- **Testes de hooks:** use `createWrapper()` de `__tests__/utils/query.tsx` — o `QueryClient` de
+  teste tem `gcTime: Infinity` também nas **mutações**; com o padrão (5 min) o Jest não encerra o
+  worker ("failed to exit gracefully").
+- **`renderRouter` e timers:** nos testes de rota os retries do TanStack (1 s + 2 s) andam em tempo
+  simulado; em `renderHook` com o `createQueryClient()` real eles levam tempo de verdade.
 - **Código só de dev:** carregue com `__DEV__ ? require(...) : null` para o Metro remover do bundle
   de produção (veja `app/(dev)/ui.tsx`).
 
@@ -186,6 +193,71 @@ componentes e hooks automaticamente.
 - Em bugs estranhos de renderização (estado "congelado", efeito que não dispara), **suspeite do
   compilador primeiro**: confira se o código respeita as regras de React (sem mutar props/estado,
   sem ler refs durante o render) e, para isolar, use a diretiva `'use no memo'` no componente.
+
+## Dados: contratos e mocks
+
+As telas são construídas **sem a API NestJS**: tudo passa por um contrato tipado e por um
+transporte que hoje responde com dados falsos. Trocar para a API real é só configuração.
+
+```
+@guara/types (schema zod)  →  @guara/types/src/api (endpoint)  →  src/lib/api (ApiTransport)
+                                                                    ├─ httpTransport (API)
+                                                                    └─ mockTransport (src/mocks)
+                       src/features/<x>/api (hooks TanStack)  ←────┘
+```
+
+### Caminho para um dado novo
+
+1. **Schema** em `packages/types/src/<dominio>.ts`: exporte `XSchema` e `type X = z.infer<…>`.
+   Sem `transform`/`default` (o formato no fio e o parseado precisam ser iguais).
+2. **Endpoint** em `packages/types/src/api/endpoints/<grupo>.ts` (nome estável `'dominio.acao'`,
+   método, caminho `/v1/...` com `:params`, `params`/`query`/`body`/`response`). Streaming (SSE)
+   fica em `api/stream.ts`. O teste do contrato confere placeholders × params.
+3. **Fixture + handler** em `apps/mobile/src/mocks`: dados base em `fixtures/`, montagem em
+   `scenarios/`, resposta em `handlers/<grupo>.ts`. O `satisfies MockHandlers` **não compila** se
+   faltar handler para algum endpoint. Campos derivados (gasto do teto, percentuais, totais) são
+   calculados em `mocks/logic/` na hora da resposta — nunca guarde valores que podem divergir.
+4. **Hook** em `src/features/<x>/api/`: query keys em `keys.ts` (sobre `QUERY_ROOTS` de
+   `src/constants/query-keys.ts`), leitura em `queries.ts`, mutação em `mutations.ts` (invalida as
+   raízes afetadas com `invalidateRoots`; otimista com rollback onde a interação pede resposta
+   imediata). Exporte pelo `index.ts` da feature. `staleTime` por tipo em `STALE_TIME`
+   (`src/lib/query-client.ts`).
+
+### Convenções dos contratos
+
+- **Dinheiro:** `Cents` inteiro (`CentsSchema`, `PositiveCentsSchema`, `NonNegativeCentsSchema`).
+  Lançamentos têm valor positivo + `direction: 'in' | 'out'`.
+- **Percentuais:** pontos percentuais (`12.5` = 12,5%), como `formatPercent`. Participações
+  (carteira, alocação) com 2 casas e soma exata 100 — use `sharesOf()` de `@guara/utils`.
+- **Quantidades fracionárias** (cotas, cripto) e valores por unidade abaixo de 1 centavo
+  (proventos): `DecimalString` (`"0.0315"`). Conta só com `multiplyCentsByDecimal`,
+  `multiplyReaisByDecimal`, `divideCentsByDecimal`, `addDecimals` (`@guara/utils`, BigInt).
+- **Datas:** `IsoDateTime` (UTC com `Z`), `IsoDate` (dia de São Paulo), `YearMonth`.
+- **IDs:** branded por entidade (`BudgetId`…). Requisições aceitam string comum; respostas
+  parseadas trazem o brand.
+- **Ausente é `null`** (nunca `0` nem `""`); a UI mostra "—". Ex.: usuário sem banco tem
+  `consolidatedBalance: null`, não `0`.
+- **Enums em inglês**; rótulos pt-BR ficam no app. Mensagens de erro (`ApiError.message`) e
+  textos de notificação vêm em pt-BR da API.
+- **Erros:** todo erro de transporte vira `ApiError` (`code`, `message` pt-BR, `status`).
+  O TanStack só repete `network`, `internal` e `unavailable`.
+- **Validação de respostas:** em dev/testes, `schema.parse` (lança `ContractViolationError`);
+  em produção, `safeParse` + `logger.error`, sem derrubar o app.
+
+### Dados falsos (`src/mocks`)
+
+- **Origem:** `EXPO_PUBLIC_DATA_SOURCE=mock | api` (padrão `mock` em dev, `api` em release). A
+  variante `production` recusa `mock`. Os mocks entram com `__DEV__ ? require() : null` e **não
+  vão para o bundle de produção** (confira com `npx expo export` e busca de strings).
+- **Determinísticos:** PRNG com semente fixa e relógio próprio (`MOCK_NOW` = 25/09/2026 12:00 em
+  São Paulo). Handlers usam `context.now`/`today(db)`, nunca a data do aparelho.
+- **Cenários:** `complete` (padrão), `new_user` (estados vazios) e `errors` (endpoints com
+  `ApiError` e um timeout). Nomes fictícios para bancos, lojas e assinaturas; tickers da B3 reais.
+- **Painel `/dev/data`** ("Dados falsos (dev)" em qualquer placeholder): troca de cenário,
+  latência (0 / 300 ms / 1,5 s), taxa de erro aleatório e botão que reinicia os dados e o cache.
+- **Telas e features nunca importam `@/mocks`** — o ESLint bloqueia fora de `src/mocks`,
+  `src/dev` e testes. Testes de hook usam `__tests__/utils/query.tsx` (`useFreshMocks`,
+  `createWrapper`).
 
 ## Versões fixadas de propósito
 
