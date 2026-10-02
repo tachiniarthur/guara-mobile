@@ -1,0 +1,192 @@
+import { z } from 'zod';
+
+import {
+  AllocationSchema,
+  AssetDetailSchema,
+  AssetSchema,
+  AssetSearchQuerySchema,
+  CreateManualPositionBodySchema,
+  CreatePriceAlertBodySchema,
+  CreateRealEstateBodySchema,
+  CreateVehicleBodySchema,
+  DuplicateIdSchema,
+  EvolutionRangeSchema,
+  ExposureSchema,
+  PositionDuplicateSchema,
+  PositionIdSchema,
+  PositionListQuerySchema,
+  PositionListSchema,
+  PositionSchema,
+  PriceAlertIdSchema,
+  PriceAlertSchema,
+  PriceHistorySchema,
+  PriceRangeSchema,
+  PropertyIdSchema,
+  PropertyListSchema,
+  PropertySchema,
+  ResolveDuplicateBodySchema,
+  TickerSchema,
+  WealthEvolutionSchema,
+  WealthOverviewSchema,
+} from '../../domain';
+import { NoContentSchema, defineEndpoints } from '../define';
+
+const positionParams = z.object({ positionId: PositionIdSchema });
+const duplicateParams = z.object({ duplicateId: DuplicateIdSchema });
+const tickerParams = z.object({ ticker: TickerSchema });
+const propertyParams = z.object({ propertyId: PropertyIdSchema });
+const alertParams = z.object({ alertId: PriceAlertIdSchema });
+
+/** Net worth, positions, allocation, market data (Brapi via API), properties and price alerts. */
+export const investmentEndpoints = defineEndpoints({
+  'wealth.overview': {
+    method: 'GET',
+    path: '/v1/wealth',
+    summary: 'Invested amount, returns vs CDI, contributions, dividends and total net worth',
+    response: WealthOverviewSchema,
+  },
+  'wealth.evolution': {
+    method: 'GET',
+    path: '/v1/wealth/evolution',
+    summary: 'Monthly portfolio value with the CDI series',
+    query: z.object({ range: EvolutionRangeSchema }),
+    response: WealthEvolutionSchema,
+  },
+  'positions.list': {
+    method: 'GET',
+    path: '/v1/positions',
+    summary: 'Positions, largest first',
+    query: PositionListQuerySchema,
+    response: PositionListSchema,
+  },
+  'positions.createManual': {
+    method: 'POST',
+    path: '/v1/positions',
+    summary: 'Register a manual position',
+    body: CreateManualPositionBodySchema,
+    response: PositionSchema,
+  },
+  'positions.delete': {
+    method: 'DELETE',
+    path: '/v1/positions/:positionId',
+    summary: 'Delete a manual position',
+    params: positionParams,
+    response: NoContentSchema,
+  },
+  'allocation.get': {
+    method: 'GET',
+    path: '/v1/allocation',
+    summary: 'Current × target allocation per class and rebalancing suggestion',
+    response: AllocationSchema,
+  },
+  'exposure.get': {
+    method: 'GET',
+    path: '/v1/exposure',
+    summary: 'Exposure by country (Brazil × abroad)',
+    response: ExposureSchema,
+  },
+  'duplicates.list': {
+    method: 'GET',
+    path: '/v1/position-duplicates',
+    summary: 'Suspected duplicated positions',
+    response: z.array(PositionDuplicateSchema),
+  },
+  'duplicates.get': {
+    method: 'GET',
+    path: '/v1/position-duplicates/:duplicateId',
+    summary: 'One suspected duplicate',
+    params: duplicateParams,
+    response: PositionDuplicateSchema,
+  },
+  'duplicates.resolve': {
+    method: 'POST',
+    path: '/v1/position-duplicates/:duplicateId/resolve',
+    summary: 'Sum, keep separate or delete one of the positions',
+    params: duplicateParams,
+    body: ResolveDuplicateBodySchema,
+    response: PositionDuplicateSchema,
+  },
+  'assets.search': {
+    method: 'GET',
+    path: '/v1/assets',
+    summary: 'Search assets by ticker or name',
+    query: AssetSearchQuerySchema,
+    response: z.array(AssetSchema),
+  },
+  'assets.get': {
+    method: 'GET',
+    path: '/v1/assets/:ticker',
+    summary: 'Quote, indicators, earnings, dividends, events and what the user received',
+    params: tickerParams,
+    response: AssetDetailSchema,
+  },
+  'assets.history': {
+    method: 'GET',
+    path: '/v1/assets/:ticker/history',
+    summary: 'Price series',
+    params: tickerParams,
+    query: z.object({ range: PriceRangeSchema }),
+    response: PriceHistorySchema,
+  },
+  'properties.list': {
+    method: 'GET',
+    path: '/v1/properties',
+    summary: 'Real estate and vehicles with totals',
+    response: PropertyListSchema,
+  },
+  'properties.get': {
+    method: 'GET',
+    path: '/v1/properties/:propertyId',
+    summary: 'One property',
+    params: propertyParams,
+    response: PropertySchema,
+  },
+  'properties.createRealEstate': {
+    method: 'POST',
+    path: '/v1/properties/real-estate',
+    summary: 'Register real estate',
+    body: CreateRealEstateBodySchema,
+    response: PropertySchema,
+  },
+  'properties.createVehicle': {
+    method: 'POST',
+    path: '/v1/properties/vehicles',
+    summary: 'Register a vehicle (value from the FIPE table)',
+    body: CreateVehicleBodySchema,
+    response: PropertySchema,
+  },
+  'properties.delete': {
+    method: 'DELETE',
+    path: '/v1/properties/:propertyId',
+    summary: 'Delete a property',
+    params: propertyParams,
+    response: NoContentSchema,
+  },
+  'priceAlerts.list': {
+    method: 'GET',
+    path: '/v1/price-alerts',
+    summary: 'Price alerts, active first',
+    response: z.array(PriceAlertSchema),
+  },
+  'priceAlerts.get': {
+    method: 'GET',
+    path: '/v1/price-alerts/:alertId',
+    summary: 'One price alert',
+    params: alertParams,
+    response: PriceAlertSchema,
+  },
+  'priceAlerts.create': {
+    method: 'POST',
+    path: '/v1/price-alerts',
+    summary: 'Create a buy or sell price alert',
+    body: CreatePriceAlertBodySchema,
+    response: PriceAlertSchema,
+  },
+  'priceAlerts.cancel': {
+    method: 'POST',
+    path: '/v1/price-alerts/:alertId/cancel',
+    summary: 'Cancel an active alert',
+    params: alertParams,
+    response: PriceAlertSchema,
+  },
+});
