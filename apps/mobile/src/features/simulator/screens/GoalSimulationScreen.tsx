@@ -8,7 +8,7 @@ import { View } from 'react-native';
 import { LegendSwatch, ProjectionChart } from '@/components/charts';
 import { toast } from '@/components/feedback';
 import { ResponsiveGrid } from '@/components/layout';
-import { Button, Input, MoneyInput, Span, Text } from '@/components/ui';
+import { Button, Input, LinkButton, MoneyInput, Span, Text } from '@/components/ui';
 import { AskAssistantCard } from '@/features/chat';
 import { useBreakpoint } from '@/hooks/useBreakpoint';
 import { conversationHref } from '@/navigation';
@@ -300,7 +300,17 @@ export function GoalSimulationScreen() {
           }))}
         />
       </SimCard>
-      <SimCard title="Suas metas" description="Acompanhadas pela Onça">
+      <SimCard
+        title="Suas metas"
+        description="Acompanhadas pela Onça"
+        action={
+          <LinkButton
+            label="Ver metas"
+            className="min-h-6"
+            onPress={() => router.navigate('/goals')}
+          />
+        }
+      >
         <FigureRows
           items={[
             {

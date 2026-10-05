@@ -376,7 +376,12 @@ export function SuccessBody({ bank, mode, findings, connections }: SuccessBodyPr
               { label: 'Contas', value: findings?.accounts ?? EMPTY },
               { label: 'Cartão', value: findings?.cards ?? EMPTY },
               { label: 'Investimentos', value: findings?.investments ?? EMPTY },
-              { label: 'Lançamentos do mês', value: findings?.transactions ?? EMPTY },
+              {
+                label: findings
+                  ? `Lançamentos de ${formatDate(`${findings.transactionsMonth}-01`, 'MMMM')}`
+                  : 'Lançamentos',
+                value: findings?.transactions ?? EMPTY,
+              },
             ]}
           />
         </Card>

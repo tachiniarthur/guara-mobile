@@ -14,7 +14,7 @@ export function WelcomeScreen() {
   const startOnboarding = () => setStatus('onboarding');
 
   return (
-    <OnboardingFrame jungleOnPhone>
+    <OnboardingFrame mataHeaderOnPhone>
       <StepIntro
         phoneSize={28}
         title="Bem-vindo ao Guará"

@@ -9,14 +9,24 @@ import { cn } from '@/lib/cn';
 export function SimCard({
   title,
   description,
+  action,
   children,
 }: {
   title: string;
   description: string;
+  /** Right of the title (link to the full list). */
+  action?: ReactNode;
   children: ReactNode;
 }) {
   return (
-    <SectionCard title={title} description={description} titleSize={18} gap={16} className="flex-1">
+    <SectionCard
+      title={title}
+      description={description}
+      action={action}
+      titleSize={18}
+      gap={16}
+      className="flex-1"
+    >
       {children}
     </SectionCard>
   );

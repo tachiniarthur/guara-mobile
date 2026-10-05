@@ -31,6 +31,8 @@ export interface ScreenProps {
   contentClassName?: string;
   /** Ref of the ScrollView (jump to a section). */
   scrollRef?: Ref<ScrollView>;
+  /** Center short content vertically (result screens like "Conectando o Itaú…"). */
+  centered?: boolean;
 }
 
 /** Base of every screen: Mata à noite background, safe area, header/footer slots, scroll. */
@@ -46,6 +48,7 @@ export function Screen({
   offlineBanner = true,
   contentClassName,
   scrollRef,
+  centered = false,
 }: ScreenProps) {
   const { isTablet } = useBreakpoint();
   const content = (
@@ -54,6 +57,7 @@ export function Screen({
         isTablet ? 'gap-5' : 'gap-4',
         padded && (isTablet ? 'px-7 pb-10 pt-7' : 'px-4 pb-8 pt-1'),
         !scroll && 'flex-1',
+        centered && 'flex-grow justify-center',
         contentClassName,
       )}
     >
@@ -71,6 +75,7 @@ export function Screen({
           keyboardShouldPersistTaps="handled"
           keyboardDismissMode="on-drag"
           contentInsetAdjustmentBehavior="automatic"
+          contentContainerStyle={centered ? { flexGrow: 1 } : undefined}
           refreshControl={
             onRefresh ? (
               <RefreshControl

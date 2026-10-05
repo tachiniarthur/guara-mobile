@@ -1,4 +1,4 @@
-import type { IsoDate } from '@guara/types';
+import type { IsoDate, YearMonth } from '@guara/types';
 
 import type { IconName } from '@/components/ui/Icon';
 
@@ -94,6 +94,8 @@ export interface MalvoFindings {
   cards: string;
   investments: string;
   transactions: string;
+  /** Month of `transactions` ("Lançamentos de setembro"). */
+  transactionsMonth: YearMonth;
   /** Investment also typed in manually: asked later in Investimentos. */
   duplicateNotice: string | null;
 }
@@ -105,6 +107,7 @@ export const MALVO_FINDINGS: Partial<Record<string, MalvoFindings>> = {
     cards: '1 · Itaú Click',
     investments: '1 · Tesouro Selic 2029',
     transactions: '64 organizados',
+    transactionsMonth: '2026-09',
     duplicateNotice:
       'O Tesouro Selic 2029 do Itaú também está no seu cadastro manual. Vamos perguntar em Investimentos se você quer somar ou manter separado.',
   },

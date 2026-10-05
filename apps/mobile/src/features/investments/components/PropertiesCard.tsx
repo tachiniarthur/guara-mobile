@@ -14,7 +14,7 @@ export function PropertiesCard() {
   const { isTablet } = useBreakpoint();
   return (
     <SectionCard
-      title="Imóveis e outros bens"
+      title={isTablet ? 'Imóveis, veículos e outros bens' : 'Imóveis e outros bens'}
       description={`Somam R$ ${(PORTFOLIO.propertiesTotal / 100).toLocaleString('pt-BR')} no patrimônio`}
       titleSize={isTablet ? 20 : 18}
       padding={isTablet ? 20 : 16}

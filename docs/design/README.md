@@ -1,7 +1,7 @@
 # Design oficial do Guará
 
 Cópia do artefato de design ("Guará · Design do app",
-<https://claude.ai/artifact/JQTwTAjHXMBuJZeTCvBZcc>, versão `1791162157-589c`). É a **fonte da
+<https://claude.ai/artifact/JQTwTAjHXMBuJZeTCvBZcc>, versão `1791208084-7b23`). É a **fonte da
 verdade visual** do app: espaçamentos, tamanhos, textos, estados e comportamento.
 
 ```

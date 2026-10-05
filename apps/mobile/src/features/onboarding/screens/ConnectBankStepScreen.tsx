@@ -53,7 +53,12 @@ export function ConnectBankStepScreen() {
 
   return (
     <>
-      <OnboardingFrame topBar={topBar} footer={actions(false)} tabletFooter={actions(true)}>
+      <OnboardingFrame
+        topBar={topBar}
+        footer={actions(false)}
+        tabletFooter={actions(true)}
+        centered={flow.step === 'connecting' || flow.step === 'error'}
+      >
         {isTablet ? <StepProgress step={1} /> : null}
         <MalvoBody
           flow={{ ...flow, bank }}

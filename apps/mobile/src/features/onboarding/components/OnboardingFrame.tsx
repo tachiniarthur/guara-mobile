@@ -6,7 +6,7 @@ import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { Screen, StickyFooter, TopBar, type TopBarProps } from '@/components/layout';
 import { useBreakpoint } from '@/hooks/useBreakpoint';
 
-import { JungleHeader } from './JungleHeader';
+import { MataHeader } from './MataHeader';
 
 export interface OnboardingFrameProps {
   children: ReactNode;
@@ -16,12 +16,14 @@ export interface OnboardingFrameProps {
   footer?: ReactNode;
   /** Tablet: action row at the end of the card (default: `footer`). */
   tabletFooter?: ReactNode;
-  /** Phone: show the jungle header instead of a top bar (welcome screen). */
-  jungleOnPhone?: boolean;
+  /** Phone: center short content vertically (Malvo connecting/error). */
+  centered?: boolean;
+  /** Phone: show the Mata header instead of a top bar (welcome screen). */
+  mataHeaderOnPhone?: boolean;
 }
 
 /**
- * Onboarding layout. Phone: top bar, content and a sticky footer. Tablet: jungle header and a
+ * Onboarding layout. Phone: top bar, content and a sticky footer. Tablet: Mata header and a
  * 600-wide card overlapping it, with the actions inside the card.
  */
 export function OnboardingFrame({
@@ -29,7 +31,8 @@ export function OnboardingFrame({
   topBar,
   footer,
   tabletFooter,
-  jungleOnPhone = false,
+  mataHeaderOnPhone = false,
+  centered = false,
 }: OnboardingFrameProps) {
   const { isTablet } = useBreakpoint();
   const insets = useSafeAreaInsets();
@@ -42,7 +45,7 @@ export function OnboardingFrame({
         contentContainerStyle={{ paddingBottom: insets.bottom + 40 }}
         keyboardShouldPersistTaps="handled"
       >
-        <JungleHeader layout="tablet" topInset={insets.top} />
+        <MataHeader layout="tablet" topInset={insets.top} />
         <View className="-mt-[70px] w-[600px] max-w-full gap-6.5 self-center rounded-24 border border-border bg-surface p-10">
           {children}
           {actions ? <View className="flex-row gap-2.5">{actions}</View> : null}
@@ -51,14 +54,14 @@ export function OnboardingFrame({
     );
   }
 
-  if (jungleOnPhone) {
+  if (mataHeaderOnPhone) {
     return (
       <ScrollView
         style={{ flex: 1, backgroundColor: colors.background.DEFAULT }}
         contentContainerStyle={{ paddingBottom: insets.bottom + 32 }}
         keyboardShouldPersistTaps="handled"
       >
-        <JungleHeader layout="phone" topInset={insets.top} />
+        <MataHeader layout="phone" topInset={insets.top} />
         <View className="gap-5.5 px-4 pt-2">{children}</View>
       </ScrollView>
     );
@@ -68,6 +71,7 @@ export function OnboardingFrame({
     <Screen
       header={topBar ? <TopBar {...topBar} /> : null}
       footer={footer ? <StickyFooter>{footer}</StickyFooter> : null}
+      centered={centered}
       contentClassName="gap-5.5 pt-2"
     >
       {children}

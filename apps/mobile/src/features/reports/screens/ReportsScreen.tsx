@@ -133,7 +133,11 @@ export function ReportsScreen() {
   const weeksPanel = (
     <InsightPanel
       title="Entradas e saídas por semana"
-      description="Em R$ mil, por semana de setembro"
+      description={
+        isTablet
+          ? 'Quanto entrou e saiu em cada semana de setembro'
+          : 'Em R$ mil, por semana de setembro'
+      }
       stats={[
         {
           label: 'Entrou',

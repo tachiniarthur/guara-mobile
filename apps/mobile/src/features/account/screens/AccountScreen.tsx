@@ -22,7 +22,7 @@ import { useBreakpoint } from '@/hooks/useBreakpoint';
 import { cn } from '@/lib/cn';
 import { useUiPreferences, type TextSize } from '@/stores/ui-preferences';
 
-import { useBankConnectionsStore, type BankConnection } from '@/features/bank-connections';
+import { PLAN, useBankConnectionsStore, type BankConnection } from '@/features/bank-connections';
 
 import { BankConnectionCard } from '../components';
 import { CURRENT_USER, DEVICES, INVESTOR_PROFILE, NOTICE_KINDS } from '../data';
@@ -325,7 +325,7 @@ export function AccountScreen() {
             <Text size={13} weight="bold">
               {banks.length} de {CURRENT_USER.banksAllowed}
             </Text>{' '}
-            conexões usadas no seu plano
+            conexões usadas no plano {PLAN.name}
           </Text>
           <Pressable
             accessibilityRole="link"

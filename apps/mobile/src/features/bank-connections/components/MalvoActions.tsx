@@ -45,7 +45,7 @@ export function MalvoActions({ flow, wide, onClose, onDone, onLeave }: MalvoActi
         <>
           {flow.mode === 'connect' ? (
             <Button variant="secondary" onPress={onClose}>
-              Conectar outro
+              {wide ? 'Conectar outro banco' : 'Conectar outro'}
             </Button>
           ) : null}
           {wide ? <View className="flex-1" /> : null}

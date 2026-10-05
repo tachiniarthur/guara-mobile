@@ -1,2155 +1,2155 @@
 {
- "v": 3,
- "attachments": {},
- "boards": {
-  "Escuro-Desktop-Adicionar-Investimento.dc.html": {
-   "h": 1440,
-   "is_interactive": true,
-   "page": "escuro-app",
-   "title": "Desktop · Adicionar investimento",
-   "w": 2560,
-   "x": 0,
-   "y": 52140
-  },
-  "Escuro-Desktop-Agentes-Avisos.dc.html": {
-   "h": 1440,
-   "is_interactive": true,
-   "page": "escuro-onb",
-   "title": "Desktop · Assistentes e avisos",
-   "w": 2560,
-   "x": 0,
-   "y": 5640
-  },
-  "Escuro-Desktop-Alertas.dc.html": {
-   "h": 1440,
-   "is_interactive": true,
-   "page": "escuro-app",
-   "title": "Desktop · Alertas",
-   "w": 2560,
-   "x": 0,
-   "y": 14410
-  },
-  "Escuro-Desktop-Assinaturas.dc.html": {
-   "h": 1440,
-   "is_interactive": true,
-   "page": "escuro-app",
-   "title": "Desktop · Assinaturas",
-   "w": 2560,
-   "x": 0,
-   "y": 8950
-  },
-  "Escuro-Desktop-Boas-Vindas.dc.html": {
-   "h": 1440,
-   "is_interactive": true,
-   "page": "escuro-onb",
-   "title": "Desktop · Boas-vindas",
-   "w": 2560,
-   "x": 0,
-   "y": 0
-  },
-  "Escuro-Desktop-Conectar-Bancos.dc.html": {
-   "h": 1440,
-   "is_interactive": true,
-   "page": "escuro-onb",
-   "title": "Desktop · Conectar bancos",
-   "w": 2560,
-   "x": 0,
-   "y": 1880
-  },
-  "Escuro-Desktop-Conversas.dc.html": {
-   "h": 1440,
-   "is_interactive": true,
-   "page": "escuro-app",
-   "title": "Desktop · Conversas",
-   "w": 2560,
-   "x": 0,
-   "y": 3440
-  },
-  "Escuro-Desktop-Gastos.dc.html": {
-   "h": 1670,
-   "is_interactive": true,
-   "page": "escuro-app",
-   "title": "Desktop · Gastos",
-   "w": 2560,
-   "x": 0,
-   "y": 5320
-  },
-  "Escuro-Desktop-Investimentos.dc.html": {
-   "h": 2600,
-   "is_interactive": true,
-   "page": "escuro-app",
-   "title": "Desktop · Investimentos (conversa recolhida)",
-   "w": 2560,
-   "x": 0,
-   "y": 20710
-  },
-  "Escuro-Desktop-Meu-Perfil.dc.html": {
-   "h": 1440,
-   "is_interactive": true,
-   "page": "escuro-app",
-   "title": "Desktop · Meu perfil e configurações",
-   "w": 2560,
-   "x": 0,
-   "y": 66850
-  },
-  "Escuro-Desktop-Novo-Alerta-Preco.dc.html": {
-   "h": 1440,
-   "is_interactive": true,
-   "page": "escuro-app",
-   "title": "Desktop · Novo alerta de preço",
-   "w": 2560,
-   "x": 0,
-   "y": 18710
-  },
-  "Escuro-Desktop-Novo-Teto.dc.html": {
-   "h": 1440,
-   "is_interactive": true,
-   "page": "escuro-app",
-   "title": "Desktop · Novo teto",
-   "w": 2560,
-   "x": 0,
-   "y": 16390
-  },
-  "Escuro-Desktop-Painel-Historico.dc.html": {
-   "h": 1440,
-   "is_interactive": true,
-   "page": "escuro-app",
-   "title": "Desktop · Início com conversa recolhida (histórico)",
-   "w": 2560,
-   "x": 2640,
-   "y": 0
-  },
-  "Main.dc.html": {
-   "h": 1440,
-   "is_interactive": true,
-   "page": "escuro-app",
-   "title": "Desktop · Início com conversa aberta",
-   "w": 2560,
-   "x": 0,
-   "y": 0
-  },
-  "Escuro-Desktop-Perfil-Investidor.dc.html": {
-   "h": 1440,
-   "is_interactive": true,
-   "page": "escuro-onb",
-   "title": "Desktop · Perfil de investidor",
-   "w": 2560,
-   "x": 0,
-   "y": 3760
-  },
-  "Escuro-Desktop-Relatorio.dc.html": {
-   "h": 1680,
-   "is_interactive": true,
-   "page": "escuro-app",
-   "title": "Desktop · Relatório",
-   "w": 2560,
-   "x": 0,
-   "y": 10930
-  },
-  "Escuro-Desktop-Simulador.dc.html": {
-   "h": 1860,
-   "is_interactive": true,
-   "page": "escuro-app",
-   "title": "Desktop · Simulador (Aposentadoria)",
-   "w": 2560,
-   "x": 0,
-   "y": 54210
-  },
-  "Escuro-Mobile-Adicionar-Investimento.dc.html": {
-   "h": 1630,
-   "is_interactive": true,
-   "page": "escuro-app",
-   "title": "Mobile · Adicionar investimento",
-   "w": 393,
-   "x": 3540,
-   "y": 52140
-  },
-  "Escuro-Mobile-Agentes-Avisos.dc.html": {
-   "h": 1350,
-   "is_interactive": true,
-   "page": "escuro-onb",
-   "title": "Mobile · Assistentes e avisos",
-   "w": 393,
-   "x": 3540,
-   "y": 5640
-  },
-  "Escuro-Mobile-Alertas.dc.html": {
-   "h": 1540,
-   "is_interactive": true,
-   "page": "escuro-app",
-   "title": "Mobile · Alertas",
-   "w": 393,
-   "x": 3540,
-   "y": 14410
-  },
-  "Escuro-Mobile-Assinaturas.dc.html": {
-   "h": 1540,
-   "is_interactive": true,
-   "page": "escuro-app",
-   "title": "Mobile · Assinaturas",
-   "w": 393,
-   "x": 3540,
-   "y": 8950
-  },
-  "Escuro-Mobile-Boas-Vindas.dc.html": {
-   "h": 1010,
-   "is_interactive": true,
-   "page": "escuro-onb",
-   "title": "Mobile · Boas-vindas",
-   "w": 393,
-   "x": 3540,
-   "y": 0
-  },
-  "Escuro-Mobile-Conectar-Bancos.dc.html": {
-   "h": 1040,
-   "is_interactive": true,
-   "page": "escuro-onb",
-   "title": "Mobile · Conectar bancos",
-   "w": 393,
-   "x": 3540,
-   "y": 1880
-  },
-  "Escuro-Mobile-Conversa.dc.html": {
-   "h": 852,
-   "is_interactive": true,
-   "page": "escuro-app",
-   "title": "Mobile · Conversa",
-   "w": 393,
-   "x": 4440,
-   "y": 3440
-  },
-  "Escuro-Mobile-Escolher-Agente.dc.html": {
-   "h": 852,
-   "is_interactive": true,
-   "page": "escuro-app",
-   "title": "Mobile · Escolher assistente (opcional)",
-   "w": 393,
-   "x": 5386,
-   "y": 3440
-  },
-  "Escuro-Mobile-Gastos.dc.html": {
-   "h": 3190,
-   "is_interactive": true,
-   "page": "escuro-app",
-   "title": "Mobile · Gastos",
-   "w": 393,
-   "x": 3540,
-   "y": 5320
-  },
-  "Escuro-Mobile-Historico-Conversas.dc.html": {
-   "h": 852,
-   "is_interactive": true,
-   "page": "escuro-app",
-   "title": "Mobile · Histórico de conversas",
-   "w": 393,
-   "x": 4913,
-   "y": 3440
-  },
-  "Escuro-Mobile-Inicio.dc.html": {
-   "h": 2720,
-   "is_interactive": true,
-   "page": "escuro-app",
-   "title": "Mobile · Início",
-   "w": 393,
-   "x": 6180,
-   "y": 0
-  },
-  "Escuro-Mobile-Investimentos.dc.html": {
-   "h": 5020,
-   "is_interactive": true,
-   "page": "escuro-app",
-   "title": "Mobile · Investimentos",
-   "w": 393,
-   "x": 3540,
-   "y": 20710
-  },
-  "Escuro-Mobile-Meu-Perfil.dc.html": {
-   "h": 2800,
-   "is_interactive": true,
-   "page": "escuro-app",
-   "title": "Mobile · Meu perfil e configurações",
-   "w": 393,
-   "x": 3540,
-   "y": 66850
-  },
-  "Escuro-Mobile-Novo-Alerta-Preco.dc.html": {
-   "h": 1540,
-   "is_interactive": true,
-   "page": "escuro-app",
-   "title": "Mobile · Novo alerta de preço",
-   "w": 393,
-   "x": 3540,
-   "y": 18710
-  },
-  "Escuro-Mobile-Novo-Teto.dc.html": {
-   "h": 1880,
-   "is_interactive": true,
-   "page": "escuro-app",
-   "title": "Mobile · Novo teto",
-   "w": 393,
-   "x": 3540,
-   "y": 16390
-  },
-  "Escuro-Mobile-Perfil-Investidor.dc.html": {
-   "h": 852,
-   "is_interactive": true,
-   "page": "escuro-onb",
-   "title": "Mobile · Perfil de investidor",
-   "w": 393,
-   "x": 3540,
-   "y": 3760
-  },
-  "Escuro-Mobile-Relatorio.dc.html": {
-   "h": 3040,
-   "is_interactive": true,
-   "page": "escuro-app",
-   "title": "Mobile · Relatório",
-   "w": 393,
-   "x": 3900,
-   "y": 10930
-  },
-  "Escuro-Mobile-Simulador.dc.html": {
-   "h": 3940,
-   "is_interactive": true,
-   "page": "escuro-app",
-   "title": "Mobile · Simulador (Aposentadoria)",
-   "w": 393,
-   "x": 3540,
-   "y": 54210
-  },
-  "Escuro-Tablet-Adicionar-Investimento.dc.html": {
-   "h": 1510,
-   "is_interactive": true,
-   "page": "escuro-app",
-   "title": "Tablet · Adicionar investimento",
-   "w": 820,
-   "x": 2640,
-   "y": 52140
-  },
-  "Escuro-Tablet-Agentes-Avisos.dc.html": {
-   "h": 1180,
-   "is_interactive": true,
-   "page": "escuro-onb",
-   "title": "Tablet · Assistentes e avisos",
-   "w": 820,
-   "x": 2640,
-   "y": 5640
-  },
-  "Escuro-Tablet-Alertas.dc.html": {
-   "h": 1190,
-   "is_interactive": true,
-   "page": "escuro-app",
-   "title": "Tablet · Alertas",
-   "w": 820,
-   "x": 2640,
-   "y": 14410
-  },
-  "Escuro-Tablet-Assinaturas.dc.html": {
-   "h": 1250,
-   "is_interactive": true,
-   "page": "escuro-app",
-   "title": "Tablet · Assinaturas",
-   "w": 820,
-   "x": 2640,
-   "y": 8950
-  },
-  "Escuro-Tablet-Boas-Vindas.dc.html": {
-   "h": 1180,
-   "is_interactive": true,
-   "page": "escuro-onb",
-   "title": "Tablet · Boas-vindas",
-   "w": 820,
-   "x": 2640,
-   "y": 0
-  },
-  "Escuro-Tablet-Conectar-Bancos.dc.html": {
-   "h": 1180,
-   "is_interactive": true,
-   "page": "escuro-onb",
-   "title": "Tablet · Conectar bancos",
-   "w": 820,
-   "x": 2640,
-   "y": 1880
-  },
-  "Escuro-Tablet-Conversa.dc.html": {
-   "h": 1180,
-   "is_interactive": true,
-   "page": "escuro-app",
-   "title": "Tablet · Conversa",
-   "w": 820,
-   "x": 2640,
-   "y": 3440
-  },
-  "Escuro-Tablet-Gastos.dc.html": {
-   "h": 2470,
-   "is_interactive": true,
-   "page": "escuro-app",
-   "title": "Tablet · Gastos",
-   "w": 820,
-   "x": 2640,
-   "y": 5320
-  },
-  "Escuro-Tablet-Investimentos.dc.html": {
-   "h": 3530,
-   "is_interactive": true,
-   "page": "escuro-app",
-   "title": "Tablet · Investimentos",
-   "w": 820,
-   "x": 2640,
-   "y": 20710
-  },
-  "Escuro-Tablet-Meu-Perfil.dc.html": {
-   "h": 1720,
-   "is_interactive": true,
-   "page": "escuro-app",
-   "title": "Tablet · Meu perfil e configurações",
-   "w": 820,
-   "x": 2640,
-   "y": 66850
-  },
-  "Escuro-Tablet-Novo-Alerta-Preco.dc.html": {
-   "h": 1560,
-   "is_interactive": true,
-   "page": "escuro-app",
-   "title": "Tablet · Novo alerta de preço",
-   "w": 820,
-   "x": 2640,
-   "y": 18710
-  },
-  "Escuro-Tablet-Novo-Teto.dc.html": {
-   "h": 1720,
-   "is_interactive": true,
-   "page": "escuro-app",
-   "title": "Tablet · Novo teto",
-   "w": 820,
-   "x": 2640,
-   "y": 16390
-  },
-  "Escuro-Tablet-Painel.dc.html": {
-   "h": 2940,
-   "is_interactive": true,
-   "page": "escuro-app",
-   "title": "Tablet · Início",
-   "w": 820,
-   "x": 5280,
-   "y": 0
-  },
-  "Escuro-Tablet-Perfil-Investidor.dc.html": {
-   "h": 1180,
-   "is_interactive": true,
-   "page": "escuro-onb",
-   "title": "Tablet · Perfil de investidor",
-   "w": 820,
-   "x": 2640,
-   "y": 3760
-  },
-  "Escuro-Tablet-Relatorio.dc.html": {
-   "h": 2460,
-   "is_interactive": true,
-   "page": "escuro-app",
-   "title": "Tablet paisagem · Relatório",
-   "w": 1180,
-   "x": 2640,
-   "y": 10930
-  },
-  "Escuro-Tablet-Simulador.dc.html": {
-   "h": 3300,
-   "is_interactive": true,
-   "page": "escuro-app",
-   "title": "Tablet · Simulador (Aposentadoria)",
-   "w": 820,
-   "x": 2640,
-   "y": 54210
-  },
-  "Fundamentos.dc.html": {
-   "h": 4490,
-   "page": "fundamentos",
-   "title": "Fundamentos do design",
-   "w": 1440,
-   "x": 0,
-   "y": 0
-  },
-  "Escuro-Mobile-Assistentes.dc.html": {
-   "h": 3000,
-   "is_interactive": true,
-   "page": "escuro-app",
-   "title": "Mobile · Assistentes",
-   "w": 393,
-   "x": 6653,
-   "y": 0
-  },
-  "Escuro-Desktop-Ativo.dc.html": {
-   "h": 2650,
-   "is_interactive": true,
-   "page": "escuro-app",
-   "title": "Desktop · Detalhe do ativo (PETR4)",
-   "w": 2560,
-   "x": 0,
-   "y": 26170
-  },
-  "Escuro-Tablet-Ativo.dc.html": {
-   "h": 3810,
-   "is_interactive": true,
-   "page": "escuro-app",
-   "title": "Tablet · Detalhe do ativo (PETR4)",
-   "w": 820,
-   "x": 2640,
-   "y": 26170
-  },
-  "Escuro-Mobile-Ativo.dc.html": {
-   "h": 4320,
-   "is_interactive": true,
-   "page": "escuro-app",
-   "title": "Mobile · Detalhe do ativo (PETR4)",
-   "w": 393,
-   "x": 3540,
-   "y": 26170
-  },
-  "Escuro-Desktop-Ativo-Tesouro-Selic.dc.html": {
-   "h": 2160,
-   "is_interactive": true,
-   "page": "escuro-app",
-   "title": "Desktop · Detalhe do ativo (Tesouro Selic 2029)",
-   "w": 2560,
-   "x": 0,
-   "y": 30930
-  },
-  "Escuro-Tablet-Ativo-Tesouro-Selic.dc.html": {
-   "h": 2970,
-   "is_interactive": true,
-   "page": "escuro-app",
-   "title": "Tablet · Detalhe do ativo (Tesouro Selic 2029)",
-   "w": 820,
-   "x": 2640,
-   "y": 30930
-  },
-  "Escuro-Mobile-Ativo-Tesouro-Selic.dc.html": {
-   "h": 3690,
-   "is_interactive": true,
-   "page": "escuro-app",
-   "title": "Mobile · Detalhe do ativo (Tesouro Selic 2029)",
-   "w": 393,
-   "x": 3540,
-   "y": 30930
-  },
-  "Escuro-Desktop-Ativo-CDB.dc.html": {
-   "h": 2160,
-   "is_interactive": true,
-   "page": "escuro-app",
-   "title": "Desktop · Detalhe do ativo (CDB 110% CDI)",
-   "w": 2560,
-   "x": 0,
-   "y": 35060
-  },
-  "Escuro-Tablet-Ativo-CDB.dc.html": {
-   "h": 2990,
-   "is_interactive": true,
-   "page": "escuro-app",
-   "title": "Tablet · Detalhe do ativo (CDB 110% CDI)",
-   "w": 820,
-   "x": 2640,
-   "y": 35060
-  },
-  "Escuro-Mobile-Ativo-CDB.dc.html": {
-   "h": 3750,
-   "is_interactive": true,
-   "page": "escuro-app",
-   "title": "Mobile · Detalhe do ativo (CDB 110% CDI)",
-   "w": 393,
-   "x": 3540,
-   "y": 35060
-  },
-  "Escuro-Desktop-Ativo-BOVA11.dc.html": {
-   "h": 2120,
-   "is_interactive": true,
-   "page": "escuro-app",
-   "title": "Desktop · Detalhe do ativo (BOVA11)",
-   "w": 2560,
-   "x": 0,
-   "y": 39250
-  },
-  "Escuro-Tablet-Ativo-BOVA11.dc.html": {
-   "h": 2880,
-   "is_interactive": true,
-   "page": "escuro-app",
-   "title": "Tablet · Detalhe do ativo (BOVA11)",
-   "w": 820,
-   "x": 2640,
-   "y": 39250
-  },
-  "Escuro-Mobile-Ativo-BOVA11.dc.html": {
-   "h": 3730,
-   "is_interactive": true,
-   "page": "escuro-app",
-   "title": "Mobile · Detalhe do ativo (BOVA11)",
-   "w": 393,
-   "x": 3540,
-   "y": 39250
-  },
-  "Escuro-Desktop-Ativo-HGLG11.dc.html": {
-   "h": 2610,
-   "is_interactive": true,
-   "page": "escuro-app",
-   "title": "Desktop · Detalhe do ativo (HGLG11)",
-   "w": 2560,
-   "x": 0,
-   "y": 43420
-  },
-  "Escuro-Tablet-Ativo-HGLG11.dc.html": {
-   "h": 3370,
-   "is_interactive": true,
-   "page": "escuro-app",
-   "title": "Tablet · Detalhe do ativo (HGLG11)",
-   "w": 820,
-   "x": 2640,
-   "y": 43420
-  },
-  "Escuro-Mobile-Ativo-HGLG11.dc.html": {
-   "h": 4100,
-   "is_interactive": true,
-   "page": "escuro-app",
-   "title": "Mobile · Detalhe do ativo (HGLG11)",
-   "w": 393,
-   "x": 3540,
-   "y": 43420
-  },
-  "Escuro-Desktop-Ativo-Bitcoin.dc.html": {
-   "h": 2120,
-   "is_interactive": true,
-   "page": "escuro-app",
-   "title": "Desktop · Detalhe do ativo (Bitcoin)",
-   "w": 2560,
-   "x": 0,
-   "y": 47960
-  },
-  "Escuro-Tablet-Ativo-Bitcoin.dc.html": {
-   "h": 2940,
-   "is_interactive": true,
-   "page": "escuro-app",
-   "title": "Tablet · Detalhe do ativo (Bitcoin)",
-   "w": 820,
-   "x": 2640,
-   "y": 47960
-  },
-  "Escuro-Mobile-Ativo-Bitcoin.dc.html": {
-   "h": 3740,
-   "is_interactive": true,
-   "page": "escuro-app",
-   "title": "Mobile · Detalhe do ativo (Bitcoin)",
-   "w": 393,
-   "x": 3540,
-   "y": 47960
-  },
-  "Escuro-Desktop-Simulador-Objetivo.dc.html": {
-   "h": 1720,
-   "is_interactive": true,
-   "page": "escuro-app",
-   "title": "Desktop · Simulador (Juntar para um objetivo)",
-   "w": 2560,
-   "x": 0,
-   "y": 58590
-  },
-  "Escuro-Tablet-Simulador-Objetivo.dc.html": {
-   "h": 3160,
-   "is_interactive": true,
-   "page": "escuro-app",
-   "title": "Tablet · Simulador (Juntar para um objetivo)",
-   "w": 820,
-   "x": 2640,
-   "y": 58590
-  },
-  "Escuro-Mobile-Simulador-Objetivo.dc.html": {
-   "h": 3700,
-   "is_interactive": true,
-   "page": "escuro-app",
-   "title": "Mobile · Simulador (Juntar para um objetivo)",
-   "w": 393,
-   "x": 3540,
-   "y": 58590
-  },
-  "Escuro-Desktop-Simulador-Corte.dc.html": {
-   "h": 1710,
-   "is_interactive": true,
-   "page": "escuro-app",
-   "title": "Desktop · Simulador (Cortar um gasto)",
-   "w": 2560,
-   "x": 0,
-   "y": 62730
-  },
-  "Escuro-Tablet-Simulador-Corte.dc.html": {
-   "h": 3000,
-   "is_interactive": true,
-   "page": "escuro-app",
-   "title": "Tablet · Simulador (Cortar um gasto)",
-   "w": 820,
-   "x": 2640,
-   "y": 62730
-  },
-  "Escuro-Mobile-Simulador-Corte.dc.html": {
-   "h": 3680,
-   "is_interactive": true,
-   "page": "escuro-app",
-   "title": "Mobile · Simulador (Cortar um gasto)",
-   "w": 393,
-   "x": 3540,
-   "y": 62730
-  },
-  "Escuro-Tablet-Historico-Conversas.dc.html": {
-   "h": 1180,
-   "is_interactive": true,
-   "page": "escuro-app",
-   "title": "Tablet · Histórico de conversas",
-   "w": 820,
-   "x": 3540,
-   "y": 3440
-  },
-  "Escuro-Mobile-Perfil-Refazer.dc.html": {
-   "h": 890,
-   "is_interactive": true,
-   "page": "escuro-app",
-   "title": "Mobile · Refazer perfil · pergunta 1",
-   "w": 393,
-   "x": 0,
-   "y": 70090
-  },
-  "Escuro-Tablet-Perfil-Refazer.dc.html": {
-   "h": 1180,
-   "is_interactive": true,
-   "page": "escuro-app",
-   "title": "Tablet · Refazer perfil · pergunta 1",
-   "w": 820,
-   "x": 473,
-   "y": 70090
-  },
-  "Escuro-Mobile-Perfil-Refazer-Resultado.dc.html": {
-   "h": 1720,
-   "is_interactive": true,
-   "page": "escuro-app",
-   "title": "Mobile · Refazer perfil · resultado",
-   "w": 393,
-   "x": 1453,
-   "y": 70090
-  },
-  "Escuro-Tablet-Perfil-Refazer-Resultado.dc.html": {
-   "h": 1430,
-   "is_interactive": true,
-   "page": "escuro-app",
-   "title": "Tablet · Refazer perfil · resultado",
-   "w": 820,
-   "x": 1926,
-   "y": 70090
-  },
-  "Escuro-Mobile-Planos.dc.html": {
-   "h": 2060,
-   "is_interactive": true,
-   "page": "escuro-app",
-   "title": "Mobile · Planos",
-   "w": 393,
-   "x": 0,
-   "y": 72250
-  },
-  "Escuro-Tablet-Planos.dc.html": {
-   "h": 1740,
-   "is_interactive": true,
-   "page": "escuro-app",
-   "title": "Tablet · Planos",
-   "w": 820,
-   "x": 473,
-   "y": 72250
-  },
-  "Escuro-Mobile-Malvo-Renovar.dc.html": {
-   "h": 1230,
-   "is_interactive": true,
-   "page": "escuro-app",
-   "title": "Mobile · Renovar autorização (Itaú)",
-   "w": 393,
-   "x": 0,
-   "y": 74750
-  },
-  "Escuro-Tablet-Malvo-Renovar.dc.html": {
-   "h": 1220,
-   "is_interactive": true,
-   "page": "escuro-app",
-   "title": "Tablet · Renovar autorização (Itaú)",
-   "w": 820,
-   "x": 473,
-   "y": 74750
-  },
-  "Escuro-Mobile-Editar-Perfil.dc.html": {
-   "h": 852,
-   "is_interactive": true,
-   "page": "escuro-app",
-   "title": "Mobile · Editar perfil",
-   "w": 393,
-   "x": 0,
-   "y": 76420
-  },
-  "Escuro-Tablet-Editar-Perfil.dc.html": {
-   "h": 1180,
-   "is_interactive": true,
-   "page": "escuro-app",
-   "title": "Tablet · Editar perfil",
-   "w": 820,
-   "x": 473,
-   "y": 76420
-  },
-  "Escuro-Mobile-Editar-Perfil-Email.dc.html": {
-   "h": 852,
-   "is_interactive": true,
-   "page": "escuro-app",
-   "title": "Mobile · Editar perfil · confirmar e-mail",
-   "w": 393,
-   "x": 1453,
-   "y": 76420
-  },
-  "Escuro-Tablet-Editar-Perfil-Email.dc.html": {
-   "h": 1180,
-   "is_interactive": true,
-   "page": "escuro-app",
-   "title": "Tablet · Editar perfil · confirmar e-mail",
-   "w": 820,
-   "x": 1926,
-   "y": 76420
-  },
-  "Escuro-Mobile-Meta-Nova.dc.html": {
-   "h": 1810,
-   "is_interactive": true,
-   "page": "escuro-app",
-   "title": "Mobile · Nova meta (da simulação)",
-   "w": 393,
-   "x": 0,
-   "y": 78040
-  },
-  "Escuro-Tablet-Meta-Nova.dc.html": {
-   "h": 1590,
-   "is_interactive": true,
-   "page": "escuro-app",
-   "title": "Tablet · Nova meta (da simulação)",
-   "w": 820,
-   "x": 473,
-   "y": 78040
-  },
-  "Escuro-Mobile-Metas.dc.html": {
-   "h": 1310,
-   "is_interactive": true,
-   "page": "escuro-app",
-   "title": "Mobile · Suas metas",
-   "w": 393,
-   "x": 1453,
-   "y": 78040
-  },
-  "Escuro-Tablet-Metas.dc.html": {
-   "h": 1180,
-   "is_interactive": true,
-   "page": "escuro-app",
-   "title": "Tablet · Suas metas",
-   "w": 820,
-   "x": 1926,
-   "y": 78040
-  },
-  "Escuro-Mobile-Meta-Detalhe.dc.html": {
-   "h": 2180,
-   "is_interactive": true,
-   "page": "escuro-app",
-   "title": "Mobile · Detalhe da meta (Reserva)",
-   "w": 393,
-   "x": 2906,
-   "y": 78040
-  },
-  "Escuro-Tablet-Meta-Detalhe.dc.html": {
-   "h": 1670,
-   "is_interactive": true,
-   "page": "escuro-app",
-   "title": "Tablet · Detalhe da meta (Reserva)",
-   "w": 820,
-   "x": 3379,
-   "y": 78040
-  },
-  "Escuro-Mobile-Metas-Estados.dc.html": {
-   "h": 960,
-   "is_interactive": true,
-   "page": "escuro-app",
-   "title": "Mobile · Suas metas · vazio e erro",
-   "w": 393,
-   "x": 4359,
-   "y": 78040
-  },
-  "Escuro-Tablet-Metas-Estados.dc.html": {
-   "h": 1180,
-   "is_interactive": true,
-   "page": "escuro-app",
-   "title": "Tablet · Suas metas · vazio e erro",
-   "w": 820,
-   "x": 4832,
-   "y": 78040
-  },
-  "Escuro-Mobile-Bem-Imovel.dc.html": {
-   "h": 1750,
-   "is_interactive": true,
-   "page": "escuro-app",
-   "title": "Mobile · Cadastrar imóvel",
-   "w": 393,
-   "x": 0,
-   "y": 80660
-  },
-  "Escuro-Tablet-Bem-Imovel.dc.html": {
-   "h": 1680,
-   "is_interactive": true,
-   "page": "escuro-app",
-   "title": "Tablet · Cadastrar imóvel",
-   "w": 820,
-   "x": 473,
-   "y": 80660
-  },
-  "Escuro-Mobile-Bem-Veiculo.dc.html": {
-   "h": 1540,
-   "is_interactive": true,
-   "page": "escuro-app",
-   "title": "Mobile · Cadastrar veículo (FIPE)",
-   "w": 393,
-   "x": 1453,
-   "y": 80660
-  },
-  "Escuro-Tablet-Bem-Veiculo.dc.html": {
-   "h": 1230,
-   "is_interactive": true,
-   "page": "escuro-app",
-   "title": "Tablet · Cadastrar veículo (FIPE)",
-   "w": 820,
-   "x": 1926,
-   "y": 80660
-  },
-  "Escuro-Mobile-Bem-Imovel-Detalhe.dc.html": {
-   "h": 1440,
-   "is_interactive": true,
-   "page": "escuro-app",
-   "title": "Mobile · Detalhe do imóvel",
-   "w": 393,
-   "x": 2906,
-   "y": 80660
-  },
-  "Escuro-Tablet-Bem-Imovel-Detalhe.dc.html": {
-   "h": 1180,
-   "is_interactive": true,
-   "page": "escuro-app",
-   "title": "Tablet · Detalhe do imóvel",
-   "w": 820,
-   "x": 3379,
-   "y": 80660
-  },
-  "Escuro-Mobile-Bem-Veiculo-Detalhe.dc.html": {
-   "h": 1340,
-   "is_interactive": true,
-   "page": "escuro-app",
-   "title": "Mobile · Detalhe do veículo",
-   "w": 393,
-   "x": 4359,
-   "y": 80660
-  },
-  "Escuro-Tablet-Bem-Veiculo-Detalhe.dc.html": {
-   "h": 1180,
-   "is_interactive": true,
-   "page": "escuro-app",
-   "title": "Tablet · Detalhe do veículo",
-   "w": 820,
-   "x": 4832,
-   "y": 80660
-  },
-  "Escuro-Mobile-Posicoes.dc.html": {
-   "h": 2020,
-   "is_interactive": true,
-   "page": "escuro-app",
-   "title": "Mobile · Todas as posições",
-   "w": 393,
-   "x": 0,
-   "y": 82850
-  },
-  "Escuro-Tablet-Posicoes.dc.html": {
-   "h": 1780,
-   "is_interactive": true,
-   "page": "escuro-app",
-   "title": "Tablet · Todas as posições",
-   "w": 820,
-   "x": 473,
-   "y": 82850
-  },
-  "Escuro-Mobile-Posicoes-Estados.dc.html": {
-   "h": 1460,
-   "is_interactive": true,
-   "page": "escuro-app",
-   "title": "Mobile · Posições · busca vazia, vazio e erro",
-   "w": 393,
-   "x": 1453,
-   "y": 82850
-  },
-  "Escuro-Tablet-Posicoes-Estados.dc.html": {
-   "h": 1470,
-   "is_interactive": true,
-   "page": "escuro-app",
-   "title": "Tablet · Posições · busca vazia, vazio e erro",
-   "w": 820,
-   "x": 1926,
-   "y": 82850
-  },
-  "Escuro-Mobile-Lancamentos.dc.html": {
-   "h": 2020,
-   "is_interactive": true,
-   "page": "escuro-app",
-   "title": "Mobile · Todos os lançamentos",
-   "w": 393,
-   "x": 2906,
-   "y": 82850
-  },
-  "Escuro-Tablet-Lancamentos.dc.html": {
-   "h": 2040,
-   "is_interactive": true,
-   "page": "escuro-app",
-   "title": "Tablet · Todos os lançamentos",
-   "w": 820,
-   "x": 3379,
-   "y": 82850
-  },
-  "Escuro-Mobile-Lancamentos-Estados.dc.html": {
-   "h": 1490,
-   "is_interactive": true,
-   "page": "escuro-app",
-   "title": "Mobile · Lançamentos · filtro vazio, vazio e erro",
-   "w": 393,
-   "x": 4359,
-   "y": 82850
-  },
-  "Escuro-Tablet-Lancamentos-Estados.dc.html": {
-   "h": 1540,
-   "is_interactive": true,
-   "page": "escuro-app",
-   "title": "Tablet · Lançamentos · filtro vazio, vazio e erro",
-   "w": 820,
-   "x": 4832,
-   "y": 82850
-  },
-  "Escuro-Mobile-Lancamentos-Categoria.dc.html": {
-   "h": 1820,
-   "is_interactive": true,
-   "page": "escuro-app",
-   "title": "Mobile · Lançamentos de uma categoria",
-   "w": 393,
-   "x": 5812,
-   "y": 82850
-  },
-  "Escuro-Tablet-Lancamentos-Categoria.dc.html": {
-   "h": 1680,
-   "is_interactive": true,
-   "page": "escuro-app",
-   "title": "Tablet · Lançamentos de uma categoria",
-   "w": 820,
-   "x": 6285,
-   "y": 82850
-  },
-  "Escuro-Mobile-Lancamento-Detalhe.dc.html": {
-   "h": 1540,
-   "is_interactive": true,
-   "page": "escuro-app",
-   "title": "Mobile · Detalhe do lançamento",
-   "w": 393,
-   "x": 7265,
-   "y": 82850
-  },
-  "Escuro-Tablet-Lancamento-Detalhe.dc.html": {
-   "h": 1180,
-   "is_interactive": true,
-   "page": "escuro-app",
-   "title": "Tablet · Detalhe do lançamento",
-   "w": 820,
-   "x": 7738,
-   "y": 82850
-  },
-  "Escuro-Mobile-Relatorio-Linha-do-Tempo.dc.html": {
-   "h": 2070,
-   "is_interactive": true,
-   "page": "escuro-app",
-   "title": "Mobile · Relatório · linha do tempo completa",
-   "w": 393,
-   "x": 8718,
-   "y": 82850
-  },
-  "Escuro-Tablet-Relatorio-Linha-do-Tempo.dc.html": {
-   "h": 2070,
-   "is_interactive": true,
-   "page": "escuro-app",
-   "title": "Tablet · Relatório · linha do tempo completa",
-   "w": 820,
-   "x": 9191,
-   "y": 82850
-  },
-  "Escuro-Mobile-Simulacoes.dc.html": {
-   "h": 852,
-   "is_interactive": true,
-   "page": "escuro-app",
-   "title": "Mobile · Simulações salvas",
-   "w": 393,
-   "x": 0,
-   "y": 85360
-  },
-  "Escuro-Tablet-Simulacoes.dc.html": {
-   "h": 1180,
-   "is_interactive": true,
-   "page": "escuro-app",
-   "title": "Tablet · Simulações salvas",
-   "w": 820,
-   "x": 473,
-   "y": 85360
-  },
-  "Escuro-Mobile-Simulacoes-Estados.dc.html": {
-   "h": 990,
-   "is_interactive": true,
-   "page": "escuro-app",
-   "title": "Mobile · Simulações salvas · estados",
-   "w": 393,
-   "x": 1453,
-   "y": 85360
-  },
-  "Escuro-Tablet-Simulacoes-Estados.dc.html": {
-   "h": 1180,
-   "is_interactive": true,
-   "page": "escuro-app",
-   "title": "Tablet · Simulações salvas · estados",
-   "w": 820,
-   "x": 1926,
-   "y": 85360
-  },
-  "Escuro-Mobile-Conversa-Menu.dc.html": {
-   "h": 852,
-   "is_interactive": true,
-   "page": "escuro-app",
-   "title": "Mobile · Conversa · mais opções",
-   "w": 393,
-   "x": 0,
-   "y": 86980
-  },
-  "Escuro-Tablet-Conversa-Menu.dc.html": {
-   "h": 1180,
-   "is_interactive": true,
-   "page": "escuro-app",
-   "title": "Tablet · Conversa · mais opções",
-   "w": 820,
-   "x": 473,
-   "y": 86980
-  },
-  "Escuro-Mobile-Conversa-Apagar.dc.html": {
-   "h": 852,
-   "is_interactive": true,
-   "page": "escuro-app",
-   "title": "Mobile · Conversa · apagar",
-   "w": 393,
-   "x": 1453,
-   "y": 86980
-  },
-  "Escuro-Tablet-Conversa-Apagar.dc.html": {
-   "h": 1180,
-   "is_interactive": true,
-   "page": "escuro-app",
-   "title": "Tablet · Conversa · apagar",
-   "w": 820,
-   "x": 1926,
-   "y": 86980
-  },
-  "Escuro-Mobile-Conversa-Anexar.dc.html": {
-   "h": 852,
-   "is_interactive": true,
-   "page": "escuro-app",
-   "title": "Mobile · Conversa · anexar arquivo",
-   "w": 393,
-   "x": 2906,
-   "y": 86980
-  },
-  "Escuro-Tablet-Conversa-Anexar.dc.html": {
-   "h": 1180,
-   "is_interactive": true,
-   "page": "escuro-app",
-   "title": "Tablet · Conversa · anexar arquivo",
-   "w": 820,
-   "x": 3379,
-   "y": 86980
-  },
-  "Escuro-Mobile-Conversa-Anexo-Previa.dc.html": {
-   "h": 852,
-   "is_interactive": true,
-   "page": "escuro-app",
-   "title": "Mobile · Conversa · anexo pronto para enviar",
-   "w": 393,
-   "x": 4359,
-   "y": 86980
-  },
-  "Escuro-Tablet-Conversa-Anexo-Previa.dc.html": {
-   "h": 1180,
-   "is_interactive": true,
-   "page": "escuro-app",
-   "title": "Tablet · Conversa · anexo pronto para enviar",
-   "w": 820,
-   "x": 4832,
-   "y": 86980
-  },
-  "Escuro-Mobile-Conversa-Gravando.dc.html": {
-   "h": 852,
-   "is_interactive": true,
-   "page": "escuro-app",
-   "title": "Mobile · Conversa · gravando voz",
-   "w": 393,
-   "x": 5812,
-   "y": 86980
-  },
-  "Escuro-Tablet-Conversa-Gravando.dc.html": {
-   "h": 1180,
-   "is_interactive": true,
-   "page": "escuro-app",
-   "title": "Tablet · Conversa · gravando voz",
-   "w": 820,
-   "x": 6285,
-   "y": 86980
-  },
-  "Escuro-Mobile-Conversa-Transcrevendo.dc.html": {
-   "h": 852,
-   "is_interactive": true,
-   "page": "escuro-app",
-   "title": "Mobile · Conversa · transcrevendo",
-   "w": 393,
-   "x": 7265,
-   "y": 86980
-  },
-  "Escuro-Tablet-Conversa-Transcrevendo.dc.html": {
-   "h": 1180,
-   "is_interactive": true,
-   "page": "escuro-app",
-   "title": "Tablet · Conversa · transcrevendo",
-   "w": 820,
-   "x": 7738,
-   "y": 86980
-  },
-  "Escuro-Mobile-Ativo-Comparar.dc.html": {
-   "h": 852,
-   "is_interactive": true,
-   "page": "escuro-app",
-   "title": "Mobile · Ativo · comparar com (opções)",
-   "w": 393,
-   "x": 0,
-   "y": 88600
-  },
-  "Escuro-Tablet-Ativo-Comparar.dc.html": {
-   "h": 1180,
-   "is_interactive": true,
-   "page": "escuro-app",
-   "title": "Tablet · Ativo · comparar com (opções)",
-   "w": 820,
-   "x": 473,
-   "y": 88600
-  },
-  "Escuro-Mobile-Ativo-Comparar-Ibovespa.dc.html": {
-   "h": 1110,
-   "is_interactive": true,
-   "page": "escuro-app",
-   "title": "Mobile · Ativo · comparado ao Ibovespa",
-   "w": 393,
-   "x": 1453,
-   "y": 88600
-  },
-  "Escuro-Tablet-Ativo-Comparar-Ibovespa.dc.html": {
-   "h": 1300,
-   "is_interactive": true,
-   "page": "escuro-app",
-   "title": "Tablet · Ativo · comparado ao Ibovespa",
-   "w": 820,
-   "x": 1926,
-   "y": 88600
-  },
-  "Escuro-Mobile-Ativo-Preco-Sem-Ajuste.dc.html": {
-   "h": 1340,
-   "is_interactive": true,
-   "page": "escuro-app",
-   "title": "Mobile · Ativo · preço sem ajuste",
-   "w": 393,
-   "x": 2906,
-   "y": 88600
-  },
-  "Escuro-Tablet-Ativo-Preco-Sem-Ajuste.dc.html": {
-   "h": 1430,
-   "is_interactive": true,
-   "page": "escuro-app",
-   "title": "Tablet · Ativo · preço sem ajuste",
-   "w": 820,
-   "x": 3379,
-   "y": 88600
-  },
-  "Escuro-Mobile-Ativo-Mais-Detalhes.dc.html": {
-   "h": 1520,
-   "is_interactive": true,
-   "page": "escuro-app",
-   "title": "Mobile · Ativo · mais detalhes",
-   "w": 393,
-   "x": 4359,
-   "y": 88600
-  },
-  "Escuro-Tablet-Ativo-Mais-Detalhes.dc.html": {
-   "h": 1180,
-   "is_interactive": true,
-   "page": "escuro-app",
-   "title": "Tablet · Ativo · mais detalhes",
-   "w": 820,
-   "x": 4832,
-   "y": 88600
-  },
-  "Escuro-Mobile-Ativo-Eventos.dc.html": {
-   "h": 1510,
-   "is_interactive": true,
-   "page": "escuro-app",
-   "title": "Mobile · Ativo · todos os eventos corporativos",
-   "w": 393,
-   "x": 5812,
-   "y": 88600
-  },
-  "Escuro-Tablet-Ativo-Eventos.dc.html": {
-   "h": 1240,
-   "is_interactive": true,
-   "page": "escuro-app",
-   "title": "Tablet · Ativo · todos os eventos corporativos",
-   "w": 820,
-   "x": 6285,
-   "y": 88600
-  },
-  "Escuro-Mobile-Ativo-Risco.dc.html": {
-   "h": 852,
-   "is_interactive": true,
-   "page": "escuro-app",
-   "title": "Mobile · Ajustar risco do ativo",
-   "w": 393,
-   "x": 7265,
-   "y": 88600
-  },
-  "Escuro-Tablet-Ativo-Risco.dc.html": {
-   "h": 1180,
-   "is_interactive": true,
-   "page": "escuro-app",
-   "title": "Tablet · Ajustar risco do ativo",
-   "w": 820,
-   "x": 7738,
-   "y": 88600
-  },
-  "Escuro-Mobile-Inicio-Novo.dc.html": {
-   "h": 1310,
-   "is_interactive": true,
-   "page": "escuro-app",
-   "title": "Mobile · Início · usuário novo",
-   "w": 393,
-   "x": 0,
-   "y": 90560
-  },
-  "Escuro-Tablet-Inicio-Novo.dc.html": {
-   "h": 1180,
-   "is_interactive": true,
-   "page": "escuro-app",
-   "title": "Tablet · Início · usuário novo",
-   "w": 820,
-   "x": 473,
-   "y": 90560
-  },
-  "Escuro-Mobile-Gastos-Novo.dc.html": {
-   "h": 990,
-   "is_interactive": true,
-   "page": "escuro-app",
-   "title": "Mobile · Gastos · usuário novo",
-   "w": 393,
-   "x": 1453,
-   "y": 90560
-  },
-  "Escuro-Tablet-Gastos-Novo.dc.html": {
-   "h": 1180,
-   "is_interactive": true,
-   "page": "escuro-app",
-   "title": "Tablet · Gastos · usuário novo",
-   "w": 820,
-   "x": 1926,
-   "y": 90560
-  },
-  "Escuro-Mobile-Investimentos-Novo.dc.html": {
-   "h": 1020,
-   "is_interactive": true,
-   "page": "escuro-app",
-   "title": "Mobile · Investimentos · usuário novo",
-   "w": 393,
-   "x": 2906,
-   "y": 90560
-  },
-  "Escuro-Tablet-Investimentos-Novo.dc.html": {
-   "h": 1180,
-   "is_interactive": true,
-   "page": "escuro-app",
-   "title": "Tablet · Investimentos · usuário novo",
-   "w": 820,
-   "x": 3379,
-   "y": 90560
-  },
-  "Escuro-Mobile-Perfil-Investidor-P1.dc.html": {
-   "h": 852,
-   "is_interactive": true,
-   "page": "escuro-onb",
-   "title": "Mobile · Perfil de investidor · pergunta 1",
-   "w": 393,
-   "x": 0,
-   "y": 7520
-  },
-  "Escuro-Tablet-Perfil-Investidor-P1.dc.html": {
-   "h": 1180,
-   "is_interactive": true,
-   "page": "escuro-onb",
-   "title": "Tablet · Perfil de investidor · pergunta 1",
-   "w": 820,
-   "x": 473,
-   "y": 7520
-  },
-  "Escuro-Mobile-Perfil-Investidor-P2.dc.html": {
-   "h": 852,
-   "is_interactive": true,
-   "page": "escuro-onb",
-   "title": "Mobile · Perfil de investidor · pergunta 2",
-   "w": 393,
-   "x": 1453,
-   "y": 7520
-  },
-  "Escuro-Tablet-Perfil-Investidor-P2.dc.html": {
-   "h": 1180,
-   "is_interactive": true,
-   "page": "escuro-onb",
-   "title": "Tablet · Perfil de investidor · pergunta 2",
-   "w": 820,
-   "x": 1926,
-   "y": 7520
-  },
-  "Escuro-Mobile-Perfil-Investidor-P4.dc.html": {
-   "h": 852,
-   "is_interactive": true,
-   "page": "escuro-onb",
-   "title": "Mobile · Perfil de investidor · pergunta 4",
-   "w": 393,
-   "x": 2906,
-   "y": 7520
-  },
-  "Escuro-Tablet-Perfil-Investidor-P4.dc.html": {
-   "h": 1180,
-   "is_interactive": true,
-   "page": "escuro-onb",
-   "title": "Tablet · Perfil de investidor · pergunta 4",
-   "w": 820,
-   "x": 3379,
-   "y": 7520
-  },
-  "Escuro-Mobile-Perfil-Investidor-P5.dc.html": {
-   "h": 852,
-   "is_interactive": true,
-   "page": "escuro-onb",
-   "title": "Mobile · Perfil de investidor · pergunta 5",
-   "w": 393,
-   "x": 4359,
-   "y": 7520
-  },
-  "Escuro-Tablet-Perfil-Investidor-P5.dc.html": {
-   "h": 1180,
-   "is_interactive": true,
-   "page": "escuro-onb",
-   "title": "Tablet · Perfil de investidor · pergunta 5",
-   "w": 820,
-   "x": 4832,
-   "y": 7520
-  },
-  "Escuro-Mobile-Perfil-Investidor-P6.dc.html": {
-   "h": 852,
-   "is_interactive": true,
-   "page": "escuro-onb",
-   "title": "Mobile · Perfil de investidor · pergunta 6",
-   "w": 393,
-   "x": 5812,
-   "y": 7520
-  },
-  "Escuro-Tablet-Perfil-Investidor-P6.dc.html": {
-   "h": 1180,
-   "is_interactive": true,
-   "page": "escuro-onb",
-   "title": "Tablet · Perfil de investidor · pergunta 6",
-   "w": 820,
-   "x": 6285,
-   "y": 7520
-  },
-  "Escuro-Mobile-Perfil-Investidor-Resultado.dc.html": {
-   "h": 1690,
-   "is_interactive": true,
-   "page": "escuro-onb",
-   "title": "Mobile · Perfil de investidor · resultado",
-   "w": 393,
-   "x": 7265,
-   "y": 7520
-  },
-  "Escuro-Tablet-Perfil-Investidor-Resultado.dc.html": {
-   "h": 1600,
-   "is_interactive": true,
-   "page": "escuro-onb",
-   "title": "Tablet · Perfil de investidor · resultado",
-   "w": 820,
-   "x": 7738,
-   "y": 7520
-  },
-  "Escuro-Mobile-Malvo-Autorizar.dc.html": {
-   "h": 1180,
-   "is_interactive": true,
-   "page": "escuro-onb",
-   "title": "Mobile · Conectar banco · autorização",
-   "w": 393,
-   "x": 0,
-   "y": 9650
-  },
-  "Escuro-Tablet-Malvo-Autorizar.dc.html": {
-   "h": 1420,
-   "is_interactive": true,
-   "page": "escuro-onb",
-   "title": "Tablet · Conectar banco · autorização",
-   "w": 820,
-   "x": 473,
-   "y": 9650
-  },
-  "Escuro-Mobile-Malvo-Conectando.dc.html": {
-   "h": 852,
-   "is_interactive": true,
-   "page": "escuro-onb",
-   "title": "Mobile · Conectar banco · conectando",
-   "w": 393,
-   "x": 1453,
-   "y": 9650
-  },
-  "Escuro-Tablet-Malvo-Conectando.dc.html": {
-   "h": 1180,
-   "is_interactive": true,
-   "page": "escuro-onb",
-   "title": "Tablet · Conectar banco · conectando",
-   "w": 820,
-   "x": 1926,
-   "y": 9650
-  },
-  "Escuro-Mobile-Malvo-Sucesso.dc.html": {
-   "h": 1000,
-   "is_interactive": true,
-   "page": "escuro-onb",
-   "title": "Mobile · Conectar banco · sucesso",
-   "w": 393,
-   "x": 2906,
-   "y": 9650
-  },
-  "Escuro-Tablet-Malvo-Sucesso.dc.html": {
-   "h": 1210,
-   "is_interactive": true,
-   "page": "escuro-onb",
-   "title": "Tablet · Conectar banco · sucesso",
-   "w": 820,
-   "x": 3379,
-   "y": 9650
-  },
-  "Escuro-Mobile-Malvo-Erro.dc.html": {
-   "h": 852,
-   "is_interactive": true,
-   "page": "escuro-onb",
-   "title": "Mobile · Conectar banco · erro ou cancelado",
-   "w": 393,
-   "x": 4359,
-   "y": 9650
-  },
-  "Escuro-Tablet-Malvo-Erro.dc.html": {
-   "h": 1180,
-   "is_interactive": true,
-   "page": "escuro-onb",
-   "title": "Tablet · Conectar banco · erro ou cancelado",
-   "w": 820,
-   "x": 4832,
-   "y": 9650
-  },
-  "Escuro-Mobile-Termos.dc.html": {
-   "h": 1570,
-   "is_interactive": true,
-   "page": "escuro-onb",
-   "title": "Mobile · Termos de uso",
-   "w": 393,
-   "x": 0,
-   "y": 11510
-  },
-  "Escuro-Tablet-Termos.dc.html": {
-   "h": 1610,
-   "is_interactive": true,
-   "page": "escuro-onb",
-   "title": "Tablet · Termos de uso",
-   "w": 820,
-   "x": 473,
-   "y": 11510
-  },
-  "Escuro-Mobile-Privacidade.dc.html": {
-   "h": 1470,
-   "is_interactive": true,
-   "page": "escuro-onb",
-   "title": "Mobile · Política de privacidade",
-   "w": 393,
-   "x": 1453,
-   "y": 11510
-  },
-  "Escuro-Tablet-Privacidade.dc.html": {
-   "h": 1500,
-   "is_interactive": true,
-   "page": "escuro-onb",
-   "title": "Tablet · Política de privacidade",
-   "w": 820,
-   "x": 1926,
-   "y": 11510
-  }
- },
- "createdOnFiles": {
-  "at": "2026-09-23T19:42:52Z",
-  "v": 1
- },
- "designSystems": [],
- "launch": {
-  "view": "canvas",
-  "page": "escuro-app"
- },
- "notes": {
-  "escuro-app-alertas": {
-   "kind": "title1",
-   "maxW": 3933,
-   "page": "escuro-app",
-   "text": "Alertas",
-   "w": 240,
-   "x": 0,
-   "y": 14110
-  },
-  "escuro-app-assinaturas": {
-   "kind": "title1",
-   "maxW": 3933,
-   "page": "escuro-app",
-   "text": "Assinaturas ativas",
-   "w": 240,
-   "x": 0,
-   "y": 8650
-  },
-  "escuro-app-conta": {
-   "kind": "title1",
-   "maxW": 3933,
-   "page": "escuro-app",
-   "text": "Meu perfil e configurações",
-   "w": 240,
-   "x": 0,
-   "y": 66550
-  },
-  "escuro-app-conversas": {
-   "kind": "title1",
-   "maxW": 5779,
-   "page": "escuro-app",
-   "text": "Conversas",
-   "w": 240,
-   "x": 0,
-   "y": 3140
-  },
-  "escuro-app-gastos": {
-   "kind": "title1",
-   "maxW": 3933,
-   "page": "escuro-app",
-   "text": "Gastos",
-   "w": 240,
-   "x": 0,
-   "y": 5020
-  },
-  "escuro-app-invest": {
-   "kind": "title1",
-   "maxW": 3933,
-   "page": "escuro-app",
-   "text": "Investimentos",
-   "w": 240,
-   "x": 0,
-   "y": 20410
-  },
-  "escuro-app-novo-alerta": {
-   "kind": "title1",
-   "maxW": 3933,
-   "page": "escuro-app",
-   "text": "Novo alerta de preço",
-   "w": 240,
-   "x": 0,
-   "y": 18410
-  },
-  "escuro-app-novo-invest": {
-   "kind": "title1",
-   "maxW": 3933,
-   "page": "escuro-app",
-   "text": "Adicionar investimento (cadastro manual)",
-   "w": 240,
-   "x": 0,
-   "y": 51840
-  },
-  "escuro-app-novo-teto": {
-   "kind": "title1",
-   "maxW": 3933,
-   "page": "escuro-app",
-   "text": "Novo teto de gasto",
-   "w": 240,
-   "x": 0,
-   "y": 16090
-  },
-  "escuro-app-painel": {
-   "kind": "title1",
-   "maxW": 7046,
-   "page": "escuro-app",
-   "text": "Início",
-   "w": 240,
-   "x": 0,
-   "y": -300
-  },
-  "escuro-app-relatorio": {
-   "kind": "title1",
-   "maxW": 4293,
-   "page": "escuro-app",
-   "text": "Relatório · o que aconteceu com meu dinheiro",
-   "w": 240,
-   "x": 0,
-   "y": 10630
-  },
-  "escuro-app-simulador": {
-   "kind": "title1",
-   "maxW": 3933,
-   "page": "escuro-app",
-   "text": "Simulador · Aposentadoria",
-   "w": 240,
-   "x": 0,
-   "y": 53910
-  },
-  "escuro-onb-onb1": {
-   "kind": "title1",
-   "maxW": 3933,
-   "page": "escuro-onb",
-   "text": "Boas-vindas e criação de conta",
-   "w": 240,
-   "x": 0,
-   "y": -300
-  },
-  "escuro-onb-onb2": {
-   "kind": "title1",
-   "maxW": 3933,
-   "page": "escuro-onb",
-   "text": "Onboarding 1 · Conectar bancos (Open Finance)",
-   "w": 240,
-   "x": 0,
-   "y": 1580
-  },
-  "escuro-onb-onb3": {
-   "kind": "title1",
-   "maxW": 3933,
-   "page": "escuro-onb",
-   "text": "Onboarding 2 · Perfil de investidor",
-   "w": 240,
-   "x": 0,
-   "y": 3460
-  },
-  "escuro-onb-onb4": {
-   "kind": "title1",
-   "maxW": 3933,
-   "page": "escuro-onb",
-   "text": "Onboarding 3 · Assistentes e avisos",
-   "w": 240,
-   "x": 0,
-   "y": 5340
-  },
-  "escuro-app-ativo": {
-   "kind": "title1",
-   "maxW": 3933,
-   "page": "escuro-app",
-   "text": "Detalhe do ativo · PETR4 (dados da Brapi)",
-   "w": 240,
-   "x": 0,
-   "y": 25870
-  },
-  "escuro-app-ativo-tesouro-selic": {
-   "kind": "title1",
-   "maxW": 3933,
-   "page": "escuro-app",
-   "text": "Detalhe do ativo · Tesouro Selic 2029",
-   "w": 240,
-   "x": 0,
-   "y": 30630
-  },
-  "escuro-app-ativo-cdb": {
-   "kind": "title1",
-   "maxW": 3933,
-   "page": "escuro-app",
-   "text": "Detalhe do ativo · CDB 110% CDI",
-   "w": 240,
-   "x": 0,
-   "y": 34760
-  },
-  "escuro-app-ativo-bova11": {
-   "kind": "title1",
-   "maxW": 3933,
-   "page": "escuro-app",
-   "text": "Detalhe do ativo · BOVA11",
-   "w": 240,
-   "x": 0,
-   "y": 38950
-  },
-  "escuro-app-ativo-hglg11": {
-   "kind": "title1",
-   "maxW": 3933,
-   "page": "escuro-app",
-   "text": "Detalhe do ativo · HGLG11",
-   "w": 240,
-   "x": 0,
-   "y": 43120
-  },
-  "escuro-app-ativo-bitcoin": {
-   "kind": "title1",
-   "maxW": 3933,
-   "page": "escuro-app",
-   "text": "Detalhe do ativo · Bitcoin",
-   "w": 240,
-   "x": 0,
-   "y": 47660
-  },
-  "escuro-app-simulador-objetivo": {
-   "kind": "title1",
-   "maxW": 3933,
-   "page": "escuro-app",
-   "text": "Simulador · Juntar para um objetivo",
-   "w": 240,
-   "x": 0,
-   "y": 58290
-  },
-  "escuro-app-simulador-corte": {
-   "kind": "title1",
-   "maxW": 3933,
-   "page": "escuro-app",
-   "text": "Simulador · Cortar um gasto",
-   "w": 240,
-   "x": 0,
-   "y": 62430
-  },
-  "escuro-app-nv-refazer-perfil-de-investidor": {
-   "kind": "title1",
-   "maxW": 2906,
-   "page": "escuro-app",
-   "text": "Refazer perfil de investidor",
-   "w": 240,
-   "x": 0,
-   "y": 69790
-  },
-  "escuro-app-nv-planos": {
-   "kind": "title1",
-   "maxW": 1453,
-   "page": "escuro-app",
-   "text": "Planos",
-   "w": 240,
-   "x": 0,
-   "y": 71950
-  },
-  "escuro-app-nv-renovar-autorizacao-do-banco": {
-   "kind": "title1",
-   "maxW": 1453,
-   "page": "escuro-app",
-   "text": "Renovar autorização do banco",
-   "w": 240,
-   "x": 0,
-   "y": 74450
-  },
-  "escuro-app-nv-editar-perfil": {
-   "kind": "title1",
-   "maxW": 2906,
-   "page": "escuro-app",
-   "text": "Editar perfil",
-   "w": 240,
-   "x": 0,
-   "y": 76120
-  },
-  "escuro-app-nv-metas": {
-   "kind": "title1",
-   "maxW": 5812,
-   "page": "escuro-app",
-   "text": "Metas",
-   "w": 240,
-   "x": 0,
-   "y": 77740
-  },
-  "escuro-app-nv-bens-imovel-e-veiculo": {
-   "kind": "title1",
-   "maxW": 5812,
-   "page": "escuro-app",
-   "text": "Bens: imóvel e veículo",
-   "w": 240,
-   "x": 0,
-   "y": 80360
-  },
-  "escuro-app-nv-listas-completas": {
-   "kind": "title1",
-   "maxW": 10171,
-   "page": "escuro-app",
-   "text": "Listas completas",
-   "w": 240,
-   "x": 0,
-   "y": 82550
-  },
-  "escuro-app-nv-simulacoes-salvas": {
-   "kind": "title1",
-   "maxW": 2906,
-   "page": "escuro-app",
-   "text": "Simulações salvas",
-   "w": 240,
-   "x": 0,
-   "y": 85060
-  },
-  "escuro-app-nv-conversa-acoes": {
-   "kind": "title1",
-   "maxW": 8718,
-   "page": "escuro-app",
-   "text": "Conversa: ações",
-   "w": 240,
-   "x": 0,
-   "y": 86680
-  },
-  "escuro-app-nv-detalhe-do-ativo-complementos": {
-   "kind": "title1",
-   "maxW": 8718,
-   "page": "escuro-app",
-   "text": "Detalhe do ativo: complementos",
-   "w": 240,
-   "x": 0,
-   "y": 88300
-  },
-  "escuro-app-nv-usuario-novo-sem-banco-conectado": {
-   "kind": "title1",
-   "maxW": 4359,
-   "page": "escuro-app",
-   "text": "Usuário novo (sem banco conectado)",
-   "w": 240,
-   "x": 0,
-   "y": 90260
-  },
-  "escuro-onb-nv-perfil-de-investidor-questionario-comple": {
-   "kind": "title1",
-   "maxW": 8718,
-   "page": "escuro-onb",
-   "text": "Perfil de investidor · questionário completo",
-   "w": 240,
-   "x": 0,
-   "y": 7220
-  },
-  "escuro-onb-nv-conexao-com-o-banco-pelo-malvo": {
-   "kind": "title1",
-   "maxW": 5812,
-   "page": "escuro-onb",
-   "text": "Conexão com o banco pelo Malvo",
-   "w": 240,
-   "x": 0,
-   "y": 9350
-  },
-  "escuro-onb-nv-termos-e-privacidade": {
-   "kind": "title1",
-   "maxW": 2906,
-   "page": "escuro-onb",
-   "text": "Termos e privacidade",
-   "w": 240,
-   "x": 0,
-   "y": 11210
-  }
- },
- "order": [
-  "Main.dc.html",
-  "Fundamentos.dc.html",
-  "Escuro-Desktop-Boas-Vindas.dc.html",
-  "Escuro-Tablet-Boas-Vindas.dc.html",
-  "Escuro-Mobile-Boas-Vindas.dc.html",
-  "Escuro-Desktop-Conectar-Bancos.dc.html",
-  "Escuro-Tablet-Conectar-Bancos.dc.html",
-  "Escuro-Mobile-Conectar-Bancos.dc.html",
-  "Escuro-Desktop-Perfil-Investidor.dc.html",
-  "Escuro-Tablet-Perfil-Investidor.dc.html",
-  "Escuro-Mobile-Perfil-Investidor.dc.html",
-  "Escuro-Desktop-Agentes-Avisos.dc.html",
-  "Escuro-Tablet-Agentes-Avisos.dc.html",
-  "Escuro-Mobile-Agentes-Avisos.dc.html",
-  "Escuro-Desktop-Painel-Historico.dc.html",
-  "Escuro-Tablet-Painel.dc.html",
-  "Escuro-Mobile-Inicio.dc.html",
-  "Escuro-Mobile-Assistentes.dc.html",
-  "Escuro-Desktop-Conversas.dc.html",
-  "Escuro-Tablet-Conversa.dc.html",
-  "Escuro-Tablet-Historico-Conversas.dc.html",
-  "Escuro-Mobile-Conversa.dc.html",
-  "Escuro-Mobile-Historico-Conversas.dc.html",
-  "Escuro-Mobile-Escolher-Agente.dc.html",
-  "Escuro-Desktop-Gastos.dc.html",
-  "Escuro-Tablet-Gastos.dc.html",
-  "Escuro-Mobile-Gastos.dc.html",
-  "Escuro-Desktop-Assinaturas.dc.html",
-  "Escuro-Tablet-Assinaturas.dc.html",
-  "Escuro-Mobile-Assinaturas.dc.html",
-  "Escuro-Desktop-Relatorio.dc.html",
-  "Escuro-Tablet-Relatorio.dc.html",
-  "Escuro-Mobile-Relatorio.dc.html",
-  "Escuro-Desktop-Alertas.dc.html",
-  "Escuro-Tablet-Alertas.dc.html",
-  "Escuro-Mobile-Alertas.dc.html",
-  "Escuro-Desktop-Novo-Teto.dc.html",
-  "Escuro-Tablet-Novo-Teto.dc.html",
-  "Escuro-Mobile-Novo-Teto.dc.html",
-  "Escuro-Desktop-Novo-Alerta-Preco.dc.html",
-  "Escuro-Tablet-Novo-Alerta-Preco.dc.html",
-  "Escuro-Mobile-Novo-Alerta-Preco.dc.html",
-  "Escuro-Desktop-Investimentos.dc.html",
-  "Escuro-Tablet-Investimentos.dc.html",
-  "Escuro-Mobile-Investimentos.dc.html",
-  "Escuro-Desktop-Ativo.dc.html",
-  "Escuro-Tablet-Ativo.dc.html",
-  "Escuro-Mobile-Ativo.dc.html",
-  "Escuro-Desktop-Ativo-Tesouro-Selic.dc.html",
-  "Escuro-Tablet-Ativo-Tesouro-Selic.dc.html",
-  "Escuro-Mobile-Ativo-Tesouro-Selic.dc.html",
-  "Escuro-Desktop-Ativo-CDB.dc.html",
-  "Escuro-Tablet-Ativo-CDB.dc.html",
-  "Escuro-Mobile-Ativo-CDB.dc.html",
-  "Escuro-Desktop-Ativo-BOVA11.dc.html",
-  "Escuro-Tablet-Ativo-BOVA11.dc.html",
-  "Escuro-Mobile-Ativo-BOVA11.dc.html",
-  "Escuro-Desktop-Ativo-HGLG11.dc.html",
-  "Escuro-Tablet-Ativo-HGLG11.dc.html",
-  "Escuro-Mobile-Ativo-HGLG11.dc.html",
-  "Escuro-Desktop-Ativo-Bitcoin.dc.html",
-  "Escuro-Tablet-Ativo-Bitcoin.dc.html",
-  "Escuro-Mobile-Ativo-Bitcoin.dc.html",
-  "Escuro-Desktop-Adicionar-Investimento.dc.html",
-  "Escuro-Tablet-Adicionar-Investimento.dc.html",
-  "Escuro-Mobile-Adicionar-Investimento.dc.html",
-  "Escuro-Desktop-Simulador.dc.html",
-  "Escuro-Tablet-Simulador.dc.html",
-  "Escuro-Mobile-Simulador.dc.html",
-  "Escuro-Desktop-Simulador-Objetivo.dc.html",
-  "Escuro-Tablet-Simulador-Objetivo.dc.html",
-  "Escuro-Mobile-Simulador-Objetivo.dc.html",
-  "Escuro-Desktop-Simulador-Corte.dc.html",
-  "Escuro-Tablet-Simulador-Corte.dc.html",
-  "Escuro-Mobile-Simulador-Corte.dc.html",
-  "Escuro-Desktop-Meu-Perfil.dc.html",
-  "Escuro-Tablet-Meu-Perfil.dc.html",
-  "Escuro-Mobile-Meu-Perfil.dc.html",
-  "Escuro-Mobile-Perfil-Refazer.dc.html",
-  "Escuro-Tablet-Perfil-Refazer.dc.html",
-  "Escuro-Mobile-Perfil-Refazer-Resultado.dc.html",
-  "Escuro-Tablet-Perfil-Refazer-Resultado.dc.html",
-  "Escuro-Mobile-Planos.dc.html",
-  "Escuro-Tablet-Planos.dc.html",
-  "Escuro-Mobile-Malvo-Renovar.dc.html",
-  "Escuro-Tablet-Malvo-Renovar.dc.html",
-  "Escuro-Mobile-Editar-Perfil.dc.html",
-  "Escuro-Tablet-Editar-Perfil.dc.html",
-  "Escuro-Mobile-Editar-Perfil-Email.dc.html",
-  "Escuro-Tablet-Editar-Perfil-Email.dc.html",
-  "Escuro-Mobile-Meta-Nova.dc.html",
-  "Escuro-Tablet-Meta-Nova.dc.html",
-  "Escuro-Mobile-Metas.dc.html",
-  "Escuro-Tablet-Metas.dc.html",
-  "Escuro-Mobile-Meta-Detalhe.dc.html",
-  "Escuro-Tablet-Meta-Detalhe.dc.html",
-  "Escuro-Mobile-Metas-Estados.dc.html",
-  "Escuro-Tablet-Metas-Estados.dc.html",
-  "Escuro-Mobile-Bem-Imovel.dc.html",
-  "Escuro-Tablet-Bem-Imovel.dc.html",
-  "Escuro-Mobile-Bem-Veiculo.dc.html",
-  "Escuro-Tablet-Bem-Veiculo.dc.html",
-  "Escuro-Mobile-Bem-Imovel-Detalhe.dc.html",
-  "Escuro-Tablet-Bem-Imovel-Detalhe.dc.html",
-  "Escuro-Mobile-Bem-Veiculo-Detalhe.dc.html",
-  "Escuro-Tablet-Bem-Veiculo-Detalhe.dc.html",
-  "Escuro-Mobile-Posicoes.dc.html",
-  "Escuro-Tablet-Posicoes.dc.html",
-  "Escuro-Mobile-Posicoes-Estados.dc.html",
-  "Escuro-Tablet-Posicoes-Estados.dc.html",
-  "Escuro-Mobile-Lancamentos.dc.html",
-  "Escuro-Tablet-Lancamentos.dc.html",
-  "Escuro-Mobile-Lancamentos-Estados.dc.html",
-  "Escuro-Tablet-Lancamentos-Estados.dc.html",
-  "Escuro-Mobile-Lancamentos-Categoria.dc.html",
-  "Escuro-Tablet-Lancamentos-Categoria.dc.html",
-  "Escuro-Mobile-Lancamento-Detalhe.dc.html",
-  "Escuro-Tablet-Lancamento-Detalhe.dc.html",
-  "Escuro-Mobile-Relatorio-Linha-do-Tempo.dc.html",
-  "Escuro-Tablet-Relatorio-Linha-do-Tempo.dc.html",
-  "Escuro-Mobile-Simulacoes.dc.html",
-  "Escuro-Tablet-Simulacoes.dc.html",
-  "Escuro-Mobile-Simulacoes-Estados.dc.html",
-  "Escuro-Tablet-Simulacoes-Estados.dc.html",
-  "Escuro-Mobile-Conversa-Menu.dc.html",
-  "Escuro-Tablet-Conversa-Menu.dc.html",
-  "Escuro-Mobile-Conversa-Apagar.dc.html",
-  "Escuro-Tablet-Conversa-Apagar.dc.html",
-  "Escuro-Mobile-Conversa-Anexar.dc.html",
-  "Escuro-Tablet-Conversa-Anexar.dc.html",
-  "Escuro-Mobile-Conversa-Anexo-Previa.dc.html",
-  "Escuro-Tablet-Conversa-Anexo-Previa.dc.html",
-  "Escuro-Mobile-Conversa-Gravando.dc.html",
-  "Escuro-Tablet-Conversa-Gravando.dc.html",
-  "Escuro-Mobile-Conversa-Transcrevendo.dc.html",
-  "Escuro-Tablet-Conversa-Transcrevendo.dc.html",
-  "Escuro-Mobile-Ativo-Comparar.dc.html",
-  "Escuro-Tablet-Ativo-Comparar.dc.html",
-  "Escuro-Mobile-Ativo-Comparar-Ibovespa.dc.html",
-  "Escuro-Tablet-Ativo-Comparar-Ibovespa.dc.html",
-  "Escuro-Mobile-Ativo-Preco-Sem-Ajuste.dc.html",
-  "Escuro-Tablet-Ativo-Preco-Sem-Ajuste.dc.html",
-  "Escuro-Mobile-Ativo-Mais-Detalhes.dc.html",
-  "Escuro-Tablet-Ativo-Mais-Detalhes.dc.html",
-  "Escuro-Mobile-Ativo-Eventos.dc.html",
-  "Escuro-Tablet-Ativo-Eventos.dc.html",
-  "Escuro-Mobile-Ativo-Risco.dc.html",
-  "Escuro-Tablet-Ativo-Risco.dc.html",
-  "Escuro-Mobile-Inicio-Novo.dc.html",
-  "Escuro-Tablet-Inicio-Novo.dc.html",
-  "Escuro-Mobile-Gastos-Novo.dc.html",
-  "Escuro-Tablet-Gastos-Novo.dc.html",
-  "Escuro-Mobile-Investimentos-Novo.dc.html",
-  "Escuro-Tablet-Investimentos-Novo.dc.html",
-  "Escuro-Mobile-Perfil-Investidor-P1.dc.html",
-  "Escuro-Tablet-Perfil-Investidor-P1.dc.html",
-  "Escuro-Mobile-Perfil-Investidor-P2.dc.html",
-  "Escuro-Tablet-Perfil-Investidor-P2.dc.html",
-  "Escuro-Mobile-Perfil-Investidor-P4.dc.html",
-  "Escuro-Tablet-Perfil-Investidor-P4.dc.html",
-  "Escuro-Mobile-Perfil-Investidor-P5.dc.html",
-  "Escuro-Tablet-Perfil-Investidor-P5.dc.html",
-  "Escuro-Mobile-Perfil-Investidor-P6.dc.html",
-  "Escuro-Tablet-Perfil-Investidor-P6.dc.html",
-  "Escuro-Mobile-Perfil-Investidor-Resultado.dc.html",
-  "Escuro-Tablet-Perfil-Investidor-Resultado.dc.html",
-  "Escuro-Mobile-Malvo-Autorizar.dc.html",
-  "Escuro-Tablet-Malvo-Autorizar.dc.html",
-  "Escuro-Mobile-Malvo-Conectando.dc.html",
-  "Escuro-Tablet-Malvo-Conectando.dc.html",
-  "Escuro-Mobile-Malvo-Sucesso.dc.html",
-  "Escuro-Tablet-Malvo-Sucesso.dc.html",
-  "Escuro-Mobile-Malvo-Erro.dc.html",
-  "Escuro-Tablet-Malvo-Erro.dc.html",
-  "Escuro-Mobile-Termos.dc.html",
-  "Escuro-Tablet-Termos.dc.html",
-  "Escuro-Mobile-Privacidade.dc.html",
-  "Escuro-Tablet-Privacidade.dc.html"
- ],
- "pages": [
-  {
-   "id": "escuro-app",
-   "name": "App"
-  },
-  {
-   "id": "escuro-onb",
-   "name": "Onboarding"
-  },
-  {
-   "id": "fundamentos",
-   "name": "Fundamentos"
-  }
- ],
- "title": "Guará · Design do app"
+  "v": 3,
+  "attachments": {},
+  "boards": {
+    "Escuro-Desktop-Adicionar-Investimento.dc.html": {
+      "h": 1440,
+      "is_interactive": true,
+      "page": "escuro-app",
+      "title": "Desktop · Adicionar investimento",
+      "w": 2560,
+      "x": 0,
+      "y": 52140
+    },
+    "Escuro-Desktop-Agentes-Avisos.dc.html": {
+      "h": 1440,
+      "is_interactive": true,
+      "page": "escuro-onb",
+      "title": "Desktop · Assistentes e avisos",
+      "w": 2560,
+      "x": 0,
+      "y": 5640
+    },
+    "Escuro-Desktop-Alertas.dc.html": {
+      "h": 1440,
+      "is_interactive": true,
+      "page": "escuro-app",
+      "title": "Desktop · Alertas",
+      "w": 2560,
+      "x": 0,
+      "y": 14410
+    },
+    "Escuro-Desktop-Assinaturas.dc.html": {
+      "h": 1440,
+      "is_interactive": true,
+      "page": "escuro-app",
+      "title": "Desktop · Assinaturas",
+      "w": 2560,
+      "x": 0,
+      "y": 8950
+    },
+    "Escuro-Desktop-Ativo-BOVA11.dc.html": {
+      "h": 2120,
+      "is_interactive": true,
+      "page": "escuro-app",
+      "title": "Desktop · Detalhe do ativo (BOVA11)",
+      "w": 2560,
+      "x": 0,
+      "y": 39250
+    },
+    "Escuro-Desktop-Ativo-Bitcoin.dc.html": {
+      "h": 2120,
+      "is_interactive": true,
+      "page": "escuro-app",
+      "title": "Desktop · Detalhe do ativo (Bitcoin)",
+      "w": 2560,
+      "x": 0,
+      "y": 47960
+    },
+    "Escuro-Desktop-Ativo-CDB.dc.html": {
+      "h": 2160,
+      "is_interactive": true,
+      "page": "escuro-app",
+      "title": "Desktop · Detalhe do ativo (CDB 110% CDI)",
+      "w": 2560,
+      "x": 0,
+      "y": 35060
+    },
+    "Escuro-Desktop-Ativo-HGLG11.dc.html": {
+      "h": 2610,
+      "is_interactive": true,
+      "page": "escuro-app",
+      "title": "Desktop · Detalhe do ativo (HGLG11)",
+      "w": 2560,
+      "x": 0,
+      "y": 43420
+    },
+    "Escuro-Desktop-Ativo-Tesouro-Selic.dc.html": {
+      "h": 2160,
+      "is_interactive": true,
+      "page": "escuro-app",
+      "title": "Desktop · Detalhe do ativo (Tesouro Selic 2029)",
+      "w": 2560,
+      "x": 0,
+      "y": 30930
+    },
+    "Escuro-Desktop-Ativo.dc.html": {
+      "h": 2650,
+      "is_interactive": true,
+      "page": "escuro-app",
+      "title": "Desktop · Detalhe do ativo (PETR4)",
+      "w": 2560,
+      "x": 0,
+      "y": 26170
+    },
+    "Escuro-Desktop-Boas-Vindas.dc.html": {
+      "h": 1440,
+      "is_interactive": true,
+      "page": "escuro-onb",
+      "title": "Desktop · Boas-vindas",
+      "w": 2560,
+      "x": 0,
+      "y": 0
+    },
+    "Escuro-Desktop-Conectar-Bancos.dc.html": {
+      "h": 1440,
+      "is_interactive": true,
+      "page": "escuro-onb",
+      "title": "Desktop · Conectar bancos",
+      "w": 2560,
+      "x": 0,
+      "y": 1880
+    },
+    "Escuro-Desktop-Conversas.dc.html": {
+      "h": 1440,
+      "is_interactive": true,
+      "page": "escuro-app",
+      "title": "Desktop · Conversas",
+      "w": 2560,
+      "x": 0,
+      "y": 3440
+    },
+    "Escuro-Desktop-Gastos.dc.html": {
+      "h": 1670,
+      "is_interactive": true,
+      "page": "escuro-app",
+      "title": "Desktop · Gastos",
+      "w": 2560,
+      "x": 0,
+      "y": 5320
+    },
+    "Escuro-Desktop-Investimentos.dc.html": {
+      "h": 2600,
+      "is_interactive": true,
+      "page": "escuro-app",
+      "title": "Desktop · Investimentos (conversa recolhida)",
+      "w": 2560,
+      "x": 0,
+      "y": 20710
+    },
+    "Escuro-Desktop-Meu-Perfil.dc.html": {
+      "h": 1440,
+      "is_interactive": true,
+      "page": "escuro-app",
+      "title": "Desktop · Meu perfil e configurações",
+      "w": 2560,
+      "x": 0,
+      "y": 66850
+    },
+    "Escuro-Desktop-Novo-Alerta-Preco.dc.html": {
+      "h": 1440,
+      "is_interactive": true,
+      "page": "escuro-app",
+      "title": "Desktop · Novo alerta de preço",
+      "w": 2560,
+      "x": 0,
+      "y": 18710
+    },
+    "Escuro-Desktop-Novo-Teto.dc.html": {
+      "h": 1440,
+      "is_interactive": true,
+      "page": "escuro-app",
+      "title": "Desktop · Novo teto",
+      "w": 2560,
+      "x": 0,
+      "y": 16390
+    },
+    "Escuro-Desktop-Painel-Historico.dc.html": {
+      "h": 1440,
+      "is_interactive": true,
+      "page": "escuro-app",
+      "title": "Desktop · Início com conversa recolhida (histórico)",
+      "w": 2560,
+      "x": 2640,
+      "y": 0
+    },
+    "Escuro-Desktop-Perfil-Investidor.dc.html": {
+      "h": 1440,
+      "is_interactive": true,
+      "page": "escuro-onb",
+      "title": "Desktop · Perfil de investidor",
+      "w": 2560,
+      "x": 0,
+      "y": 3760
+    },
+    "Escuro-Desktop-Relatorio.dc.html": {
+      "h": 1680,
+      "is_interactive": true,
+      "page": "escuro-app",
+      "title": "Desktop · Relatório",
+      "w": 2560,
+      "x": 0,
+      "y": 10930
+    },
+    "Escuro-Desktop-Simulador-Corte.dc.html": {
+      "h": 1710,
+      "is_interactive": true,
+      "page": "escuro-app",
+      "title": "Desktop · Simulador (Cortar um gasto)",
+      "w": 2560,
+      "x": 0,
+      "y": 62730
+    },
+    "Escuro-Desktop-Simulador-Objetivo.dc.html": {
+      "h": 1720,
+      "is_interactive": true,
+      "page": "escuro-app",
+      "title": "Desktop · Simulador (Juntar para um objetivo)",
+      "w": 2560,
+      "x": 0,
+      "y": 58590
+    },
+    "Escuro-Desktop-Simulador.dc.html": {
+      "h": 1860,
+      "is_interactive": true,
+      "page": "escuro-app",
+      "title": "Desktop · Simulador (Aposentadoria)",
+      "w": 2560,
+      "x": 0,
+      "y": 54210
+    },
+    "Escuro-Mobile-Adicionar-Investimento.dc.html": {
+      "h": 1630,
+      "is_interactive": true,
+      "page": "escuro-app",
+      "title": "Mobile · Adicionar investimento",
+      "w": 393,
+      "x": 3540,
+      "y": 52140
+    },
+    "Escuro-Mobile-Agentes-Avisos.dc.html": {
+      "h": 1350,
+      "is_interactive": true,
+      "page": "escuro-onb",
+      "title": "Mobile · Assistentes e avisos",
+      "w": 393,
+      "x": 3540,
+      "y": 5640
+    },
+    "Escuro-Mobile-Alertas.dc.html": {
+      "h": 1540,
+      "is_interactive": true,
+      "page": "escuro-app",
+      "title": "Mobile · Alertas",
+      "w": 393,
+      "x": 3540,
+      "y": 14410
+    },
+    "Escuro-Mobile-Assinaturas.dc.html": {
+      "h": 1540,
+      "is_interactive": true,
+      "page": "escuro-app",
+      "title": "Mobile · Assinaturas",
+      "w": 393,
+      "x": 3540,
+      "y": 8950
+    },
+    "Escuro-Mobile-Assistentes.dc.html": {
+      "h": 3000,
+      "is_interactive": true,
+      "page": "escuro-app",
+      "title": "Mobile · Assistentes",
+      "w": 393,
+      "x": 6653,
+      "y": 0
+    },
+    "Escuro-Mobile-Ativo-BOVA11.dc.html": {
+      "h": 3730,
+      "is_interactive": true,
+      "page": "escuro-app",
+      "title": "Mobile · Detalhe do ativo (BOVA11)",
+      "w": 393,
+      "x": 3540,
+      "y": 39250
+    },
+    "Escuro-Mobile-Ativo-Bitcoin.dc.html": {
+      "h": 3740,
+      "is_interactive": true,
+      "page": "escuro-app",
+      "title": "Mobile · Detalhe do ativo (Bitcoin)",
+      "w": 393,
+      "x": 3540,
+      "y": 47960
+    },
+    "Escuro-Mobile-Ativo-CDB.dc.html": {
+      "h": 3750,
+      "is_interactive": true,
+      "page": "escuro-app",
+      "title": "Mobile · Detalhe do ativo (CDB 110% CDI)",
+      "w": 393,
+      "x": 3540,
+      "y": 35060
+    },
+    "Escuro-Mobile-Ativo-Comparar-Ibovespa.dc.html": {
+      "h": 1110,
+      "is_interactive": true,
+      "page": "escuro-app",
+      "title": "Mobile · Ativo · comparado ao Ibovespa",
+      "w": 393,
+      "x": 1453,
+      "y": 88600
+    },
+    "Escuro-Mobile-Ativo-Comparar.dc.html": {
+      "h": 852,
+      "is_interactive": true,
+      "page": "escuro-app",
+      "title": "Mobile · Ativo · comparar com (opções)",
+      "w": 393,
+      "x": 0,
+      "y": 88600
+    },
+    "Escuro-Mobile-Ativo-Eventos.dc.html": {
+      "h": 1510,
+      "is_interactive": true,
+      "page": "escuro-app",
+      "title": "Mobile · Ativo · todos os eventos corporativos",
+      "w": 393,
+      "x": 5812,
+      "y": 88600
+    },
+    "Escuro-Mobile-Ativo-HGLG11.dc.html": {
+      "h": 4100,
+      "is_interactive": true,
+      "page": "escuro-app",
+      "title": "Mobile · Detalhe do ativo (HGLG11)",
+      "w": 393,
+      "x": 3540,
+      "y": 43420
+    },
+    "Escuro-Mobile-Ativo-Mais-Detalhes.dc.html": {
+      "h": 1520,
+      "is_interactive": true,
+      "page": "escuro-app",
+      "title": "Mobile · Ativo · mais detalhes",
+      "w": 393,
+      "x": 4359,
+      "y": 88600
+    },
+    "Escuro-Mobile-Ativo-Preco-Sem-Ajuste.dc.html": {
+      "h": 1340,
+      "is_interactive": true,
+      "page": "escuro-app",
+      "title": "Mobile · Ativo · preço sem ajuste",
+      "w": 393,
+      "x": 2906,
+      "y": 88600
+    },
+    "Escuro-Mobile-Ativo-Risco.dc.html": {
+      "h": 852,
+      "is_interactive": true,
+      "page": "escuro-app",
+      "title": "Mobile · Ajustar risco do ativo",
+      "w": 393,
+      "x": 7265,
+      "y": 88600
+    },
+    "Escuro-Mobile-Ativo-Tesouro-Selic.dc.html": {
+      "h": 3690,
+      "is_interactive": true,
+      "page": "escuro-app",
+      "title": "Mobile · Detalhe do ativo (Tesouro Selic 2029)",
+      "w": 393,
+      "x": 3540,
+      "y": 30930
+    },
+    "Escuro-Mobile-Ativo.dc.html": {
+      "h": 4320,
+      "is_interactive": true,
+      "page": "escuro-app",
+      "title": "Mobile · Detalhe do ativo (PETR4)",
+      "w": 393,
+      "x": 3540,
+      "y": 26170
+    },
+    "Escuro-Mobile-Bem-Imovel-Detalhe.dc.html": {
+      "h": 1440,
+      "is_interactive": true,
+      "page": "escuro-app",
+      "title": "Mobile · Detalhe do imóvel",
+      "w": 393,
+      "x": 2906,
+      "y": 80660
+    },
+    "Escuro-Mobile-Bem-Imovel.dc.html": {
+      "h": 1750,
+      "is_interactive": true,
+      "page": "escuro-app",
+      "title": "Mobile · Cadastrar imóvel",
+      "w": 393,
+      "x": 0,
+      "y": 80660
+    },
+    "Escuro-Mobile-Bem-Veiculo-Detalhe.dc.html": {
+      "h": 1340,
+      "is_interactive": true,
+      "page": "escuro-app",
+      "title": "Mobile · Detalhe do veículo",
+      "w": 393,
+      "x": 4359,
+      "y": 80660
+    },
+    "Escuro-Mobile-Bem-Veiculo.dc.html": {
+      "h": 1540,
+      "is_interactive": true,
+      "page": "escuro-app",
+      "title": "Mobile · Cadastrar veículo (FIPE)",
+      "w": 393,
+      "x": 1453,
+      "y": 80660
+    },
+    "Escuro-Mobile-Boas-Vindas.dc.html": {
+      "h": 1010,
+      "is_interactive": true,
+      "page": "escuro-onb",
+      "title": "Mobile · Boas-vindas",
+      "w": 393,
+      "x": 3540,
+      "y": 0
+    },
+    "Escuro-Mobile-Conectar-Bancos.dc.html": {
+      "h": 1040,
+      "is_interactive": true,
+      "page": "escuro-onb",
+      "title": "Mobile · Conectar bancos",
+      "w": 393,
+      "x": 3540,
+      "y": 1880
+    },
+    "Escuro-Mobile-Conversa-Anexar.dc.html": {
+      "h": 852,
+      "is_interactive": true,
+      "page": "escuro-app",
+      "title": "Mobile · Conversa · anexar arquivo",
+      "w": 393,
+      "x": 2906,
+      "y": 86980
+    },
+    "Escuro-Mobile-Conversa-Anexo-Previa.dc.html": {
+      "h": 852,
+      "is_interactive": true,
+      "page": "escuro-app",
+      "title": "Mobile · Conversa · anexo pronto para enviar",
+      "w": 393,
+      "x": 4359,
+      "y": 86980
+    },
+    "Escuro-Mobile-Conversa-Apagar.dc.html": {
+      "h": 852,
+      "is_interactive": true,
+      "page": "escuro-app",
+      "title": "Mobile · Conversa · apagar",
+      "w": 393,
+      "x": 1453,
+      "y": 86980
+    },
+    "Escuro-Mobile-Conversa-Gravando.dc.html": {
+      "h": 852,
+      "is_interactive": true,
+      "page": "escuro-app",
+      "title": "Mobile · Conversa · gravando voz",
+      "w": 393,
+      "x": 5812,
+      "y": 86980
+    },
+    "Escuro-Mobile-Conversa-Menu.dc.html": {
+      "h": 852,
+      "is_interactive": true,
+      "page": "escuro-app",
+      "title": "Mobile · Conversa · mais opções",
+      "w": 393,
+      "x": 0,
+      "y": 86980
+    },
+    "Escuro-Mobile-Conversa-Transcrevendo.dc.html": {
+      "h": 852,
+      "is_interactive": true,
+      "page": "escuro-app",
+      "title": "Mobile · Conversa · transcrevendo",
+      "w": 393,
+      "x": 7265,
+      "y": 86980
+    },
+    "Escuro-Mobile-Conversa.dc.html": {
+      "h": 852,
+      "is_interactive": true,
+      "page": "escuro-app",
+      "title": "Mobile · Conversa",
+      "w": 393,
+      "x": 4440,
+      "y": 3440
+    },
+    "Escuro-Mobile-Editar-Perfil-Email.dc.html": {
+      "h": 852,
+      "is_interactive": true,
+      "page": "escuro-app",
+      "title": "Mobile · Editar perfil · confirmar e-mail",
+      "w": 393,
+      "x": 1453,
+      "y": 76420
+    },
+    "Escuro-Mobile-Editar-Perfil.dc.html": {
+      "h": 852,
+      "is_interactive": true,
+      "page": "escuro-app",
+      "title": "Mobile · Editar perfil",
+      "w": 393,
+      "x": 0,
+      "y": 76420
+    },
+    "Escuro-Mobile-Escolher-Agente.dc.html": {
+      "h": 852,
+      "is_interactive": true,
+      "page": "escuro-app",
+      "title": "Mobile · Escolher assistente (opcional)",
+      "w": 393,
+      "x": 5386,
+      "y": 3440
+    },
+    "Escuro-Mobile-Gastos-Novo.dc.html": {
+      "h": 990,
+      "is_interactive": true,
+      "page": "escuro-app",
+      "title": "Mobile · Gastos · usuário novo",
+      "w": 393,
+      "x": 1453,
+      "y": 90560
+    },
+    "Escuro-Mobile-Gastos.dc.html": {
+      "h": 3190,
+      "is_interactive": true,
+      "page": "escuro-app",
+      "title": "Mobile · Gastos",
+      "w": 393,
+      "x": 3540,
+      "y": 5320
+    },
+    "Escuro-Mobile-Historico-Conversas.dc.html": {
+      "h": 852,
+      "is_interactive": true,
+      "page": "escuro-app",
+      "title": "Mobile · Histórico de conversas",
+      "w": 393,
+      "x": 4913,
+      "y": 3440
+    },
+    "Escuro-Mobile-Inicio-Novo.dc.html": {
+      "h": 1310,
+      "is_interactive": true,
+      "page": "escuro-app",
+      "title": "Mobile · Início · usuário novo",
+      "w": 393,
+      "x": 0,
+      "y": 90560
+    },
+    "Escuro-Mobile-Inicio.dc.html": {
+      "h": 2720,
+      "is_interactive": true,
+      "page": "escuro-app",
+      "title": "Mobile · Início",
+      "w": 393,
+      "x": 6180,
+      "y": 0
+    },
+    "Escuro-Mobile-Investimentos-Novo.dc.html": {
+      "h": 1020,
+      "is_interactive": true,
+      "page": "escuro-app",
+      "title": "Mobile · Investimentos · usuário novo",
+      "w": 393,
+      "x": 2906,
+      "y": 90560
+    },
+    "Escuro-Mobile-Investimentos.dc.html": {
+      "h": 5020,
+      "is_interactive": true,
+      "page": "escuro-app",
+      "title": "Mobile · Investimentos",
+      "w": 393,
+      "x": 3540,
+      "y": 20710
+    },
+    "Escuro-Mobile-Lancamento-Detalhe.dc.html": {
+      "h": 1540,
+      "is_interactive": true,
+      "page": "escuro-app",
+      "title": "Mobile · Detalhe do lançamento",
+      "w": 393,
+      "x": 7265,
+      "y": 82850
+    },
+    "Escuro-Mobile-Lancamentos-Categoria.dc.html": {
+      "h": 1820,
+      "is_interactive": true,
+      "page": "escuro-app",
+      "title": "Mobile · Lançamentos de uma categoria",
+      "w": 393,
+      "x": 5812,
+      "y": 82850
+    },
+    "Escuro-Mobile-Lancamentos-Estados.dc.html": {
+      "h": 1490,
+      "is_interactive": true,
+      "page": "escuro-app",
+      "title": "Mobile · Lançamentos · filtro vazio, vazio e erro",
+      "w": 393,
+      "x": 4359,
+      "y": 82850
+    },
+    "Escuro-Mobile-Lancamentos.dc.html": {
+      "h": 2020,
+      "is_interactive": true,
+      "page": "escuro-app",
+      "title": "Mobile · Todos os lançamentos",
+      "w": 393,
+      "x": 2906,
+      "y": 82850
+    },
+    "Escuro-Mobile-Malvo-Autorizar.dc.html": {
+      "h": 1180,
+      "is_interactive": true,
+      "page": "escuro-onb",
+      "title": "Mobile · Conectar banco · autorização",
+      "w": 393,
+      "x": 0,
+      "y": 9650
+    },
+    "Escuro-Mobile-Malvo-Conectando.dc.html": {
+      "h": 852,
+      "is_interactive": true,
+      "page": "escuro-onb",
+      "title": "Mobile · Conectar banco · conectando",
+      "w": 393,
+      "x": 1453,
+      "y": 9650
+    },
+    "Escuro-Mobile-Malvo-Erro.dc.html": {
+      "h": 852,
+      "is_interactive": true,
+      "page": "escuro-onb",
+      "title": "Mobile · Conectar banco · erro ou cancelado",
+      "w": 393,
+      "x": 4359,
+      "y": 9650
+    },
+    "Escuro-Mobile-Malvo-Renovar.dc.html": {
+      "h": 1230,
+      "is_interactive": true,
+      "page": "escuro-app",
+      "title": "Mobile · Renovar autorização (Itaú)",
+      "w": 393,
+      "x": 0,
+      "y": 74750
+    },
+    "Escuro-Mobile-Malvo-Sucesso.dc.html": {
+      "h": 1000,
+      "is_interactive": true,
+      "page": "escuro-onb",
+      "title": "Mobile · Conectar banco · sucesso",
+      "w": 393,
+      "x": 2906,
+      "y": 9650
+    },
+    "Escuro-Mobile-Meta-Detalhe.dc.html": {
+      "h": 2180,
+      "is_interactive": true,
+      "page": "escuro-app",
+      "title": "Mobile · Detalhe da meta (Reserva)",
+      "w": 393,
+      "x": 2906,
+      "y": 78040
+    },
+    "Escuro-Mobile-Meta-Nova.dc.html": {
+      "h": 1810,
+      "is_interactive": true,
+      "page": "escuro-app",
+      "title": "Mobile · Nova meta (da simulação)",
+      "w": 393,
+      "x": 0,
+      "y": 78040
+    },
+    "Escuro-Mobile-Metas-Estados.dc.html": {
+      "h": 960,
+      "is_interactive": true,
+      "page": "escuro-app",
+      "title": "Mobile · Suas metas · vazio e erro",
+      "w": 393,
+      "x": 4359,
+      "y": 78040
+    },
+    "Escuro-Mobile-Metas.dc.html": {
+      "h": 1310,
+      "is_interactive": true,
+      "page": "escuro-app",
+      "title": "Mobile · Suas metas",
+      "w": 393,
+      "x": 1453,
+      "y": 78040
+    },
+    "Escuro-Mobile-Meu-Perfil.dc.html": {
+      "h": 2800,
+      "is_interactive": true,
+      "page": "escuro-app",
+      "title": "Mobile · Meu perfil e configurações",
+      "w": 393,
+      "x": 3540,
+      "y": 66850
+    },
+    "Escuro-Mobile-Novo-Alerta-Preco.dc.html": {
+      "h": 1540,
+      "is_interactive": true,
+      "page": "escuro-app",
+      "title": "Mobile · Novo alerta de preço",
+      "w": 393,
+      "x": 3540,
+      "y": 18710
+    },
+    "Escuro-Mobile-Novo-Teto.dc.html": {
+      "h": 1880,
+      "is_interactive": true,
+      "page": "escuro-app",
+      "title": "Mobile · Novo teto",
+      "w": 393,
+      "x": 3540,
+      "y": 16390
+    },
+    "Escuro-Mobile-Perfil-Investidor-P1.dc.html": {
+      "h": 852,
+      "is_interactive": true,
+      "page": "escuro-onb",
+      "title": "Mobile · Perfil de investidor · pergunta 1",
+      "w": 393,
+      "x": 0,
+      "y": 7520
+    },
+    "Escuro-Mobile-Perfil-Investidor-P2.dc.html": {
+      "h": 852,
+      "is_interactive": true,
+      "page": "escuro-onb",
+      "title": "Mobile · Perfil de investidor · pergunta 2",
+      "w": 393,
+      "x": 1453,
+      "y": 7520
+    },
+    "Escuro-Mobile-Perfil-Investidor-P4.dc.html": {
+      "h": 852,
+      "is_interactive": true,
+      "page": "escuro-onb",
+      "title": "Mobile · Perfil de investidor · pergunta 4",
+      "w": 393,
+      "x": 2906,
+      "y": 7520
+    },
+    "Escuro-Mobile-Perfil-Investidor-P5.dc.html": {
+      "h": 852,
+      "is_interactive": true,
+      "page": "escuro-onb",
+      "title": "Mobile · Perfil de investidor · pergunta 5",
+      "w": 393,
+      "x": 4359,
+      "y": 7520
+    },
+    "Escuro-Mobile-Perfil-Investidor-P6.dc.html": {
+      "h": 852,
+      "is_interactive": true,
+      "page": "escuro-onb",
+      "title": "Mobile · Perfil de investidor · pergunta 6",
+      "w": 393,
+      "x": 5812,
+      "y": 7520
+    },
+    "Escuro-Mobile-Perfil-Investidor-Resultado.dc.html": {
+      "h": 1690,
+      "is_interactive": true,
+      "page": "escuro-onb",
+      "title": "Mobile · Perfil de investidor · resultado",
+      "w": 393,
+      "x": 7265,
+      "y": 7520
+    },
+    "Escuro-Mobile-Perfil-Investidor.dc.html": {
+      "h": 852,
+      "is_interactive": true,
+      "page": "escuro-onb",
+      "title": "Mobile · Perfil de investidor",
+      "w": 393,
+      "x": 3540,
+      "y": 3760
+    },
+    "Escuro-Mobile-Perfil-Refazer-Resultado.dc.html": {
+      "h": 1720,
+      "is_interactive": true,
+      "page": "escuro-app",
+      "title": "Mobile · Refazer perfil · resultado",
+      "w": 393,
+      "x": 1453,
+      "y": 70090
+    },
+    "Escuro-Mobile-Perfil-Refazer.dc.html": {
+      "h": 890,
+      "is_interactive": true,
+      "page": "escuro-app",
+      "title": "Mobile · Refazer perfil · pergunta 1",
+      "w": 393,
+      "x": 0,
+      "y": 70090
+    },
+    "Escuro-Mobile-Planos.dc.html": {
+      "h": 2060,
+      "is_interactive": true,
+      "page": "escuro-app",
+      "title": "Mobile · Planos",
+      "w": 393,
+      "x": 0,
+      "y": 72250
+    },
+    "Escuro-Mobile-Posicoes-Estados.dc.html": {
+      "h": 1460,
+      "is_interactive": true,
+      "page": "escuro-app",
+      "title": "Mobile · Posições · busca vazia, vazio e erro",
+      "w": 393,
+      "x": 1453,
+      "y": 82850
+    },
+    "Escuro-Mobile-Posicoes.dc.html": {
+      "h": 2020,
+      "is_interactive": true,
+      "page": "escuro-app",
+      "title": "Mobile · Todas as posições",
+      "w": 393,
+      "x": 0,
+      "y": 82850
+    },
+    "Escuro-Mobile-Privacidade.dc.html": {
+      "h": 1470,
+      "is_interactive": true,
+      "page": "escuro-onb",
+      "title": "Mobile · Política de privacidade",
+      "w": 393,
+      "x": 1453,
+      "y": 11510
+    },
+    "Escuro-Mobile-Relatorio-Linha-do-Tempo.dc.html": {
+      "h": 2070,
+      "is_interactive": true,
+      "page": "escuro-app",
+      "title": "Mobile · Relatório · linha do tempo completa",
+      "w": 393,
+      "x": 8718,
+      "y": 82850
+    },
+    "Escuro-Mobile-Relatorio.dc.html": {
+      "h": 3040,
+      "is_interactive": true,
+      "page": "escuro-app",
+      "title": "Mobile · Relatório",
+      "w": 393,
+      "x": 3900,
+      "y": 10930
+    },
+    "Escuro-Mobile-Simulacoes-Estados.dc.html": {
+      "h": 990,
+      "is_interactive": true,
+      "page": "escuro-app",
+      "title": "Mobile · Simulações salvas · estados",
+      "w": 393,
+      "x": 1453,
+      "y": 85360
+    },
+    "Escuro-Mobile-Simulacoes.dc.html": {
+      "h": 852,
+      "is_interactive": true,
+      "page": "escuro-app",
+      "title": "Mobile · Simulações salvas",
+      "w": 393,
+      "x": 0,
+      "y": 85360
+    },
+    "Escuro-Mobile-Simulador-Corte.dc.html": {
+      "h": 3680,
+      "is_interactive": true,
+      "page": "escuro-app",
+      "title": "Mobile · Simulador (Cortar um gasto)",
+      "w": 393,
+      "x": 3540,
+      "y": 62730
+    },
+    "Escuro-Mobile-Simulador-Objetivo.dc.html": {
+      "h": 3700,
+      "is_interactive": true,
+      "page": "escuro-app",
+      "title": "Mobile · Simulador (Juntar para um objetivo)",
+      "w": 393,
+      "x": 3540,
+      "y": 58590
+    },
+    "Escuro-Mobile-Simulador.dc.html": {
+      "h": 3940,
+      "is_interactive": true,
+      "page": "escuro-app",
+      "title": "Mobile · Simulador (Aposentadoria)",
+      "w": 393,
+      "x": 3540,
+      "y": 54210
+    },
+    "Escuro-Mobile-Termos.dc.html": {
+      "h": 1570,
+      "is_interactive": true,
+      "page": "escuro-onb",
+      "title": "Mobile · Termos de uso",
+      "w": 393,
+      "x": 0,
+      "y": 11510
+    },
+    "Escuro-Tablet-Adicionar-Investimento.dc.html": {
+      "h": 1510,
+      "is_interactive": true,
+      "page": "escuro-app",
+      "title": "Tablet · Adicionar investimento",
+      "w": 820,
+      "x": 2640,
+      "y": 52140
+    },
+    "Escuro-Tablet-Agentes-Avisos.dc.html": {
+      "h": 1180,
+      "is_interactive": true,
+      "page": "escuro-onb",
+      "title": "Tablet · Assistentes e avisos",
+      "w": 820,
+      "x": 2640,
+      "y": 5640
+    },
+    "Escuro-Tablet-Alertas.dc.html": {
+      "h": 1190,
+      "is_interactive": true,
+      "page": "escuro-app",
+      "title": "Tablet · Alertas",
+      "w": 820,
+      "x": 2640,
+      "y": 14410
+    },
+    "Escuro-Tablet-Assinaturas.dc.html": {
+      "h": 1250,
+      "is_interactive": true,
+      "page": "escuro-app",
+      "title": "Tablet · Assinaturas",
+      "w": 820,
+      "x": 2640,
+      "y": 8950
+    },
+    "Escuro-Tablet-Ativo-BOVA11.dc.html": {
+      "h": 2880,
+      "is_interactive": true,
+      "page": "escuro-app",
+      "title": "Tablet · Detalhe do ativo (BOVA11)",
+      "w": 820,
+      "x": 2640,
+      "y": 39250
+    },
+    "Escuro-Tablet-Ativo-Bitcoin.dc.html": {
+      "h": 2940,
+      "is_interactive": true,
+      "page": "escuro-app",
+      "title": "Tablet · Detalhe do ativo (Bitcoin)",
+      "w": 820,
+      "x": 2640,
+      "y": 47960
+    },
+    "Escuro-Tablet-Ativo-CDB.dc.html": {
+      "h": 2990,
+      "is_interactive": true,
+      "page": "escuro-app",
+      "title": "Tablet · Detalhe do ativo (CDB 110% CDI)",
+      "w": 820,
+      "x": 2640,
+      "y": 35060
+    },
+    "Escuro-Tablet-Ativo-Comparar-Ibovespa.dc.html": {
+      "h": 1300,
+      "is_interactive": true,
+      "page": "escuro-app",
+      "title": "Tablet · Ativo · comparado ao Ibovespa",
+      "w": 820,
+      "x": 1926,
+      "y": 88600
+    },
+    "Escuro-Tablet-Ativo-Comparar.dc.html": {
+      "h": 1180,
+      "is_interactive": true,
+      "page": "escuro-app",
+      "title": "Tablet · Ativo · comparar com (opções)",
+      "w": 820,
+      "x": 473,
+      "y": 88600
+    },
+    "Escuro-Tablet-Ativo-Eventos.dc.html": {
+      "h": 1240,
+      "is_interactive": true,
+      "page": "escuro-app",
+      "title": "Tablet · Ativo · todos os eventos corporativos",
+      "w": 820,
+      "x": 6285,
+      "y": 88600
+    },
+    "Escuro-Tablet-Ativo-HGLG11.dc.html": {
+      "h": 3370,
+      "is_interactive": true,
+      "page": "escuro-app",
+      "title": "Tablet · Detalhe do ativo (HGLG11)",
+      "w": 820,
+      "x": 2640,
+      "y": 43420
+    },
+    "Escuro-Tablet-Ativo-Mais-Detalhes.dc.html": {
+      "h": 1180,
+      "is_interactive": true,
+      "page": "escuro-app",
+      "title": "Tablet · Ativo · mais detalhes",
+      "w": 820,
+      "x": 4832,
+      "y": 88600
+    },
+    "Escuro-Tablet-Ativo-Preco-Sem-Ajuste.dc.html": {
+      "h": 1430,
+      "is_interactive": true,
+      "page": "escuro-app",
+      "title": "Tablet · Ativo · preço sem ajuste",
+      "w": 820,
+      "x": 3379,
+      "y": 88600
+    },
+    "Escuro-Tablet-Ativo-Risco.dc.html": {
+      "h": 1180,
+      "is_interactive": true,
+      "page": "escuro-app",
+      "title": "Tablet · Ajustar risco do ativo",
+      "w": 820,
+      "x": 7738,
+      "y": 88600
+    },
+    "Escuro-Tablet-Ativo-Tesouro-Selic.dc.html": {
+      "h": 2970,
+      "is_interactive": true,
+      "page": "escuro-app",
+      "title": "Tablet · Detalhe do ativo (Tesouro Selic 2029)",
+      "w": 820,
+      "x": 2640,
+      "y": 30930
+    },
+    "Escuro-Tablet-Ativo.dc.html": {
+      "h": 3810,
+      "is_interactive": true,
+      "page": "escuro-app",
+      "title": "Tablet · Detalhe do ativo (PETR4)",
+      "w": 820,
+      "x": 2640,
+      "y": 26170
+    },
+    "Escuro-Tablet-Bem-Imovel-Detalhe.dc.html": {
+      "h": 1180,
+      "is_interactive": true,
+      "page": "escuro-app",
+      "title": "Tablet · Detalhe do imóvel",
+      "w": 820,
+      "x": 3379,
+      "y": 80660
+    },
+    "Escuro-Tablet-Bem-Imovel.dc.html": {
+      "h": 1680,
+      "is_interactive": true,
+      "page": "escuro-app",
+      "title": "Tablet · Cadastrar imóvel",
+      "w": 820,
+      "x": 473,
+      "y": 80660
+    },
+    "Escuro-Tablet-Bem-Veiculo-Detalhe.dc.html": {
+      "h": 1180,
+      "is_interactive": true,
+      "page": "escuro-app",
+      "title": "Tablet · Detalhe do veículo",
+      "w": 820,
+      "x": 4832,
+      "y": 80660
+    },
+    "Escuro-Tablet-Bem-Veiculo.dc.html": {
+      "h": 1230,
+      "is_interactive": true,
+      "page": "escuro-app",
+      "title": "Tablet · Cadastrar veículo (FIPE)",
+      "w": 820,
+      "x": 1926,
+      "y": 80660
+    },
+    "Escuro-Tablet-Boas-Vindas.dc.html": {
+      "h": 1180,
+      "is_interactive": true,
+      "page": "escuro-onb",
+      "title": "Tablet · Boas-vindas",
+      "w": 820,
+      "x": 2640,
+      "y": 0
+    },
+    "Escuro-Tablet-Conectar-Bancos.dc.html": {
+      "h": 1180,
+      "is_interactive": true,
+      "page": "escuro-onb",
+      "title": "Tablet · Conectar bancos",
+      "w": 820,
+      "x": 2640,
+      "y": 1880
+    },
+    "Escuro-Tablet-Conversa-Anexar.dc.html": {
+      "h": 1180,
+      "is_interactive": true,
+      "page": "escuro-app",
+      "title": "Tablet · Conversa · anexar arquivo",
+      "w": 820,
+      "x": 3379,
+      "y": 86980
+    },
+    "Escuro-Tablet-Conversa-Anexo-Previa.dc.html": {
+      "h": 1180,
+      "is_interactive": true,
+      "page": "escuro-app",
+      "title": "Tablet · Conversa · anexo pronto para enviar",
+      "w": 820,
+      "x": 4832,
+      "y": 86980
+    },
+    "Escuro-Tablet-Conversa-Apagar.dc.html": {
+      "h": 1180,
+      "is_interactive": true,
+      "page": "escuro-app",
+      "title": "Tablet · Conversa · apagar",
+      "w": 820,
+      "x": 1926,
+      "y": 86980
+    },
+    "Escuro-Tablet-Conversa-Gravando.dc.html": {
+      "h": 1180,
+      "is_interactive": true,
+      "page": "escuro-app",
+      "title": "Tablet · Conversa · gravando voz",
+      "w": 820,
+      "x": 6285,
+      "y": 86980
+    },
+    "Escuro-Tablet-Conversa-Menu.dc.html": {
+      "h": 1180,
+      "is_interactive": true,
+      "page": "escuro-app",
+      "title": "Tablet · Conversa · mais opções",
+      "w": 820,
+      "x": 473,
+      "y": 86980
+    },
+    "Escuro-Tablet-Conversa-Transcrevendo.dc.html": {
+      "h": 1180,
+      "is_interactive": true,
+      "page": "escuro-app",
+      "title": "Tablet · Conversa · transcrevendo",
+      "w": 820,
+      "x": 7738,
+      "y": 86980
+    },
+    "Escuro-Tablet-Conversa.dc.html": {
+      "h": 1180,
+      "is_interactive": true,
+      "page": "escuro-app",
+      "title": "Tablet · Conversa",
+      "w": 820,
+      "x": 2640,
+      "y": 3440
+    },
+    "Escuro-Tablet-Editar-Perfil-Email.dc.html": {
+      "h": 1180,
+      "is_interactive": true,
+      "page": "escuro-app",
+      "title": "Tablet · Editar perfil · confirmar e-mail",
+      "w": 820,
+      "x": 1926,
+      "y": 76420
+    },
+    "Escuro-Tablet-Editar-Perfil.dc.html": {
+      "h": 1180,
+      "is_interactive": true,
+      "page": "escuro-app",
+      "title": "Tablet · Editar perfil",
+      "w": 820,
+      "x": 473,
+      "y": 76420
+    },
+    "Escuro-Tablet-Gastos-Novo.dc.html": {
+      "h": 1180,
+      "is_interactive": true,
+      "page": "escuro-app",
+      "title": "Tablet · Gastos · usuário novo",
+      "w": 820,
+      "x": 1926,
+      "y": 90560
+    },
+    "Escuro-Tablet-Gastos.dc.html": {
+      "h": 2470,
+      "is_interactive": true,
+      "page": "escuro-app",
+      "title": "Tablet · Gastos",
+      "w": 820,
+      "x": 2640,
+      "y": 5320
+    },
+    "Escuro-Tablet-Historico-Conversas.dc.html": {
+      "h": 1180,
+      "is_interactive": true,
+      "page": "escuro-app",
+      "title": "Tablet · Histórico de conversas",
+      "w": 820,
+      "x": 3540,
+      "y": 3440
+    },
+    "Escuro-Tablet-Inicio-Novo.dc.html": {
+      "h": 1180,
+      "is_interactive": true,
+      "page": "escuro-app",
+      "title": "Tablet · Início · usuário novo",
+      "w": 820,
+      "x": 473,
+      "y": 90560
+    },
+    "Escuro-Tablet-Investimentos-Novo.dc.html": {
+      "h": 1180,
+      "is_interactive": true,
+      "page": "escuro-app",
+      "title": "Tablet · Investimentos · usuário novo",
+      "w": 820,
+      "x": 3379,
+      "y": 90560
+    },
+    "Escuro-Tablet-Investimentos.dc.html": {
+      "h": 3530,
+      "is_interactive": true,
+      "page": "escuro-app",
+      "title": "Tablet · Investimentos",
+      "w": 820,
+      "x": 2640,
+      "y": 20710
+    },
+    "Escuro-Tablet-Lancamento-Detalhe.dc.html": {
+      "h": 1180,
+      "is_interactive": true,
+      "page": "escuro-app",
+      "title": "Tablet · Detalhe do lançamento",
+      "w": 820,
+      "x": 7738,
+      "y": 82850
+    },
+    "Escuro-Tablet-Lancamentos-Categoria.dc.html": {
+      "h": 1680,
+      "is_interactive": true,
+      "page": "escuro-app",
+      "title": "Tablet · Lançamentos de uma categoria",
+      "w": 820,
+      "x": 6285,
+      "y": 82850
+    },
+    "Escuro-Tablet-Lancamentos-Estados.dc.html": {
+      "h": 1540,
+      "is_interactive": true,
+      "page": "escuro-app",
+      "title": "Tablet · Lançamentos · filtro vazio, vazio e erro",
+      "w": 820,
+      "x": 4832,
+      "y": 82850
+    },
+    "Escuro-Tablet-Lancamentos.dc.html": {
+      "h": 2040,
+      "is_interactive": true,
+      "page": "escuro-app",
+      "title": "Tablet · Todos os lançamentos",
+      "w": 820,
+      "x": 3379,
+      "y": 82850
+    },
+    "Escuro-Tablet-Malvo-Autorizar.dc.html": {
+      "h": 1420,
+      "is_interactive": true,
+      "page": "escuro-onb",
+      "title": "Tablet · Conectar banco · autorização",
+      "w": 820,
+      "x": 473,
+      "y": 9650
+    },
+    "Escuro-Tablet-Malvo-Conectando.dc.html": {
+      "h": 1180,
+      "is_interactive": true,
+      "page": "escuro-onb",
+      "title": "Tablet · Conectar banco · conectando",
+      "w": 820,
+      "x": 1926,
+      "y": 9650
+    },
+    "Escuro-Tablet-Malvo-Erro.dc.html": {
+      "h": 1180,
+      "is_interactive": true,
+      "page": "escuro-onb",
+      "title": "Tablet · Conectar banco · erro ou cancelado",
+      "w": 820,
+      "x": 4832,
+      "y": 9650
+    },
+    "Escuro-Tablet-Malvo-Renovar.dc.html": {
+      "h": 1220,
+      "is_interactive": true,
+      "page": "escuro-app",
+      "title": "Tablet · Renovar autorização (Itaú)",
+      "w": 820,
+      "x": 473,
+      "y": 74750
+    },
+    "Escuro-Tablet-Malvo-Sucesso.dc.html": {
+      "h": 1210,
+      "is_interactive": true,
+      "page": "escuro-onb",
+      "title": "Tablet · Conectar banco · sucesso",
+      "w": 820,
+      "x": 3379,
+      "y": 9650
+    },
+    "Escuro-Tablet-Meta-Detalhe.dc.html": {
+      "h": 1670,
+      "is_interactive": true,
+      "page": "escuro-app",
+      "title": "Tablet · Detalhe da meta (Reserva)",
+      "w": 820,
+      "x": 3379,
+      "y": 78040
+    },
+    "Escuro-Tablet-Meta-Nova.dc.html": {
+      "h": 1590,
+      "is_interactive": true,
+      "page": "escuro-app",
+      "title": "Tablet · Nova meta (da simulação)",
+      "w": 820,
+      "x": 473,
+      "y": 78040
+    },
+    "Escuro-Tablet-Metas-Estados.dc.html": {
+      "h": 1180,
+      "is_interactive": true,
+      "page": "escuro-app",
+      "title": "Tablet · Suas metas · vazio e erro",
+      "w": 820,
+      "x": 4832,
+      "y": 78040
+    },
+    "Escuro-Tablet-Metas.dc.html": {
+      "h": 1180,
+      "is_interactive": true,
+      "page": "escuro-app",
+      "title": "Tablet · Suas metas",
+      "w": 820,
+      "x": 1926,
+      "y": 78040
+    },
+    "Escuro-Tablet-Meu-Perfil.dc.html": {
+      "h": 1720,
+      "is_interactive": true,
+      "page": "escuro-app",
+      "title": "Tablet · Meu perfil e configurações",
+      "w": 820,
+      "x": 2640,
+      "y": 66850
+    },
+    "Escuro-Tablet-Novo-Alerta-Preco.dc.html": {
+      "h": 1560,
+      "is_interactive": true,
+      "page": "escuro-app",
+      "title": "Tablet · Novo alerta de preço",
+      "w": 820,
+      "x": 2640,
+      "y": 18710
+    },
+    "Escuro-Tablet-Novo-Teto.dc.html": {
+      "h": 1720,
+      "is_interactive": true,
+      "page": "escuro-app",
+      "title": "Tablet · Novo teto",
+      "w": 820,
+      "x": 2640,
+      "y": 16390
+    },
+    "Escuro-Tablet-Painel.dc.html": {
+      "h": 2940,
+      "is_interactive": true,
+      "page": "escuro-app",
+      "title": "Tablet · Início",
+      "w": 820,
+      "x": 5280,
+      "y": 0
+    },
+    "Escuro-Tablet-Perfil-Investidor-P1.dc.html": {
+      "h": 1180,
+      "is_interactive": true,
+      "page": "escuro-onb",
+      "title": "Tablet · Perfil de investidor · pergunta 1",
+      "w": 820,
+      "x": 473,
+      "y": 7520
+    },
+    "Escuro-Tablet-Perfil-Investidor-P2.dc.html": {
+      "h": 1180,
+      "is_interactive": true,
+      "page": "escuro-onb",
+      "title": "Tablet · Perfil de investidor · pergunta 2",
+      "w": 820,
+      "x": 1926,
+      "y": 7520
+    },
+    "Escuro-Tablet-Perfil-Investidor-P4.dc.html": {
+      "h": 1180,
+      "is_interactive": true,
+      "page": "escuro-onb",
+      "title": "Tablet · Perfil de investidor · pergunta 4",
+      "w": 820,
+      "x": 3379,
+      "y": 7520
+    },
+    "Escuro-Tablet-Perfil-Investidor-P5.dc.html": {
+      "h": 1180,
+      "is_interactive": true,
+      "page": "escuro-onb",
+      "title": "Tablet · Perfil de investidor · pergunta 5",
+      "w": 820,
+      "x": 4832,
+      "y": 7520
+    },
+    "Escuro-Tablet-Perfil-Investidor-P6.dc.html": {
+      "h": 1180,
+      "is_interactive": true,
+      "page": "escuro-onb",
+      "title": "Tablet · Perfil de investidor · pergunta 6",
+      "w": 820,
+      "x": 6285,
+      "y": 7520
+    },
+    "Escuro-Tablet-Perfil-Investidor-Resultado.dc.html": {
+      "h": 1600,
+      "is_interactive": true,
+      "page": "escuro-onb",
+      "title": "Tablet · Perfil de investidor · resultado",
+      "w": 820,
+      "x": 7738,
+      "y": 7520
+    },
+    "Escuro-Tablet-Perfil-Investidor.dc.html": {
+      "h": 1180,
+      "is_interactive": true,
+      "page": "escuro-onb",
+      "title": "Tablet · Perfil de investidor",
+      "w": 820,
+      "x": 2640,
+      "y": 3760
+    },
+    "Escuro-Tablet-Perfil-Refazer-Resultado.dc.html": {
+      "h": 1430,
+      "is_interactive": true,
+      "page": "escuro-app",
+      "title": "Tablet · Refazer perfil · resultado",
+      "w": 820,
+      "x": 1926,
+      "y": 70090
+    },
+    "Escuro-Tablet-Perfil-Refazer.dc.html": {
+      "h": 1180,
+      "is_interactive": true,
+      "page": "escuro-app",
+      "title": "Tablet · Refazer perfil · pergunta 1",
+      "w": 820,
+      "x": 473,
+      "y": 70090
+    },
+    "Escuro-Tablet-Planos.dc.html": {
+      "h": 1740,
+      "is_interactive": true,
+      "page": "escuro-app",
+      "title": "Tablet · Planos",
+      "w": 820,
+      "x": 473,
+      "y": 72250
+    },
+    "Escuro-Tablet-Posicoes-Estados.dc.html": {
+      "h": 1470,
+      "is_interactive": true,
+      "page": "escuro-app",
+      "title": "Tablet · Posições · busca vazia, vazio e erro",
+      "w": 820,
+      "x": 1926,
+      "y": 82850
+    },
+    "Escuro-Tablet-Posicoes.dc.html": {
+      "h": 1780,
+      "is_interactive": true,
+      "page": "escuro-app",
+      "title": "Tablet · Todas as posições",
+      "w": 820,
+      "x": 473,
+      "y": 82850
+    },
+    "Escuro-Tablet-Privacidade.dc.html": {
+      "h": 1500,
+      "is_interactive": true,
+      "page": "escuro-onb",
+      "title": "Tablet · Política de privacidade",
+      "w": 820,
+      "x": 1926,
+      "y": 11510
+    },
+    "Escuro-Tablet-Relatorio-Linha-do-Tempo.dc.html": {
+      "h": 2070,
+      "is_interactive": true,
+      "page": "escuro-app",
+      "title": "Tablet · Relatório · linha do tempo completa",
+      "w": 820,
+      "x": 9191,
+      "y": 82850
+    },
+    "Escuro-Tablet-Relatorio.dc.html": {
+      "h": 2460,
+      "is_interactive": true,
+      "page": "escuro-app",
+      "title": "Tablet paisagem · Relatório",
+      "w": 1180,
+      "x": 2640,
+      "y": 10930
+    },
+    "Escuro-Tablet-Simulacoes-Estados.dc.html": {
+      "h": 1180,
+      "is_interactive": true,
+      "page": "escuro-app",
+      "title": "Tablet · Simulações salvas · estados",
+      "w": 820,
+      "x": 1926,
+      "y": 85360
+    },
+    "Escuro-Tablet-Simulacoes.dc.html": {
+      "h": 1180,
+      "is_interactive": true,
+      "page": "escuro-app",
+      "title": "Tablet · Simulações salvas",
+      "w": 820,
+      "x": 473,
+      "y": 85360
+    },
+    "Escuro-Tablet-Simulador-Corte.dc.html": {
+      "h": 3000,
+      "is_interactive": true,
+      "page": "escuro-app",
+      "title": "Tablet · Simulador (Cortar um gasto)",
+      "w": 820,
+      "x": 2640,
+      "y": 62730
+    },
+    "Escuro-Tablet-Simulador-Objetivo.dc.html": {
+      "h": 3160,
+      "is_interactive": true,
+      "page": "escuro-app",
+      "title": "Tablet · Simulador (Juntar para um objetivo)",
+      "w": 820,
+      "x": 2640,
+      "y": 58590
+    },
+    "Escuro-Tablet-Simulador.dc.html": {
+      "h": 3300,
+      "is_interactive": true,
+      "page": "escuro-app",
+      "title": "Tablet · Simulador (Aposentadoria)",
+      "w": 820,
+      "x": 2640,
+      "y": 54210
+    },
+    "Escuro-Tablet-Termos.dc.html": {
+      "h": 1610,
+      "is_interactive": true,
+      "page": "escuro-onb",
+      "title": "Tablet · Termos de uso",
+      "w": 820,
+      "x": 473,
+      "y": 11510
+    },
+    "Fundamentos.dc.html": {
+      "h": 4490,
+      "page": "fundamentos",
+      "title": "Fundamentos do design",
+      "w": 1440,
+      "x": 0,
+      "y": 0
+    },
+    "Main.dc.html": {
+      "h": 1440,
+      "is_interactive": true,
+      "page": "escuro-app",
+      "title": "Desktop · Início com conversa aberta",
+      "w": 2560,
+      "x": 0,
+      "y": 0
+    }
+  },
+  "createdOnFiles": {
+    "at": "2026-09-23T19:42:52Z",
+    "v": 1
+  },
+  "designSystems": [],
+  "launch": {
+    "page": "escuro-app",
+    "view": "canvas"
+  },
+  "notes": {
+    "escuro-app-alertas": {
+      "kind": "title1",
+      "maxW": 3933,
+      "page": "escuro-app",
+      "text": "Alertas",
+      "w": 240,
+      "x": 0,
+      "y": 14110
+    },
+    "escuro-app-assinaturas": {
+      "kind": "title1",
+      "maxW": 3933,
+      "page": "escuro-app",
+      "text": "Assinaturas ativas",
+      "w": 240,
+      "x": 0,
+      "y": 8650
+    },
+    "escuro-app-ativo": {
+      "kind": "title1",
+      "maxW": 3933,
+      "page": "escuro-app",
+      "text": "Detalhe do ativo · PETR4 (dados da Brapi)",
+      "w": 240,
+      "x": 0,
+      "y": 25870
+    },
+    "escuro-app-ativo-bitcoin": {
+      "kind": "title1",
+      "maxW": 3933,
+      "page": "escuro-app",
+      "text": "Detalhe do ativo · Bitcoin",
+      "w": 240,
+      "x": 0,
+      "y": 47660
+    },
+    "escuro-app-ativo-bova11": {
+      "kind": "title1",
+      "maxW": 3933,
+      "page": "escuro-app",
+      "text": "Detalhe do ativo · BOVA11",
+      "w": 240,
+      "x": 0,
+      "y": 38950
+    },
+    "escuro-app-ativo-cdb": {
+      "kind": "title1",
+      "maxW": 3933,
+      "page": "escuro-app",
+      "text": "Detalhe do ativo · CDB 110% CDI",
+      "w": 240,
+      "x": 0,
+      "y": 34760
+    },
+    "escuro-app-ativo-hglg11": {
+      "kind": "title1",
+      "maxW": 3933,
+      "page": "escuro-app",
+      "text": "Detalhe do ativo · HGLG11",
+      "w": 240,
+      "x": 0,
+      "y": 43120
+    },
+    "escuro-app-ativo-tesouro-selic": {
+      "kind": "title1",
+      "maxW": 3933,
+      "page": "escuro-app",
+      "text": "Detalhe do ativo · Tesouro Selic 2029",
+      "w": 240,
+      "x": 0,
+      "y": 30630
+    },
+    "escuro-app-conta": {
+      "kind": "title1",
+      "maxW": 3933,
+      "page": "escuro-app",
+      "text": "Meu perfil e configurações",
+      "w": 240,
+      "x": 0,
+      "y": 66550
+    },
+    "escuro-app-conversas": {
+      "kind": "title1",
+      "maxW": 5779,
+      "page": "escuro-app",
+      "text": "Conversas",
+      "w": 240,
+      "x": 0,
+      "y": 3140
+    },
+    "escuro-app-gastos": {
+      "kind": "title1",
+      "maxW": 3933,
+      "page": "escuro-app",
+      "text": "Gastos",
+      "w": 240,
+      "x": 0,
+      "y": 5020
+    },
+    "escuro-app-invest": {
+      "kind": "title1",
+      "maxW": 3933,
+      "page": "escuro-app",
+      "text": "Investimentos",
+      "w": 240,
+      "x": 0,
+      "y": 20410
+    },
+    "escuro-app-novo-alerta": {
+      "kind": "title1",
+      "maxW": 3933,
+      "page": "escuro-app",
+      "text": "Novo alerta de preço",
+      "w": 240,
+      "x": 0,
+      "y": 18410
+    },
+    "escuro-app-novo-invest": {
+      "kind": "title1",
+      "maxW": 3933,
+      "page": "escuro-app",
+      "text": "Adicionar investimento (cadastro manual)",
+      "w": 240,
+      "x": 0,
+      "y": 51840
+    },
+    "escuro-app-novo-teto": {
+      "kind": "title1",
+      "maxW": 3933,
+      "page": "escuro-app",
+      "text": "Novo teto de gasto",
+      "w": 240,
+      "x": 0,
+      "y": 16090
+    },
+    "escuro-app-nv-bens-imovel-e-veiculo": {
+      "kind": "title1",
+      "maxW": 5812,
+      "page": "escuro-app",
+      "text": "Bens: imóvel e veículo",
+      "w": 240,
+      "x": 0,
+      "y": 80360
+    },
+    "escuro-app-nv-conversa-acoes": {
+      "kind": "title1",
+      "maxW": 8000,
+      "page": "escuro-app",
+      "text": "Conversa: ações",
+      "w": 240,
+      "x": 0,
+      "y": 86680
+    },
+    "escuro-app-nv-detalhe-do-ativo-complementos": {
+      "kind": "title1",
+      "maxW": 8718,
+      "page": "escuro-app",
+      "text": "Detalhe do ativo: complementos",
+      "w": 240,
+      "x": 0,
+      "y": 88300
+    },
+    "escuro-app-nv-editar-perfil": {
+      "kind": "title1",
+      "maxW": 2906,
+      "page": "escuro-app",
+      "text": "Editar perfil",
+      "w": 240,
+      "x": 0,
+      "y": 76120
+    },
+    "escuro-app-nv-listas-completas": {
+      "kind": "title1",
+      "maxW": 8000,
+      "page": "escuro-app",
+      "text": "Listas completas",
+      "w": 240,
+      "x": 0,
+      "y": 82550
+    },
+    "escuro-app-nv-metas": {
+      "kind": "title1",
+      "maxW": 5812,
+      "page": "escuro-app",
+      "text": "Metas",
+      "w": 240,
+      "x": 0,
+      "y": 77740
+    },
+    "escuro-app-nv-planos": {
+      "kind": "title1",
+      "maxW": 1453,
+      "page": "escuro-app",
+      "text": "Planos",
+      "w": 240,
+      "x": 0,
+      "y": 71950
+    },
+    "escuro-app-nv-refazer-perfil-de-investidor": {
+      "kind": "title1",
+      "maxW": 2906,
+      "page": "escuro-app",
+      "text": "Refazer perfil de investidor",
+      "w": 240,
+      "x": 0,
+      "y": 69790
+    },
+    "escuro-app-nv-renovar-autorizacao-do-banco": {
+      "kind": "title1",
+      "maxW": 1453,
+      "page": "escuro-app",
+      "text": "Renovar autorização do banco",
+      "w": 240,
+      "x": 0,
+      "y": 74450
+    },
+    "escuro-app-nv-simulacoes-salvas": {
+      "kind": "title1",
+      "maxW": 2906,
+      "page": "escuro-app",
+      "text": "Simulações salvas",
+      "w": 240,
+      "x": 0,
+      "y": 85060
+    },
+    "escuro-app-nv-usuario-novo-sem-banco-conectado": {
+      "kind": "title1",
+      "maxW": 4359,
+      "page": "escuro-app",
+      "text": "Usuário novo (sem banco conectado)",
+      "w": 240,
+      "x": 0,
+      "y": 90260
+    },
+    "escuro-app-painel": {
+      "kind": "title1",
+      "maxW": 7046,
+      "page": "escuro-app",
+      "text": "Início",
+      "w": 240,
+      "x": 0,
+      "y": -300
+    },
+    "escuro-app-relatorio": {
+      "kind": "title1",
+      "maxW": 4293,
+      "page": "escuro-app",
+      "text": "Relatório · o que aconteceu com meu dinheiro",
+      "w": 240,
+      "x": 0,
+      "y": 10630
+    },
+    "escuro-app-simulador": {
+      "kind": "title1",
+      "maxW": 3933,
+      "page": "escuro-app",
+      "text": "Simulador · Aposentadoria",
+      "w": 240,
+      "x": 0,
+      "y": 53910
+    },
+    "escuro-app-simulador-corte": {
+      "kind": "title1",
+      "maxW": 3933,
+      "page": "escuro-app",
+      "text": "Simulador · Cortar um gasto",
+      "w": 240,
+      "x": 0,
+      "y": 62430
+    },
+    "escuro-app-simulador-objetivo": {
+      "kind": "title1",
+      "maxW": 3933,
+      "page": "escuro-app",
+      "text": "Simulador · Juntar para um objetivo",
+      "w": 240,
+      "x": 0,
+      "y": 58290
+    },
+    "escuro-onb-nv-conexao-com-o-banco-pelo-malvo": {
+      "kind": "title1",
+      "maxW": 5812,
+      "page": "escuro-onb",
+      "text": "Conexão com o banco pelo Malvo",
+      "w": 240,
+      "x": 0,
+      "y": 9350
+    },
+    "escuro-onb-nv-perfil-de-investidor-questionario-comple": {
+      "kind": "title1",
+      "maxW": 8718,
+      "page": "escuro-onb",
+      "text": "Perfil de investidor · questionário completo",
+      "w": 240,
+      "x": 0,
+      "y": 7220
+    },
+    "escuro-onb-nv-termos-e-privacidade": {
+      "kind": "title1",
+      "maxW": 2906,
+      "page": "escuro-onb",
+      "text": "Termos e privacidade",
+      "w": 240,
+      "x": 0,
+      "y": 11210
+    },
+    "escuro-onb-onb1": {
+      "kind": "title1",
+      "maxW": 3933,
+      "page": "escuro-onb",
+      "text": "Boas-vindas e criação de conta",
+      "w": 240,
+      "x": 0,
+      "y": -300
+    },
+    "escuro-onb-onb2": {
+      "kind": "title1",
+      "maxW": 3933,
+      "page": "escuro-onb",
+      "text": "Onboarding 1 · Conectar bancos (Open Finance)",
+      "w": 240,
+      "x": 0,
+      "y": 1580
+    },
+    "escuro-onb-onb3": {
+      "kind": "title1",
+      "maxW": 3933,
+      "page": "escuro-onb",
+      "text": "Onboarding 2 · Perfil de investidor",
+      "w": 240,
+      "x": 0,
+      "y": 3460
+    },
+    "escuro-onb-onb4": {
+      "kind": "title1",
+      "maxW": 3933,
+      "page": "escuro-onb",
+      "text": "Onboarding 3 · Assistentes e avisos",
+      "w": 240,
+      "x": 0,
+      "y": 5340
+    }
+  },
+  "order": [
+    "Main.dc.html",
+    "Fundamentos.dc.html",
+    "Escuro-Desktop-Boas-Vindas.dc.html",
+    "Escuro-Tablet-Boas-Vindas.dc.html",
+    "Escuro-Mobile-Boas-Vindas.dc.html",
+    "Escuro-Desktop-Conectar-Bancos.dc.html",
+    "Escuro-Tablet-Conectar-Bancos.dc.html",
+    "Escuro-Mobile-Conectar-Bancos.dc.html",
+    "Escuro-Desktop-Perfil-Investidor.dc.html",
+    "Escuro-Tablet-Perfil-Investidor.dc.html",
+    "Escuro-Mobile-Perfil-Investidor.dc.html",
+    "Escuro-Desktop-Agentes-Avisos.dc.html",
+    "Escuro-Tablet-Agentes-Avisos.dc.html",
+    "Escuro-Mobile-Agentes-Avisos.dc.html",
+    "Escuro-Desktop-Painel-Historico.dc.html",
+    "Escuro-Tablet-Painel.dc.html",
+    "Escuro-Mobile-Inicio.dc.html",
+    "Escuro-Mobile-Assistentes.dc.html",
+    "Escuro-Desktop-Conversas.dc.html",
+    "Escuro-Tablet-Conversa.dc.html",
+    "Escuro-Tablet-Historico-Conversas.dc.html",
+    "Escuro-Mobile-Conversa.dc.html",
+    "Escuro-Mobile-Historico-Conversas.dc.html",
+    "Escuro-Mobile-Escolher-Agente.dc.html",
+    "Escuro-Desktop-Gastos.dc.html",
+    "Escuro-Tablet-Gastos.dc.html",
+    "Escuro-Mobile-Gastos.dc.html",
+    "Escuro-Desktop-Assinaturas.dc.html",
+    "Escuro-Tablet-Assinaturas.dc.html",
+    "Escuro-Mobile-Assinaturas.dc.html",
+    "Escuro-Desktop-Relatorio.dc.html",
+    "Escuro-Tablet-Relatorio.dc.html",
+    "Escuro-Mobile-Relatorio.dc.html",
+    "Escuro-Desktop-Alertas.dc.html",
+    "Escuro-Tablet-Alertas.dc.html",
+    "Escuro-Mobile-Alertas.dc.html",
+    "Escuro-Desktop-Novo-Teto.dc.html",
+    "Escuro-Tablet-Novo-Teto.dc.html",
+    "Escuro-Mobile-Novo-Teto.dc.html",
+    "Escuro-Desktop-Novo-Alerta-Preco.dc.html",
+    "Escuro-Tablet-Novo-Alerta-Preco.dc.html",
+    "Escuro-Mobile-Novo-Alerta-Preco.dc.html",
+    "Escuro-Desktop-Investimentos.dc.html",
+    "Escuro-Tablet-Investimentos.dc.html",
+    "Escuro-Mobile-Investimentos.dc.html",
+    "Escuro-Desktop-Ativo.dc.html",
+    "Escuro-Tablet-Ativo.dc.html",
+    "Escuro-Mobile-Ativo.dc.html",
+    "Escuro-Desktop-Ativo-Tesouro-Selic.dc.html",
+    "Escuro-Tablet-Ativo-Tesouro-Selic.dc.html",
+    "Escuro-Mobile-Ativo-Tesouro-Selic.dc.html",
+    "Escuro-Desktop-Ativo-CDB.dc.html",
+    "Escuro-Tablet-Ativo-CDB.dc.html",
+    "Escuro-Mobile-Ativo-CDB.dc.html",
+    "Escuro-Desktop-Ativo-BOVA11.dc.html",
+    "Escuro-Tablet-Ativo-BOVA11.dc.html",
+    "Escuro-Mobile-Ativo-BOVA11.dc.html",
+    "Escuro-Desktop-Ativo-HGLG11.dc.html",
+    "Escuro-Tablet-Ativo-HGLG11.dc.html",
+    "Escuro-Mobile-Ativo-HGLG11.dc.html",
+    "Escuro-Desktop-Ativo-Bitcoin.dc.html",
+    "Escuro-Tablet-Ativo-Bitcoin.dc.html",
+    "Escuro-Mobile-Ativo-Bitcoin.dc.html",
+    "Escuro-Desktop-Adicionar-Investimento.dc.html",
+    "Escuro-Tablet-Adicionar-Investimento.dc.html",
+    "Escuro-Mobile-Adicionar-Investimento.dc.html",
+    "Escuro-Desktop-Simulador.dc.html",
+    "Escuro-Tablet-Simulador.dc.html",
+    "Escuro-Mobile-Simulador.dc.html",
+    "Escuro-Desktop-Simulador-Objetivo.dc.html",
+    "Escuro-Tablet-Simulador-Objetivo.dc.html",
+    "Escuro-Mobile-Simulador-Objetivo.dc.html",
+    "Escuro-Desktop-Simulador-Corte.dc.html",
+    "Escuro-Tablet-Simulador-Corte.dc.html",
+    "Escuro-Mobile-Simulador-Corte.dc.html",
+    "Escuro-Desktop-Meu-Perfil.dc.html",
+    "Escuro-Tablet-Meu-Perfil.dc.html",
+    "Escuro-Mobile-Meu-Perfil.dc.html",
+    "Escuro-Mobile-Perfil-Refazer.dc.html",
+    "Escuro-Tablet-Perfil-Refazer.dc.html",
+    "Escuro-Mobile-Perfil-Refazer-Resultado.dc.html",
+    "Escuro-Tablet-Perfil-Refazer-Resultado.dc.html",
+    "Escuro-Mobile-Planos.dc.html",
+    "Escuro-Tablet-Planos.dc.html",
+    "Escuro-Mobile-Malvo-Renovar.dc.html",
+    "Escuro-Tablet-Malvo-Renovar.dc.html",
+    "Escuro-Mobile-Editar-Perfil.dc.html",
+    "Escuro-Tablet-Editar-Perfil.dc.html",
+    "Escuro-Mobile-Editar-Perfil-Email.dc.html",
+    "Escuro-Tablet-Editar-Perfil-Email.dc.html",
+    "Escuro-Mobile-Meta-Nova.dc.html",
+    "Escuro-Tablet-Meta-Nova.dc.html",
+    "Escuro-Mobile-Metas.dc.html",
+    "Escuro-Tablet-Metas.dc.html",
+    "Escuro-Mobile-Meta-Detalhe.dc.html",
+    "Escuro-Tablet-Meta-Detalhe.dc.html",
+    "Escuro-Mobile-Metas-Estados.dc.html",
+    "Escuro-Tablet-Metas-Estados.dc.html",
+    "Escuro-Mobile-Bem-Imovel.dc.html",
+    "Escuro-Tablet-Bem-Imovel.dc.html",
+    "Escuro-Mobile-Bem-Veiculo.dc.html",
+    "Escuro-Tablet-Bem-Veiculo.dc.html",
+    "Escuro-Mobile-Bem-Imovel-Detalhe.dc.html",
+    "Escuro-Tablet-Bem-Imovel-Detalhe.dc.html",
+    "Escuro-Mobile-Bem-Veiculo-Detalhe.dc.html",
+    "Escuro-Tablet-Bem-Veiculo-Detalhe.dc.html",
+    "Escuro-Mobile-Posicoes.dc.html",
+    "Escuro-Tablet-Posicoes.dc.html",
+    "Escuro-Mobile-Posicoes-Estados.dc.html",
+    "Escuro-Tablet-Posicoes-Estados.dc.html",
+    "Escuro-Mobile-Lancamentos.dc.html",
+    "Escuro-Tablet-Lancamentos.dc.html",
+    "Escuro-Mobile-Lancamentos-Estados.dc.html",
+    "Escuro-Tablet-Lancamentos-Estados.dc.html",
+    "Escuro-Mobile-Lancamentos-Categoria.dc.html",
+    "Escuro-Tablet-Lancamentos-Categoria.dc.html",
+    "Escuro-Mobile-Lancamento-Detalhe.dc.html",
+    "Escuro-Tablet-Lancamento-Detalhe.dc.html",
+    "Escuro-Mobile-Relatorio-Linha-do-Tempo.dc.html",
+    "Escuro-Tablet-Relatorio-Linha-do-Tempo.dc.html",
+    "Escuro-Mobile-Simulacoes.dc.html",
+    "Escuro-Tablet-Simulacoes.dc.html",
+    "Escuro-Mobile-Simulacoes-Estados.dc.html",
+    "Escuro-Tablet-Simulacoes-Estados.dc.html",
+    "Escuro-Mobile-Conversa-Menu.dc.html",
+    "Escuro-Tablet-Conversa-Menu.dc.html",
+    "Escuro-Mobile-Conversa-Apagar.dc.html",
+    "Escuro-Tablet-Conversa-Apagar.dc.html",
+    "Escuro-Mobile-Conversa-Anexar.dc.html",
+    "Escuro-Tablet-Conversa-Anexar.dc.html",
+    "Escuro-Mobile-Conversa-Anexo-Previa.dc.html",
+    "Escuro-Tablet-Conversa-Anexo-Previa.dc.html",
+    "Escuro-Mobile-Conversa-Gravando.dc.html",
+    "Escuro-Tablet-Conversa-Gravando.dc.html",
+    "Escuro-Mobile-Conversa-Transcrevendo.dc.html",
+    "Escuro-Tablet-Conversa-Transcrevendo.dc.html",
+    "Escuro-Mobile-Ativo-Comparar.dc.html",
+    "Escuro-Tablet-Ativo-Comparar.dc.html",
+    "Escuro-Mobile-Ativo-Comparar-Ibovespa.dc.html",
+    "Escuro-Tablet-Ativo-Comparar-Ibovespa.dc.html",
+    "Escuro-Mobile-Ativo-Preco-Sem-Ajuste.dc.html",
+    "Escuro-Tablet-Ativo-Preco-Sem-Ajuste.dc.html",
+    "Escuro-Mobile-Ativo-Mais-Detalhes.dc.html",
+    "Escuro-Tablet-Ativo-Mais-Detalhes.dc.html",
+    "Escuro-Mobile-Ativo-Eventos.dc.html",
+    "Escuro-Tablet-Ativo-Eventos.dc.html",
+    "Escuro-Mobile-Ativo-Risco.dc.html",
+    "Escuro-Tablet-Ativo-Risco.dc.html",
+    "Escuro-Mobile-Inicio-Novo.dc.html",
+    "Escuro-Tablet-Inicio-Novo.dc.html",
+    "Escuro-Mobile-Gastos-Novo.dc.html",
+    "Escuro-Tablet-Gastos-Novo.dc.html",
+    "Escuro-Mobile-Investimentos-Novo.dc.html",
+    "Escuro-Tablet-Investimentos-Novo.dc.html",
+    "Escuro-Mobile-Perfil-Investidor-P1.dc.html",
+    "Escuro-Tablet-Perfil-Investidor-P1.dc.html",
+    "Escuro-Mobile-Perfil-Investidor-P2.dc.html",
+    "Escuro-Tablet-Perfil-Investidor-P2.dc.html",
+    "Escuro-Mobile-Perfil-Investidor-P4.dc.html",
+    "Escuro-Tablet-Perfil-Investidor-P4.dc.html",
+    "Escuro-Mobile-Perfil-Investidor-P5.dc.html",
+    "Escuro-Tablet-Perfil-Investidor-P5.dc.html",
+    "Escuro-Mobile-Perfil-Investidor-P6.dc.html",
+    "Escuro-Tablet-Perfil-Investidor-P6.dc.html",
+    "Escuro-Mobile-Perfil-Investidor-Resultado.dc.html",
+    "Escuro-Tablet-Perfil-Investidor-Resultado.dc.html",
+    "Escuro-Mobile-Malvo-Autorizar.dc.html",
+    "Escuro-Tablet-Malvo-Autorizar.dc.html",
+    "Escuro-Mobile-Malvo-Conectando.dc.html",
+    "Escuro-Tablet-Malvo-Conectando.dc.html",
+    "Escuro-Mobile-Malvo-Sucesso.dc.html",
+    "Escuro-Tablet-Malvo-Sucesso.dc.html",
+    "Escuro-Mobile-Malvo-Erro.dc.html",
+    "Escuro-Tablet-Malvo-Erro.dc.html",
+    "Escuro-Mobile-Termos.dc.html",
+    "Escuro-Tablet-Termos.dc.html",
+    "Escuro-Mobile-Privacidade.dc.html",
+    "Escuro-Tablet-Privacidade.dc.html"
+  ],
+  "pages": [
+    {
+      "id": "escuro-app",
+      "name": "App"
+    },
+    {
+      "id": "escuro-onb",
+      "name": "Onboarding"
+    },
+    {
+      "id": "fundamentos",
+      "name": "Fundamentos"
+    }
+  ],
+  "title": "Guará · Design do app"
 }

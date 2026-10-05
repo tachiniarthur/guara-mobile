@@ -7,6 +7,13 @@ import { ChatFab } from '@/navigation';
 
 import { SimulatorTabs, type SimulationKind } from './SimulatorTabs';
 
+/** Tablet subtitle of each simulation. */
+const SUBTITLES: Record<SimulationKind, string> = {
+  retirement: 'Cenários com os seus números reais',
+  goal: 'Planeje um objetivo com prazo e valor',
+  cut: 'Veja quanto um corte rende ao longo do tempo',
+};
+
 /** Page of the simulator: header, simulation tabs and the blocks of the active simulation. */
 export function SimulatorFrame({
   active,
@@ -24,9 +31,7 @@ export function SimulatorFrame({
         }
         contentClassName={isTablet ? 'gap-5 pb-32' : 'gap-4 pt-1'}
       >
-        {isTablet ? (
-          <PageHeader title="Simulador" subtitle="Cenários com os seus números reais" size={34} />
-        ) : null}
+        {isTablet ? <PageHeader title="Simulador" subtitle={SUBTITLES[active]} size={34} /> : null}
         <SimulatorTabs active={active} wide={isTablet} />
         {children}
       </Screen>

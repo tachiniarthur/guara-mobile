@@ -79,6 +79,7 @@ export function MalvoScreen() {
       <Screen
         header={<TopBar title={title} leading="close" fallbackHref="/account" />}
         footer={<StickyFooter>{actions(false)}</StickyFooter>}
+        centered={flow.step === 'connecting' || flow.step === 'error'}
         contentClassName="gap-[18px] pt-2"
       >
         {body}
