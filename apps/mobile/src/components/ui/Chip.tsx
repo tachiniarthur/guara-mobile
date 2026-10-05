@@ -19,6 +19,8 @@ export interface ChipProps {
   appearance?: 'outline' | 'filled';
   /** Stretch inside grids ("Tipo de investimento"). */
   fill?: boolean;
+  /** Label size below 40 dp: 13 bold (default) or 14 semibold (list filters). */
+  textSize?: 13 | 14;
   disabled?: boolean;
   accessibilityLabel?: string;
   className?: string;
@@ -41,6 +43,7 @@ export function Chip({
   size = 36,
   appearance = 'outline',
   fill = false,
+  textSize = 13,
   disabled = false,
   accessibilityLabel,
   className,
@@ -73,8 +76,8 @@ export function Chip({
     >
       {icon ? <Icon name={icon} size={16} color={textColor} /> : null}
       <Text
-        size={size >= 40 ? 14 : 13}
-        weight={size >= 40 ? (selected ? 'bold' : 'medium') : 'bold'}
+        size={size >= 40 ? 14 : textSize}
+        weight={size >= 40 ? (selected ? 'bold' : 'medium') : textSize === 14 ? 'semibold' : 'bold'}
         style={{ color: textColor }}
         numberOfLines={1}
       >

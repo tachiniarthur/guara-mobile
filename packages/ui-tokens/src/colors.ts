@@ -72,6 +72,8 @@ export const colors = {
     solid: '#FF6A50',
     pressed: '#E85A41',
     muted: '#3A1C16',
+    /** Outline of Urucum text buttons ("Não reconheço"). */
+    border: '#5A2A22',
     foreground: '#0B110E',
   },
   warning: {

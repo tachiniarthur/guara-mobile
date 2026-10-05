@@ -1,38 +1,70 @@
 import { colors } from '@guara/ui-tokens';
 import { View } from 'react-native';
 
-import { Button } from '@/components/ui/Button';
+import { Button, type ButtonVariant } from '@/components/ui/Button';
 import { Icon, type IconName } from '@/components/ui/Icon';
 import { Text } from '@/components/ui/Text';
 import { cn } from '@/lib/cn';
+
+export interface EmptyStateAction {
+  label: string;
+  onPress: () => void;
+  /** Design: `secondary` ("Limpar filtros") or `primary` ("Conectar banco"). */
+  variant?: ButtonVariant;
+  icon?: IconName;
+}
 
 export interface EmptyStateProps {
   title: string;
   description?: string;
   icon?: IconName;
-  action?: { label: string; onPress: () => void };
+  /** `negative`: Urucum circle (errors). */
+  tone?: 'neutral' | 'negative';
+  action?: EmptyStateAction;
   className?: string;
 }
 
-/** Friendly empty list/screen with an optional call to action. */
-export function EmptyState({ title, description, icon, action, className }: EmptyStateProps) {
+/** List/screen state of the design: 64 circle, Fraunces title, short text and one action. */
+export function EmptyState({
+  title,
+  description,
+  icon,
+  tone = 'neutral',
+  action,
+  className,
+}: EmptyStateProps) {
   return (
-    <View className={cn('items-center gap-3 px-6 py-10', className)}>
+    <View className={cn('items-center gap-3 px-4 py-7', className)}>
       {icon ? (
-        <View className="h-14 w-14 items-center justify-center rounded-full bg-surface-muted">
-          <Icon name={icon} size={24} color={colors.foreground.muted} />
+        <View
+          className={cn(
+            'h-16 w-16 items-center justify-center rounded-full',
+            tone === 'negative' ? 'bg-negative-muted' : 'bg-surface-muted',
+          )}
+        >
+          <Icon
+            name={icon}
+            size={28}
+            color={tone === 'negative' ? colors.negative.DEFAULT : colors.foreground.muted}
+          />
         </View>
       ) : null}
-      <Text variant="heading" align="center" accessibilityRole="header">
+      <Text serif weight="bold" size={20} leading={1.25} align="center" accessibilityRole="header">
         {title}
       </Text>
       {description ? (
-        <Text variant="body" tone="muted" align="center">
+        <Text size={14} leading={1.55} tone="muted" align="center" className="max-w-[320px]">
           {description}
         </Text>
       ) : null}
       {action ? (
-        <Button variant="outline" size="md" onPress={action.onPress} className="mt-2 self-center">
+        <Button
+          variant={action.variant ?? 'secondary'}
+          size="md"
+          leftIcon={action.icon}
+          onPress={action.onPress}
+          className="self-center"
+        >
           {action.label}
         </Button>
       ) : null}

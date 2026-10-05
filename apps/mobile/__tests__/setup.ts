@@ -71,3 +71,45 @@ jest.mock('@shopify/react-native-skia', () => {
     vec: (x: number, y: number) => ({ x, y }),
   };
 });
+
+// FlashList measures its cells natively; in tests every item renders in a plain ScrollView.
+jest.mock('@shopify/flash-list', () => {
+  const { createElement, Fragment, isValidElement } = jest.requireActual<typeof React>('react');
+  const { ScrollView } = jest.requireActual<typeof ReactNative>('react-native');
+  type MockSlot = React.ComponentType | React.ReactElement | null | undefined;
+  const slot = (value: MockSlot) =>
+    !value ? null : isValidElement(value) ? value : createElement(value as React.ComponentType);
+  function FlashList<T>({
+    data,
+    renderItem,
+    keyExtractor,
+    ListHeaderComponent,
+    ListFooterComponent,
+    ListEmptyComponent,
+  }: {
+    data: readonly T[] | null | undefined;
+    renderItem: (info: { item: T; index: number }) => React.ReactNode;
+    keyExtractor?: (item: T, index: number) => string;
+    ListHeaderComponent?: MockSlot;
+    ListFooterComponent?: MockSlot;
+    ListEmptyComponent?: MockSlot;
+  }) {
+    const items = data ?? [];
+    return createElement(
+      ScrollView,
+      null,
+      slot(ListHeaderComponent),
+      items.length === 0
+        ? slot(ListEmptyComponent)
+        : items.map((item, index) =>
+            createElement(
+              Fragment,
+              { key: keyExtractor ? keyExtractor(item, index) : String(index) },
+              renderItem({ item, index }),
+            ),
+          ),
+      slot(ListFooterComponent),
+    );
+  }
+  return { FlashList };
+});

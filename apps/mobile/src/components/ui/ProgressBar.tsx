@@ -23,6 +23,14 @@ export function budgetTone(percent: number): ProgressTone {
   return 'positive';
 }
 
+/** Word of the month state: "tranquilo", "atenção", "apertado" or "passou" (above 100%). */
+export function budgetStateLabel(percent: number): string {
+  if (percent > 100) return 'passou';
+  if (percent >= 85) return 'apertado';
+  if (percent >= 70) return 'atenção';
+  return 'tranquilo';
+}
+
 export interface ProgressBarProps {
   /** 0–100 (values outside are clamped). */
   percent: number;

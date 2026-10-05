@@ -18,9 +18,10 @@ import { hitSlopFor } from './touch';
  * - `outline`: transparent with an outline ("Ver", "Criar alerta").
  * - `ghost`: text only ("Pular").
  * - `destructive`: Urucum ("Excluir").
+ * - `negativeOutline`: Urucum text with a dark red outline ("Não reconheço").
  */
 export type ButtonVariant =
-  'primary' | 'inverse' | 'secondary' | 'outline' | 'ghost' | 'destructive';
+  'primary' | 'inverse' | 'secondary' | 'outline' | 'ghost' | 'destructive' | 'negativeOutline';
 
 const containerVariants = cva('flex-row items-center justify-center gap-2 rounded-full border', {
   variants: {
@@ -31,6 +32,7 @@ const containerVariants = cva('flex-row items-center justify-center gap-2 rounde
       outline: 'border-border-strong bg-transparent active:bg-surface-pressed',
       ghost: 'border-transparent bg-transparent active:bg-surface-pressed',
       destructive: 'border-negative bg-negative active:bg-negative-pressed',
+      negativeOutline: 'border-negative-border bg-transparent active:bg-surface-pressed',
     } satisfies Record<ButtonVariant, string>,
     size: {
       sm: 'h-control-sm px-3',
@@ -50,6 +52,7 @@ const CONTENT_COLOR: Record<ButtonVariant, string> = {
   outline: colors.foreground.DEFAULT,
   ghost: colors.foreground.DEFAULT,
   destructive: colors.negative.foreground,
+  negativeOutline: colors.negative.DEFAULT,
 };
 
 const LABEL_SIZE: Record<ControlSize, number> = { sm: 13, md: 14, lg: 15 };

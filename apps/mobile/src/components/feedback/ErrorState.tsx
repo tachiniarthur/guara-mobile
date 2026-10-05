@@ -18,10 +18,11 @@ export function ErrorState({
 }: ErrorStateProps) {
   return (
     <EmptyState
-      icon="alertTriangle"
+      icon="wifiOff"
+      tone="negative"
       title={title}
       description={description}
-      action={{ label: FEEDBACK_COPY.retry, onPress: onRetry }}
+      action={{ label: FEEDBACK_COPY.retry, onPress: onRetry, variant: 'primary', icon: 'retry' }}
       className={className}
     />
   );

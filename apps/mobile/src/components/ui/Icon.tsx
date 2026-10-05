@@ -73,6 +73,13 @@ export const ICON_PATHS = {
   laptop: ['M4 5h16v11H4zM2 19h20'],
   trash: ['M4 7h16M9 7V4h6v3M6 7l1 13h10l1-13'],
   download: ['M12 4v11M7 10l5 5 5-5M4 20h16'],
+  share: ['M12 3v13M7 8l5-5 5 5M5 14v5a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2v-5'],
+  tag: ['M3 12V4h8l10 10-8 8zM7.5 8h.01'],
+  filter: ['M4 5h16l-6 8v6l-4-2v-4z'],
+  wifiOff: [
+    'M2 2l20 20M8.5 16.5a5 5 0 0 1 7 0M5 12.5a10 10 0 0 1 5-2.6M19 12.5a10 10 0 0 0-2.4-1.7M12 20h.01',
+  ],
+  retry: ['M20 12a8 8 0 1 1-2.3-5.7M20 4v5h-5'],
   flag: ['M5 21V4M5 4h11l-2 4 2 4H5'],
   target: ['M12 21a9 9 0 1 0 0-18 9 9 0 0 0 0 18zM12 16a4 4 0 1 0 0-8 4 4 0 0 0 0 8zM12 12h.01'],
   scissors: [
