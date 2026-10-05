@@ -17,9 +17,12 @@ const SUBTITLES: Record<SimulationKind, string> = {
 /** Page of the simulator: header, simulation tabs and the blocks of the active simulation. */
 export function SimulatorFrame({
   active,
+  notice,
   children,
 }: {
   active: SimulationKind;
+  /** Under the tabs ("Aberta de uma simulação salva…"). */
+  notice?: ReactNode;
   children: ReactNode;
 }) {
   const { isTablet } = useBreakpoint();
@@ -33,6 +36,7 @@ export function SimulatorFrame({
       >
         {isTablet ? <PageHeader title="Simulador" subtitle={SUBTITLES[active]} size={34} /> : null}
         <SimulatorTabs active={active} wide={isTablet} />
+        {notice}
         {children}
       </Screen>
       {isTablet ? <ChatFab /> : null}

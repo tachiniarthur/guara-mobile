@@ -3,11 +3,11 @@ import { useRouter } from 'expo-router';
 import { useState, type ReactNode } from 'react';
 import { Pressable, View } from 'react-native';
 
-import { toast } from '@/components/feedback';
 import { EmptyValue, Icon, MoneyText, Text } from '@/components/ui';
 import { haptics } from '@/lib/haptics';
 
 import type { Position } from '../data';
+import { changeText, shareText } from '../lib/positions';
 
 import { RiskPill } from './RiskPill';
 
@@ -28,14 +28,16 @@ function Detail({ label, children }: { label: string; children: ReactNode }) {
 export function PositionItem({
   position,
   defaultOpen = false,
+  onAdjustRisk,
 }: {
   position: Position;
   defaultOpen?: boolean;
+  onAdjustRisk: () => void;
 }) {
   const router = useRouter();
   const [open, setOpen] = useState(defaultOpen);
   const up = position.change >= 0;
-  const changeLabel = `${up ? '+' : '−'}${Math.abs(position.change).toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}%`;
+  const changeLabel = changeText(position.change);
 
   return (
     <View className="overflow-hidden rounded-18 border border-border bg-surface-input">
@@ -84,14 +86,11 @@ export function PositionItem({
               </Text>
             </Detail>
             <Detail label="Risco">
-              <RiskPill
-                risk={position.risk}
-                onPress={() => toast.info('Ajuste do risco em breve')}
-              />
+              <RiskPill risk={position.risk} assetName={position.name} onPress={onAdjustRisk} />
             </Detail>
             <Detail label="% da carteira">
               <Text size={15} weight="semibold" tabular>
-                {position.share.toLocaleString('pt-BR', { minimumFractionDigits: 1 })}%
+                {shareText(position.share)}
               </Text>
             </Detail>
             <Detail label="Quantidade">

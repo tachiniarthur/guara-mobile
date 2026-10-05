@@ -22,6 +22,7 @@ import {
   PremisesCard,
   ResultCard,
   SimCard,
+  SavedNotice,
   SimulatorFrame,
   SliderField,
 } from '../components';
@@ -36,10 +37,12 @@ import {
   RETIREMENT_DEFAULTS,
   START,
 } from '../data';
+import { useSavedPremises } from '../hooks/useSavedPremises';
 import { simulateCut } from '../lib/cut';
 import { longMonth, reais, shortMonth, thousands } from '../lib/format';
 import { simulateGoal } from '../lib/goal';
 import { simulateRetirement } from '../lib/retirement';
+import { useSimulationsStore } from '../store';
 
 type Place = (typeof GOAL_PLACES)[number]['key'];
 
@@ -59,11 +62,14 @@ const RETIREMENT_DEPOSIT = simulateRetirement({
 export function GoalSimulationScreen() {
   const router = useRouter();
   const { isTablet } = useBreakpoint();
-  const [name, setName] = useState<string>(GOAL_DEFAULTS.name);
-  const [cost, setCost] = useState<number>(GOAL_DEFAULTS.cost);
-  const [months, setMonths] = useState<number>(GOAL_DEFAULTS.months);
-  const [saved, setSaved] = useState<Cents | null>(cents(GOAL_DEFAULTS.saved * 100));
-  const [place, setPlace] = useState<Place>(GOAL_DEFAULTS.place);
+  const opened = useSavedPremises('goal');
+  const initial = opened?.input ?? GOAL_DEFAULTS;
+  const saveSimulation = useSimulationsStore((state) => state.save);
+  const [name, setName] = useState<string>(opened?.simulation.name ?? GOAL_DEFAULTS.name);
+  const [cost, setCost] = useState<number>(initial.cost);
+  const [months, setMonths] = useState<number>(initial.months);
+  const [saved, setSaved] = useState<Cents | null>(cents(initial.saved * 100));
+  const [place, setPlace] = useState<Place>(initial.place);
 
   const placeInfo = GOAL_PLACES.find((item) => item.key === place) ?? GOAL_PLACES[0];
   const start = (saved ?? 0) / 100;
@@ -133,7 +139,10 @@ export function GoalSimulationScreen() {
   };
 
   return (
-    <SimulatorFrame active="goal">
+    <SimulatorFrame
+      active="goal"
+      notice={opened ? <SavedNotice simulation={opened.simulation} /> : null}
+    >
       <ResultCard
         title={`Seu plano para ${the}`}
         subtitle={`Meta de ${reais(cost)} em ${months} meses`}
@@ -211,7 +220,10 @@ export function GoalSimulationScreen() {
               variant="secondary"
               size="md"
               className="px-4.5"
-              onPress={() => toast.success('Simulação salva')}
+              onPress={() => {
+                saveSimulation(goalName, { kind: 'goal', cost, months, saved: start, place });
+                toast.success('Simulação salva');
+              }}
             >
               Salvar
             </Button>

@@ -9,7 +9,7 @@ import type {
   UnusualStatus,
   YearMonth,
 } from '@guara/types';
-import { cents, percentChange, sharesOf, sumCents } from '@guara/utils';
+import { cents, normalizeForSearch, percentChange, sharesOf, sumCents } from '@guara/utils';
 
 import { CATEGORY_LABELS, SUBCATEGORY_LABELS } from '../categories';
 import type {
@@ -90,9 +90,7 @@ export interface LedgerFilters {
   month: YearMonth;
 }
 
-export function normalize(text: string): string {
-  return text.normalize('NFD').replace(/[̀-ͯ]/g, '').toLocaleLowerCase('pt-BR').trim();
-}
+export const normalize = normalizeForSearch;
 
 /** Transactions matching the filters, newest first (the order of the ledger). */
 export function filterLedger(

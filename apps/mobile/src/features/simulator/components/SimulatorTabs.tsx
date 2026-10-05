@@ -3,7 +3,9 @@ import { ScrollView } from 'react-native';
 
 import { Chip, SegmentedControl } from '@/components/ui';
 
-export type SimulationKind = 'retirement' | 'goal' | 'cut';
+import type { SimulationKind } from '../data';
+
+export type { SimulationKind };
 
 const TABS = [
   {

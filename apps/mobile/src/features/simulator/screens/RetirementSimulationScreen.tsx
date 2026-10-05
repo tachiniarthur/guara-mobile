@@ -21,13 +21,16 @@ import {
   MilestoneList,
   PremisesCard,
   ResultCard,
+  SavedNotice,
   SimCard,
   SimulatorFrame,
   SliderField,
 } from '../components';
 import { HOUSEHOLD, QUESTIONS, RETIREMENT_DEFAULTS, RETIREMENT_INCLUDES, START } from '../data';
 import { compact, longAmount, millions, reais, reaisWithCents, yearlyPercent } from '../lib/format';
+import { useSavedPremises } from '../hooks/useSavedPremises';
 import { simulateRetirement } from '../lib/retirement';
+import { useSimulationsStore } from '../store';
 
 type Include = (typeof RETIREMENT_INCLUDES)[number]['key'];
 
@@ -35,13 +38,14 @@ type Include = (typeof RETIREMENT_INCLUDES)[number]['key'];
 export function RetirementSimulationScreen() {
   const router = useRouter();
   const { isTablet } = useBreakpoint();
-  const [years, setYears] = useState<number>(RETIREMENT_DEFAULTS.years);
-  const [income, setIncome] = useState<number>(RETIREMENT_DEFAULTS.income);
-  const [rate, setRate] = useState<number>(RETIREMENT_DEFAULTS.rate);
-  const [withdrawal, setWithdrawal] = useState<number>(RETIREMENT_DEFAULTS.withdrawal);
-  const [invested, setInvested] = useState<Cents | null>(
-    cents(Math.round(HOUSEHOLD.invested * 100)),
-  );
+  const opened = useSavedPremises('retirement');
+  const initial = opened?.input ?? { ...RETIREMENT_DEFAULTS, start: HOUSEHOLD.invested };
+  const saveSimulation = useSimulationsStore((state) => state.save);
+  const [years, setYears] = useState<number>(initial.years);
+  const [income, setIncome] = useState<number>(initial.income);
+  const [rate, setRate] = useState<number>(initial.rate);
+  const [withdrawal, setWithdrawal] = useState<number>(initial.withdrawal);
+  const [invested, setInvested] = useState<Cents | null>(cents(Math.round(initial.start * 100)));
   const [includes, setIncludes] = useState<Include[]>([]);
 
   const start =
@@ -102,7 +106,21 @@ export function RetirementSimulationScreen() {
   };
 
   return (
-    <SimulatorFrame active="retirement">
+    <SimulatorFrame
+      active="retirement"
+      notice={
+        opened ? (
+          <SavedNotice
+            simulation={opened.simulation}
+            onRefresh={
+              invested === cents(Math.round(HOUSEHOLD.invested * 100))
+                ? undefined
+                : () => setInvested(cents(Math.round(HOUSEHOLD.invested * 100)))
+            }
+          />
+        ) : null
+      }
+    >
       <ResultCard
         title="O caminho do seu futuro"
         subtitle={`Aposentadoria em ${years} anos, em valores de hoje`}
@@ -167,7 +185,17 @@ export function RetirementSimulationScreen() {
               variant="secondary"
               size="md"
               className="px-4.5"
-              onPress={() => toast.success('Simulação salva')}
+              onPress={() => {
+                saveSimulation(`Aposentadoria em ${retireYear}`, {
+                  kind: 'retirement',
+                  years,
+                  income,
+                  rate,
+                  withdrawal,
+                  start,
+                });
+                toast.success('Simulação salva');
+              }}
             >
               Salvar
             </Button>

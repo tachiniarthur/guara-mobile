@@ -1,3 +1,5 @@
+import type { IsoDate } from '@guara/types';
+
 /** Inputs of the simulator as shown in the design (static until the API exists). */
 
 /** The simulations start in October 2026 (first deposit on the 5th, with the salary). */
@@ -117,3 +119,87 @@ export const QUESTIONS = {
     'Quanto gasto com delivery por mês?',
   ],
 } as const;
+
+export type SimulationKind = 'retirement' | 'goal' | 'cut';
+
+export const SIMULATION_KIND_LABELS: Record<SimulationKind, string> = {
+  retirement: 'Aposentadoria',
+  goal: 'Objetivo',
+  cut: 'Corte de gasto',
+};
+
+export type CutCategory = (typeof CUT_CATEGORIES)[number]['key'];
+export type CutDestination = (typeof CUT_DESTINATIONS)[number]['key'];
+export type GoalPlace = (typeof GOAL_PLACES)[number]['key'];
+
+/** Premises of a saved simulation: the numbers of the day it was saved. */
+export type SavedSimulationInput =
+  | {
+      kind: 'retirement';
+      years: number;
+      income: number;
+      rate: number;
+      withdrawal: number;
+      /** Already invested on the day (portfolio, plus properties when included). */
+      start: number;
+    }
+  | { kind: 'goal'; cost: number; months: number; saved: number; place: GoalPlace }
+  | {
+      kind: 'cut';
+      category: CutCategory;
+      percent: number;
+      rate: number;
+      destination: CutDestination;
+    };
+
+export interface SavedSimulation {
+  id: string;
+  name: string;
+  savedOn: IsoDate;
+  /** Set when the simulation became a goal ("virou meta"). */
+  goalId: string | null;
+  input: SavedSimulationInput;
+}
+
+/** "Simulações salvas" of the design, newest first. */
+export const SAVED_SIMULATIONS: SavedSimulation[] = [
+  {
+    id: 'sim-retire-55',
+    name: 'Aposentadoria aos 55',
+    savedOn: '2026-09-23',
+    goalId: null,
+    input: { kind: 'retirement', ...RETIREMENT_DEFAULTS, start: HOUSEHOLD.invested },
+  },
+  {
+    id: 'sim-japan',
+    name: GOAL_DEFAULTS.name,
+    savedOn: '2026-09-23',
+    goalId: 'japao',
+    input: {
+      kind: 'goal',
+      cost: GOAL_DEFAULTS.cost,
+      months: GOAL_DEFAULTS.months,
+      saved: GOAL_DEFAULTS.saved,
+      place: GOAL_DEFAULTS.place,
+    },
+  },
+  {
+    id: 'sim-cut-rides',
+    name: 'Cortar transporte por app',
+    savedOn: '2026-09-20',
+    goalId: null,
+    input: { kind: 'cut', ...CUT_DEFAULTS },
+  },
+  {
+    id: 'sim-retire-60',
+    name: 'Aposentadoria aos 60',
+    savedOn: '2026-09-12',
+    goalId: null,
+    input: {
+      kind: 'retirement',
+      ...RETIREMENT_DEFAULTS,
+      years: RETIREMENT_DEFAULTS.years + 5,
+      start: HOUSEHOLD.invested,
+    },
+  },
+];

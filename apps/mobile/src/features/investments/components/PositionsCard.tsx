@@ -2,15 +2,23 @@ import { colors } from '@guara/ui-tokens';
 import { useState } from 'react';
 import { Pressable, View } from 'react-native';
 
-import { MataSurface } from '@/components/illustrations';
+import { useRouter } from 'expo-router';
+
 import { ResponsiveGrid, SectionCard } from '@/components/layout';
 import { Icon, LinkButton, MoneyText, SegmentedControl, Text } from '@/components/ui';
 import { useBreakpoint } from '@/hooks/useBreakpoint';
 import { haptics } from '@/lib/haptics';
 
-import { OTHER_POSITIONS, PORTFOLIO, POSITION_GROUPS, type Position } from '../data';
+import type { Position } from '../data';
+import { usePositions } from '../hooks/usePositions';
+import { groupPositions, previewPositions, shareText } from '../lib/positions';
 
+import { PositionClassBand } from './PositionClassBand';
 import { PositionItem } from './PositionItem';
+import { RiskSheet } from './RiskSheet';
+
+/** Positions shown in the card; the rest are summed in "Outras N posições". */
+const PREVIEW_COUNT = 6;
 
 type Grouping = 'list' | 'byClass';
 type Sort = 'value' | 'share';
@@ -19,7 +27,11 @@ const SORT_LABEL: Record<Sort, string> = { value: 'Maior valor', share: '% da ca
 
 /** Positions grouped by class (mata band per class) or as a flat list, sortable. */
 export function PositionsCard() {
+  const router = useRouter();
   const { isTablet } = useBreakpoint();
+  const data = usePositions();
+  const [riskTarget, setRiskTarget] = useState<Position | null>(null);
+  const { shown, others } = previewPositions(data.positions, PREVIEW_COUNT);
   const [grouping, setGrouping] = useState<Grouping>('byClass');
   const [sort, setSort] = useState<Sort>('value');
 
@@ -29,7 +41,11 @@ export function PositionsCard() {
   const items = (positions: Position[]) => (
     <ResponsiveGrid columns={{ phone: 1, tablet: 2 }} gap={8} stretch={false}>
       {ordered(positions).map((position) => (
-        <PositionItem key={position.id} position={position} />
+        <PositionItem
+          key={position.id}
+          position={position}
+          onAdjustRisk={() => setRiskTarget(position)}
+        />
       ))}
     </ResponsiveGrid>
   );
@@ -37,12 +53,17 @@ export function PositionsCard() {
   return (
     <SectionCard
       title="Posições"
-      description={`${PORTFOLIO.positionsCount} posições`}
+      description={`${data.positions.length} posições`}
       titleSize={isTablet ? 20 : 18}
       padding={isTablet ? 20 : 16}
       gap={12}
       action={
-        <LinkButton label={`Ver as ${PORTFOLIO.positionsCount}`} size={15} className="min-h-6" />
+        <LinkButton
+          label={`Ver as ${data.positions.length}`}
+          size={15}
+          className="min-h-6"
+          onPress={() => router.navigate('/investments/positions')}
+        />
       }
     >
       <View className="flex-row flex-wrap items-center justify-between gap-2">
@@ -75,44 +96,34 @@ export function PositionsCard() {
         </Pressable>
       </View>
       {grouping === 'byClass'
-        ? POSITION_GROUPS.map((group) => (
-            <View key={group.label} className="gap-2">
-              <MataSurface
-                veil={[0.82, 0.55, 0.2]}
-                style={{ borderColor: colors.avatarRing }}
-                className="mt-1.5 flex-row items-baseline justify-between gap-2 rounded-14 border px-3.5 py-3"
-              >
-                <Text size={15} weight="bold" accessibilityRole="header">
-                  {group.label}
-                </Text>
-                <Text size={14} tone="soft" tabular>
-                  <MoneyText value={group.total} size={14} weight="bold" /> ·{' '}
-                  {group.share.toLocaleString('pt-BR', { minimumFractionDigits: 1 })}%
-                </Text>
-              </MataSurface>
+        ? groupPositions(shown).map((group) => (
+            <View key={group.key} className="gap-2">
+              <PositionClassBand label={group.label} total={group.total} share={group.share} />
               {items(group.positions)}
             </View>
           ))
-        : items(POSITION_GROUPS.flatMap((group) => group.positions))}
-      <View className="flex-row items-center justify-between gap-2 border-t border-border px-0.5 py-3">
-        <Text size={14} tone="muted">
-          Outras {OTHER_POSITIONS.count} posições
-        </Text>
-        <Text size={14} tone="muted" tabular>
-          <MoneyText value={OTHER_POSITIONS.total} size={14} weight="bold" /> ·{' '}
-          {OTHER_POSITIONS.share.toLocaleString('pt-BR')}%
-        </Text>
-      </View>
+        : items(shown)}
+      {others ? (
+        <View className="flex-row items-center justify-between gap-2 border-t border-border px-0.5 py-3">
+          <Text size={14} tone="muted">
+            Outras {others.count} posições
+          </Text>
+          <Text size={14} tone="muted" tabular>
+            <MoneyText value={others.total} size={14} weight="bold" /> · {shareText(others.share)}
+          </Text>
+        </View>
+      ) : null}
       <View className="flex-row items-baseline justify-between gap-2 border-t border-border-strong px-0.5 pt-3">
         <Text serif weight="bold" size={17}>
           Total da carteira
         </Text>
-        <MoneyText value={PORTFOLIO.total} serif weight="extrabold" size={20} />
+        <MoneyText value={data.total} serif weight="extrabold" size={20} />
       </View>
       <Text variant="caption" tone="muted">
         Toque numa posição para ver classe, instrumento, risco, quantidade e preço médio. O risco
         vem do cadastro do ativo (volatilidade, crédito e liquidez) e pode ser ajustado.
       </Text>
+      <RiskSheet target={riskTarget} onClose={() => setRiskTarget(null)} onChange={data.setRisk} />
     </SectionCard>
   );
 }

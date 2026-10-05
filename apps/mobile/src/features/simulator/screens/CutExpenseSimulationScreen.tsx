@@ -18,6 +18,7 @@ import {
   MilestoneList,
   PremisesCard,
   ResultCard,
+  SavedNotice,
   SimCard,
   SimulatorFrame,
   SliderField,
@@ -35,10 +36,12 @@ import {
   RESERVE,
   RETIREMENT_DEFAULTS,
 } from '../data';
+import { useSavedPremises } from '../hooks/useSavedPremises';
 import { simulateCut } from '../lib/cut';
 import { reais, signedReais, thousands, yearlyPercent } from '../lib/format';
 import { simulateGoal } from '../lib/goal';
 import { simulateRetirement } from '../lib/retirement';
+import { useSimulationsStore } from '../store';
 
 type Category = (typeof CUT_CATEGORIES)[number]['key'];
 type Destination = (typeof CUT_DESTINATIONS)[number]['key'];
@@ -50,10 +53,14 @@ const GOAL_INPUT = { ...GOAL_DEFAULTS, rate: GOAL_PLACES[0].monthlyRate };
 export function CutExpenseSimulationScreen() {
   const router = useRouter();
   const { isTablet } = useBreakpoint();
-  const [category, setCategory] = useState<Category>(CUT_DEFAULTS.category);
-  const [percent, setPercent] = useState<number>(CUT_DEFAULTS.percent);
-  const [rate, setRate] = useState<number>(CUT_DEFAULTS.rate);
-  const [destination, setDestination] = useState<Destination>(CUT_DEFAULTS.destination);
+  const opened = useSavedPremises('cut');
+  const initial = opened?.input ?? CUT_DEFAULTS;
+  const saveSimulation = useSimulationsStore((state) => state.save);
+  const [category, setCategory] = useState<Category>(initial.category);
+  const [percent, setPercent] = useState<number>(initial.percent);
+  const [rate, setRate] = useState<number>(initial.rate);
+  const [destination, setDestination] = useState<Destination>(initial.destination);
+  const notice = opened ? <SavedNotice simulation={opened.simulation} /> : null;
 
   const info = CUT_CATEGORIES.find((item) => item.key === category) ?? CUT_CATEGORIES[0];
   const result = simulateCut({ average: info.average, percent, rate });
@@ -120,7 +127,7 @@ export function CutExpenseSimulationScreen() {
 
   if (!result) {
     return (
-      <SimulatorFrame active="cut">
+      <SimulatorFrame active="cut" notice={notice}>
         <EmptyState
           icon="scissors"
           title="Sem histórico desse gasto"
@@ -177,7 +184,7 @@ export function CutExpenseSimulationScreen() {
   };
 
   return (
-    <SimulatorFrame active="cut">
+    <SimulatorFrame active="cut" notice={notice}>
       <ResultCard
         title="O que esse corte vira"
         subtitle="Economia investida todo mês, em valores de hoje"
@@ -238,7 +245,16 @@ export function CutExpenseSimulationScreen() {
               variant="secondary"
               size="md"
               className="px-4.5"
-              onPress={() => toast.success('Simulação salva')}
+              onPress={() => {
+                saveSimulation(`Cortar ${info.name}`, {
+                  kind: 'cut',
+                  category,
+                  percent,
+                  rate,
+                  destination,
+                });
+                toast.success('Simulação salva');
+              }}
             >
               Salvar
             </Button>

@@ -111,7 +111,7 @@ apps/mobile/
 packages/
   types/               schemas zod de domínio + tipos inferidos + contrato da API (src/api)
   ui-tokens/           tokens de design (tema escuro)
-  utils/               funções puras e testadas (money, date, percent, decimal, empty)
+  utils/               funções puras e testadas (money, date, percent, decimal, empty, text)
   tsconfig/            base.json, react-native.json
   eslint-config/       base (TS puro) e expo (app)
 ```
