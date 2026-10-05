@@ -1,18 +1,7 @@
 import type { IconName } from '@/components/ui/Icon';
 import type { NoticeKind } from '@/stores/ui-preferences';
 
-/** Signed-in user as shown in the design (static until the API exists). */
-export const CURRENT_USER = {
-  name: 'Arthur',
-  initials: 'AR',
-  email: 'arthur@exemplo.com',
-  banksAllowed: 3,
-} as const;
-
-export const INVESTOR_PROFILE = {
-  name: 'Moderado',
-  answered: 'Respondido em 23 set 2026 · vale só para Investimentos',
-} as const;
+export { CURRENT_USER } from '@/constants/current-user';
 
 export const NOTICE_KINDS: { key: NoticeKind; label: string }[] = [
   { key: 'budgets', label: 'Tetos de gasto' },

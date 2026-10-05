@@ -1,7 +1,6 @@
 import { act, fireEvent, render, screen } from '@testing-library/react-native';
 
 import { toast } from '@/components/feedback';
-import { InvestorProfileScreen } from '@/features/account';
 
 import { CONNECTING_STEP_MS, CONNECTING_STEPS } from '../hooks/useMalvoFlow';
 import { ConnectBankScreen, MalvoScreen } from '../screens';
@@ -130,16 +129,5 @@ describe('Conectar banco pelo Malvo', () => {
     fireEvent.press(screen.getByRole('button', { name: 'Continuar usando o app' }));
     expect(info).toHaveBeenCalledWith('Avisamos quando o C6 Bank terminar de conectar.');
     expect(useBankConnectionsStore.getState().connections.map((item) => item.id)).toContain('c6');
-  });
-});
-
-describe('Perfil de investidor (from Meu perfil)', () => {
-  it('saves a new answer', () => {
-    const success = jest.spyOn(toast, 'success');
-    render(<InvestorProfileScreen />);
-    fireEvent.press(screen.getByText('Venderia uma parte'));
-    fireEvent.press(screen.getByRole('button', { name: 'Salvar perfil' }));
-    expect(success).toHaveBeenCalledWith('Perfil de investidor atualizado');
-    expect(mockBack).toHaveBeenCalled();
   });
 });

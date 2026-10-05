@@ -1,26 +1,44 @@
+import type { InvestorProfileOption } from '@guara/types';
 import { View } from 'react-native';
 
 import { Disclosure, RadioGroup, Text } from '@/components/ui';
 import { useBreakpoint } from '@/hooks/useBreakpoint';
 
-import { RISK_QUESTION, type RiskAnswer } from '../data';
+import type { ProfileQuestion } from '../data';
+
+export interface ProfileQuestionViewProps {
+  question: ProfileQuestion;
+  /** 1-based position ("Pergunta 3 de 6"). */
+  index: number;
+  total: number;
+  /** Line under the counter ("Mesmas 6 perguntas do início · leva 2 minutos"). */
+  hint?: string;
+  answer: InvestorProfileOption | null;
+  onChange: (answer: InvestorProfileOption) => void;
+}
 
 /** One question of the investor profile and why it is asked. */
-export function RiskQuestion({
+export function ProfileQuestionView({
+  question,
+  index,
+  total,
+  hint,
   answer,
   onChange,
-}: {
-  answer: RiskAnswer | null;
-  onChange: (answer: RiskAnswer) => void;
-}) {
+}: ProfileQuestionViewProps) {
   const { isTablet } = useBreakpoint();
   return (
     <>
       <View className="gap-2.5">
         <View className="mb-4 gap-2">
           <Text variant="caption" tone="subtle">
-            Pergunta {RISK_QUESTION.index} de {RISK_QUESTION.total}
+            Pergunta {index} de {total}
           </Text>
+          {hint ? (
+            <Text variant="caption" tone="subtle">
+              {hint}
+            </Text>
+          ) : null}
           <Text
             serif
             weight={isTablet ? 'extrabold' : 'bold'}
@@ -29,20 +47,19 @@ export function RiskQuestion({
             tracking={-0.01}
             accessibilityRole="header"
           >
-            {RISK_QUESTION.title}
+            {question.title}
           </Text>
         </View>
         <RadioGroup
-          options={RISK_QUESTION.options}
+          options={question.options.map((option) => ({ value: option.id, label: option.label }))}
           value={answer}
           onChange={onChange}
-          accessibilityLabel={RISK_QUESTION.title}
+          accessibilityLabel={question.title}
         />
       </View>
       <Disclosure title="Por que perguntamos isso?" defaultOpen>
         <Text size={14} leading={1.6} tone="muted">
-          Seu perfil ajuda a montar simulações que combinam com você. Ele vale só para Investimentos
-          e pode ser refeito quando quiser em Meu perfil.
+          {question.why}
         </Text>
       </Disclosure>
     </>

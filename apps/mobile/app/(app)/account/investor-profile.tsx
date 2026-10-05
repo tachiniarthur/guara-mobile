@@ -1,3 +1,3 @@
-import { InvestorProfileScreen } from '@/features/account';
+import { RedoProfileScreen } from '@/features/investor-profile';
 
-export default InvestorProfileScreen;
+export default RedoProfileScreen;

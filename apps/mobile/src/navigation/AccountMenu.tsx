@@ -5,7 +5,7 @@ import { Modal, Pressable, View } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 import { Avatar, CountBadge, Icon, Text } from '@/components/ui';
-import { CURRENT_USER } from '@/features/account';
+import { CURRENT_USER } from '@/constants/current-user';
 import { PLAN, useBankConnectionsStore } from '@/features/bank-connections';
 import { haptics } from '@/lib/haptics';
 

@@ -5,7 +5,7 @@ import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 import { LogoMark } from '@/components/brand';
 import { Avatar, Icon, Text } from '@/components/ui';
-import { CURRENT_USER } from '@/features/account';
+import { CURRENT_USER } from '@/constants/current-user';
 import { ASSISTANT_ORDER, ASSISTANTS, AssistantAvatar } from '@/features/chat';
 import { cn } from '@/lib/cn';
 import { haptics } from '@/lib/haptics';

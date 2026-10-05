@@ -115,7 +115,7 @@ implementada.
 | `Conectar-Bancos` · onboarding 1                                                         | M T D    | `(onboarding)/connect-banks`; fora do onboarding `/connect-bank`  |
 | `Perfil-Investidor` · onboarding 2                                                       | M T D    | `(onboarding)/investor-profile`; fora `/account/investor-profile` |
 | `Agentes-Avisos` · onboarding 3                                                          | M T D    | `(onboarding)/assistants`                                         |
-| `Perfil-Investidor-P1`, `-P2`, `-P4`, `-P5`, `-P6`, `-Resultado` · questionário completo | M T      | —                                                                 |
+| `Perfil-Investidor-P1`, `-P2`, `-P4`, `-P5`, `-P6`, `-Resultado` · questionário completo | M T      | `(onboarding)/investor-profile` (as 6 perguntas e o resultado)    |
 | `Malvo-Autorizar`, `-Conectando`, `-Sucesso`, `-Erro` · conexão pelo Malvo               | M T      | `(onboarding)/connect/[bankId]`; no app `/malvo/[bankId]`         |
 | `Termos`, `Privacidade`                                                                  | M T      | —                                                                 |
 
@@ -149,7 +149,7 @@ implementada.
 | `Bem-Imovel`, `Bem-Veiculo`, `Bem-Imovel-Detalhe`, `Bem-Veiculo-Detalhe`                            | M T      | `/new-property`, `/new-vehicle`, `/investments/properties/[propertyId]`               |
 | `Meu-Perfil`                                                                                        | M T D    | `/account`                                                                            |
 | `Editar-Perfil`, `Editar-Perfil-Email`                                                              | M T      | `/account/profile`                                                                    |
-| `Perfil-Refazer`, `Perfil-Refazer-Resultado`                                                        | M T      | —                                                                                     |
+| `Perfil-Refazer`, `Perfil-Refazer-Resultado`                                                        | M T      | `/account/investor-profile`                                                           |
 | `Planos`                                                                                            | M T      | `/account/plan`                                                                       |
 | `Malvo-Renovar` · renovar autorização do banco                                                      | M T      | `/malvo/[bankId]?mode=renew`                                                          |
 | `Inicio-Novo`, `Gastos-Novo`, `Investimentos-Novo` · usuário sem banco                              | M T      | —                                                                                     |

@@ -59,7 +59,7 @@ const APP_ROUTES: RouteCase[] = [
   ['/account/profile', 'Perfil', null],
   ['/account/banks', 'Bancos conectados', null],
   ['/account/banks/conn-1', 'Conexão bancária', 'conn-1'],
-  ['/account/investor-profile', 'Perfil de investidor', null],
+  ['/account/investor-profile', 'Refazer perfil', null],
   ['/account/notification-channels', 'Canais de aviso', null],
   ['/account/plan', 'Plano', null],
   ['/connect-bank', 'Conectar bancos', null],

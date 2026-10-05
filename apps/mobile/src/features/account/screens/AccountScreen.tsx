@@ -1,4 +1,5 @@
 import { colors } from '@guara/ui-tokens';
+import { formatDate } from '@guara/utils';
 import { useRouter } from 'expo-router';
 import { useState, type ReactNode } from 'react';
 import { Pressable, View } from 'react-native';
@@ -23,9 +24,10 @@ import { cn } from '@/lib/cn';
 import { useUiPreferences, type TextSize } from '@/stores/ui-preferences';
 
 import { PLAN, useBankConnectionsStore, type BankConnection } from '@/features/bank-connections';
+import { PROFILE_LABELS, useInvestorProfileStore } from '@/features/investor-profile';
 
 import { BankConnectionCard } from '../components';
-import { CURRENT_USER, DEVICES, INVESTOR_PROFILE, NOTICE_KINDS } from '../data';
+import { CURRENT_USER, DEVICES, NOTICE_KINDS } from '../data';
 
 const TEXT_SIZES: { value: TextSize; label: string }[] = [
   { value: 'default', label: 'Padrão' },
@@ -96,6 +98,7 @@ export function AccountScreen() {
   const { isTablet } = useBreakpoint();
   const preferences = useUiPreferences();
   const banks = useBankConnectionsStore((state) => state.connections);
+  const investorProfile = useInvestorProfileStore((state) => state.profile);
   const disconnect = useBankConnectionsStore((state) => state.disconnect);
   const [scopesOf, setScopesOf] = useState<BankConnection | null>(null);
   const [dialog, setDialog] = useState<Dialog>(null);
@@ -128,7 +131,7 @@ export function AccountScreen() {
     </MataSurface>
   );
 
-  const investorProfile = (
+  const investorProfileCard = (
     <SettingsCard title="Perfil de investidor">
       <View className="flex-row items-center gap-3">
         <View className="h-10 w-10 items-center justify-center rounded-12 bg-info-muted">
@@ -136,10 +139,10 @@ export function AccountScreen() {
         </View>
         <View className="flex-1">
           <Text weight="bold" leading={1.35}>
-            {INVESTOR_PROFILE.name}
+            {PROFILE_LABELS[investorProfile.type]}
           </Text>
           <Text size={13} tone="subtle" leading={1.35}>
-            {INVESTOR_PROFILE.answered}
+            {`Respondido em ${formatDate(investorProfile.answeredOn, 'd MMM yyyy')} · vale só para Investimentos`}
           </Text>
         </View>
       </View>
@@ -396,7 +399,7 @@ export function AccountScreen() {
             <View className="flex-row gap-4">
               <View className="min-w-0 flex-1 gap-4">
                 {hero}
-                {investorProfile}
+                {investorProfileCard}
                 {appearance}
               </View>
               <View className="min-w-0 flex-1 gap-4">
@@ -409,7 +412,7 @@ export function AccountScreen() {
         ) : (
           <>
             {hero}
-            {investorProfile}
+            {investorProfileCard}
             {banksCard}
             {notifications}
             {appearance}

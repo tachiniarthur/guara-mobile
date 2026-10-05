@@ -9,7 +9,7 @@ import { CapBarChart, DashedLine, LegendSwatch } from '@/components/charts';
 import { toast } from '@/components/feedback';
 import { FormScreen, ResponsiveGrid, SectionCard } from '@/components/layout';
 import { Checkbox, MoneyInput, SelectField, Text } from '@/components/ui';
-import { CURRENT_USER } from '@/features/account';
+import { CURRENT_USER } from '@/constants/current-user';
 import { useBreakpoint } from '@/hooks/useBreakpoint';
 
 import { BudgetMilestoneBar, MilestoneInputs } from '../components';
