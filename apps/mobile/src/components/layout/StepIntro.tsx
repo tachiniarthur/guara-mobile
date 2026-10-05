@@ -1,6 +1,6 @@
 import { View } from 'react-native';
 
-import { Text } from '@/components/ui';
+import { Text } from '@/components/ui/Text';
 import { useBreakpoint } from '@/hooks/useBreakpoint';
 
 export interface StepIntroProps {
@@ -10,7 +10,7 @@ export interface StepIntroProps {
   phoneSize?: number;
 }
 
-/** Fraunces title + intro paragraph of an onboarding step. */
+/** Fraunces title + intro paragraph (onboarding steps, Conectar bancos). */
 export function StepIntro({ title, description, phoneSize = 26 }: StepIntroProps) {
   const { isTablet } = useBreakpoint();
   return (

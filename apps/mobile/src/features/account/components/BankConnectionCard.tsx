@@ -1,10 +1,11 @@
 import { colors } from '@guara/ui-tokens';
+import { formatDate } from '@guara/utils';
 import { View } from 'react-native';
 
 import { Button, Icon, Span, Text } from '@/components/ui';
 import { cn } from '@/lib/cn';
 
-import type { BankConnection } from '../data';
+import type { BankConnection } from '@/features/bank-connections';
 
 export interface BankConnectionCardProps {
   bank: BankConnection;
@@ -65,9 +66,10 @@ export function BankConnectionCard({
         <Text size={13} className="flex-1">
           {expiring ? (
             <>
-              A autorização termina em <Span weight="bold">{bank.expiresOn}</Span>. Depois disso,
-              gastos e saldo do {bank.name} param de atualizar. Renovar leva 1 minuto no app do
-              banco.
+              A autorização termina em{' '}
+              <Span weight="bold">{formatDate(bank.authorizedUntil, "d 'de' MMMM")}</Span>. Depois
+              disso, gastos e saldo do {bank.name} param de atualizar. Renovar leva 1 minuto no app
+              do banco.
             </>
           ) : (
             `Tudo certo. Seus gastos e saldo do ${bank.name} chegam sozinhos, várias vezes ao dia. Não precisa fazer nada.`
@@ -102,7 +104,7 @@ export function BankConnectionCard({
             Autorização até
           </Text>
           <Text size={13} weight="semibold" tone={expiring ? 'warning' : 'default'}>
-            {bank.authorizedUntil}
+            {formatDate(bank.authorizedUntil)}
           </Text>
         </View>
       </View>

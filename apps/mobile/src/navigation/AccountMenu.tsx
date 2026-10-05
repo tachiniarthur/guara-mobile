@@ -5,7 +5,8 @@ import { Modal, Pressable, View } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 import { Avatar, CountBadge, Icon, Text } from '@/components/ui';
-import { banksConnectedLabel, CURRENT_USER } from '@/features/account';
+import { CURRENT_USER } from '@/features/account';
+import { PLAN, useBankConnectionsStore } from '@/features/bank-connections';
 import { haptics } from '@/lib/haptics';
 
 import { ACCOUNT_MENU } from './destinations';
@@ -15,6 +16,7 @@ export function AccountMenuButton() {
   const [open, setOpen] = useState(false);
   const router = useRouter();
   const insets = useSafeAreaInsets();
+  const banks = useBankConnectionsStore((state) => state.connections.length);
 
   return (
     <>
@@ -64,7 +66,7 @@ export function AccountMenuButton() {
                 {CURRENT_USER.name}
               </Text>
               <Text variant="caption" tone="subtle" leading={1.3}>
-                {banksConnectedLabel}
+                {`${banks} de ${PLAN.bankLimit} bancos conectados`}
               </Text>
             </View>
           </View>

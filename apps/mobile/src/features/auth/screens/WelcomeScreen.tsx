@@ -2,7 +2,8 @@ import { useState } from 'react';
 import { View } from 'react-native';
 
 import { Button, Divider, InfoNote, Input, Span, Text } from '@/components/ui';
-import { OnboardingFrame, StepIntro } from '@/features/onboarding';
+import { StepIntro } from '@/components/layout';
+import { OnboardingFrame } from '@/features/onboarding';
 import { useAuth } from '@/providers';
 
 /** Boas-vindas e criação de conta (Google, Apple ou e-mail). */

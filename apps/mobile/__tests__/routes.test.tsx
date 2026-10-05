@@ -17,6 +17,7 @@ const AUTH_ROUTES: RouteCase[] = [
 
 const ONBOARDING_ROUTES: RouteCase[] = [
   ['/connect-banks', 'Conecte seus bancos', null],
+  ['/connect/bradesco', 'Conectar Bradesco', null],
   ['/investor-profile', 'Perfil de investidor', null],
   ['/assistants', 'Conheça seus assistentes', null],
 ];
@@ -62,6 +63,8 @@ const APP_ROUTES: RouteCase[] = [
   ['/account/notification-channels', 'Canais de aviso', null],
   ['/account/plan', 'Plano', null],
   ['/connect-bank', 'Conectar bancos', null],
+  ['/malvo/bradesco', 'Conectar Bradesco', null],
+  ['/malvo/itau?mode=renew', 'Renovar autorização do Itaú', null],
   ['/new-budget', 'Novo teto de gasto', null],
   ['/new-price-alert', 'Novo alerta de preço', null],
   ['/new-manual-asset', 'Adicionar investimento', null],

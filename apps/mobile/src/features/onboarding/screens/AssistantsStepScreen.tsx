@@ -2,12 +2,12 @@ import { useRouter } from 'expo-router';
 import { useState } from 'react';
 import { View } from 'react-native';
 
-import { ResponsiveGrid } from '@/components/layout';
+import { ResponsiveGrid, StepIntro } from '@/components/layout';
 import { Button, Checkbox, Text } from '@/components/ui';
 import { ASSISTANTS, AssistantAvatar, ONBOARDING_ASSISTANT_ORDER } from '@/features/chat';
 import { useAuth } from '@/providers';
 
-import { OnboardingFrame, StepIntro, StepProgress } from '../components';
+import { OnboardingFrame, StepProgress } from '../components';
 
 /** Onboarding 3 · Assistentes e avisos. */
 export function AssistantsStepScreen() {

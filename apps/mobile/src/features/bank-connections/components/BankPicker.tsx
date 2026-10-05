@@ -4,42 +4,40 @@ import { toast } from '@/components/feedback';
 import { ResponsiveGrid } from '@/components/layout';
 import { SearchInput, Span, Text } from '@/components/ui';
 
-import { ONBOARDING_BANKS, PLAN_BANK_LIMIT } from '../data';
+import { PLAN, SUPPORTED_BANKS, type BankOptionData } from '../data';
 
 import { AccessList } from './AccessList';
 import { BankOption } from './BankOption';
 
 export interface BankPickerProps {
-  connected: string[];
-  onChange: (connected: string[]) => void;
-  /** Banks that are already connected and can only be removed in Meu perfil. */
-  locked?: readonly string[];
-  /** Text after "1 de 3" ("bancos do plano …"). */
+  /** Ids of the banks already connected. */
+  connected: readonly string[];
+  /** A bank that is not connected yet was chosen (opens the Malvo). */
+  onConnect: (bank: BankOptionData) => void;
+  /** Said when a connected bank is tapped ("Para desconectar, use Meu perfil."). */
+  connectedHint?: string;
+  /** Text after "2 de 3" ("bancos do plano Completo…"). */
   planLabel: string;
 }
 
 /** Search, bank grid (connect up to the plan limit), plan usage and what the Guará reads. */
-export function BankPicker({ connected, onChange, locked = [], planLabel }: BankPickerProps) {
+export function BankPicker({ connected, onConnect, connectedHint, planLabel }: BankPickerProps) {
   const [query, setQuery] = useState('');
   const normalized = query.trim().toLocaleLowerCase('pt-BR');
-  const banks = ONBOARDING_BANKS.filter((bank) =>
+  const banks = SUPPORTED_BANKS.filter((bank) =>
     bank.name.toLocaleLowerCase('pt-BR').includes(normalized),
   );
 
-  const toggle = (id: string, name: string) => {
-    if (locked.includes(id)) {
-      toast.info(`${name} já está conectado. Para desconectar, use Meu perfil.`);
+  const choose = (bank: BankOptionData) => {
+    if (connected.includes(bank.id)) {
+      toast.info(`${bank.name} já está conectado.${connectedHint ? ` ${connectedHint}` : ''}`);
       return;
     }
-    if (connected.includes(id)) {
-      onChange(connected.filter((item) => item !== id));
+    if (connected.length >= PLAN.bankLimit) {
+      toast.info(`Seu plano permite ${PLAN.bankLimit} bancos.`);
       return;
     }
-    if (connected.length >= PLAN_BANK_LIMIT) {
-      toast.info(`Seu plano permite ${PLAN_BANK_LIMIT} bancos.`);
-      return;
-    }
-    onChange([...connected, id]);
+    onConnect(bank);
   };
 
   return (
@@ -57,13 +55,13 @@ export function BankPicker({ connected, onChange, locked = [], planLabel }: Bank
             name={bank.name}
             mark={bank.mark}
             connected={connected.includes(bank.id)}
-            onPress={() => toggle(bank.id, bank.name)}
+            onPress={() => choose(bank)}
           />
         ))}
       </ResponsiveGrid>
       <Text size={14} tone="muted">
         <Span weight="bold" tone="default">
-          {connected.length} de {PLAN_BANK_LIMIT}
+          {connected.length} de {PLAN.bankLimit}
         </Span>{' '}
         {planLabel}
       </Text>

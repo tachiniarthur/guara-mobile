@@ -10,3 +10,4 @@ export * from './Section';
 export * from './SectionCard';
 export * from './StickyFooter';
 export * from './TopBar';
+export * from './StepIntro';

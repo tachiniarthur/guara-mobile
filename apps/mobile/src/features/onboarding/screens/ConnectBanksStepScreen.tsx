@@ -1,15 +1,16 @@
 import { useRouter } from 'expo-router';
-import { useState } from 'react';
 import { View } from 'react-native';
 
+import { StepIntro } from '@/components/layout';
 import { Button } from '@/components/ui';
+import { BankPicker, PLAN, useBankConnectionsStore } from '@/features/bank-connections';
 
-import { BankPicker, OnboardingFrame, StepIntro, StepProgress } from '../components';
+import { OnboardingFrame, StepProgress } from '../components';
 
 /** Onboarding 1 · Conectar bancos (Open Finance). */
 export function ConnectBanksStepScreen() {
   const router = useRouter();
-  const [connected, setConnected] = useState<string[]>(['nubank']);
+  const connections = useBankConnectionsStore((state) => state.connections);
 
   const next = () => router.push('/investor-profile');
 
@@ -42,9 +43,11 @@ export function ConnectBanksStepScreen() {
         description="Pelo Open Finance, via Malvo. Você autoriza no app do banco e revoga quando quiser."
       />
       <BankPicker
-        connected={connected}
-        onChange={setConnected}
-        planLabel="bancos do plano [NOME DO PLANO]. Dá para conectar mais depois."
+        connected={connections.map((item) => item.id)}
+        onConnect={(bank) =>
+          router.push({ pathname: '/connect/[bankId]', params: { bankId: bank.id } })
+        }
+        planLabel={`bancos do plano ${PLAN.name}. Dá para conectar mais depois.`}
       />
     </OnboardingFrame>
   );

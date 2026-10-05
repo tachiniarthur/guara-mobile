@@ -22,15 +22,10 @@ import { useBreakpoint } from '@/hooks/useBreakpoint';
 import { cn } from '@/lib/cn';
 import { useUiPreferences, type TextSize } from '@/stores/ui-preferences';
 
+import { useBankConnectionsStore, type BankConnection } from '@/features/bank-connections';
+
 import { BankConnectionCard } from '../components';
-import {
-  BANK_CONNECTIONS,
-  CURRENT_USER,
-  DEVICES,
-  INVESTOR_PROFILE,
-  NOTICE_KINDS,
-  type BankConnection,
-} from '../data';
+import { CURRENT_USER, DEVICES, INVESTOR_PROFILE, NOTICE_KINDS } from '../data';
 
 const TEXT_SIZES: { value: TextSize; label: string }[] = [
   { value: 'default', label: 'Padrão' },
@@ -100,7 +95,8 @@ export function AccountScreen() {
   const router = useRouter();
   const { isTablet } = useBreakpoint();
   const preferences = useUiPreferences();
-  const [banks, setBanks] = useState(BANK_CONNECTIONS);
+  const banks = useBankConnectionsStore((state) => state.connections);
+  const disconnect = useBankConnectionsStore((state) => state.disconnect);
   const [scopesOf, setScopesOf] = useState<BankConnection | null>(null);
   const [dialog, setDialog] = useState<Dialog>(null);
   const free = CURRENT_USER.banksAllowed - banks.length;
@@ -285,7 +281,12 @@ export function AccountScreen() {
       key={bank.id}
       bank={bank}
       onRefresh={() => toast.success(`${bank.name} atualizado`)}
-      onRenew={() => router.navigate('/connect-bank')}
+      onRenew={() =>
+        router.navigate({
+          pathname: '/malvo/[bankId]',
+          params: { bankId: bank.id, mode: 'renew' },
+        })
+      }
       onShowScopes={() => setScopesOf(bank)}
       onDisconnect={() => setDialog({ kind: 'disconnect', bank })}
     />
@@ -373,7 +374,7 @@ export function AccountScreen() {
   const confirm = () => {
     if (dialog?.kind === 'disconnect') {
       const { bank } = dialog;
-      setBanks((current) => current.filter((item) => item.id !== bank.id));
+      disconnect(bank.id);
       toast.success(`${bank.name} desconectado`);
     } else if (dialog?.kind === 'signOutAll') {
       toast.success('Os outros aparelhos foram desconectados');

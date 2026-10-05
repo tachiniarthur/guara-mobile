@@ -7,13 +7,14 @@ import { cn } from '@/lib/cn';
 import { Icon, type IconName } from './Icon';
 import { Text } from './Text';
 
-export type InfoNoteTone = 'neutral' | 'warning' | 'positive' | 'negative' | 'plain';
+export type InfoNoteTone = 'neutral' | 'warning' | 'positive' | 'negative' | 'info' | 'plain';
 
 const BOX: Record<InfoNoteTone, string> = {
   neutral: 'rounded-16 bg-surface-muted p-3.5',
   warning: 'rounded-14 bg-warning-muted px-3.5 py-3',
   positive: 'rounded-14 bg-positive-muted px-3.5 py-3',
   negative: 'rounded-14 bg-negative-muted px-3.5 py-3',
+  info: 'rounded-14 bg-info-muted px-3.5 py-3',
   plain: '',
 };
 
@@ -22,6 +23,7 @@ const ICON_COLOR: Record<InfoNoteTone, string> = {
   warning: colors.warning.DEFAULT,
   positive: colors.positive.DEFAULT,
   negative: colors.negative.DEFAULT,
+  info: colors.info.DEFAULT,
   plain: colors.brand.DEFAULT,
 };
 
