@@ -1,3 +1,4 @@
+import { useRouter } from 'expo-router';
 import { useState } from 'react';
 import { View } from 'react-native';
 
@@ -8,6 +9,7 @@ import { useAuth } from '@/providers';
 
 /** Boas-vindas e criação de conta (Google, Apple ou e-mail). */
 export function WelcomeScreen() {
+  const router = useRouter();
   const { setStatus } = useAuth();
   const [email, setEmail] = useState('');
 
@@ -66,11 +68,21 @@ export function WelcomeScreen() {
       </Text>
       <Text variant="caption" tone="subtle" align="center">
         Ao continuar, você aceita os{' '}
-        <Span tone="muted" underline accessibilityRole="link">
+        <Span
+          tone="muted"
+          underline
+          accessibilityRole="link"
+          onPress={() => router.navigate('/terms')}
+        >
           Termos de uso
         </Span>{' '}
         e a{' '}
-        <Span tone="muted" underline accessibilityRole="link">
+        <Span
+          tone="muted"
+          underline
+          accessibilityRole="link"
+          onPress={() => router.navigate('/privacy')}
+        >
           Política de privacidade
         </Span>
         .

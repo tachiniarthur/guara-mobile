@@ -1,7 +1,7 @@
 # Design oficial do Guará
 
 Cópia do artefato de design ("Guará · Design do app",
-<https://claude.ai/artifact/JQTwTAjHXMBuJZeTCvBZcc>, versão `1791208084-7b23`). É a **fonte da
+<https://claude.ai/artifact/JQTwTAjHXMBuJZeTCvBZcc>, versão `1791220150-f1a1`). É a **fonte da
 verdade visual** do app: espaçamentos, tamanhos, textos, estados e comportamento.
 
 ```
@@ -26,57 +26,74 @@ docs/design/
 **Princípios:** turma, não robô (cada resposta tem um bicho com nome e jeito); calor de mata (escuro
 verde, luz de tucano); claro antes de bonito (número legível, rótulo escrito, um assunto por tela).
 
-**Cor** — um só tema, escuro. Ganho e perda nunca dependem só da cor: sempre têm sinal, rótulo ou
-seta. Os valores estão em `@guara/ui-tokens` (`colors.ts`).
+**Cor** — um só tema, escuro. Tucano marca a ação que conclui ou cria; Areia marca o que está
+selecionado; Urucum é o alerta. Ganho e perda nunca dependem só da cor: sempre têm sinal, rótulo ou
+seta. Valores em `@guara/ui-tokens` (`colors.ts`).
 
-| Nome         | Uso                                          |
-| ------------ | -------------------------------------------- |
-| Mata à noite | fundo do app                                 |
-| Folha escura | cards e painéis                              |
-| Sombra       | elevado, bolhas, trilhos                     |
-| Musgo        | bordas e divisórias                          |
-| Líquen       | borda de campo e botão contorno              |
-| Areia        | texto principal                              |
-| Névoa        | texto de apoio                               |
-| Seriema      | legendas e metadados (nunca abaixo de 12 px) |
-| Tucano       | ação principal, atenção, bolha do usuário    |
-| Urucum       | alerta, fora do padrão, apertado             |
-| Folha        | ganho, tranquilo, compra                     |
-| Arara-azul   | dados, entradas, gráficos                    |
-| Mata         | destaque do saldo (hero)                     |
+| Nome                                      | Uso                                                         |
+| ----------------------------------------- | ----------------------------------------------------------- |
+| Mata à noite                              | fundo do app                                                |
+| Folha escura                              | cards e painéis                                             |
+| Sombra                                    | elevado, bolhas, trilhos, avisos neutros                    |
+| Campo                                     | inputs, itens de lista, trilho do segmentado (borda Líquen) |
+| Musgo / Líquen                            | divisórias / borda de campo e botão contorno                |
+| Areia / Névoa / Seriema                   | texto principal / apoio / legendas (nunca abaixo de 12 px)  |
+| Névoa clara                               | texto de apoio só sobre a textura de mata                   |
+| Tucano, Urucum, Folha, Arara-azul         | ação principal, alerta, ganho, dados                        |
+| Folha funda, Tucano, Urucum e Arara fundo | fundos de status com o texto da cor por cima                |
+| Mata                                      | destaque do saldo e superfícies com textura                 |
 
-**Estados do mês** — sempre com palavra e porcentagem:
+**Botões** — Amarelo: a ação que conclui ou cria (uma por tela). Mata: criar algo importante (Nova
+conversa, Nova meta, Conectar banco). Areia: avançar etapas do questionário e item ativo em menus e
+filtros. Contorno: secundárias. Texto: cancelar. Urucum: excluir e desconectar. Altura 52 no rodapé
+fixo e no onboarding, 44–48 no conteúdo, 40 dentro de cards.
 
-- **Tranquilo:** até 69% dos tetos e nenhuma compra suspeita.
-- **Atenção:** algum teto entre 70% e 84%, ou alerta a confirmar.
-- **Apertado:** algum teto a partir de 85% ou compra fora do padrão.
+**Tipografia** — Fraunces para números e títulos, Figtree para o resto; números tabulares.
 
-**Tipografia** — Fraunces para números e títulos, Figtree para ler e tocar; números tabulares.
+| Uso                                   | Fonte e tamanho                                         |
+| ------------------------------------- | ------------------------------------------------------- |
+| Saldo e patrimônio (número-herói)     | Fraunces 800 · 34–38                                    |
+| Título de página                      | Fraunces 800 · 28 tablet · 24–26 formulários no celular |
+| Título de card                        | Fraunces 700 · 20 tablet · 17–18 celular                |
+| Título da barra do celular            | Figtree 700 · 16                                        |
+| Chat e campos                         | Figtree 400 · 16/26                                     |
+| Leitura e listas                      | Figtree 400 · 14–15                                     |
+| Botões, rótulos e títulos de linha    | Figtree 700 · 14–15                                     |
+| Apoio, metadados e etiquetas          | Figtree 400–700 · 12–13                                 |
+| Rótulos do trilho do tablet (exceção) | Figtree 600 · 11                                        |
 
-| Uso                   | Fonte e tamanho                          |
-| --------------------- | ---------------------------------------- |
-| Saldos, números-herói | Fraunces 800 · 44–50                     |
-| Título de página      | Fraunces 800 · 32–44                     |
-| Título de card        | Fraunces 700 · 20–22                     |
-| Texto e chat          | Figtree 400 · 16/26 (mín. 16 no celular) |
-| Botões e rótulos      | Figtree 700 · 14–15                      |
-| Apoio                 | Figtree 400 · 12–13                      |
+**Componentes** — tocável é pílula, alvo ≥ 44 px, foco Tucano de 3 px, ícone sozinho com nome
+acessível.
 
-**Identidade** — fauna só nos assistentes e no chat. Curvas de nível só no card do saldo. Cenas da
-turma no topo de alertas e cards da turma. Textura de mata só em três lugares: cartão do usuário,
-botão "Nova conversa" e faixas de classe nas posições. Logo: lobo-guará no círculo verde-mata, com o
-nome em Fraunces 800 (no trilho do tablet, só o lobo).
+- Campos: rótulo 14/700 acima, campo 52 (Campo + borda Líquen), dinheiro 64 px Fraunces 800 raio
+  16, ajuda 13 px Seriema.
+- Filtros: segmentado para trocar a visão, chips para filtrar, pílula de menu para período e ordem,
+  opções do questionário em cards de 60 px.
+- Etiquetas 24 px, 12/700, recuo 10; avisos com ícone, 13 px, raio 14. Cor sempre com palavra ou
+  ícone.
+- Listas: título 15/500 e meta 12, valor à direita tabular; estatística em bloco Campo raio 16; barra
+  de teto 10 px com marcas dos avisos.
+- Assistentes só no chat e em caixas onde eles falam; retrato com anel do bioma e nome escrito.
+- Toda lista ou ação de rede tem estado vazio e de erro; dado ausente é "—", nunca zero.
+- Painéis: celular sobe de baixo com alça; tablet é diálogo centralizado ou menu sob o botão; fundo
+  escurecido a 72%.
 
-**Componentes** — tudo que é tocável é pílula, com alvo ≥ 44 px; foco visível em tucano (3 px);
-ícone sozinho sempre tem nome acessível. Avatar da turma é retrato com anel na cor do bioma, sempre
-com o nome escrito ao lado.
+**Textura de mata** — só para marcar o que é importante: cartão do usuário, botões de criar (Nova
+conversa, Nova meta, Conectar banco), faixas de classe e topo do onboarding. O tucano e as folhas
+ilustradas saíram do app.
 
-**Responsividade** — mesmas funções nos três formatos; muda o arranjo (tabela vira cartão, colunas
-viram abas), nunca o que o usuário consegue fazer.
+**Formatos** — mesmas funções nos três; muda o arranjo, nunca a função.
 
-- Celular: barra inferior (Início, Gastos, Conversar, Investir, Assistentes); Assinaturas,
-  Simulador, Relatórios, Alertas e Meu perfil no menu do avatar.
-- Tablet: trilho lateral de 88 px; botão Conversar flutuante; chat em tela própria com histórico.
+- Celular (393): barra superior 60, barra inferior 84 (Conversar amarelo no centro), margem 16 e 16
+  entre cards; formulários com fechar no topo e ação fixa embaixo; tabelas viram cartões.
+- Tablet (820 / 1180 no Relatório): trilho de 88 (logo, 7 destinos, a turma e o avatar), margem 28 e
+  20 entre cards, Conversar flutuante; formulários com trilha, título, card e ações à direita;
+  onboarding com topo de mata e card de 600.
+
+**Composição** — cards da mesma linha com a mesma altura; nada de card grande com pouca informação;
+barras e textos alinhados em colunas; valores em R$ 1.234,56, datas brasileiras e variação com sinal
+e seta. Raios: 999 pílulas, 24 cards, 20 blocos internos e opções, 16 estatísticas, 14 avisos e
+faixas, 12 ícones.
 
 ## Assets
 

@@ -1,3 +1,4 @@
+import { colors } from '@guara/ui-tokens';
 import { Modal, Pressable, View } from 'react-native';
 
 import { FEEDBACK_COPY } from '@/constants/copy';
@@ -48,18 +49,25 @@ export function ConfirmDialog({
         />
         <View
           accessibilityViewIsModal
-          className="w-full max-w-sm gap-3 rounded-24 border border-border-strong bg-surface-input p-6"
+          className="w-full max-w-[340px] gap-4 rounded-28 border border-border-strong bg-surface p-7"
+          style={{
+            shadowColor: colors.shadow,
+            shadowOpacity: 0.5,
+            shadowRadius: 32,
+            shadowOffset: { width: 0, height: 24 },
+            elevation: 24,
+          }}
         >
-          <Text variant="heading" accessibilityRole="header">
+          <Text serif weight="bold" size={22} leading={1.25} accessibilityRole="header">
             {title}
           </Text>
           {message ? (
-            <Text variant="body" tone="muted">
+            <Text size={15} leading={1.55} tone="muted">
               {message}
             </Text>
           ) : null}
-          <View className="mt-3 flex-row justify-end gap-3">
-            <Button variant="outline" size="md" onPress={onCancel} disabled={loading}>
+          <View className="flex-row flex-wrap justify-end gap-2.5">
+            <Button variant="ghost" size="md" onPress={onCancel} disabled={loading}>
               {cancelLabel}
             </Button>
             <Button

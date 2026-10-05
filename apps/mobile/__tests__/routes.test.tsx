@@ -13,6 +13,8 @@ const AUTH_ROUTES: RouteCase[] = [
   ['/sign-in', 'Bem-vindo ao Guará', null],
   ['/sign-up', 'Criar conta', null],
   ['/forgot-password', 'Recuperar senha', null],
+  ['/terms', 'Termos de uso', null],
+  ['/privacy', 'Política de privacidade', null],
 ];
 
 const ONBOARDING_ROUTES: RouteCase[] = [

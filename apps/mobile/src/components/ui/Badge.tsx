@@ -83,8 +83,7 @@ export function Badge({
         isScrim && 'h-7 gap-1.5 bg-scrim-strong px-3',
         isSolid && cn('h-7 gap-1.5 px-3', SOLID_BG[tone]),
         isStatus && cn('h-6.5 gap-1.5 px-2.5', SOFT_BG[tone]),
-        appearance === 'soft' &&
-          cn('h-6 gap-1 px-2', SOFT_BG[tone], tone === 'neutral' && 'px-2.5'),
+        appearance === 'soft' && cn('h-6 gap-1 px-2.5', SOFT_BG[tone]),
         className,
       )}
     >
@@ -106,7 +105,7 @@ export function Badge({
       <Text
         size={isStatus ? 13 : 12}
         weight="bold"
-        tracking={appearance === 'soft' && tone !== 'neutral' ? 0.04 : 0}
+        tracking={0}
         tone={textTone}
         className={isScrim ? 'text-scrim-foreground' : undefined}
         numberOfLines={1}

@@ -10,7 +10,7 @@ import { Text } from './Text';
 export type InfoNoteTone = 'neutral' | 'warning' | 'positive' | 'negative' | 'info' | 'plain';
 
 const BOX: Record<InfoNoteTone, string> = {
-  neutral: 'rounded-16 bg-surface-muted p-3.5',
+  neutral: 'rounded-14 bg-surface-muted px-3.5 py-3',
   warning: 'rounded-14 bg-warning-muted px-3.5 py-3',
   positive: 'rounded-14 bg-positive-muted px-3.5 py-3',
   negative: 'rounded-14 bg-negative-muted px-3.5 py-3',
@@ -19,7 +19,7 @@ const BOX: Record<InfoNoteTone, string> = {
 };
 
 const ICON_COLOR: Record<InfoNoteTone, string> = {
-  neutral: colors.foreground.DEFAULT,
+  neutral: colors.foreground.muted,
   warning: colors.warning.DEFAULT,
   positive: colors.positive.DEFAULT,
   negative: colors.negative.DEFAULT,

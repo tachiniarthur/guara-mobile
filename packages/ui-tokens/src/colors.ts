@@ -134,7 +134,7 @@ export const colors = {
     blue: '#2A5CA8',
   },
   /** Backdrop behind sheets, dialogs and the account menu. */
-  overlay: 'rgba(5, 8, 6, 0.55)',
+  overlay: 'rgba(5, 9, 7, 0.72)',
   /** Dark scrims over photos (badges on the assistants' scenes). */
   scrim: {
     soft: 'rgba(0, 0, 0, 0.45)',

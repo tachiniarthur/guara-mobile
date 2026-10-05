@@ -6,7 +6,10 @@ import {
 } from '@gorhom/bottom-sheet';
 import { colors, spacing } from '@guara/ui-tokens';
 import { useEffect, useRef, type ReactNode } from 'react';
+import { Modal, Pressable, ScrollView, View } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
+
+import { useBreakpoint } from '@/hooks/useBreakpoint';
 
 import { Text } from './Text';
 
@@ -32,12 +35,16 @@ function Backdrop(props: BottomSheetBackdropProps) {
   );
 }
 
-/** Bottom sheet with the app look, controlled by `open`. Requires BottomSheetModalProvider. */
+/**
+ * Panel controlled by `open`. Phone: bottom sheet with a handle (requires
+ * BottomSheetModalProvider). Tablet: centered dialog, like the Fundamentos.
+ */
 export function Sheet({ open, onClose, title, children, snapPoints }: SheetProps) {
   const ref = useRef<BottomSheetModal>(null);
   /** Whether the modal is currently presented (avoids dismissing a closed modal). */
   const presented = useRef(false);
   const insets = useSafeAreaInsets();
+  const { isTablet } = useBreakpoint();
 
   useEffect(() => {
     if (open && !presented.current) {
@@ -57,6 +64,47 @@ export function Sheet({ open, onClose, title, children, snapPoints }: SheetProps
     presented.current = false;
     onClose();
   };
+
+  if (isTablet) {
+    return (
+      <Modal
+        visible={open}
+        transparent
+        animationType="fade"
+        statusBarTranslucent
+        onRequestClose={onClose}
+      >
+        <View className="flex-1 items-center justify-center bg-overlay px-6">
+          <Pressable
+            accessibilityRole="button"
+            accessibilityLabel="Fechar"
+            onPress={onClose}
+            className="absolute bottom-0 left-0 right-0 top-0"
+          />
+          <View
+            accessibilityViewIsModal
+            className="max-h-[85%] w-full max-w-[480px] rounded-28 border border-border-strong bg-surface"
+            style={{
+              shadowColor: colors.shadow,
+              shadowOpacity: 0.5,
+              shadowRadius: 32,
+              shadowOffset: { width: 0, height: 24 },
+              elevation: 24,
+            }}
+          >
+            <ScrollView contentContainerStyle={{ padding: 28, gap: spacing[4] }}>
+              {title ? (
+                <Text serif weight="bold" size={22} leading={1.25} accessibilityRole="header">
+                  {title}
+                </Text>
+              ) : null}
+              {children}
+            </ScrollView>
+          </View>
+        </View>
+      </Modal>
+    );
+  }
 
   return (
     <BottomSheetModal
