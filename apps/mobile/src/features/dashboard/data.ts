@@ -121,7 +121,7 @@ export const RECENT_TRANSACTIONS: RecentTransaction[] = [
     direction: 'out',
   },
   {
-    id: 'tx-app-carro',
+    id: 'tx-app',
     merchant: 'App de carro',
     detail: 'Transporte · Ontem',
     amount: cents(2_390),

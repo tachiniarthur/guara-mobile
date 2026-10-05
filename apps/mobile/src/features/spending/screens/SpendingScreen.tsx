@@ -16,6 +16,7 @@ import {
   Text,
 } from '@/components/ui';
 import { useBreakpoint } from '@/hooks/useBreakpoint';
+import { routeTo } from '@/constants/routes';
 import { AccountMenuButton, ChatFab } from '@/navigation';
 
 import {
@@ -27,15 +28,20 @@ import {
 } from '../components';
 import {
   ACTIVE_SUBSCRIPTIONS,
-  MONTH_BUDGETS,
   MONTHLY_TOTALS,
   PACE,
+  RECENT_SUBSCRIPTION_ROW,
+  RECENT_TRANSACTION_IDS,
   SPENDING,
+  SPENDING_TODAY,
   SUBSCRIPTIONS_SUMMARY,
-  TRANSACTIONS,
   WEEKDAY_AVERAGES,
   type SpendingBankId,
 } from '../data';
+import { useLedger } from '../hooks/useLedger';
+import { categoryLabel } from '../categories';
+import { accountLabel, shortDayLabel } from '../lib/format';
+import { displayName, normalize, signedAmount } from '../lib/ledger';
 
 const THOUSANDS = [0, 2000, 4000, 6000].map((value) => ({
   value,
@@ -82,9 +88,30 @@ export function SpendingScreen() {
   const jump = (key: SectionKey) =>
     scrollRef.current?.scrollTo({ y: Math.max(0, (offsets[key] ?? 0) - 8), animated: true });
 
-  const normalized = query.trim().toLocaleLowerCase('pt-BR');
-  const transactions = TRANSACTIONS.filter((tx) =>
-    `${tx.description} ${tx.detail} ${tx.category}`.toLocaleLowerCase('pt-BR').includes(normalized),
+  const ledger = useLedger();
+  const totalOut = ledger.summaryFor('all')?.totalOut ?? SPENDING.totalOut;
+  const recent = [
+    ...RECENT_TRANSACTION_IDS.flatMap((id) => {
+      const tx = ledger.transactions.find((item) => item.id === id);
+      if (!tx) return [];
+      return [
+        {
+          id: tx.id,
+          name: displayName(tx),
+          detail: `${shortDayLabel(tx, SPENDING_TODAY)} · ${accountLabel(tx, ledger.accounts[tx.accountId])}`,
+          category: categoryLabel(tx.categoryId),
+          amount: signedAmount(tx),
+          flagged: ledger.unusualOf(tx.id)?.status === 'pending',
+          duplicate: tx.markedDuplicate,
+          linked: true,
+        },
+      ];
+    }),
+    { ...RECENT_SUBSCRIPTION_ROW, flagged: false, duplicate: false, linked: false },
+  ];
+  const normalized = normalize(query);
+  const transactions = recent.filter((tx) =>
+    normalize(`${tx.name} ${tx.detail} ${tx.category}`).includes(normalized),
   );
 
   const monthPicker = (
@@ -219,7 +246,14 @@ export function SpendingScreen() {
         padding={isTablet ? 20 : 16}
         gap={isTablet ? 16 : 8}
       >
-        <CategoryBreakdown wide={isTablet} onSelect={(category) => setQuery(category)} />
+        <CategoryBreakdown
+          items={ledger.categoryTotals}
+          totalOut={totalOut}
+          wide={isTablet}
+          onSelect={(categoryId) =>
+            router.navigate({ pathname: '/spending/category/[categoryId]', params: { categoryId } })
+          }
+        />
       </SectionCard>
     </View>
   );
@@ -244,7 +278,7 @@ export function SpendingScreen() {
           </Button>
         }
       >
-        {MONTH_BUDGETS.map((budget) => (
+        {ledger.budgets.map((budget) => (
           <MonthBudgetRow key={budget.category} {...budget} />
         ))}
       </SectionCard>
@@ -283,7 +317,13 @@ export function SpendingScreen() {
         titleSize={isTablet ? 20 : 18}
         padding={isTablet ? 20 : 16}
         gap={isTablet ? 12 : 4}
-        action={<LinkButton label={`Ver ${SPENDING.transactionsCount}`} className="min-h-6" />}
+        action={
+          <LinkButton
+            label={`Ver ${SPENDING.transactionsCount}`}
+            onPress={() => router.navigate('/spending/transactions')}
+            className="min-h-6"
+          />
+        }
       >
         <View className={isTablet ? undefined : 'mb-1 mt-2'}>
           <SearchInput
@@ -296,7 +336,16 @@ export function SpendingScreen() {
         </View>
         <View>
           {transactions.map((tx) => (
-            <TransactionRow key={tx.id} transaction={tx} showCategory={isTablet} />
+            <TransactionRow
+              key={tx.id}
+              name={tx.name}
+              detail={isTablet ? `${tx.detail} · ${tx.category}` : tx.detail}
+              amount={tx.amount}
+              flagged={tx.flagged}
+              duplicate={tx.duplicate}
+              incomeTone="info"
+              onPress={tx.linked ? () => router.navigate(routeTo.transaction(tx.id)) : undefined}
+            />
           ))}
           {transactions.length === 0 ? (
             <Text variant="caption" tone="subtle" className="py-3">

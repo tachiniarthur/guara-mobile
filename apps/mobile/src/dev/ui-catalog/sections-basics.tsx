@@ -113,13 +113,21 @@ export function ButtonsSection() {
       title="Button, IconButton e LinkButton"
       note="Pílulas de 36, 44 ou 52; ícones à esquerda ou à direita."
     >
-      {(['primary', 'inverse', 'secondary', 'outline', 'ghost', 'destructive'] as const).map(
-        (variant) => (
-          <Button key={variant} variant={variant} size="md" leftIcon="plus">
-            {variant}
-          </Button>
-        ),
-      )}
+      {(
+        [
+          'primary',
+          'inverse',
+          'secondary',
+          'outline',
+          'ghost',
+          'destructive',
+          'negativeOutline',
+        ] as const
+      ).map((variant) => (
+        <Button key={variant} variant={variant} size="md" leftIcon="plus">
+          {variant}
+        </Button>
+      ))}
       <Example label="tamanhos">
         <View className="flex-row flex-wrap items-center gap-2">
           <Button size="sm">sm</Button>

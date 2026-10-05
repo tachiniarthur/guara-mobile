@@ -1,17 +1,23 @@
 import { useRouter } from 'expo-router';
-import { View } from 'react-native';
+import { Pressable, View } from 'react-native';
 
 import { CardHeader } from '@/components/layout';
 import { Card, LinkButton, MoneyText, Text } from '@/components/ui';
+import { routeTo } from '@/constants/routes';
 import { useBreakpoint } from '@/hooks/useBreakpoint';
 import { cn } from '@/lib/cn';
 
 import { RECENT_TRANSACTIONS, TRANSACTIONS_COUNT, type RecentTransaction } from '../data';
 
-function RecentRow({ tx }: { tx: RecentTransaction }) {
+function RecentRow({ tx, onPress }: { tx: RecentTransaction; onPress: () => void }) {
   const signed = tx.direction === 'out' ? -tx.amount : tx.amount;
   return (
-    <View className="min-h-12 flex-row items-center gap-3 border-b border-border">
+    <Pressable
+      accessibilityRole="link"
+      accessibilityHint="Abre o lançamento"
+      onPress={onPress}
+      className="min-h-12 flex-row items-center gap-3 border-b border-border active:bg-surface-pressed"
+    >
       <View
         className={cn(
           'h-9 w-9 items-center justify-center rounded-full border-2',
@@ -46,7 +52,7 @@ function RecentRow({ tx }: { tx: RecentTransaction }) {
         weight="bold"
         tone={tx.flagged ? 'negative' : tx.direction === 'in' ? 'positive' : 'default'}
       />
-    </View>
+    </Pressable>
   );
 }
 
@@ -62,13 +68,17 @@ export function RecentTransactionsCard() {
         aside={
           <LinkButton
             label={`Ver os ${TRANSACTIONS_COUNT}`}
-            onPress={() => router.navigate('/spending')}
+            onPress={() => router.navigate('/spending/transactions')}
           />
         }
       />
       <View>
         {RECENT_TRANSACTIONS.map((tx) => (
-          <RecentRow key={tx.id} tx={tx} />
+          <RecentRow
+            key={tx.id}
+            tx={tx}
+            onPress={() => router.navigate(routeTo.transaction(tx.id))}
+          />
         ))}
       </View>
     </Card>

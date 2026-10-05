@@ -5,18 +5,29 @@ import { DonutChart } from '@/components/charts';
 import { Icon, MoneyText, Text } from '@/components/ui';
 import { cn } from '@/lib/cn';
 
-import { CATEGORY_TOTALS, SPENDING } from '../data';
+import type { CategoryId, Cents } from '@guara/types';
+
+import { SPENDING, type CategoryTotal } from '../data';
 
 export interface CategoryBreakdownProps {
+  /** Biggest categories of the month (with the user's edits). */
+  items: readonly CategoryTotal[];
+  /** All outflows of the month (donut center and shares). */
+  totalOut: Cents;
   /** Tablet: donut beside the list and shares in the captions. */
   wide?: boolean;
-  onSelect?: (category: string) => void;
+  onSelect?: (category: CategoryId) => void;
 }
 
 /** Donut of the month's spending by category + the tappable list. */
-export function CategoryBreakdown({ wide = false, onSelect }: CategoryBreakdownProps) {
+export function CategoryBreakdown({
+  items,
+  totalOut,
+  wide = false,
+  onSelect,
+}: CategoryBreakdownProps) {
   const segments = [
-    ...CATEGORY_TOTALS.map((item) => ({ key: item.name, value: item.total, color: item.color })),
+    ...items.map((item) => ({ key: item.name, value: item.total, color: item.color })),
     { key: 'Outros', value: SPENDING.othersTotal, color: colors.border.strong },
   ];
 
@@ -28,7 +39,7 @@ export function CategoryBreakdown({ wide = false, onSelect }: CategoryBreakdownP
             Saídas
           </Text>
           <MoneyText
-            value={SPENDING.totalOut}
+            value={totalOut}
             wholeUnits
             serif
             weight="extrabold"
@@ -38,12 +49,12 @@ export function CategoryBreakdown({ wide = false, onSelect }: CategoryBreakdownP
         </DonutChart>
       </View>
       <View className={cn(wide && 'min-w-0 flex-1')}>
-        {CATEGORY_TOTALS.map((item) => (
+        {items.map((item) => (
           <Pressable
             key={item.name}
-            accessibilityRole="button"
+            accessibilityRole="link"
             accessibilityLabel={`${item.name}, ${item.count} lançamentos`}
-            onPress={() => onSelect?.(item.name)}
+            onPress={() => onSelect?.(item.id)}
             className={cn(
               'flex-row items-center gap-3 border-b border-border active:bg-surface-pressed',
               wide ? 'min-h-13' : 'min-h-14',
@@ -59,7 +70,7 @@ export function CategoryBreakdown({ wide = false, onSelect }: CategoryBreakdownP
               </Text>
               <Text size={12} tone="subtle" leading={1.3}>
                 {item.count} {item.count === 1 ? 'lançamento' : 'lançamentos'}
-                {wide ? ` · ${item.share}%` : ''}
+                {wide ? ` · ${Math.round((item.total / totalOut) * 100)}%` : ''}
               </Text>
             </View>
             <MoneyText value={item.total} weight="bold" />

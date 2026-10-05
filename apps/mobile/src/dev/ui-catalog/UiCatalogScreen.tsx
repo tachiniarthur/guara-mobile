@@ -15,6 +15,7 @@ import {
   LayoutSection,
   SelectionSection,
 } from './sections-more';
+import { LedgerSection } from './sections-features';
 
 /** Development-only catalog of the base components (route `/ui`). */
 export function UiCatalogScreen() {
@@ -41,6 +42,7 @@ export function UiCatalogScreen() {
       <SelectionSection />
       <DisplaySection />
       <ChartsSection />
+      <LedgerSection />
       <FeedbackSection />
       <LayoutSection />
     </Screen>

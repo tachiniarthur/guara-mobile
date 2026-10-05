@@ -1,5 +1,6 @@
 export * from './AskAssistantCard';
 export * from './AssistantAvatar';
+export * from './AssistantNote';
 export * from './AssistantPickerSheet';
 export * from './ChatBudgetCard';
 export * from './ChatComposer';

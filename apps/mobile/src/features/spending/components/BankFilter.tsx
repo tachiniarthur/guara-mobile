@@ -11,10 +11,21 @@ export interface BankFilterProps {
   onChange: (value: SpendingBankId) => void;
   /** Wrap instead of scrolling horizontally (tablet). */
   wrap?: boolean;
+  /**
+   * `spending`: grid icon on "Todos os bancos" and the dashed "Conectar" (Gastos);
+   * `list`: plain chips with 14 labels (Lançamentos).
+   */
+  appearance?: 'spending' | 'list';
 }
 
 /** Bank chips ("Todos os bancos", "Nubank", "Itaú") plus a dashed "Conectar". */
-export function BankFilter({ value, onChange, wrap = false }: BankFilterProps) {
+export function BankFilter({
+  value,
+  onChange,
+  wrap = false,
+  appearance = 'spending',
+}: BankFilterProps) {
+  const isList = appearance === 'list';
   const router = useRouter();
   const chips = (
     <>
@@ -24,23 +35,26 @@ export function BankFilter({ value, onChange, wrap = false }: BankFilterProps) {
           label={bank.label}
           size={36}
           appearance="filled"
-          icon={bank.id === 'all' ? 'grid' : undefined}
+          icon={bank.id === 'all' && !isList ? 'grid' : undefined}
+          textSize={isList ? 14 : 13}
           selected={value === bank.id}
           onPress={() => onChange(bank.id)}
           className="h-9 px-3.5"
         />
       ))}
-      <Pressable
-        accessibilityRole="button"
-        accessibilityLabel="Conectar banco"
-        onPress={() => router.navigate('/connect-bank')}
-        className="h-9 flex-row items-center gap-1.5 rounded-full border border-dashed border-border-strong px-3 active:bg-surface-pressed"
-      >
-        <Icon name="plus" size={16} color={colors.foreground.muted} />
-        <Text size={14} tone="muted">
-          Conectar
-        </Text>
-      </Pressable>
+      {isList ? null : (
+        <Pressable
+          accessibilityRole="button"
+          accessibilityLabel="Conectar banco"
+          onPress={() => router.navigate('/connect-bank')}
+          className="h-9 flex-row items-center gap-1.5 rounded-full border border-dashed border-border-strong px-3 active:bg-surface-pressed"
+        >
+          <Icon name="plus" size={16} color={colors.foreground.muted} />
+          <Text size={14} tone="muted">
+            Conectar
+          </Text>
+        </Pressable>
+      )}
     </>
   );
 

@@ -259,6 +259,12 @@ export function FeedbackSection() {
       <Skeleton className="h-6 w-2/3 rounded-8" />
       <Spinner />
       <EmptyState icon="search" title="Nada por aqui" description="Estado vazio com ícone." />
+      <EmptyState
+        icon="wallet"
+        title="Ainda sem lançamentos"
+        description="Ação principal em Tucano."
+        action={{ label: 'Conectar banco', variant: 'primary', onPress: () => undefined }}
+      />
       <ErrorState onRetry={() => toast.info('Tentando de novo')} />
       <Sheet open={sheet} onClose={() => setSheet(false)} title="Sheet">
         <Text>Conteúdo do sheet.</Text>

@@ -24,7 +24,10 @@ const ONBOARDING_ROUTES: RouteCase[] = [
 const APP_ROUTES: RouteCase[] = [
   ['/', 'Boa tarde, Arthur.', null],
   ['/spending', 'Gastos', null],
-  ['/spending/tx-1', 'Lançamento', 'tx-1'],
+  ['/spending/transactions', 'Lançamentos', null],
+  ['/spending/category/food', 'Alimentação', null],
+  ['/spending/tx-eletronicos', 'Lançamento', null],
+  ['/spending/tx-1', 'Lançamento', null],
   ['/spending/subscriptions', 'Assinaturas', null],
   ['/spending/subscriptions/calendar', 'Calendário de cobranças', null],
   ['/spending/subscriptions/sub-1', 'Assinatura', 'sub-1'],

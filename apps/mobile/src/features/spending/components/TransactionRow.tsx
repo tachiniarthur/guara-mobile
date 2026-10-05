@@ -1,43 +1,73 @@
-import { View } from 'react-native';
+import type { Cents } from '@guara/types';
+import { Pressable, View } from 'react-native';
 
 import { Badge, MoneyText, Text } from '@/components/ui';
-
-import type { SpendingTransaction } from '../data';
+import { cn } from '@/lib/cn';
 
 export interface TransactionRowProps {
-  transaction: SpendingTransaction;
-  /** Append the category to the detail line (tablet). */
-  showCategory?: boolean;
+  name: string;
+  /** "02:14 · Nubank crédito · Eletrônicos". */
+  detail: string;
+  /** Signed amount (negative = out). */
+  amount: Cents;
+  /** Out of the pattern: Urucum badge and amount. */
+  flagged?: boolean;
+  /** Marked as a duplicate: left out of the totals. */
+  duplicate?: boolean;
+  /** Color of incoming money: Folha (Lançamentos) or Arara-azul (Gastos). */
+  incomeTone?: 'positive' | 'info';
+  /** Opens the transaction; without it the row is static. */
+  onPress?: () => void;
+  /** Hide the bottom divider (last row of a card). */
+  last?: boolean;
 }
 
-/** Transaction line: description, date · account, out-of-pattern badge and signed amount. */
-export function TransactionRow({ transaction, showCategory = false }: TransactionRowProps) {
-  const signed = (
-    transaction.direction === 'out' ? -transaction.amount : transaction.amount
-  ) as typeof transaction.amount;
-  return (
-    <View className="flex-row items-start gap-3 border-b border-border py-3">
+/** Transaction line: name, detail, badges and the signed amount. */
+export function TransactionRow({
+  name,
+  detail,
+  amount,
+  flagged = false,
+  duplicate = false,
+  incomeTone = 'positive',
+  onPress,
+  last = false,
+}: TransactionRowProps) {
+  const content = (
+    <>
       <View className="min-w-0 flex-1">
         <Text weight="medium" leading={1.35}>
-          {transaction.description}
+          {name}
         </Text>
         <Text size={12} tone="subtle" leading={1.35}>
-          {showCategory ? `${transaction.detail} · ${transaction.category}` : transaction.detail}
+          {detail}
         </Text>
-        {transaction.flagged ? (
-          <View className="mt-1 flex-row">
-            <Badge label="Fora do padrão" tone="negative" icon="eye" />
+        {flagged || duplicate ? (
+          <View className="mt-1 flex-row gap-1.5">
+            {flagged ? <Badge label="Fora do padrão" tone="negative" icon="alertTriangle" /> : null}
+            {duplicate ? <Badge label="Duplicado" icon="copy" /> : null}
           </View>
         ) : null}
       </View>
       <MoneyText
-        value={signed}
+        value={amount}
         showSign
         weight="bold"
-        tone={
-          transaction.flagged ? 'negative' : transaction.direction === 'in' ? 'info' : 'default'
-        }
+        tone={duplicate ? 'subtle' : flagged ? 'negative' : amount > 0 ? incomeTone : 'default'}
       />
-    </View>
+    </>
+  );
+  const className = cn('flex-row items-center gap-3 py-3', !last && 'border-b border-border');
+
+  if (!onPress) return <View className={className}>{content}</View>;
+  return (
+    <Pressable
+      accessibilityRole="link"
+      accessibilityHint="Abre o lançamento"
+      onPress={onPress}
+      className={cn(className, 'active:bg-surface-pressed')}
+    >
+      {content}
+    </Pressable>
   );
 }

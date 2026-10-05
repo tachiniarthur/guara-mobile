@@ -1,4 +1,18 @@
-import type { Cents } from '@guara/types';
+import type {
+  AccountId,
+  BankAccountType,
+  CategoryId,
+  Cents,
+  IsoDate,
+  IsoDateTime,
+  SubcategoryId,
+  Transaction,
+  TransactionId,
+  TransactionSummary,
+  UnusualReason,
+  UnusualStatus,
+  YearMonth,
+} from '@guara/types';
 import { colors } from '@guara/ui-tokens';
 import { cents } from '@guara/utils';
 
@@ -82,29 +96,47 @@ export const WEEKDAY_AVERAGES = {
 } as const;
 
 export interface CategoryTotal {
+  id: CategoryId;
   name: string;
   count: number;
   total: Cents;
-  share: number;
   color: string;
 }
 
 export const CATEGORY_TOTALS: CategoryTotal[] = [
-  { name: 'Moradia', count: 1, total: cents(210_000), share: 36, color: colors.info.DEFAULT },
   {
+    id: 'housing',
+    name: 'Moradia',
+    count: 1,
+    total: cents(210_000),
+    color: colors.info.DEFAULT,
+  },
+  {
+    id: 'electronics',
     name: 'Eletrônicos',
     count: 1,
     total: cents(124_990),
-    share: 21,
     color: colors.negative.DEFAULT,
   },
-  { name: 'Alimentação', count: 31, total: cents(74_218), share: 13, color: colors.brand.DEFAULT },
-  { name: 'Transporte', count: 22, total: cents(38_640), share: 7, color: colors.positive.DEFAULT },
   {
+    id: 'food',
+    name: 'Alimentação',
+    count: 31,
+    total: cents(74_218),
+    color: colors.brand.DEFAULT,
+  },
+  {
+    id: 'transport',
+    name: 'Transporte',
+    count: 22,
+    total: cents(38_640),
+    color: colors.positive.DEFAULT,
+  },
+  {
+    id: 'subscriptions',
     name: 'Assinaturas',
     count: 4,
     total: cents(10_160),
-    share: 2,
     color: colors.foreground.subtle,
   },
 ];
@@ -116,14 +148,21 @@ export interface BudgetWithMilestones {
   milestones: Cents[];
 }
 
-export const MONTH_BUDGETS: BudgetWithMilestones[] = [
+export interface CategoryBudget extends BudgetWithMilestones {
+  categoryId: CategoryId;
+}
+
+/** `spent` is the API's figure before the edits made in the app (see `lib/ledger`). */
+export const MONTH_BUDGETS: CategoryBudget[] = [
   {
+    categoryId: 'food',
     category: 'Alimentação',
     spent: cents(74_218),
     limit: cents(100_000),
     milestones: [cents(50_000), cents(70_000)],
   },
   {
+    categoryId: 'transport',
     category: 'Transporte',
     spent: cents(38_640),
     limit: cents(45_000),
@@ -146,65 +185,309 @@ export const ACTIVE_SUBSCRIPTIONS: SubscriptionSummary[] = [
 
 export const SUBSCRIPTIONS_SUMMARY = '4 detectadas automaticamente · R$ 101,60/mês';
 
-export interface SpendingTransaction {
-  id: string;
-  description: string;
-  /** "Hoje, 02:14 · Nubank crédito". */
-  detail: string;
-  category: string;
-  amount: Cents;
-  direction: 'in' | 'out';
-  flagged?: boolean;
+// --- Lançamentos ------------------------------------------------------------------------------
+
+/** "Today" of the design snapshot: day labels ("Hoje", "Ontem") are relative to it. */
+export const SPENDING_TODAY: IsoDate = '2026-09-23';
+export const SPENDING_MONTH: YearMonth = '2026-09';
+
+export interface LedgerAccount {
+  bank: Exclude<SpendingBankId, 'all'>;
+  type: BankAccountType;
 }
 
-export const TRANSACTIONS: SpendingTransaction[] = [
-  {
+export const LEDGER_ACCOUNTS: Record<string, LedgerAccount> = {
+  'acc-nubank-card': { bank: 'nubank', type: 'credit_card' },
+  'acc-itau-checking': { bank: 'itau', type: 'checking' },
+};
+
+/** A transaction as the API returns it (timestamps left out until the API exists). */
+export type LedgerTransaction = Omit<Transaction, 'createdAt' | 'updatedAt'>;
+
+interface LedgerInput {
+  id: string;
+  account: keyof typeof LEDGER_ACCOUNTS;
+  amount: number;
+  direction?: 'in' | 'out';
+  type: LedgerTransaction['type'];
+  date: IsoDate;
+  occurredAt?: IsoDateTime;
+  description: string;
+  merchantName?: string;
+  categoryId: CategoryId;
+  subcategoryId?: SubcategoryId;
+  invoice?: LedgerTransaction['invoice'];
+  isUnusual?: boolean;
+}
+
+function ledger(input: LedgerInput): LedgerTransaction {
+  return {
+    id: input.id as TransactionId,
+    accountId: input.account as AccountId,
+    amount: cents(input.amount),
+    currency: 'BRL',
+    direction: input.direction ?? 'out',
+    type: input.type,
+    source: 'open_finance',
+    date: input.date,
+    occurredAt: input.occurredAt ?? null,
+    description: input.description,
+    merchantName: input.merchantName ?? null,
+    autoCategoryId: input.categoryId,
+    userCategoryId: null,
+    categoryId: input.categoryId,
+    subcategoryId: input.subcategoryId ?? null,
+    installment: null,
+    invoice: input.invoice ?? null,
+    isUnusual: input.isUnusual ?? false,
+    markedDuplicate: false,
+    hiddenFromReports: false,
+    note: null,
+  };
+}
+
+const NUBANK = 'acc-nubank-card';
+const ITAU = 'acc-itau-checking';
+
+/** September transactions shown in the design ("Todos os lançamentos" and Alimentação). */
+export const LEDGER: LedgerTransaction[] = [
+  ledger({
     id: 'tx-eletronicos',
-    description: 'Loja de eletrônicos online',
-    detail: 'Hoje, 02:14 · Nubank crédito',
-    category: 'Eletrônicos',
-    amount: cents(124_990),
-    direction: 'out',
-    flagged: true,
-  },
-  {
-    id: 'tx-padaria',
-    description: 'Padaria Central',
-    detail: 'Ontem · Itaú débito',
-    category: 'Alimentação',
-    amount: cents(1_840),
-    direction: 'out',
-  },
-  {
+    account: NUBANK,
+    amount: 124_990,
+    type: 'credit_card',
+    date: '2026-09-23',
+    occurredAt: '2026-09-23T05:14:00.000Z',
+    description: 'LOJAELETRON*ONLINE SP',
+    merchantName: 'Loja de eletrônicos online',
+    categoryId: 'electronics',
+    invoice: { month: '2026-10', dueOn: '2026-10-10' },
+    isUnusual: true,
+  }),
+  ledger({
+    id: 'tx-cafe',
+    account: NUBANK,
+    amount: 950,
+    type: 'credit_card',
+    date: '2026-09-23',
+    occurredAt: '2026-09-23T11:40:00.000Z',
+    description: 'Café da esquina',
+    categoryId: 'food',
+    subcategoryId: 'bakery',
+  }),
+  ledger({
+    id: 'tx-casa-bela',
+    account: NUBANK,
+    amount: 22_000,
+    type: 'credit_card',
+    date: '2026-09-22',
+    description: 'Presentes Casa Bela',
+    categoryId: 'shopping',
+  }),
+  ledger({
+    id: 'tx-sabor-da-vila',
+    account: NUBANK,
+    amount: 16_310,
+    type: 'credit_card',
+    date: '2026-09-22',
+    description: 'Restaurante Sabor da Vila',
+    categoryId: 'food',
+    subcategoryId: 'restaurants',
+  }),
+  ledger({
+    id: 'tx-farmacia',
+    account: ITAU,
+    amount: 8_760,
+    type: 'debit_card',
+    date: '2026-09-22',
+    description: 'Farmácia Bem Estar',
+    categoryId: 'health',
+  }),
+  ledger({
     id: 'tx-app',
+    account: NUBANK,
+    amount: 2_390,
+    type: 'credit_card',
+    date: '2026-09-22',
     description: 'Transporte por app',
-    detail: 'Ontem · Nubank crédito',
-    category: 'Transporte',
-    amount: cents(2_390),
-    direction: 'out',
-  },
-  {
+    categoryId: 'transport',
+  }),
+  ledger({
+    id: 'tx-padaria',
+    account: ITAU,
+    amount: 1_840,
+    type: 'debit_card',
+    date: '2026-09-22',
+    description: 'Padaria Central',
+    categoryId: 'food',
+    subcategoryId: 'bakery',
+  }),
+  ledger({
+    id: 'tx-pizza',
+    account: NUBANK,
+    amount: 7_290,
+    type: 'credit_card',
+    date: '2026-09-21',
+    description: 'Delivery de pizza',
+    categoryId: 'food',
+    subcategoryId: 'restaurants',
+  }),
+  ledger({
+    id: 'tx-cinema',
+    account: NUBANK,
+    amount: 5_600,
+    type: 'credit_card',
+    date: '2026-09-21',
+    description: 'Cine Max',
+    categoryId: 'leisure',
+  }),
+  ledger({
+    id: 'tx-app-21',
+    account: NUBANK,
+    amount: 3_720,
+    type: 'credit_card',
+    date: '2026-09-21',
+    description: 'Transporte por app',
+    categoryId: 'transport',
+  }),
+  ledger({
+    id: 'tx-bar',
+    account: NUBANK,
+    amount: 8_800,
+    type: 'credit_card',
+    date: '2026-09-20',
+    description: 'Bar do Zé',
+    categoryId: 'leisure',
+  }),
+  ledger({
+    id: 'tx-mercado-bairro',
+    account: ITAU,
+    amount: 7_410,
+    type: 'debit_card',
+    date: '2026-09-20',
+    description: 'Mercado do bairro',
+    categoryId: 'food',
+    subcategoryId: 'groceries',
+  }),
+  ledger({
+    id: 'tx-app-20',
+    account: NUBANK,
+    amount: 3_630,
+    type: 'credit_card',
+    date: '2026-09-20',
+    description: 'Transporte por app',
+    categoryId: 'transport',
+  }),
+  ledger({
+    id: 'tx-japones',
+    account: NUBANK,
+    amount: 9_572,
+    type: 'credit_card',
+    date: '2026-09-19',
+    description: 'Delivery japonês',
+    categoryId: 'food',
+    subcategoryId: 'restaurants',
+  }),
+  ledger({
+    id: 'tx-hamburgueria',
+    account: NUBANK,
+    amount: 5_890,
+    type: 'credit_card',
+    date: '2026-09-19',
+    description: 'Hamburgueria',
+    categoryId: 'food',
+    subcategoryId: 'restaurants',
+  }),
+  ledger({
     id: 'tx-freela',
-    description: 'Freela · site institucional',
-    detail: '18 set · Pix recebido · Itaú',
-    category: 'Entrada',
-    amount: cents(100_000),
+    account: ITAU,
+    amount: 100_000,
     direction: 'in',
-  },
-  {
+    type: 'pix',
+    date: '2026-09-18',
+    description: 'Freela · site institucional',
+    categoryId: 'other_income',
+  }),
+  ledger({
+    id: 'tx-posto',
+    account: ITAU,
+    amount: 9_230,
+    type: 'debit_card',
+    date: '2026-09-18',
+    description: 'Posto de combustível',
+    categoryId: 'transport',
+  }),
+  ledger({
     id: 'tx-mercado',
+    account: ITAU,
+    amount: 31_120,
+    type: 'debit_card',
+    date: '2026-09-10',
     description: 'Mercado do mês',
-    detail: '10 set · Itaú débito',
-    category: 'Alimentação',
-    amount: cents(31_120),
-    direction: 'out',
-  },
-  {
-    id: 'tx-spotify',
-    description: 'Spotify',
-    detail: '02 set · assinatura',
-    category: 'Assinaturas',
-    amount: cents(2_190),
-    direction: 'out',
-  },
+    categoryId: 'food',
+    subcategoryId: 'groceries',
+  }),
 ];
+
+/** Purchases out of the pattern and what the Quero-quero noticed. */
+export const UNUSUAL: Record<string, { reasons: UnusualReason[]; status: UnusualStatus }> = {
+  'tx-eletronicos': { reasons: ['unusual_amount', 'unusual_time'], status: 'pending' },
+};
+
+/** Month header from the API. Per-bank figures are not in the design: `null` shows "—". */
+export const TRANSACTION_SUMMARIES: Record<SpendingBankId, TransactionSummary | null> = {
+  all: {
+    count: SPENDING.transactionsCount,
+    totalIn: cents(820_000),
+    totalOut: SPENDING.totalOut,
+  },
+  nubank: null,
+  itau: null,
+};
+
+/** Category history the API sends beyond the month totals (only Alimentação in the design). */
+export const CATEGORY_DETAILS: Partial<
+  Record<
+    CategoryId,
+    {
+      previousMonthSpent: Cents | null;
+      projectedSpent: Cents | null;
+      subcategories: { id: SubcategoryId; spent: Cents; count: number }[];
+    }
+  >
+> = {
+  food: {
+    previousMonthSpent: cents(66_200),
+    projectedSpent: cents(96_000),
+    subcategories: [
+      { id: 'restaurants', spent: cents(39_852), count: 14 },
+      { id: 'groceries', spent: cents(27_148), count: 6 },
+      { id: 'bakery', spent: cents(7_218), count: 11 },
+    ],
+  },
+};
+
+/** Last sync of each bank; `staleSince` set when a bank stopped updating. */
+export const BANK_SYNC: { bank: Exclude<SpendingBankId, 'all'>; staleSince: IsoDateTime | null }[] =
+  [
+    { bank: 'nubank', staleSince: null },
+    { bank: 'itau', staleSince: null },
+  ];
+
+/** Transactions in "Últimos lançamentos" of Gastos (design order). */
+export const RECENT_TRANSACTION_IDS = [
+  'tx-eletronicos',
+  'tx-padaria',
+  'tx-app',
+  'tx-freela',
+  'tx-mercado',
+] as const;
+
+/** Spotify appears in Gastos without account details, so it stays outside the ledger. */
+export const RECENT_SUBSCRIPTION_ROW = {
+  id: 'tx-spotify',
+  name: 'Spotify',
+  detail: '02 set · assinatura',
+  category: 'Assinaturas',
+  amount: cents(-2_190),
+} as const;

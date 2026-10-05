@@ -206,6 +206,13 @@ subtitle/body/lead/label/caption/micro`, ou `size`/`weight`/`serif` explícitos)
   (`activeOffsetX` + `failOffsetY`); deixe o vertical para a rolagem e ofereça dois dedos.
 - **Gestos:** prefira `react-native-gesture-handler` (`Gesture.Pan().runOnJS(true)`) a
   `PanResponder` com refs — o React Compiler recusa ler refs durante o render (veja `Slider`).
+- **FlashList nos testes:** `__tests__/setup.ts` troca o `FlashList` por uma `ScrollView` que
+  renderiza todos os itens (sem medir células). No aparelho, células encostadas desenham emendas
+  finas por causa de posições fracionárias: um card montado em fatias (veja `LedgerFeed`) estende o
+  fundo 1 dp para baixo.
+- **Linhas de `dl` com valor longo:** rótulo com `flexShrink: 0` e valor com `flex: 1, minWidth: 0`
+  (por estilo, não classe); códigos sem espaço ("LOJAELETRON*ONLINE SP") quebram no meio da palavra
+  no Android — insira `\u200B` onde a quebra pode acontecer.
 - **Código só de dev:** carregue com `__DEV__ ? require(...) : null` para o Metro remover do bundle
   de produção (veja `app/(dev)/ui.tsx`).
 
@@ -285,6 +292,9 @@ tipado e o transporte HTTP já existem e serão usados quando a API chegar:
   parseadas trazem o brand.
 - **Ausente é `null`** (nunca `0` nem `""`); a UI mostra "—". Ex.: usuário sem banco tem
   `consolidatedBalance: null`, não `0`.
+- **Categorias:** `categoryId` é o que o usuário vê e o que tem teto ("Alimentação" = `food`);
+  `subcategoryId` (opcional, sempre dentro da categoria) é o recorte de "Onde foi"
+  (`restaurants`, `groceries`, `bakery`). Rótulos em `src/features/spending/categories.ts`.
 - **Enums em inglês**; rótulos pt-BR ficam no app. Mensagens de erro (`ApiError.message`) e
   textos de notificação vêm em pt-BR da API.
 - **Erros:** todo erro de transporte vira `ApiError` (`code`, `message` pt-BR, `status`).

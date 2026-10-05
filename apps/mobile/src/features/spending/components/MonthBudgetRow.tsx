@@ -1,11 +1,10 @@
 import { View } from 'react-native';
 
-import { budgetTone, MoneyText, Text } from '@/components/ui';
+import { budgetStateLabel, budgetTone, MoneyText, Text } from '@/components/ui';
 import { BudgetMilestoneBar } from '@/features/budgets';
 
 import type { BudgetWithMilestones } from '../data';
 
-const STATE_LABEL = { positive: 'tranquilo', warning: 'atenção', negative: 'apertado' } as const;
 const TONE = { positive: 'subtle', warning: 'warning', negative: 'negative' } as const;
 
 /** Cap of a category with its warning marks and month state ("74% · atenção"). */
@@ -26,7 +25,7 @@ export function MonthBudgetRow({ category, spent, limit, milestones }: BudgetWit
       </View>
       <BudgetMilestoneBar spent={spent} limit={limit} milestones={milestones} />
       <Text size={12} weight={key === 'positive' ? 'medium' : 'bold'} tone={TONE[key]}>
-        {percent}% · {STATE_LABEL[key]}
+        {percent}% · {budgetStateLabel(percent)}
       </Text>
     </View>
   );
