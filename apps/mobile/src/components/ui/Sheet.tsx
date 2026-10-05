@@ -65,7 +65,7 @@ export function Sheet({ open, onClose, title, children, snapPoints }: SheetProps
       enableDynamicSizing={!snapPoints}
       onDismiss={handleDismiss}
       backdropComponent={Backdrop}
-      backgroundStyle={{ backgroundColor: colors.background.elevated }}
+      backgroundStyle={{ backgroundColor: colors.surface.input, borderRadius: 24 }}
       handleIndicatorStyle={{ backgroundColor: colors.border.strong }}
       accessible={false}
     >
@@ -78,7 +78,7 @@ export function Sheet({ open, onClose, title, children, snapPoints }: SheetProps
         }}
       >
         {title ? (
-          <Text variant="subtitle" accessibilityRole="header">
+          <Text variant="heading" accessibilityRole="header">
             {title}
           </Text>
         ) : null}

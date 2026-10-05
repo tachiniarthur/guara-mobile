@@ -16,12 +16,17 @@ describe('smoke', () => {
 
   it('routes "/" to the dashboard of the authenticated area', async () => {
     renderRouter('./app', { initialUrl: '/' });
-    expect(await screen.findByRole('header', { name: 'Painel' })).toBeOnTheScreen();
+    expect(await screen.findByRole('header', { name: 'Boa tarde, Arthur.' })).toBeOnTheScreen();
   });
 
   it('opens a nested dynamic route', async () => {
     renderRouter('./app', { initialUrl: '/investments/asset/PETR4' });
-    expect(await screen.findByRole('header', { name: 'Ativo' })).toBeOnTheScreen();
-    expect(screen.getByText('PETR4')).toBeOnTheScreen();
+    expect(await screen.findByRole('header', { name: 'Detalhes do ativo' })).toBeOnTheScreen();
+    expect(screen.getByRole('header', { name: 'PETR4' })).toBeOnTheScreen();
+  });
+
+  it('shows "Ativo não encontrado" for unknown tickers', async () => {
+    renderRouter('./app', { initialUrl: '/investments/asset/XPTO3' });
+    expect(await screen.findByRole('header', { name: 'Ativo não encontrado' })).toBeOnTheScreen();
   });
 });

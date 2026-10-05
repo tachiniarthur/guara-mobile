@@ -1,5 +1,3 @@
-import { SearchIcon, XIcon } from 'lucide-react-native';
-
 import { IconButton } from './IconButton';
 import { Input, type InputProps } from './Input';
 
@@ -24,15 +22,15 @@ export function SearchInput({
       onChangeText={onChangeText}
       placeholder={placeholder}
       accessibilityLabel={props.accessibilityLabel ?? props.label ?? placeholder}
-      leftIcon={SearchIcon}
+      leftIcon="search"
       returnKeyType="search"
       autoCorrect={false}
       autoCapitalize="none"
       rightElement={
         value ? (
           <IconButton
-            icon={XIcon}
-            size="sm"
+            icon="close"
+            size={36}
             accessibilityLabel="Limpar busca"
             onPress={() => {
               onChangeText('');

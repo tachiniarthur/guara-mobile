@@ -92,7 +92,14 @@ export interface FormatCentsOptions {
   signDisplay?: 'auto' | 'always' | 'never';
   /** Omit the currency symbol ("1.234,56"). */
   hideSymbol?: boolean;
+  /** Drop the cents, truncating toward zero ("R$ 742" for 742,18). */
+  wholeUnits?: boolean;
+  /** Use the typographic minus sign "−" (U+2212) instead of the hyphen "-". */
+  typographicMinus?: boolean;
 }
+
+/** U+2212, the minus sign used in the UI ("−R$ 18,40"). */
+export const MINUS_SIGN = '\u2212';
 
 /**
  * Formats integer cents as pt-BR currency using integer math only.
@@ -102,20 +109,29 @@ export interface FormatCentsOptions {
  */
 export function formatCents(
   value: Cents | number | null | undefined,
-  { currency = 'BRL', signDisplay = 'auto', hideSymbol = false }: FormatCentsOptions = {},
+  {
+    currency = 'BRL',
+    signDisplay = 'auto',
+    hideSymbol = false,
+    wholeUnits = false,
+    typographicMinus = false,
+  }: FormatCentsOptions = {},
 ): string {
   if (value === null || value === undefined || !Number.isSafeInteger(value)) return EMPTY;
 
   const abs = Math.abs(value);
-  const integerPart = groupThousands(String(Math.trunc(abs / 100)));
+  const units = Math.trunc(abs / 100);
+  const integerPart = groupThousands(String(units));
   const fractionPart = String(abs % 100).padStart(2, '0');
-  const number = `${integerPart},${fractionPart}`;
+  const number = wholeUnits ? integerPart : `${integerPart},${fractionPart}`;
   const body = hideSymbol ? number : `${CURRENCY_SYMBOL[currency]}${NBSP}${number}`;
+  // With `wholeUnits`, -0,40 shows as "R$ 0" (no sign on a zero).
+  const shown = wholeUnits ? units : abs;
 
   let sign = '';
-  if (signDisplay !== 'never') {
-    if (value < 0) sign = '-';
-    else if (value > 0 && signDisplay === 'always') sign = '+';
+  if (signDisplay !== 'never' && shown > 0) {
+    if (value < 0) sign = typographicMinus ? MINUS_SIGN : '-';
+    else if (signDisplay === 'always') sign = '+';
   }
   return `${sign}${body}`;
 }
@@ -164,13 +180,17 @@ const COMPACT_UNITS = [
  */
 export function formatCentsCompact(
   value: Cents | number | null | undefined,
-  { currency = 'BRL', signDisplay = 'auto' }: Omit<FormatCentsOptions, 'hideSymbol'> = {},
+  {
+    currency = 'BRL',
+    signDisplay = 'auto',
+    typographicMinus = false,
+  }: Omit<FormatCentsOptions, 'hideSymbol' | 'wholeUnits'> = {},
 ): string {
   if (value === null || value === undefined || !Number.isSafeInteger(value)) return EMPTY;
 
   const abs = Math.abs(value);
   const first = COMPACT_UNITS[0];
-  if (abs < first.cents) return formatCents(value, { currency, signDisplay });
+  if (abs < first.cents) return formatCents(value, { currency, signDisplay, typographicMinus });
 
   let unitIndex = COMPACT_UNITS.findLastIndex((unit) => abs >= unit.cents);
   let tenths = Math.round(abs / (COMPACT_UNITS[unitIndex]!.cents / 10));
@@ -187,7 +207,7 @@ export function formatCentsCompact(
 
   let sign = '';
   if (signDisplay !== 'never') {
-    if (value < 0) sign = '-';
+    if (value < 0) sign = typographicMinus ? MINUS_SIGN : '-';
     else if (value > 0 && signDisplay === 'always') sign = '+';
   }
   return `${sign}${body}`;

@@ -1,10 +1,10 @@
-import { duration, iconSize } from '@guara/ui-tokens';
-import { CircleAlertIcon, CircleCheckIcon, InfoIcon, XIcon } from 'lucide-react-native';
+import { duration } from '@guara/ui-tokens';
 import { AccessibilityInfo, Pressable, View } from 'react-native';
 import Animated, { FadeInUp, FadeOutUp } from 'react-native-reanimated';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { create } from 'zustand';
 
+import { Icon, type IconName } from '@/components/ui/Icon';
 import { Text } from '@/components/ui/Text';
 import { FEEDBACK_COPY } from '@/constants/copy';
 import { cn } from '@/lib/cn';
@@ -55,11 +55,11 @@ export const toast = {
 
 const STYLE: Record<
   ToastType,
-  { icon: typeof InfoIcon; tone: 'positive' | 'negative' | 'info'; border: string }
+  { icon: IconName; tone: 'positive' | 'negative' | 'info'; border: string }
 > = {
-  success: { icon: CircleCheckIcon, tone: 'positive', border: 'border-positive' },
-  error: { icon: CircleAlertIcon, tone: 'negative', border: 'border-negative' },
-  info: { icon: InfoIcon, tone: 'info', border: 'border-info' },
+  success: { icon: 'checkThin', tone: 'positive', border: 'border-positive' },
+  error: { icon: 'alertTriangle', tone: 'negative', border: 'border-negative' },
+  info: { icon: 'info', tone: 'info', border: 'border-info' },
 };
 
 /** Renders active toasts at the top of the screen. Mounted once in AppProviders. */
@@ -77,7 +77,7 @@ export function ToastViewport() {
       style={{ paddingTop: insets.top }}
     >
       {toasts.map((item) => {
-        const { icon: Icon, tone, border } = STYLE[item.type];
+        const { icon, tone, border } = STYLE[item.type];
         return (
           <Animated.View
             key={item.id}
@@ -85,11 +85,11 @@ export function ToastViewport() {
             exiting={FadeOutUp.duration(duration.fast)}
             accessibilityLiveRegion="polite"
             className={cn(
-              'w-full max-w-md flex-row items-center gap-3 rounded-lg border-l-4 bg-background-elevated py-3 pl-3 pr-1',
+              'w-full max-w-md flex-row items-center gap-3 rounded-16 border border-l-4 border-border-strong bg-surface-input py-3 pl-3 pr-1',
               border,
             )}
           >
-            <Icon size={iconSize.md} color={toneColor[tone]} />
+            <Icon name={icon} size={20} color={toneColor[tone]} />
             <Text variant="body" className="flex-1" accessibilityRole="alert">
               {item.message}
             </Text>
@@ -99,7 +99,7 @@ export function ToastViewport() {
               onPress={() => dismiss(item.id)}
               className="h-touch w-touch items-center justify-center"
             >
-              <XIcon size={iconSize.sm} color={toneColor.subtle} />
+              <Icon name="close" size={16} color={toneColor.subtle} />
             </Pressable>
           </Animated.View>
         );

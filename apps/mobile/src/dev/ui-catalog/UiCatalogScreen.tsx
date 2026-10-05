@@ -1,23 +1,46 @@
-import { Header, Screen } from '@/components/layout';
+import { Screen, TopBar } from '@/components/layout';
 import { Text } from '@/components/ui';
 
-import { ButtonsSection, InputsSection, TypographySection, ValuesSection } from './sections-basics';
-import { DisplaySection, FeedbackSection, LayoutSection, SelectionSection } from './sections-more';
+import {
+  ButtonsSection,
+  IconsSection,
+  InputsSection,
+  TypographySection,
+  ValuesSection,
+} from './sections-basics';
+import {
+  ChartsSection,
+  DisplaySection,
+  FeedbackSection,
+  LayoutSection,
+  SelectionSection,
+} from './sections-more';
 
 /** Development-only catalog of the base components (route `/ui`). */
 export function UiCatalogScreen() {
   return (
-    <Screen scroll contentClassName="gap-6 pb-12">
-      <Header title="Catálogo de UI" subtitle="Somente em desenvolvimento" large />
+    <Screen
+      header={
+        <TopBar
+          title="Catálogo de UI"
+          subtitle="Somente em desenvolvimento"
+          leading="back"
+          fallbackHref="/"
+        />
+      }
+      contentClassName="gap-6 pb-12"
+    >
       <Text variant="caption" tone="subtle">
         Todos os dados desta tela são fictícios.
       </Text>
       <TypographySection />
+      <IconsSection />
       <ValuesSection />
       <ButtonsSection />
       <InputsSection />
       <SelectionSection />
       <DisplaySection />
+      <ChartsSection />
       <FeedbackSection />
       <LayoutSection />
     </Screen>

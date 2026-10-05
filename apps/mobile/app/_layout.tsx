@@ -1,9 +1,15 @@
 import '../global.css';
 
-import { Inter_400Regular } from '@expo-google-fonts/inter/400Regular';
-import { Inter_500Medium } from '@expo-google-fonts/inter/500Medium';
-import { Inter_600SemiBold } from '@expo-google-fonts/inter/600SemiBold';
-import { Inter_700Bold } from '@expo-google-fonts/inter/700Bold';
+import { Figtree_400Regular } from '@expo-google-fonts/figtree/400Regular';
+import { Figtree_400Regular_Italic } from '@expo-google-fonts/figtree/400Regular_Italic';
+import { Figtree_500Medium } from '@expo-google-fonts/figtree/500Medium';
+import { Figtree_600SemiBold } from '@expo-google-fonts/figtree/600SemiBold';
+import { Figtree_700Bold } from '@expo-google-fonts/figtree/700Bold';
+import { Figtree_800ExtraBold } from '@expo-google-fonts/figtree/800ExtraBold';
+import { Fraunces_600SemiBold } from '@expo-google-fonts/fraunces/600SemiBold';
+import { Fraunces_700Bold } from '@expo-google-fonts/fraunces/700Bold';
+import { Fraunces_700Bold_Italic } from '@expo-google-fonts/fraunces/700Bold_Italic';
+import { Fraunces_800ExtraBold } from '@expo-google-fonts/fraunces/800ExtraBold';
 import { colors, fontFamily } from '@guara/ui-tokens';
 import { useFonts } from 'expo-font';
 import { Stack } from 'expo-router';
@@ -34,10 +40,16 @@ function RootNavigator() {
   const { status } = useAuth();
   // Family names come from the tokens (one family per weight).
   const [fontsLoaded, fontError] = useFonts({
-    [fontFamily.regular]: Inter_400Regular,
-    [fontFamily.medium]: Inter_500Medium,
-    [fontFamily.semibold]: Inter_600SemiBold,
-    [fontFamily.bold]: Inter_700Bold,
+    [fontFamily.regular]: Figtree_400Regular,
+    [fontFamily.italic]: Figtree_400Regular_Italic,
+    [fontFamily.medium]: Figtree_500Medium,
+    [fontFamily.semibold]: Figtree_600SemiBold,
+    [fontFamily.bold]: Figtree_700Bold,
+    [fontFamily.extrabold]: Figtree_800ExtraBold,
+    [fontFamily.serifSemibold]: Fraunces_600SemiBold,
+    [fontFamily.serifBold]: Fraunces_700Bold,
+    [fontFamily.serifBoldItalic]: Fraunces_700Bold_Italic,
+    [fontFamily.serifExtrabold]: Fraunces_800ExtraBold,
   });
   const ready = status !== 'loading' && (fontsLoaded || fontError !== null);
 
@@ -63,10 +75,9 @@ function RootNavigator() {
       <Stack.Protected guard={status === 'signedIn'}>
         <Stack.Screen name="(app)" />
       </Stack.Protected>
-      {/* Dev-only tools (component catalog, fake data). Unreachable in production builds. */}
+      {/* Dev-only tools (component catalog). Unreachable in production builds. */}
       <Stack.Protected guard={__DEV__}>
         <Stack.Screen name="(dev)/ui" />
-        <Stack.Screen name="(dev)/dev/data" />
       </Stack.Protected>
     </Stack>
   );

@@ -1,5 +1,3 @@
-import { CloudAlertIcon } from 'lucide-react-native';
-
 import { FEEDBACK_COPY } from '@/constants/copy';
 
 import { EmptyState } from './EmptyState';
@@ -20,7 +18,7 @@ export function ErrorState({
 }: ErrorStateProps) {
   return (
     <EmptyState
-      icon={CloudAlertIcon}
+      icon="alertTriangle"
       title={title}
       description={description}
       action={{ label: FEEDBACK_COPY.retry, onPress: onRetry }}

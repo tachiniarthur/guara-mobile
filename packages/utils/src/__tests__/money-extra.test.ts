@@ -1,4 +1,5 @@
-import { NBSP, cents, formatCentsCompact, formatCentsForSpeech } from '../money';
+import { NBSP, cents, formatCents, formatCentsCompact, formatCentsForSpeech } from '../money';
+import { formatPercent } from '../percent';
 
 const s = (text: string) => text.replace(/ /g, NBSP);
 
@@ -40,5 +41,19 @@ describe('formatCentsForSpeech()', () => {
   it('handles other currencies and missing values', () => {
     expect(formatCentsForSpeech(cents(250), 'USD')).toBe('2 dólares e 50 centavos');
     expect(formatCentsForSpeech(null)).toBe('sem informação');
+  });
+});
+
+describe('formatCents display options', () => {
+  it('drops the cents with wholeUnits (truncating toward zero)', () => {
+    expect(formatCents(cents(74218), { wholeUnits: true })).toBe(`R$${NBSP}742`);
+    expect(formatCents(cents(228753), { wholeUnits: true })).toBe(`R$${NBSP}2.287`);
+    expect(formatCents(cents(-40), { wholeUnits: true })).toBe(`R$${NBSP}0`);
+  });
+
+  it('uses the typographic minus when asked', () => {
+    expect(formatCents(cents(-1840), { typographicMinus: true })).toBe(`−R$${NBSP}18,40`);
+    expect(formatCents(cents(-1840))).toBe(`-R$${NBSP}18,40`);
+    expect(formatPercent(-6, { fractionDigits: 0, typographicMinus: true })).toBe('−6%');
   });
 });

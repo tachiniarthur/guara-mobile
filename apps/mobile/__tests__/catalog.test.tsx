@@ -7,12 +7,14 @@ describe('UI catalog (/ui)', () => {
     expect(await screen.findByRole('header', { name: 'Catálogo de UI' })).toBeOnTheScreen();
     for (const section of [
       'Text',
+      'Icon',
       'Valores',
-      'Button e IconButton',
-      'Entradas',
+      'Button, IconButton e LinkButton',
+      'Campos',
       'Seleção',
       'Exibição',
-      'Feedback e sobreposições',
+      'Gráficos',
+      'Feedback',
       'Layout',
     ]) {
       expect(screen.getByRole('header', { name: section })).toBeOnTheScreen();
@@ -31,7 +33,7 @@ describe('UI catalog (/ui)', () => {
 
     it('is not reachable and falls back to the home screen', async () => {
       renderRouter('./app', { initialUrl: '/ui' });
-      expect(await screen.findByRole('header', { name: 'Painel' })).toBeOnTheScreen();
+      expect(await screen.findByRole('header', { name: 'Boa tarde, Arthur.' })).toBeOnTheScreen();
       expect(screen.queryByRole('header', { name: 'Catálogo de UI' })).toBeNull();
     });
   });

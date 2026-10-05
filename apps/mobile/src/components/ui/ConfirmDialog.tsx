@@ -48,9 +48,9 @@ export function ConfirmDialog({
         />
         <View
           accessibilityViewIsModal
-          className="w-full max-w-sm gap-3 rounded-xl border border-border bg-background-elevated p-6"
+          className="w-full max-w-sm gap-3 rounded-24 border border-border-strong bg-surface-input p-6"
         >
-          <Text variant="subtitle" accessibilityRole="header">
+          <Text variant="heading" accessibilityRole="header">
             {title}
           </Text>
           {message ? (
@@ -59,10 +59,11 @@ export function ConfirmDialog({
             </Text>
           ) : null}
           <View className="mt-3 flex-row justify-end gap-3">
-            <Button variant="secondary" onPress={onCancel} disabled={loading}>
+            <Button variant="outline" size="md" onPress={onCancel} disabled={loading}>
               {cancelLabel}
             </Button>
             <Button
+              size="md"
               variant={destructive ? 'destructive' : 'primary'}
               onPress={onConfirm}
               loading={loading}

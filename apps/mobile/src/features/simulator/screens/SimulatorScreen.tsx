@@ -1,5 +1,4 @@
-import { PlaceholderScreen } from '@/components/layout';
+import { RetirementSimulationScreen } from './RetirementSimulationScreen';
 
-export function SimulatorScreen() {
-  return <PlaceholderScreen title="Simulador" />;
-}
+/** Simulador opens on the retirement simulation (first tab). */
+export const SimulatorScreen = RetirementSimulationScreen;

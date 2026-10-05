@@ -1,10 +1,10 @@
-import { colors, iconSize } from '@guara/ui-tokens';
-import { ChevronRightIcon, type LucideIcon } from 'lucide-react-native';
+import { colors } from '@guara/ui-tokens';
 import type { ReactNode } from 'react';
 import { Pressable, View } from 'react-native';
 
 import { cn } from '@/lib/cn';
 
+import { Icon, type IconName } from './Icon';
 import { Text } from './Text';
 
 export interface ListItemProps {
@@ -13,7 +13,7 @@ export interface ListItemProps {
   /** Custom leading element (e.g. `<Avatar />`). */
   leading?: ReactNode;
   /** Shortcut for an icon in a rounded tile. Ignored when `leading` is set. */
-  leadingIcon?: LucideIcon;
+  leadingIcon?: IconName;
   /** Right side content, e.g. `<MoneyText />` or `<Badge />`. */
   trailing?: ReactNode;
   /** Secondary text under the trailing content (e.g. a date). */
@@ -30,7 +30,7 @@ export function ListItem({
   title,
   subtitle,
   leading,
-  leadingIcon: LeadingIcon,
+  leadingIcon,
   trailing,
   trailingCaption,
   showChevron = false,
@@ -42,13 +42,13 @@ export function ListItem({
   const content = (
     <>
       {leading ??
-        (LeadingIcon ? (
-          <View className="h-10 w-10 items-center justify-center rounded-lg bg-surface-muted">
-            <LeadingIcon size={iconSize.md} color={colors.foreground.muted} />
+        (leadingIcon ? (
+          <View className="h-10 w-10 items-center justify-center rounded-12 bg-surface-muted">
+            <Icon name={leadingIcon} size={20} color={colors.foreground.muted} />
           </View>
         ) : null)}
       <View className="flex-1 gap-0.5">
-        <Text variant="body" numberOfLines={1}>
+        <Text variant="subtitle" numberOfLines={1}>
           {title}
         </Text>
         {subtitle ? (
@@ -67,13 +67,11 @@ export function ListItem({
           ) : null}
         </View>
       ) : null}
-      {showChevron ? (
-        <ChevronRightIcon size={iconSize.md} color={colors.foreground.subtle} />
-      ) : null}
+      {showChevron ? <Icon name="chevronRight" size={18} color={colors.foreground.subtle} /> : null}
     </>
   );
 
-  const classes = cn('min-h-touch flex-row items-center gap-3 px-4 py-3', className);
+  const classes = cn('min-h-12 flex-row items-center gap-3 py-2.5', className);
 
   if (onPress) {
     return (

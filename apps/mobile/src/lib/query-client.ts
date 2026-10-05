@@ -1,7 +1,5 @@
 import { QueryClient } from '@tanstack/react-query';
 
-import type { QueryRoot } from '@/constants/query-keys';
-
 import { ApiError } from './api/errors';
 
 const MAX_RETRIES = 2;
@@ -38,9 +36,4 @@ export function createQueryClient(): QueryClient {
       },
     },
   });
-}
-
-/** Marks every query of the given domains as stale (and refetches the active ones). */
-export function invalidateRoots(queryClient: QueryClient, roots: readonly QueryRoot[]) {
-  return Promise.all(roots.map((root) => queryClient.invalidateQueries({ queryKey: [root] })));
 }

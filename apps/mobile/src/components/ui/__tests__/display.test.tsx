@@ -6,46 +6,37 @@ import { Badge } from '../Badge';
 import { Card } from '../Card';
 import { ListItem } from '../ListItem';
 import { MoneyText } from '../MoneyText';
-import { ProgressBar, getProgressState } from '../ProgressBar';
+import { ProgressBar, budgetTone } from '../ProgressBar';
 import { Text } from '../Text';
 
 describe('ProgressBar', () => {
-  // Budget of R$ 1.000,00 with warnings at R$ 500,00 and R$ 700,00.
-  const max = cents(100_000);
-  const markers = [cents(50_000), cents(70_000)];
-
-  it('positions markers by their proportion of the limit', () => {
-    render(<ProgressBar value={cents(30_000)} max={max} markers={markers} />);
-    expect(screen.getByTestId('progress-marker-0')).toHaveStyle({ left: '50%' });
-    expect(screen.getByTestId('progress-marker-1')).toHaveStyle({ left: '70%' });
+  it('fills by percent and marks the target', () => {
+    render(<ProgressBar percent={30} marker={70} />);
     expect(screen.getByTestId('progress-fill')).toHaveStyle({ width: '30%' });
   });
 
-  it('turns yellow at the last marker and red when over the limit', () => {
-    expect(getProgressState(30_000, 100_000, { markers })).toBe('normal');
-    expect(getProgressState(72_000, 100_000, { markers })).toBe('warning');
-    expect(getProgressState(85_000, 100_000)).toBe('warning');
-    expect(getProgressState(100_000, 100_000)).toBe('warning');
-    expect(getProgressState(100_001, 100_000)).toBe('over');
-    expect(getProgressState(10, 0)).toBe('over');
-  });
-
-  it('caps the fill at 100% and exposes the real percentage', () => {
-    render(<ProgressBar value={cents(125_000)} max={max} accessibilityLabel="Mercado" />);
+  it('clamps the fill and the spoken value to 0–100', () => {
+    render(<ProgressBar percent={125} tone="negative" accessibilityLabel="Mercado" />);
     expect(screen.getByTestId('progress-fill')).toHaveStyle({ width: '100%' });
     expect(screen.getByTestId('progress-fill').props.className).toContain('bg-negative');
     expect(screen.getByRole('progressbar', { name: 'Mercado' }).props.accessibilityValue).toEqual({
       min: 0,
       max: 100,
-      now: 125,
+      now: 100,
     });
+  });
+
+  it('colors budgets by how much was used', () => {
+    expect(budgetTone(30)).toBe('positive');
+    expect(budgetTone(72)).toBe('warning');
+    expect(budgetTone(85)).toBe('negative');
   });
 });
 
 describe('Avatar', () => {
   it('derives initials from the first and last words', () => {
     expect(getInitials('Banco do Brasil')).toBe('BB');
-    expect(getInitials('Nubank')).toBe('N');
+    expect(getInitials('Nubank')).toBe('NU');
     expect(getInitials('  maria  de souza ')).toBe('MS');
   });
 

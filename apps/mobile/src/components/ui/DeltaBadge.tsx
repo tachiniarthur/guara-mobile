@@ -1,12 +1,11 @@
-import { iconSize } from '@guara/ui-tokens';
 import { formatPercent, formatPercentForSpeech } from '@guara/utils';
-import { ArrowDownRightIcon, ArrowUpRightIcon, MinusIcon } from 'lucide-react-native';
 import { View } from 'react-native';
 
 import { cn } from '@/lib/cn';
 import { toneColor, toneForSign } from '@/theme/tones';
 
 import { EmptyValue } from './EmptyValue';
+import { Icon } from './Icon';
 import { Text } from './Text';
 
 export interface DeltaBadgeProps {
@@ -38,11 +37,11 @@ export function DeltaBadge({
     return <EmptyValue variant="caption" />;
   }
 
-  const options = { fractionDigits, signDisplay: 'always' } as const;
+  const options = { fractionDigits, signDisplay: 'always', typographicMinus: true } as const;
   const text = formatPercent(value, options);
   const isZero = text.replace(/[^1-9]/g, '') === '';
   const tone = isZero ? 'default' : toneForSign(value, invertColors);
-  const Icon = isZero ? MinusIcon : value > 0 ? ArrowUpRightIcon : ArrowDownRightIcon;
+  const icon = isZero ? null : value > 0 ? 'arrowUp' : 'arrowDown';
   const tint = tone === 'positive' || tone === 'negative' ? TINT[tone] : TINT.default;
 
   return (
@@ -50,17 +49,17 @@ export function DeltaBadge({
       accessible
       accessibilityLabel={[formatPercentForSpeech(value, options), label].filter(Boolean).join(' ')}
       className={cn(
-        'flex-row items-center gap-1 self-start rounded-full px-2 py-0.5',
+        'h-6 flex-row items-center gap-1 self-start rounded-full px-2',
         tint,
         className,
       )}
     >
-      <Icon size={iconSize.sm} color={toneColor[tone]} />
-      <Text variant="caption" weight="medium" tone={tone} tabular numberOfLines={1}>
+      {icon ? <Icon name={icon} size={14} strokeWidth={2.2} color={toneColor[tone]} /> : null}
+      <Text size={12} weight="bold" tone={tone} tabular numberOfLines={1}>
         {text}
       </Text>
       {label ? (
-        <Text variant="caption" tone="muted" numberOfLines={1}>
+        <Text size={12} tone="muted" numberOfLines={1}>
           {label}
         </Text>
       ) : null}

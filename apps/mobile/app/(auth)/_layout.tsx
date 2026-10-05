@@ -5,9 +5,5 @@ import { stackScreenOptions } from '@/theme/navigation';
 export const unstable_settings = { initialRouteName: 'sign-in' };
 
 export default function AuthLayout() {
-  return (
-    <Stack screenOptions={stackScreenOptions}>
-      <Stack.Screen name="sign-in" options={{ headerShown: false }} />
-    </Stack>
-  );
+  return <Stack screenOptions={stackScreenOptions} />;
 }

@@ -11,29 +11,18 @@ export const navigationTheme: Theme = {
     card: colors.background.elevated,
     text: colors.foreground.DEFAULT,
     border: colors.border.DEFAULT,
-    notification: colors.brand.DEFAULT,
+    notification: colors.negative.DEFAULT,
   },
   fonts: {
     regular: { fontFamily: fontFamily.regular, fontWeight: '400' },
     medium: { fontFamily: fontFamily.medium, fontWeight: '500' },
-    bold: { fontFamily: fontFamily.semibold, fontWeight: '600' },
-    heavy: { fontFamily: fontFamily.bold, fontWeight: '700' },
+    bold: { fontFamily: fontFamily.bold, fontWeight: '700' },
+    heavy: { fontFamily: fontFamily.extrabold, fontWeight: '800' },
   },
 };
 
-/** Shared header style. Placeholder screens render their own title in the body. */
+/** Every screen draws its own header (`TopBar` on phones, `PageHeader` on tablets). */
 export const stackScreenOptions: NativeStackNavigationOptions = {
-  headerStyle: { backgroundColor: colors.background.DEFAULT },
-  headerTintColor: colors.foreground.DEFAULT,
-  headerShadowVisible: false,
-  headerTitle: '',
-  headerBackButtonDisplayMode: 'minimal',
+  headerShown: false,
   contentStyle: { backgroundColor: colors.background.DEFAULT },
 };
-
-export const tabBarColors = {
-  background: colors.background.elevated,
-  border: colors.border.DEFAULT,
-  active: colors.brand.DEFAULT,
-  inactive: colors.foreground.subtle,
-} as const;

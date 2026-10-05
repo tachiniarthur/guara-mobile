@@ -1,5 +1,5 @@
 /**
- * Opens EVERY route of the app and checks its placeholder title.
+ * Opens EVERY route of the app and checks its title (header).
  * Generated from the route table used to scaffold app/; keep in sync when adding routes.
  */
 import { screen } from '@testing-library/react-native';
@@ -10,7 +10,7 @@ import { devSession } from '@/providers/AuthProvider';
 type RouteCase = [url: string, title: string, param: string | null];
 
 const AUTH_ROUTES: RouteCase[] = [
-  ['/sign-in', 'Entrar', null],
+  ['/sign-in', 'Bem-vindo ao Guará', null],
   ['/sign-up', 'Criar conta', null],
   ['/forgot-password', 'Recuperar senha', null],
 ];
@@ -18,11 +18,11 @@ const AUTH_ROUTES: RouteCase[] = [
 const ONBOARDING_ROUTES: RouteCase[] = [
   ['/connect-banks', 'Conecte seus bancos', null],
   ['/investor-profile', 'Perfil de investidor', null],
-  ['/assistants', 'Assistentes e avisos', null],
+  ['/assistants', 'Conheça seus assistentes', null],
 ];
 
 const APP_ROUTES: RouteCase[] = [
-  ['/', 'Painel', null],
+  ['/', 'Boa tarde, Arthur.', null],
   ['/spending', 'Gastos', null],
   ['/spending/tx-1', 'Lançamento', 'tx-1'],
   ['/spending/subscriptions', 'Assinaturas', null],
@@ -32,36 +32,36 @@ const APP_ROUTES: RouteCase[] = [
   ['/investments/positions', 'Posições', null],
   ['/investments/allocation', 'Alocação', null],
   ['/investments/exposure', 'Exposição por país', null],
-  ['/investments/asset/PETR4', 'Ativo', 'PETR4'],
+  ['/investments/asset/PETR4', 'Detalhes do ativo', null],
+  ['/investments/asset/HGLG11', 'HGLG11', null],
   ['/investments/properties', 'Bens', null],
   ['/investments/properties/prop-1', 'Bem', 'prop-1'],
   ['/chat', 'Conversas', null],
-  ['/chat/conv-1', 'Conversa', 'conv-1'],
-  ['/more', 'Mais', null],
+  ['/chat/gastos-de-setembro', 'Gastos de setembro', null],
+  ['/assistants', 'Seus assistentes', null],
   ['/budgets', 'Tetos de gasto', null],
   ['/budgets/budget-1', 'Teto de gasto', 'budget-1'],
-  ['/reports', 'Relatórios', null],
-  ['/price-alerts', 'Alertas de preço', null],
+  ['/reports', 'Relatório', null],
+  ['/alerts', 'Alertas', null],
   ['/price-alerts/alert-1', 'Alerta de preço', 'alert-1'],
-  ['/simulator', 'Simulador', null],
-  ['/simulator/retirement', 'Aposentadoria', null],
-  ['/simulator/goal', 'Simular uma meta', null],
-  ['/simulator/cut-expense', 'Cortar um gasto', null],
-  ['/simulator/saved', 'Simulações salvas', null],
+  ['/investments/simulator', 'O caminho do seu futuro', null],
+  ['/investments/simulator/retirement', 'O caminho do seu futuro', null],
+  ['/investments/simulator/goal', 'Seu plano para a viagem', null],
+  ['/investments/simulator/cut-expense', 'O que esse corte vira', null],
+  ['/investments/simulator/saved', 'Simulações salvas', null],
   ['/goals', 'Metas', null],
   ['/goals/goal-1', 'Meta', 'goal-1'],
-  ['/notifications', 'Notificações', null],
-  ['/account', 'Conta', null],
+  ['/account', 'Meu perfil', null],
   ['/account/profile', 'Perfil', null],
   ['/account/banks', 'Bancos conectados', null],
   ['/account/banks/conn-1', 'Conexão bancária', 'conn-1'],
   ['/account/investor-profile', 'Perfil de investidor', null],
   ['/account/notification-channels', 'Canais de aviso', null],
   ['/account/plan', 'Plano', null],
-  ['/connect-bank', 'Conectar banco', null],
+  ['/connect-bank', 'Conectar bancos', null],
   ['/new-budget', 'Novo teto de gasto', null],
   ['/new-price-alert', 'Novo alerta de preço', null],
-  ['/new-manual-asset', 'Novo ativo manual', null],
+  ['/new-manual-asset', 'Adicionar investimento', null],
   ['/new-property', 'Novo imóvel', null],
   ['/new-vehicle', 'Novo veículo', null],
   ['/new-goal', 'Nova meta', null],
@@ -88,7 +88,7 @@ describe('routes', () => {
     });
     it.each(AUTH_ROUTES)('%s → %s', expectRoute);
     it('redirects protected app routes to sign-in', async () => {
-      await expectRoute('/budgets', 'Entrar', null);
+      await expectRoute('/budgets', 'Bem-vindo ao Guará', null);
     });
   });
 
@@ -108,7 +108,7 @@ describe('routes', () => {
     });
     it.each(APP_ROUTES)('%s → %s', expectRoute);
     it('does not expose auth screens', async () => {
-      await expectRoute('/sign-in', 'Painel', null);
+      await expectRoute('/sign-in', 'Boa tarde, Arthur.', null);
     });
     it('shows not-found for unknown URLs', async () => {
       await expectRoute('/does-not-exist', 'Página não encontrada', null);

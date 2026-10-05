@@ -2,86 +2,72 @@ import { View } from 'react-native';
 
 import { cn } from '@/lib/cn';
 
-export type ProgressState = 'normal' | 'warning' | 'over';
+export type ProgressTone = 'positive' | 'warning' | 'negative' | 'info' | 'brand' | 'neutral';
 
-/**
- * State of a progress value against its limit:
- * - `over` when the value exceeds the limit;
- * - `warning` when it reaches `warnAt` (fraction of the limit) or the last marker;
- * - `normal` otherwise.
- */
-export function getProgressState(
-  value: number,
-  max: number,
-  { warnAt = 0.8, markers = [] }: { warnAt?: number; markers?: readonly number[] } = {},
-): ProgressState {
-  if (max <= 0) return value > 0 ? 'over' : 'normal';
-  if (value > max) return 'over';
-  const lastMarker = markers.length ? Math.max(...markers) : Infinity;
-  if (value / max >= warnAt || value >= lastMarker) return 'warning';
-  return 'normal';
-}
-
-const FILL_CLASS: Record<ProgressState, string> = {
-  normal: 'bg-brand',
+const FILL_CLASS: Record<ProgressTone, string> = {
+  positive: 'bg-positive',
   warning: 'bg-warning',
-  over: 'bg-negative',
+  negative: 'bg-negative',
+  info: 'bg-info',
+  brand: 'bg-brand',
+  neutral: 'bg-foreground',
 };
 
-const toPercent = (part: number, whole: number) =>
-  whole > 0 ? Math.min(100, Math.max(0, (part / whole) * 100)) : part > 0 ? 100 : 0;
+/**
+ * Month state of a budget (Fundamentos): calm up to 69%, attention from 70%, tight from 85%.
+ * Always shown with words and a percentage, never by color alone.
+ */
+export function budgetTone(percent: number): ProgressTone {
+  if (percent >= 85) return 'negative';
+  if (percent >= 70) return 'warning';
+  return 'positive';
+}
 
 export interface ProgressBarProps {
-  /** Current value, in the same unit as `max` (e.g. cents spent). */
-  value: number;
-  /** Limit (e.g. budget cap in cents). */
-  max: number;
-  /** Intermediate warning points in the same unit (e.g. 50% and 70% of a budget). */
-  markers?: readonly number[];
-  /** Fraction of `max` from which the bar turns yellow. */
-  warnAt?: number;
-  /** Spoken description, e.g. "Mercado: 820 de 1.000 reais". */
+  /** 0–100 (values outside are clamped). */
+  percent: number;
+  tone?: ProgressTone;
+  /** Height in dp (design: 8 or 10). */
+  height?: number;
+  /** Vertical marker (target) in percent, drawn in Areia. */
+  marker?: number;
+  /** Spoken description, e.g. "Alimentação: 742 de 1.000 reais". */
   accessibilityLabel?: string;
   className?: string;
 }
 
-/** Progress toward a limit with optional markers; yellow near the limit, red when over. */
+/** Track in Sombra with a rounded fill. */
 export function ProgressBar({
-  value,
-  max,
-  markers = [],
-  warnAt,
+  percent,
+  tone = 'positive',
+  height = 10,
+  marker,
   accessibilityLabel,
   className,
 }: ProgressBarProps) {
-  const state = getProgressState(value, max, { warnAt, markers });
-  const percent = toPercent(value, max);
-
+  const clamped = Math.min(100, Math.max(0, percent));
   return (
     <View
       accessible
       accessibilityRole="progressbar"
       accessibilityLabel={accessibilityLabel}
-      accessibilityValue={{ min: 0, max: 100, now: Math.round(max > 0 ? (value / max) * 100 : 0) }}
+      accessibilityValue={{ min: 0, max: 100, now: Math.round(clamped) }}
       testID="progress-bar"
-      className={cn('h-2 w-full overflow-hidden rounded-full bg-surface-muted', className)}
+      style={{ height, borderRadius: height / 2 }}
+      className={cn('w-full bg-surface-muted', className)}
     >
       <View
         testID="progress-fill"
-        className={cn('h-full rounded-full', FILL_CLASS[state])}
-        style={{ width: `${percent}%` }}
+        className={FILL_CLASS[tone]}
+        style={{ width: `${clamped}%`, height, borderRadius: height / 2 }}
       />
-      {markers.map((marker, index) => (
+      {marker !== undefined ? (
         <View
-          key={`${marker}-${index}`}
-          testID={`progress-marker-${index}`}
-          className={cn(
-            'absolute bottom-0 top-0 w-0.5',
-            value >= marker ? 'bg-background' : 'bg-foreground-subtle',
-          )}
-          style={{ left: `${toPercent(marker, max)}%` }}
+          testID="progress-marker"
+          className="absolute w-0.5 bg-foreground"
+          style={{ left: `${marker}%`, top: -3, bottom: -3 }}
         />
-      ))}
+      ) : null}
     </View>
   );
 }

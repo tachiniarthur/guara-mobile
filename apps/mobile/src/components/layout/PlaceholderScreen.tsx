@@ -1,10 +1,9 @@
-import type { UseQueryResult } from '@tanstack/react-query';
 import { Link } from 'expo-router';
 import type { ReactNode } from 'react';
 import { View } from 'react-native';
 
 import { Text } from '@/components/ui/Text';
-import { COMMON_COPY, FEEDBACK_COPY } from '@/constants/copy';
+import { COMMON_COPY } from '@/constants/copy';
 
 import { Screen } from './Screen';
 
@@ -13,7 +12,6 @@ interface PlaceholderScreenProps {
   title: string;
   /** Optional detail, e.g. the id of a dynamic route. */
   subtitle?: string | string[];
-  /** Temporary data summary proving the screen is wired to its hooks. */
   children?: ReactNode;
 }
 
@@ -44,37 +42,8 @@ export function PlaceholderScreen({ title, subtitle, children }: PlaceholderScre
               {COMMON_COPY.devUiCatalog}
             </Text>
           </Link>
-          <Link href="/dev/data" asChild>
-            <Text variant="caption" tone="subtle" className="underline">
-              {COMMON_COPY.devData}
-            </Text>
-          </Link>
         </View>
       ) : null}
     </Screen>
   );
-}
-
-interface PlaceholderSummaryProps<T> {
-  query: Pick<UseQueryResult<T>, 'data' | 'error' | 'isPending'>;
-  children: (data: T) => ReactNode;
-}
-
-/** Loading / error / data line used by placeholders wired to real hooks. */
-export function PlaceholderSummary<T>({ query, children }: PlaceholderSummaryProps<T>) {
-  if (query.isPending) {
-    return (
-      <Text variant="body" tone="muted" align="center">
-        {FEEDBACK_COPY.loading}…
-      </Text>
-    );
-  }
-  if (query.error || query.data === undefined) {
-    return (
-      <Text variant="body" tone="negative" align="center">
-        {query.error?.message ?? FEEDBACK_COPY.errorTitle}
-      </Text>
-    );
-  }
-  return <View className="items-center gap-1">{children(query.data)}</View>;
 }

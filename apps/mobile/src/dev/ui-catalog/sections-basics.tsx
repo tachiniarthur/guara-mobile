@@ -1,7 +1,7 @@
 import type { Cents } from '@guara/types';
+import { colors } from '@guara/ui-tokens';
 import { cents } from '@guara/utils';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { ArrowRightIcon, PlusIcon, SettingsIcon, Trash2Icon } from 'lucide-react-native';
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { View } from 'react-native';
@@ -12,30 +12,45 @@ import {
   DeltaBadge,
   EmptyValue,
   FormField,
+  Icon,
+  ICON_PATHS,
   IconButton,
   Input,
+  LinkButton,
   MoneyInput,
   MoneyText,
   PercentText,
   SearchInput,
+  Span,
   Text,
+  type IconName,
 } from '@/components/ui';
 
 import { CatalogSection, Example } from './CatalogSection';
 
 export function TypographySection() {
   return (
-    <CatalogSection title="Text" note="Escala tipográfica (Inter) e tons semânticos.">
-      <Text variant="display">Display 32</Text>
-      <Text variant="title">Título 24</Text>
-      <Text variant="subtitle">Subtítulo 18</Text>
-      <Text variant="body">Corpo 16 — texto padrão das telas.</Text>
-      <Text variant="label">Rótulo 14</Text>
-      <Text variant="caption">Legenda 13</Text>
+    <CatalogSection
+      title="Text"
+      note="Fraunces (títulos e números grandes) e Figtree, com tons semânticos."
+    >
+      <Text variant="hero">Hero</Text>
+      <Text variant="display">Display</Text>
+      <Text variant="title">Título</Text>
+      <Text variant="section">Seção</Text>
+      <Text variant="heading">Heading</Text>
+      <Text variant="subtitle">Subtítulo</Text>
+      <Text variant="body">
+        Corpo — texto padrão das telas, com <Span weight="bold">trecho em negrito</Span>.
+      </Text>
+      <Text variant="label">Rótulo</Text>
+      <Text variant="caption">Legenda</Text>
+      <Text variant="micro">MICRO</Text>
       <View className="flex-row flex-wrap gap-x-4 gap-y-1">
         {(
           [
             'default',
+            'soft',
             'muted',
             'subtle',
             'positive',
@@ -54,114 +69,108 @@ export function TypographySection() {
   );
 }
 
+export function IconsSection() {
+  return (
+    <CatalogSection title="Icon" note="Ícones de traço do design (24×24). Cores sempre de tokens.">
+      <View className="flex-row flex-wrap gap-3">
+        {(Object.keys(ICON_PATHS) as IconName[]).map((name) => (
+          <View key={name} className="w-[76px] items-center gap-1">
+            <Icon name={name} size={22} color={colors.foreground.DEFAULT} />
+            <Text size={10} tone="subtle" numberOfLines={1}>
+              {name}
+            </Text>
+          </View>
+        ))}
+      </View>
+    </CatalogSection>
+  );
+}
+
 export function ValuesSection() {
   return (
     <CatalogSection
       title="Valores"
-      note="MoneyText, PercentText, DeltaBadge e EmptyValue. Valores fictícios; dígitos tabulares."
+      note="MoneyText, PercentText, DeltaBadge e EmptyValue — nunca formate à mão."
     >
-      <Example label="MoneyText — entrada com sinal e cor">
-        <MoneyText value={cents(523_450)} showSign colorBySign variant="title" />
-      </Example>
-      <Example label="MoneyText — saída">
-        <MoneyText value={cents(-8_990)} colorBySign />
-      </Example>
-      <Example label="MoneyText — compacto / oculto / sem dado">
-        <View className="flex-row gap-6">
-          <MoneyText value={cents(12_345_678)} compact />
-          <MoneyText value={cents(12_345_678)} masked />
-          <MoneyText value={null} />
-        </View>
-      </Example>
-      <Example label="PercentText">
-        <View className="flex-row gap-6">
-          <PercentText value={11.65} />
-          <PercentText value={-3.2} showSign colorBySign fractionDigits={1} />
-          <PercentText value={null} />
-        </View>
-      </Example>
-      <Example label="DeltaBadge">
-        <View className="gap-2">
-          <DeltaBadge value={2.3} label="vs mês anterior" />
-          <DeltaBadge value={-0.8} label="vs CDI" />
-          <DeltaBadge value={8.4} label="gastos vs média" invertColors />
-          <DeltaBadge value={0} label="vs mês anterior" />
-          <DeltaBadge value={null} />
-        </View>
-      </Example>
-      <Example label="EmptyValue">
-        <EmptyValue />
-      </Example>
+      <MoneyText value={cents(123_456)} variant="heading" />
+      <MoneyText value={cents(-4_990)} colorBySign showSign />
+      <MoneyText value={cents(615_200_00)} wholeUnits />
+      <MoneyText value={cents(123_456)} masked />
+      <PercentText value={12.4} showSign colorBySign />
+      <View className="flex-row gap-2">
+        <DeltaBadge value={3.2} />
+        <DeltaBadge value={-1.8} />
+        <DeltaBadge value={null} />
+      </View>
+      <EmptyValue />
     </CatalogSection>
   );
 }
 
 export function ButtonsSection() {
-  const [loading, setLoading] = useState(false);
-  const simulate = () => {
-    setLoading(true);
-    setTimeout(() => setLoading(false), 1500);
-  };
-
   return (
-    <CatalogSection title="Button e IconButton" note="Variantes, tamanhos e estados.">
-      <View className="flex-row flex-wrap gap-2">
-        <Button onPress={simulate} loading={loading}>
-          Primário
-        </Button>
-        <Button variant="secondary">Secundário</Button>
-        <Button variant="ghost">Fantasma</Button>
-        <Button variant="destructive" leftIcon={Trash2Icon}>
-          Excluir
-        </Button>
-      </View>
-      <View className="flex-row flex-wrap items-center gap-2">
-        <Button size="sm">Pequeno</Button>
-        <Button size="md">Médio</Button>
-        <Button size="lg" rightIcon={ArrowRightIcon}>
-          Grande
-        </Button>
-      </View>
-      <View className="flex-row flex-wrap gap-2">
-        <Button disabled>Desabilitado</Button>
-        <Button loading>Carregando</Button>
-      </View>
-      <Button fullWidth leftIcon={PlusIcon}>
-        Largura total
-      </Button>
-      <View className="flex-row gap-2">
-        <IconButton icon={SettingsIcon} accessibilityLabel="Configurações" />
-        <IconButton icon={PlusIcon} variant="secondary" accessibilityLabel="Adicionar" />
-        <IconButton icon={PlusIcon} variant="primary" accessibilityLabel="Adicionar" />
-        <IconButton icon={PlusIcon} disabled accessibilityLabel="Adicionar (desabilitado)" />
-      </View>
+    <CatalogSection
+      title="Button, IconButton e LinkButton"
+      note="Pílulas de 36, 44 ou 52; ícones à esquerda ou à direita."
+    >
+      {(['primary', 'inverse', 'secondary', 'outline', 'ghost', 'destructive'] as const).map(
+        (variant) => (
+          <Button key={variant} variant={variant} size="md" leftIcon="plus">
+            {variant}
+          </Button>
+        ),
+      )}
+      <Example label="tamanhos">
+        <View className="flex-row flex-wrap items-center gap-2">
+          <Button size="sm">sm</Button>
+          <Button size="md">md</Button>
+          <Button size="lg" rightIcon="arrowRight">
+            lg
+          </Button>
+        </View>
+      </Example>
+      <Example label="estados">
+        <View className="flex-row flex-wrap gap-2">
+          <Button size="md" loading>
+            Salvando
+          </Button>
+          <Button size="md" disabled>
+            Desabilitado
+          </Button>
+        </View>
+      </Example>
+      <Example label="IconButton">
+        <View className="flex-row gap-2">
+          {(['ghost', 'outline', 'filled', 'primary'] as const).map((variant) => (
+            <IconButton key={variant} icon="bell" variant={variant} accessibilityLabel={variant} />
+          ))}
+        </View>
+      </Example>
+      <LinkButton label="Ver todos" chevron onPress={() => undefined} />
     </CatalogSection>
   );
 }
 
-const budgetSchema = z.object({
-  name: z.string().min(1, 'Informe um nome para o teto'),
-  limit: z
-    .number({ error: 'Informe o valor do teto' })
-    .int()
-    .positive('O valor precisa ser maior que zero'),
+const schema = z.object({
+  name: z.string().min(1, 'Informe um nome'),
+  limit: z.number().int().positive('Informe um valor'),
 });
-type BudgetForm = z.infer<typeof budgetSchema>;
 
 export function InputsSection() {
   const [search, setSearch] = useState('');
   const [amount, setAmount] = useState<Cents | null>(null);
-  const { control, handleSubmit } = useForm<BudgetForm>({
-    resolver: zodResolver(budgetSchema),
-    defaultValues: { name: '' },
+  const { control, handleSubmit } = useForm<z.infer<typeof schema>>({
+    resolver: zodResolver(schema),
+    defaultValues: { name: '', limit: undefined },
   });
 
   return (
     <CatalogSection
-      title="Entradas"
+      title="Campos"
       note="Input, SearchInput, MoneyInput e FormField (react-hook-form + zod)."
     >
       <Input label="Nome" placeholder="Como quer chamar?" helperText="Aparece na lista de tetos." />
+      <Input label="Ativo" leftIcon="search" strong value="PETR4" />
       <Input label="E-mail" value="email-invalido" errorMessage="Informe um e-mail válido" />
       <Input label="Desabilitado" value="Não editável" disabled />
       <SearchInput value={search} onChangeText={setSearch} placeholder="Buscar lançamentos" />
@@ -171,13 +180,13 @@ export function InputsSection() {
         onChangeValue={setAmount}
         helperText={`Centavos: ${amount ?? 'null'}`}
       />
-      <View className="gap-3 rounded-lg border border-border p-3">
-        <Text variant="label" tone="muted">
+      <View className="gap-3 rounded-16 border border-border p-3">
+        <Text variant="caption" tone="subtle">
           FormField — toque em Validar com os campos vazios
         </Text>
         <FormField control={control} name="name" label="Nome do teto" placeholder="Mercado" />
         <FormField control={control} name="limit" type="money" label="Teto mensal" />
-        <Button variant="secondary" onPress={handleSubmit(() => undefined)}>
+        <Button variant="secondary" size="md" onPress={handleSubmit(() => undefined)}>
           Validar
         </Button>
       </View>

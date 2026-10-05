@@ -8,19 +8,32 @@ export const controlHeight = {
 /** Minimum touch target (WCAG / platform guidelines). */
 export const minTouchTarget = 44;
 
-/** Lucide icon sizes in dp. */
+/** Icon sizes in dp. */
 export const iconSize = {
+  xs: 14,
   sm: 16,
-  md: 20,
-  lg: 24,
-  xl: 32,
+  md: 18,
+  lg: 20,
+  xl: 24,
 } as const;
 
 /** Avatar diameters in dp. */
 export const avatarSize = {
+  xs: 28,
   sm: 32,
   md: 40,
-  lg: 56,
+  lg: 46,
+  xl: 56,
+} as const;
+
+/** Mobile bottom tab bar, tablet side rail and the chat side panel. */
+export const navigationSize = {
+  tabBarHeight: 84,
+  railWidth: 88,
+  /** The chat beside the pages (history or open conversation): one width everywhere. */
+  chatPanelWidth: 360,
+  /** Window width from which the chat docks beside the pages instead of opening full screen. */
+  chatPanelMinWindow: 1100,
 } as const;
 
 export type ControlSize = keyof typeof controlHeight;

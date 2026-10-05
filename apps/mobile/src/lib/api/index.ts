@@ -1,13 +1,8 @@
 /**
  * Data access entry point. Features call `apiRequest`/`apiStream` (usually through TanStack
- * hooks) and never know whether the data is fake or real.
- *
- * EXPO_PUBLIC_DATA_SOURCE picks the transport (see `env.ts`). The mock transport is loaded
- * with `__DEV__ ? require() : null`, so Metro removes `src/mocks` from production bundles.
+ * hooks) against the NestJS API (`EXPO_PUBLIC_API_URL`).
  */
 import type { ApiRequestArgs, EndpointName, StreamEndpointName, StreamRequest } from '@guara/types';
-
-import type * as Mocks from '@/mocks';
 
 import { env } from '../env';
 
@@ -21,16 +16,7 @@ export { createHttpTransport, toQueryString } from './http-transport';
 export type * from './transport';
 export { ContractViolationError, createApiTransport } from './validation';
 
-const loadMocks: (() => typeof Mocks) | null = __DEV__
-  ? // eslint-disable-next-line @typescript-eslint/no-require-imports -- conditional dev-only load
-    () => require('@/mocks') as typeof Mocks
-  : null;
-
 function createDefaultTransport(): ApiTransport {
-  if (env.dataSource === 'mock') {
-    if (!loadMocks) throw new Error('Mock data is only available in development builds.');
-    return createApiTransport(loadMocks().createMockTransport());
-  }
   return createApiTransport(createHttpTransport({ baseUrl: env.apiUrl }));
 }
 
@@ -41,7 +27,7 @@ export function getTransport(): ApiTransport {
   return current;
 }
 
-/** Replaces the transport (tests). `null` goes back to the one chosen by the env. */
+/** Replaces the transport (tests). `null` goes back to the HTTP transport. */
 export function setTransport(transport: ApiTransport | null): void {
   current = transport;
 }

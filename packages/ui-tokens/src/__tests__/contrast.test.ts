@@ -22,10 +22,12 @@ const backgrounds = {
   'background.elevated': colors.background.elevated,
   'surface.DEFAULT': colors.surface.DEFAULT,
   'surface.muted': colors.surface.muted,
+  'surface.input': colors.surface.input,
 };
 
 const textTokens = {
   'foreground.DEFAULT': colors.foreground.DEFAULT,
+  'foreground.soft': colors.foreground.soft,
   'foreground.muted': colors.foreground.muted,
   'foreground.subtle': colors.foreground.subtle,
   'brand.DEFAULT': colors.brand.DEFAULT,
@@ -57,7 +59,9 @@ describe('WCAG AA contrast (dark theme)', () => {
     ['brand.pressed', colors.brand.foreground, colors.brand.pressed],
     ['negative.solid', colors.negative.foreground, colors.negative.solid],
     ['negative.pressed', colors.negative.foreground, colors.negative.pressed],
-    ['positive (filled)', colors.positive.foreground, colors.positive.DEFAULT],
+    ['positive.solid', colors.positive.foreground, colors.positive.solid],
+    ['sand (inverse button)', colors.foreground.inverse, colors.foreground.DEFAULT],
+    ['hero', colors.foreground.DEFAULT, colors.hero.DEFAULT],
     ['warning (filled)', colors.warning.foreground, colors.warning.DEFAULT],
     ['info (filled)', colors.info.foreground, colors.info.DEFAULT],
   ])('text on %s', (_name, fg, bg) => {
@@ -78,5 +82,9 @@ describe('WCAG AA contrast (dark theme)', () => {
     for (const bg of Object.values(backgrounds)) {
       expect(contrast(colors.border.focus, bg)).toBeGreaterThanOrEqual(AA_UI);
     }
+  });
+
+  it.each(Object.entries(colors.assetMark))('main text on the asset mark %s', (_, bg) => {
+    expect(contrast(colors.foreground.DEFAULT, bg)).toBeGreaterThanOrEqual(AA_TEXT);
   });
 });

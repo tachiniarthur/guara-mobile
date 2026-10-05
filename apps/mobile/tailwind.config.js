@@ -3,17 +3,8 @@
 const { createJiti } = require('jiti');
 
 const jiti = createJiti(__filename);
-const {
-  colors,
-  spacing,
-  radius,
-  fontSize,
-  fontFamily,
-  typography,
-  controlHeight,
-  minTouchTarget,
-  breakpoints,
-} = jiti('@guara/ui-tokens');
+const { colors, spacing, radius, fontFamily, controlHeight, minTouchTarget, breakpoints } =
+  jiti('@guara/ui-tokens');
 
 const px = (value) => `${value}px`;
 const mapValues = (object, fn) =>
@@ -46,26 +37,33 @@ module.exports = {
       negative: colors.negative,
       warning: colors.warning,
       info: colors.info,
+      hero: colors.hero,
       overlay: colors.overlay,
+      scrim: colors.scrim,
       skeleton: colors.skeleton,
     },
     spacing: { ...mapValues(spacing, px), ...controlSizes },
     borderRadius: mapValues(radius, px),
-    fontSize: {
-      ...mapValues(fontSize, ([size, lineHeight]) => [px(size), { lineHeight: px(lineHeight) }]),
-      // Semantic scale: text-display, text-title, text-subtitle, text-body, text-caption, text-label.
-      ...mapValues(typography, (style) => [
-        px(style.fontSize),
-        { lineHeight: px(style.lineHeight), letterSpacing: px(style.letterSpacing) },
-      ]),
-    },
-    // One family per weight (required by custom fonts on Android):
-    // font-sans, font-sans-medium, font-sans-semibold, font-sans-bold.
+    // Font sizes in dp, named by value (`text-15`). Line height comes from the `Text` component
+    // (ratio per variant); prefer `<Text size={15}>` over these classes.
+    fontSize: Object.fromEntries(
+      [9, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 22, 24, 26, 28, 30, 34, 36, 38, 44].map(
+        (size) => [size, px(size)],
+      ),
+    ),
+    // One family per weight (required by custom fonts on Android). Figtree: font-sans,
+    // font-sans-medium… font-sans-extrabold. Fraunces: font-serif-semibold, -bold, -extrabold.
     fontFamily: {
       sans: [fontFamily.regular],
+      'sans-italic': [fontFamily.italic],
       'sans-medium': [fontFamily.medium],
       'sans-semibold': [fontFamily.semibold],
       'sans-bold': [fontFamily.bold],
+      'sans-extrabold': [fontFamily.extrabold],
+      'serif-semibold': [fontFamily.serifSemibold],
+      'serif-bold': [fontFamily.serifBold],
+      'serif-bold-italic': [fontFamily.serifBoldItalic],
+      'serif-extrabold': [fontFamily.serifExtrabold],
     },
     screens: mapValues(
       Object.fromEntries(Object.entries(breakpoints).filter(([, value]) => value > 0)),

@@ -2,11 +2,11 @@ import { fireEvent, render, screen } from '@testing-library/react-native';
 
 import { Text } from '@/components/ui/Text';
 
-import { Header } from '../Header';
 import { ResponsiveGrid } from '../ResponsiveGrid';
 import { Section } from '../Section';
+import { TopBar } from '../TopBar';
 
-const mockRouter = { back: jest.fn(), canGoBack: jest.fn(() => true) };
+const mockRouter = { back: jest.fn(), replace: jest.fn(), canGoBack: jest.fn(() => true) };
 jest.mock('expo-router', () => ({
   ...jest.requireActual('expo-router'),
   useRouter: () => mockRouter,
@@ -34,33 +34,53 @@ describe('ResponsiveGrid', () => {
     expect(rows).toHaveLength(2);
     expect(rows[1]?.children).toHaveLength(2); // "C" + spacer
   });
+
+  it('keeps the tablet columns on large tablets (landscape)', () => {
+    mockBreakpoint = 'desktop';
+    const { toJSON } = render(<ResponsiveGrid columns={{ tablet: 2 }}>{cells}</ResponsiveGrid>);
+    expect((toJSON() as { children: unknown[] }).children).toHaveLength(2);
+  });
 });
 
 describe('Section', () => {
-  it('renders the title as a header and the "Ver tudo" link', () => {
-    const onPress = jest.fn();
+  it('renders the title as a header and the aside', () => {
     render(
-      <Section title="Tetos de gasto" action={{ label: 'Ver tudo', onPress }}>
+      <Section
+        title="Tetos de gasto"
+        description="Como está o seu mês"
+        aside={<Text>Ver tudo</Text>}
+      >
         <Text>conteúdo</Text>
       </Section>,
     );
     expect(screen.getByRole('header', { name: 'Tetos de gasto' })).toBeOnTheScreen();
-    fireEvent.press(screen.getByRole('link', { name: 'Ver tudo: Tetos de gasto' }));
-    expect(onPress).toHaveBeenCalled();
+    expect(screen.getByText('Ver tudo')).toBeOnTheScreen();
   });
 });
 
-describe('Header', () => {
+describe('TopBar', () => {
   it('goes back with an accessible button', () => {
-    render(<Header title="Teto de gasto" />);
+    render(<TopBar title="Teto de gasto" />);
     fireEvent.press(screen.getByRole('button', { name: 'Voltar' }));
     expect(mockRouter.back).toHaveBeenCalled();
     expect(screen.getByRole('header', { name: 'Teto de gasto' })).toBeOnTheScreen();
   });
 
-  it('hides the back button when there is nowhere to go', () => {
+  it('falls back to a route when there is no history', () => {
     mockRouter.canGoBack.mockReturnValueOnce(false);
-    render(<Header title="Gastos" large />);
+    render(<TopBar title="Ativo" fallbackHref="/investments" />);
+    fireEvent.press(screen.getByRole('button', { name: 'Voltar' }));
+    expect(mockRouter.replace).toHaveBeenCalledWith('/investments');
+  });
+
+  it('closes forms and hides the button when asked', () => {
+    const onClose = jest.fn();
+    const { rerender } = render(
+      <TopBar title="Novo teto" leading="close" onLeadingPress={onClose} />,
+    );
+    fireEvent.press(screen.getByRole('button', { name: 'Fechar' }));
+    expect(onClose).toHaveBeenCalled();
+    rerender(<TopBar title="Gastos" leading="none" />);
     expect(screen.queryByRole('button', { name: 'Voltar' })).toBeNull();
   });
 });

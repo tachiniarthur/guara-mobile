@@ -29,7 +29,7 @@ O app roda **exclusivamente no Expo Go** (iPhone/iPad e Android físicos, emulad
 - **Back-end:** uma API NestJS. O app só fala com ela. **Exceção:** autenticação via Supabase Auth
   (Google, Apple, e-mail) com `@supabase/supabase-js`.
 - **IA:** API do Claude chamada **somente pela API NestJS**. O app recebe o chat por **SSE** da nossa API.
-- **Open Finance:** Malvo, via widget web dentro do app (WebView).
+- **Open Finance:** Malvo, via widget web dentro do app (WebView). Nos textos do app, sempre "Malvo".
 - **Cotações:** Brapi, sempre via nossa API.
 - **Notificações:** push (Expo Notifications) e e-mail (back-end). No Expo Go só notificações locais.
 - **Nenhum segredo no app.** Claude, Malvo, Brapi e a service role do Supabase ficam só na API.
@@ -63,13 +63,13 @@ O app roda **exclusivamente no Expo Go** (iPhone/iPad e Android físicos, emulad
 | Estado do cliente  | Zustand (`src/stores`, `src/features/*/store`)                                                                      |
 | Formulários        | react-hook-form + zod (`src/features/*/schemas`)                                                                    |
 | Estilo             | NativeWind 4 + Tailwind 3, tokens de `@guara/ui-tokens` (`tailwind.config.js`)                                      |
-| Gráficos           | Victory Native (XL) + Skia                                                                                          |
+| Gráficos           | SVG próprio (`react-native-svg`) com a geometria do design, em `src/components/charts`; globo interativo em Skia    |
 | Listas longas      | `@shopify/flash-list`                                                                                               |
 | Armazenamento      | `expo-sqlite/kv-store` (cache/preferências) e `expo-secure-store` (sessão), atrás de `src/lib/storage.ts`           |
 | Login Google       | OAuth do Supabase no navegador (`expo-web-browser` + `expo-auth-session`)                                           |
 | Login Apple        | `expo-apple-authentication` (só iOS)                                                                                |
 | Datas              | date-fns + date-fns-tz                                                                                              |
-| Ícones             | lucide-react-native                                                                                                 |
+| Ícones             | `Icon` (`src/components/ui/Icon.tsx`): traços 24×24 copiados do design, sobre `react-native-svg`                    |
 | Markdown no chat   | react-native-marked (JS puro)                                                                                       |
 | Testes             | jest-expo + @testing-library/react-native 13 (pacotes puros: Jest + @swc/jest)                                      |
 | Qualidade          | ESLint 9 (flat, `@guara/eslint-config`) + Prettier + Husky + lint-staged                                            |
@@ -81,13 +81,15 @@ O app roda **exclusivamente no Expo Go** (iPhone/iPad e Android físicos, emulad
 apps/mobile/
   app/                 SOMENTE rotas (Expo Router). Cada arquivo só importa e exporta a tela.
   src/features/<x>/    um diretório por domínio:
-    screens/           telas (hoje placeholders)
-    api/               query keys + hooks de dados (TanStack) da feature
-    components/ hooks/ schemas/ store/
+    screens/           telas
+    components/        peças da feature (cards, linhas, gráficos montados)
+    data.ts            dados estáticos do design (até a API existir) — dinheiro em Cents
+    lib/               cálculos puros e testados da feature (ex.: simulator/lib/finance.ts)
     index.ts           API pública da feature (importe sempre de '@/features/<x>')
-  src/components/      compartilhados: ui/ (primitivos e controles), feedback/, layout/, charts/ (vazio)
-  src/dev/             ferramentas só de desenvolvimento (catálogo de UI em /ui, dados falsos em /dev/data)
-  src/mocks/           dados falsos (fixtures, cenários, handlers, store) — só dev e testes
+  src/components/      compartilhados: ui/ (primitivos e controles), feedback/, layout/, charts/,
+                       illustrations/ (selva, contornos, textura Mata, bandeira), brand/ (logo)
+  src/navigation/      barra inferior (celular), trilho lateral (tablet), menu da conta, destinos
+  src/dev/             ferramentas só de desenvolvimento (catálogo de UI em /ui)
   src/lib/             infraestrutura: env, runtime, supabase, auth-oauth, api (transporte), sse,
                        query-client, storage, notifications, logger, cn, haptics
   src/providers/       AppProviders, QueryProvider, AuthProvider, ThemeProvider
@@ -112,9 +114,9 @@ packages/
 - **Infra isolada:** features **não** importam `expo-sqlite`, `expo-secure-store`,
   `@supabase/supabase-js`, `expo-auth-session`, `expo-apple-authentication`, `expo-web-browser` nem
   `expo-notifications` — o ESLint bloqueia (`no-restricted-imports`). Use `src/lib/*`.
-- **Chamadas à API:** `apiRequest('<endpoint>', …)` de `src/lib/api` (contrato tipado de
-  `@guara/types`), sempre por hooks TanStack da feature. Detalhes em
-  [Dados: contratos e mocks](#dados-contratos-e-mocks).
+- **Dados das telas:** hoje vêm de `src/features/<x>/data.ts`, fiéis ao artefato de design. Valores
+  derivados (totais, percentuais, simulações) são **calculados** a partir deles, nunca copiados.
+  Detalhes em [Dados: hoje estáticos, amanhã a API](#dados-hoje-estáticos-amanhã-a-api).
 - **Modais:** arquivos em `app/(app)/(modals)/` são apresentados como modal automaticamente.
 - **Env:** novas variáveis entram em `.env.example` e no schema zod de `src/lib/env.ts`, lidas com
   `process.env.EXPO_PUBLIC_X` estático.
@@ -125,16 +127,35 @@ packages/
 - **Sessão simulada:** `devSession.status` em `src/providers/AuthProvider.tsx`
   (`signedOut` → (auth), `onboarding` → (onboarding), `signedIn` → (app)).
 
+### Chat em tablets
+
+- **Uma largura só:** toda coluna de chat (histórico ou conversa aberta) usa `ChatSideColumn`, com
+  `navigationSize.chatPanelWidth` (360 dp). Não crie painéis de chat com largura própria.
+- **Tablet largo** (`useChatDocked()`: janela ≥ `chatPanelMinWindow`, 1100 dp): o `ChatPanel`
+  fica à direita de todas as páginas (`app/(app)/_layout.tsx`); o botão "Conversar" reabre o painel.
+  Nas rotas `/chat`, o histórico vira coluna fixa à esquerda da conversa.
+- **Tablet em pé e celular:** conversa e histórico abrem como página inteira.
+- **Estado compartilhado:** mensagens, destinatário (@) e painel ficam em `useChatStore`
+  (`src/features/chat/store.ts`). Uma página pode abrir o chat sobre si com `setContext` (ex.:
+  Relatório com o Tamanduá) e deve limpar ao sair.
+
 ### Componentes base (`src/components/`)
 
-- **Catálogo vivo:** abra `/ui` no app em desenvolvimento ("Catálogo de UI (dev)" em qualquer
-  placeholder). Componente novo ou variante nova → acrescente ao catálogo (`src/dev/ui-catalog`).
-- **Texto:** todo texto passa por `Text` (variantes `display/title/subtitle/body/caption/label`,
-  tons semânticos). Dinheiro com `MoneyText` (`Cents | null`), percentuais com `PercentText`,
-  variação com `DeltaBadge`, ausência com `EmptyValue`. Nunca formate valores na mão.
+- **Catálogo vivo:** abra `/ui` no app em desenvolvimento. Componente novo ou variante nova →
+  acrescente ao catálogo (`src/dev/ui-catalog`).
+- **Tipografia:** Fraunces (títulos e números grandes, `serif`) e Figtree (o resto), carregadas em
+  `app/_layout.tsx`. Todo texto passa por `Text` (variantes `hero/display/title/section/heading/
+subtitle/body/lead/label/caption/micro`, ou `size`/`weight`/`serif` explícitos) e `Span` para
+  trechos inline. `Text` aplica a escala de "Tamanho do texto" (`useUiPreferences`).
+- **Valores:** dinheiro com `MoneyText` (`Cents | null`), percentuais com `PercentText`, variação
+  com `DeltaBadge`, ausência com `EmptyValue`. Nunca formate valores na mão.
+- **Blocos prontos:** `SectionCard` (card com título Fraunces), `DataRow` (linha de `dl`),
+  `DataTable` (tabela do tablet, colunas com largura fixa), `InfoTip` (ⓘ com explicação),
+  `Slider`, `SegmentedControl`, `UnderlineTabs`, `Chip`, `ResponsiveGrid`, `PageHeader`/`Breadcrumb`
+  (tablet) e `TopBar` (celular), `FormScreen` (formulários nos dois tamanhos).
 - **Variantes:** `cva` + `cn()` (`src/lib/cn.ts`, tailwind-merge v2 configurado com nossos tokens).
   Classes sempre escritas por extenso (o Tailwind não enxerga classes montadas dinamicamente).
-- **Cores em props** (ícones Lucide, Switch, ActivityIndicator): use `toneColor`/tokens de
+- **Cores em props** (`Icon`, SVG, ActivityIndicator): use `toneColor`/tokens de
   `@guara/ui-tokens`, nunca hex no componente. Contraste AA é testado em `ui-tokens`.
 - **Toque e acessibilidade:** `hitSlopFor(size)` garante 44×44; `accessibilityRole/State` em todo
   controle; `haptics` (`src/lib/haptics.ts`) em ações principais e seleção.
@@ -150,13 +171,27 @@ packages/
 - **`@gorhom/bottom-sheet`:** nunca chame `dismiss()` num modal que não foi apresentado (trava em
   `DISMISSING` e ignora `present()` depois). O `Sheet` já trata isso.
 - **Testes:** `expo-router/testing-library` registra o próprio mock do Reanimated (sem
-  `useReducedMotion`) — prefira `ReduceMotion.System` nas animações. Use os matchers do RNTL 13
+  `useReducedMotion` nem `ReducedMotionConfig`) — prefira `ReduceMotion.System` nas animações e
+  confira `typeof ReducedMotionConfig === 'function'` antes de renderizá-lo. Use os matchers do RNTL 13
   (`toBeChecked`, `toBeSelected`, `toBeBusy`); `jest-native` está descontinuado.
 - **Testes de hooks:** use `createWrapper()` de `__tests__/utils/query.tsx` — o `QueryClient` de
   teste tem `gcTime: Infinity` também nas **mutações**; com o padrão (5 min) o Jest não encerra o
   worker ("failed to exit gracefully").
 - **`renderRouter` e timers:** nos testes de rota os retries do TanStack (1 s + 2 s) andam em tempo
   simulado; em `renderHook` com o `createQueryClient()` real eles levam tempo de verdade.
+- **Raio + fundo dinâmico no Android:** um `View` que ganha `bg-*` depois de montado pode perder o
+  `rounded-*` (cantos retos). Em pílulas que trocam de fundo, passe também `style={{ borderRadius }}`.
+- **Tabelas/linhas com conteúdo largo:** o Yoga deixa uma célula larga empurrar as vizinhas mesmo
+  com `flex`. Use larguras fixas (como o `DataTable`) quando as colunas precisam alinhar.
+- **Worklets (Reanimated/Skia):** dentro de `useDerivedValue`/gestos, nada de `.map`/`.forEach` com
+  callback nem funções auxiliares locais — viram "Remote Function" e quebram no aparelho (os testes
+  não pegam). Use laços simples ou funções de módulo com `'worklet'` (veja `InteractiveGlobe`). Leia e
+  escreva shared values com `.get()`/`.set()` (o React Compiler recusa `.value =`) e use
+  `scheduleOnRN` (react-native-worklets) no lugar de `runOnJS`.
+- **Gesto dentro de página que rola:** um dedo só assume depois de movimento horizontal
+  (`activeOffsetX` + `failOffsetY`); deixe o vertical para a rolagem e ofereça dois dedos.
+- **Gestos:** prefira `react-native-gesture-handler` (`Gesture.Pan().runOnJS(true)`) a
+  `PanResponder` com refs — o React Compiler recusa ler refs durante o render (veja `Slider`).
 - **Código só de dev:** carregue com `__DEV__ ? require(...) : null` para o Metro remover do bundle
   de produção (veja `app/(dev)/ui.tsx`).
 
@@ -194,17 +229,22 @@ componentes e hooks automaticamente.
   compilador primeiro**: confira se o código respeita as regras de React (sem mutar props/estado,
   sem ler refs durante o render) e, para isolar, use a diretiva `'use no memo'` no componente.
 
-## Dados: contratos e mocks
+## Dados: hoje estáticos, amanhã a API
 
-As telas são construídas **sem a API NestJS**: tudo passa por um contrato tipado e por um
-transporte que hoje responde com dados falsos. Trocar para a API real é só configuração.
+As telas são construídas **sem a API NestJS**. Cada feature guarda os dados do design em
+`data.ts` (tipados, dinheiro em `Cents`) e calcula o que é derivado na hora (ex.: as simulações em
+`src/features/simulator/lib`, os recortes de período em `src/features/investments/lib`). O contrato
+tipado e o transporte HTTP já existem e serão usados quando a API chegar:
 
 ```
-@guara/types (schema zod)  →  @guara/types/src/api (endpoint)  →  src/lib/api (ApiTransport)
-                                                                    ├─ httpTransport (API)
-                                                                    └─ mockTransport (src/mocks)
-                       src/features/<x>/api (hooks TanStack)  ←────┘
+@guara/types (schema zod)  →  @guara/types/src/api (endpoint)  →  src/lib/api (httpTransport)
+                       src/features/<x>/api (hooks TanStack, quando houver API)  ←──┘
 ```
+
+- **Nunca invente valores:** períodos ou campos que o design não traz mostram "—" ou um estado vazio
+  ("Ainda não temos 5 anos de histórico deste ativo.").
+- **Ao trocar para a API:** troque a leitura de `data.ts` por um hook TanStack da feature e mantenha
+  os mesmos tipos/formatos; os cálculos de `lib/` continuam valendo.
 
 ### Caminho para um dado novo
 
@@ -213,15 +253,9 @@ transporte que hoje responde com dados falsos. Trocar para a API real é só con
 2. **Endpoint** em `packages/types/src/api/endpoints/<grupo>.ts` (nome estável `'dominio.acao'`,
    método, caminho `/v1/...` com `:params`, `params`/`query`/`body`/`response`). Streaming (SSE)
    fica em `api/stream.ts`. O teste do contrato confere placeholders × params.
-3. **Fixture + handler** em `apps/mobile/src/mocks`: dados base em `fixtures/`, montagem em
-   `scenarios/`, resposta em `handlers/<grupo>.ts`. O `satisfies MockHandlers` **não compila** se
-   faltar handler para algum endpoint. Campos derivados (gasto do teto, percentuais, totais) são
-   calculados em `mocks/logic/` na hora da resposta — nunca guarde valores que podem divergir.
-4. **Hook** em `src/features/<x>/api/`: query keys em `keys.ts` (sobre `QUERY_ROOTS` de
-   `src/constants/query-keys.ts`), leitura em `queries.ts`, mutação em `mutations.ts` (invalida as
-   raízes afetadas com `invalidateRoots`; otimista com rollback onde a interação pede resposta
-   imediata). Exporte pelo `index.ts` da feature. `staleTime` por tipo em `STALE_TIME`
-   (`src/lib/query-client.ts`).
+3. **Hook** em `src/features/<x>/api/`: query keys em `keys.ts`, leitura em `queries.ts`, mutação
+   em `mutations.ts` (otimista com rollback onde a interação pede resposta imediata). Exporte pelo
+   `index.ts` da feature. `staleTime` por tipo em `STALE_TIME` (`src/lib/query-client.ts`).
 
 ### Convenções dos contratos
 
@@ -243,21 +277,6 @@ transporte que hoje responde com dados falsos. Trocar para a API real é só con
   O TanStack só repete `network`, `internal` e `unavailable`.
 - **Validação de respostas:** em dev/testes, `schema.parse` (lança `ContractViolationError`);
   em produção, `safeParse` + `logger.error`, sem derrubar o app.
-
-### Dados falsos (`src/mocks`)
-
-- **Origem:** `EXPO_PUBLIC_DATA_SOURCE=mock | api` (padrão `mock` em dev, `api` em release). A
-  variante `production` recusa `mock`. Os mocks entram com `__DEV__ ? require() : null` e **não
-  vão para o bundle de produção** (confira com `npx expo export` e busca de strings).
-- **Determinísticos:** PRNG com semente fixa e relógio próprio (`MOCK_NOW` = 25/09/2026 12:00 em
-  São Paulo). Handlers usam `context.now`/`today(db)`, nunca a data do aparelho.
-- **Cenários:** `complete` (padrão), `new_user` (estados vazios) e `errors` (endpoints com
-  `ApiError` e um timeout). Nomes fictícios para bancos, lojas e assinaturas; tickers da B3 reais.
-- **Painel `/dev/data`** ("Dados falsos (dev)" em qualquer placeholder): troca de cenário,
-  latência (0 / 300 ms / 1,5 s), taxa de erro aleatório e botão que reinicia os dados e o cache.
-- **Telas e features nunca importam `@/mocks`** — o ESLint bloqueia fora de `src/mocks`,
-  `src/dev` e testes. Testes de hook usam `__tests__/utils/query.tsx` (`useFreshMocks`,
-  `createWrapper`).
 
 ## Versões fixadas de propósito
 

@@ -1,3 +1,6 @@
+import type React from 'react';
+import type * as ReactNative from 'react-native';
+
 /* Global test setup (jest-expo preset). RNTL 13+ registers its matchers automatically. */
 import 'react-native-gesture-handler/jestSetup';
 
@@ -42,3 +45,29 @@ jest.mock('expo-network', () => ({
   useNetworkState: jest.fn(() => ({ isConnected: true, isInternetReachable: true })),
   getNetworkStateAsync: jest.fn(async () => ({ isConnected: true, isInternetReachable: true })),
 }));
+
+// Skia draws on the GPU; in Jest the canvas becomes a View and drawing calls are no-ops.
+jest.mock('@shopify/react-native-skia', () => {
+  const { createElement } = jest.requireActual<typeof React>('react');
+  const { View } = jest.requireActual<typeof ReactNative>('react-native');
+  const makePath = () => {
+    const path: Record<string, () => unknown> = {};
+    for (const method of ['addCircle', 'moveTo', 'lineTo', 'close', 'reset', 'addOval']) {
+      path[method] = () => path;
+    }
+    path.detach = () => ({});
+    path.build = () => ({});
+    return path;
+  };
+  const Noop = () => null;
+  return {
+    Canvas: (props: object) => createElement(View, props),
+    Circle: Noop,
+    DashPathEffect: Noop,
+    Group: Noop,
+    Path: Noop,
+    RadialGradient: Noop,
+    Skia: { Path: { Make: makePath }, PathBuilder: { Make: makePath } },
+    vec: (x: number, y: number) => ({ x, y }),
+  };
+});

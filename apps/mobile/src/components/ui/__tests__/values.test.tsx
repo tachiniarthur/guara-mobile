@@ -1,4 +1,5 @@
-import { cents, NBSP } from '@guara/utils';
+import { fontFor, typography } from '@guara/ui-tokens';
+import { cents, MINUS_SIGN, NBSP } from '@guara/utils';
 import { render, screen } from '@testing-library/react-native';
 
 import { DeltaBadge } from '../DeltaBadge';
@@ -17,10 +18,12 @@ describe('Text', () => {
       </Text>,
     );
     const text = screen.getByTestId('t');
-    expect(text.props.className).toContain('text-title');
-    expect(text.props.className).toContain('font-sans-semibold');
     expect(text.props.className).toContain('text-foreground-muted');
-    expect(text.props.maxFontSizeMultiplier).toBe(1.4);
+    expect(text).toHaveStyle({
+      fontFamily: fontFor(typography.title.weight, { serif: typography.title.serif }),
+    });
+    expect(text).toHaveStyle({ fontSize: typography.title.fontSize });
+    expect(text.props.maxFontSizeMultiplier).toBe(typography.title.maxFontSizeMultiplier);
   });
 });
 
@@ -52,7 +55,7 @@ describe('MoneyText', () => {
     expect(screen.getByTestId('in')).toHaveTextContent(brl('+R$ 50,00'));
     expect(screen.getByTestId('in').props.className).toContain('text-positive');
     expect(screen.getByTestId('in').props.accessibilityLabel).toBe('mais 50 reais');
-    expect(screen.getByTestId('out')).toHaveTextContent(brl('-R$ 50,00'));
+    expect(screen.getByTestId('out')).toHaveTextContent(brl(`${MINUS_SIGN}R$ 50,00`));
     expect(screen.getByTestId('out').props.className).toContain('text-negative');
     expect(screen.getByTestId('zero').props.className).toContain('text-foreground');
   });

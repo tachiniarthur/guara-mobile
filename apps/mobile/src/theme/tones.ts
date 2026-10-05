@@ -3,6 +3,7 @@ import { colors } from '@guara/ui-tokens';
 /** Semantic text/icon tones shared by components. */
 export type Tone =
   | 'default'
+  | 'soft'
   | 'muted'
   | 'subtle'
   | 'positive'
@@ -18,6 +19,7 @@ export type Tone =
  */
 export const toneColor: Record<Tone, string> = {
   default: colors.foreground.DEFAULT,
+  soft: colors.foreground.soft,
   muted: colors.foreground.muted,
   subtle: colors.foreground.subtle,
   positive: colors.positive.DEFAULT,

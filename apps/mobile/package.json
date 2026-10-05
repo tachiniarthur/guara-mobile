@@ -18,7 +18,8 @@
     "typegen": "expo customize tsconfig.json > /dev/null"
   },
   "dependencies": {
-    "@expo-google-fonts/inter": "^0.4.2",
+    "@expo-google-fonts/figtree": "^0.4.1",
+    "@expo-google-fonts/fraunces": "^0.4.1",
     "@gorhom/bottom-sheet": "^5.2.14",
     "@guara/types": "workspace:*",
     "@guara/ui-tokens": "workspace:*",
@@ -55,7 +56,6 @@
     "expo-status-bar": "~57.0.1",
     "expo-system-ui": "~57.0.4",
     "expo-web-browser": "~57.0.3",
-    "lucide-react-native": "^1.49.0",
     "nativewind": "^4.2.7",
     "react": "19.2.3",
     "react-dom": "19.2.3",

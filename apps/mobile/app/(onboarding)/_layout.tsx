@@ -6,9 +6,5 @@ import { stackScreenOptions } from '@/theme/navigation';
 export const unstable_settings = { initialRouteName: 'connect-banks' };
 
 export default function OnboardingLayout() {
-  return (
-    <Stack screenOptions={stackScreenOptions}>
-      <Stack.Screen name="connect-banks" options={{ headerShown: false }} />
-    </Stack>
-  );
+  return <Stack screenOptions={stackScreenOptions} />;
 }

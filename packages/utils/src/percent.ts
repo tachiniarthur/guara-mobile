@@ -6,6 +6,8 @@ export interface FormatPercentOptions {
   fractionDigits?: number;
   /** `always` adds "+" to positive values (useful for variations). */
   signDisplay?: 'auto' | 'always';
+  /** Use the typographic minus sign "−" (U+2212) instead of the hyphen "-". */
+  typographicMinus?: boolean;
 }
 
 /**
@@ -14,7 +16,7 @@ export interface FormatPercentOptions {
  */
 export function formatPercent(
   value: number | null | undefined,
-  { fractionDigits = 2, signDisplay = 'auto' }: FormatPercentOptions = {},
+  { fractionDigits = 2, signDisplay = 'auto', typographicMinus = false }: FormatPercentOptions = {},
 ): string {
   if (value === null || value === undefined || !Number.isFinite(value)) return EMPTY;
 
@@ -25,7 +27,7 @@ export function formatPercent(
   const number = fractionPart ? `${grouped},${fractionPart}` : grouped;
 
   let sign = '';
-  if (!isZero && value < 0) sign = '-';
+  if (!isZero && value < 0) sign = typographicMinus ? '\u2212' : '-';
   else if (!isZero && signDisplay === 'always') sign = '+';
 
   return `${sign}${number}%`;

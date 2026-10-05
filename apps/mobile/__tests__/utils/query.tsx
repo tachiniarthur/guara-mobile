@@ -1,9 +1,6 @@
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import type { ReactNode } from 'react';
 
-import { setTransport } from '@/lib/api';
-import { resetMockData, setMockScenario, useMockConfig, type MockScenarioName } from '@/mocks';
-
 /** Fresh client per test: no retries, nothing garbage-collected mid-test. */
 export function createTestQueryClient() {
   return new QueryClient({
@@ -19,16 +16,6 @@ export function createWrapper(queryClient = createTestQueryClient()) {
     return <QueryClientProvider client={queryClient}>{children}</QueryClientProvider>;
   }
   return { queryClient, wrapper: Wrapper };
-}
-
-/** Fresh fake data for each test, served by the transport chosen by the env (mock). */
-export function useFreshMocks(scenario: MockScenarioName = 'complete') {
-  beforeEach(() => {
-    setTransport(null);
-    useMockConfig.setState({ latencyMs: 0, errorRate: 0 });
-    setMockScenario(scenario);
-    resetMockData();
-  });
 }
 
 export function deferred<T = void>() {

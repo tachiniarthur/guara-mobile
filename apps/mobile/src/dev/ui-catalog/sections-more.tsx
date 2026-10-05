@@ -1,10 +1,17 @@
-import { cents } from '@guara/utils';
-import { BriefcaseIcon, InboxIcon, ReceiptTextIcon, ShoppingCartIcon } from 'lucide-react-native';
+import { colors } from '@guara/ui-tokens';
 import { useState } from 'react';
 import { View } from 'react-native';
 
-import { AiDisclaimer, EmptyState, ErrorState, OfflineBanner, toast } from '@/components/feedback';
-import { ResponsiveGrid, Section } from '@/components/layout';
+import {
+  BarChart,
+  COUNTRY_CENTERS,
+  InteractiveGlobe,
+  LegendSwatch,
+  ProjectionChart,
+  RangeBar,
+} from '@/components/charts';
+import { EmptyState, ErrorState, toast } from '@/components/feedback';
+import { ResponsiveGrid, SectionCard } from '@/components/layout';
 import {
   Avatar,
   Badge,
@@ -13,114 +20,106 @@ import {
   Checkbox,
   Chip,
   ConfirmDialog,
-  Divider,
+  CountBadge,
+  DataRow,
+  DataTable,
+  Disclosure,
+  InfoNote,
+  InfoTip,
   ListItem,
-  MoneyText,
   ProgressBar,
   RadioGroup,
   SegmentedControl,
+  SelectField,
   Sheet,
   Skeleton,
+  Slider,
   Spinner,
   Switch,
   Text,
+  UnderlineTabs,
 } from '@/components/ui';
 
 import { CatalogSection, Example } from './CatalogSection';
 
 export function SelectionSection() {
-  const [push, setPush] = useState(true);
-  const [email, setEmail] = useState(false);
-  const [horizon, setHorizon] = useState<'short' | 'medium' | 'long' | null>(null);
-  const [banks, setBanks] = useState({ a: true, b: false });
-  const [categories, setCategories] = useState<string[]>(['Mercado']);
-  const [period, setPeriod] = useState<'6m' | '12m' | 'all'>('6m');
-
-  const toggleCategory = (name: string) =>
-    setCategories((current) =>
-      current.includes(name) ? current.filter((item) => item !== name) : [...current, name],
-    );
+  const [chip, setChip] = useState('Mês');
+  const [segment, setSegment] = useState<'all' | 'banks'>('all');
+  const [tab, setTab] = useState<'1M' | '1A'>('1A');
+  const [checked, setChecked] = useState(true);
+  const [switched, setSwitched] = useState(false);
+  const [radio, setRadio] = useState<'buy' | 'sell'>('sell');
+  const [select, setSelect] = useState<'sep' | 'aug'>('sep');
+  const [slider, setSlider] = useState(25);
 
   return (
-    <CatalogSection title="Seleção" note="Switch, RadioGroup, Checkbox, Chip e SegmentedControl.">
-      <View>
-        <Switch
-          label="Notificações push"
-          description="Alertas de teto e de preço"
-          value={push}
-          onValueChange={setPush}
-        />
-        <Switch label="E-mail" value={email} onValueChange={setEmail} />
-        <Switch label="SMS (indisponível)" value={false} onValueChange={() => undefined} disabled />
-      </View>
-      <Example label="RadioGroup — pergunta do perfil de investidor (exemplo)">
-        <RadioGroup
-          accessibilityLabel="Por quanto tempo pretende deixar o dinheiro investido?"
-          value={horizon}
-          onChange={setHorizon}
-          options={[
-            { value: 'short', label: 'Até 1 ano' },
-            { value: 'medium', label: 'De 1 a 5 anos' },
-            { value: 'long', label: 'Mais de 5 anos', description: 'Aceito oscilações no caminho' },
-          ]}
-        />
-      </Example>
-      <View>
-        <Checkbox
-          label="Banco Exemplo A"
-          checked={banks.a}
-          onChange={(a) => setBanks((s) => ({ ...s, a }))}
-        />
-        <Checkbox
-          label="Banco Exemplo B"
-          checked={banks.b}
-          onChange={(b) => setBanks((s) => ({ ...s, b }))}
-        />
-      </View>
+    <CatalogSection
+      title="Seleção"
+      note="Chip, SegmentedControl, UnderlineTabs, Checkbox, Switch, RadioGroup, SelectField e Slider."
+    >
       <View className="flex-row flex-wrap gap-2">
-        {['Mercado', 'Transporte', 'Lazer', 'Saúde'].map((name) => (
+        {['Mês', 'Ano', '12M'].map((label) => (
           <Chip
-            key={name}
-            label={name}
-            selected={categories.includes(name)}
-            onPress={() => toggleCategory(name)}
+            key={label}
+            label={label}
+            selected={chip === label}
+            onPress={() => setChip(label)}
           />
         ))}
-        <Chip label="Desabilitado" selected={false} onPress={() => undefined} disabled />
       </View>
       <SegmentedControl
-        accessibilityLabel="Período"
-        value={period}
-        onChange={setPeriod}
         options={[
-          { value: '6m', label: '6M', accessibilityLabel: '6 meses' },
-          { value: '12m', label: '12M', accessibilityLabel: '12 meses' },
-          { value: 'all', label: 'Tudo' },
+          { value: 'all', label: 'Tudo junto' },
+          { value: 'banks', label: 'Por banco' },
         ]}
+        value={segment}
+        onChange={setSegment}
       />
-    </CatalogSection>
-  );
-}
-
-const BUDGET_LIMIT = cents(100_000); // R$ 1.000,00
-const BUDGET_MARKERS = [cents(50_000), cents(70_000)]; // avisos em R$ 500,00 e R$ 700,00
-
-function BudgetExample({ spent, label }: { spent: number; label: string }) {
-  return (
-    <Example label={label}>
-      <View className="gap-2">
-        <View className="flex-row justify-between">
-          <MoneyText value={cents(spent)} variant="label" />
-          <MoneyText value={BUDGET_LIMIT} variant="label" tone="muted" />
-        </View>
-        <ProgressBar
-          value={spent}
-          max={BUDGET_LIMIT}
-          markers={BUDGET_MARKERS}
-          accessibilityLabel={`Teto de mercado (exemplo): ${label}`}
+      <UnderlineTabs
+        options={[
+          { value: '1M', label: '1M' },
+          { value: '1A', label: '1A' },
+        ]}
+        value={tab}
+        onChange={setTab}
+      />
+      <Checkbox label="Notificação no celular" checked={checked} onChange={setChecked} />
+      <Switch
+        label="Reduzir animações"
+        description="Vale para o app todo"
+        value={switched}
+        onValueChange={setSwitched}
+      />
+      <RadioGroup
+        accessibilityLabel="Tipo de alerta"
+        options={[
+          { value: 'buy', label: 'Compra', description: 'Quando cair' },
+          { value: 'sell', label: 'Venda', description: 'Quando subir' },
+        ]}
+        value={radio}
+        onChange={setRadio}
+      />
+      <SelectField
+        label="Mês"
+        options={[
+          { value: 'sep', label: 'Setembro' },
+          { value: 'aug', label: 'Agosto' },
+        ]}
+        value={select}
+        onChange={setSelect}
+      />
+      <Example label={`Slider: ${slider} anos`}>
+        <Slider
+          value={slider}
+          min={5}
+          max={45}
+          step={1}
+          onChange={setSlider}
+          accessibilityLabel="Prazo"
+          valueText={`${slider} anos`}
         />
-      </View>
-    </Example>
+      </Example>
+    </CatalogSection>
   );
 }
 
@@ -128,146 +127,149 @@ export function DisplaySection() {
   return (
     <CatalogSection
       title="Exibição"
-      note="Card, ListItem, Badge, Avatar, ProgressBar, Divider, Skeleton e Spinner."
+      note="Badge, CountBadge, Avatar, ProgressBar, InfoNote, InfoTip, DataRow, DataTable e Disclosure."
     >
-      <Card>
-        <Text variant="label" tone="muted">
-          Card padrão
-        </Text>
-        <MoneyText value={cents(1_234_567)} variant="title" />
-      </Card>
-      <Card variant="elevated" onPress={() => toast.info('Card pressionado')}>
-        <Text>Card elevado e pressionável</Text>
-      </Card>
-      <Card padding="none">
-        <ListItem
-          leadingIcon={BriefcaseIcon}
-          title="Salário (exemplo)"
-          subtitle="Conta corrente • Banco Exemplo"
-          trailing={<MoneyText value={cents(500_000)} showSign colorBySign variant="label" />}
-          trailingCaption="05/10"
-          onPress={() => undefined}
-          showChevron
-        />
-        <Divider inset />
-        <ListItem
-          leadingIcon={ShoppingCartIcon}
-          title="Supermercado (exemplo)"
-          subtitle="Cartão final 0000 • 2/3"
-          trailing={<MoneyText value={cents(-8_990)} colorBySign variant="label" />}
-          trailingCaption="Hoje"
-          onPress={() => undefined}
-          showChevron
-        />
-        <Divider inset />
-        <ListItem
-          leading={<Avatar name="Streaming Exemplo" size="md" />}
-          title="Streaming Exemplo"
-          subtitle="Assinatura mensal"
-          trailing={<MoneyText value={null} variant="label" />}
-        />
-      </Card>
       <View className="flex-row flex-wrap gap-2">
-        <Badge label="Conectado" tone="positive" />
-        <Badge label="Expirando" tone="warning" />
-        <Badge label="Expirado" tone="negative" />
-        <Badge label="Open Finance" tone="info" />
-        <Badge label="Manual" />
-        <Badge label="Compra" tone="positive" />
-        <Badge label="Venda" tone="negative" />
-        <Badge label="Risco alto" tone="negative" />
+        {(['neutral', 'positive', 'negative', 'warning', 'info', 'brand'] as const).map((tone) => (
+          <Badge key={tone} label={tone} tone={tone} />
+        ))}
+        <Badge label="status" tone="positive" appearance="status" />
+        <Badge label="solid" tone="brand" appearance="solid" />
       </View>
       <View className="flex-row items-center gap-3">
-        <Avatar name="Banco Exemplo" size="sm" />
-        <Avatar name="Banco Exemplo" size="md" />
-        <Avatar name="Banco Exemplo" size="lg" />
-        <Avatar name="Imagem quebrada" source={{ uri: 'https://invalid.example/x.png' }} />
+        <Avatar name="Arthur Rocha" tone="brand" />
+        <Avatar name="Bia" tone="neutral" size={32} />
+        <CountBadge count={2} accessibilityLabel="2 alertas" />
       </View>
-      <BudgetExample spent={30_000} label="R$ 300 de R$ 1.000 — normal" />
-      <BudgetExample spent={72_000} label="R$ 720 — passou do aviso de R$ 700" />
-      <BudgetExample spent={105_000} label="R$ 1.050 — estourou o teto" />
-      <Example label="Skeleton e Spinner">
-        <View className="flex-row items-center gap-3">
-          <Skeleton className="h-10 w-10 rounded-full" />
-          <View className="flex-1 gap-2">
-            <Skeleton className="w-1/2" />
-            <Skeleton className="w-1/3" />
-          </View>
-          <Spinner />
-        </View>
-      </Example>
+      <ProgressBar percent={74} tone="warning" marker={70} accessibilityLabel="74% do teto" />
+      <InfoNote icon="info">Explicação curta com ícone.</InfoNote>
+      <InfoNote icon="alertTriangle" tone="warning">
+        Aviso em destaque.
+      </InfoNote>
+      <View className="flex-row items-center">
+        <Text>Com dica</Text>
+        <InfoTip text="Toque para ver a explicação." />
+      </View>
+      <View>
+        <DataRow label="Quantidade" value="200 ações" density="compact" />
+        <DataRow label="Classe" value="Renda variável" info="Grupo usado na sua alocação." />
+        <DataRow label="Nome" value="iShares Ibovespa Fundo de Índice" layout="stacked" last />
+      </View>
+      <DataTable
+        caption="Exemplo de tabela"
+        columns={[
+          { key: 'date', label: 'Data' },
+          { key: 'value', label: 'Valor', align: 'right' },
+        ]}
+        rows={[
+          { key: '1', cells: [<Text key="d">20/08/2026</Text>, <Text key="v">R$ 0,72</Text>] },
+          { key: '2', cells: [<Text key="d">20/05/2026</Text>, <Text key="v">R$ 0,64</Text>] },
+        ]}
+      />
+      <Disclosure title="Como calculamos">
+        <Text tone="muted">Conteúdo que abre e fecha.</Text>
+      </Disclosure>
+    </CatalogSection>
+  );
+}
+
+function GlobeExample() {
+  const [selected, setSelected] = useState<string | null>(null);
+  const [lat = 0, lon = 0] = COUNTRY_CENTERS[392] ?? [];
+  return (
+    <Example label={`InteractiveGlobe (Japão em destaque) · selecionado: ${selected ?? 'nenhum'}`}>
+      <InteractiveGlobe
+        markers={[
+          { key: 'JP', label: 'Japão', lat, lon, color: colors.negative.DEFAULT, countryId: 392 },
+        ]}
+        orbit={{ key: 'crypto', label: 'Sem país', color: colors.positive.DEFAULT }}
+        selectedKey={selected}
+        onSelect={setSelected}
+        initialCenter={{ lat: 20, lon: 120 }}
+        maxSize={240}
+        accessibilityLabel="Globo de exemplo"
+      />
+    </Example>
+  );
+}
+
+export function ChartsSection() {
+  return (
+    <CatalogSection
+      title="Gráficos"
+      note="SVG com a geometria do design; toque nos pontos para ver o valor."
+    >
+      <GlobeExample />
+      <RangeBar
+        position={62}
+        minLabel="Mín. R$ 30,12"
+        maxLabel="Máx. R$ 42,50"
+        accessibilityLabel="Faixa de 52 semanas"
+      />
+      <BarChart
+        data={[0.95, 1.12, 0.74, 0.72].map((value, index) => ({
+          label: `p${index + 1}`,
+          value,
+          highlight: index === 3,
+          description: `R$ ${value.toFixed(2).replace('.', ',')}`,
+        }))}
+        maxValue={1.2}
+        ticks={[
+          { value: 0, label: '0' },
+          { value: 1, label: '1' },
+        ]}
+        color={colors.positive.DEFAULT}
+        accessibilityLabel="Barras de exemplo"
+      />
+      <ProjectionChart
+        values={[0, 10, 22, 36, 52, 70]}
+        contributed={[0, 9, 18, 27, 36, 45]}
+        goal={{ value: 70, label: 'Meta' }}
+        xLabels={['hoje', '5 anos']}
+        accessibilityLabel="Projeção de exemplo"
+      />
+      <View className="flex-row gap-4">
+        <LegendSwatch label="Linha" color={colors.info.DEFAULT} />
+        <LegendSwatch label="Tracejada" dashed />
+        <LegendSwatch label="Ponto" shape="dot" color={colors.brand.DEFAULT} />
+      </View>
     </CatalogSection>
   );
 }
 
 export function FeedbackSection() {
-  const [sheetOpen, setSheetOpen] = useState(false);
-  const [dialogOpen, setDialogOpen] = useState(false);
-  const [revoking, setRevoking] = useState(false);
-
+  const [sheet, setSheet] = useState(false);
+  const [dialog, setDialog] = useState(false);
   return (
     <CatalogSection
-      title="Feedback e sobreposições"
-      note="Estados, aviso de IA, offline, toast, sheet e confirmação."
+      title="Feedback"
+      note="Toast, Sheet, ConfirmDialog, Skeleton, Spinner, EmptyState e ErrorState."
     >
-      <Card padding="none">
-        <EmptyState
-          icon={InboxIcon}
-          title="Nenhum teto ainda"
-          description="Crie um teto para acompanhar seus gastos por categoria."
-          action={{ label: 'Criar teto', onPress: () => undefined }}
-        />
-      </Card>
-      <Card padding="none">
-        <ErrorState onRetry={() => toast.info('Tentando de novo…')} />
-      </Card>
-      <AiDisclaimer />
-      <OfflineBanner visible />
       <View className="flex-row flex-wrap gap-2">
-        <Button variant="secondary" size="sm" onPress={() => toast.success('Teto criado')}>
-          Toast sucesso
+        <Button size="sm" variant="secondary" onPress={() => toast.success('Salvo')}>
+          Toast
         </Button>
-        <Button
-          variant="secondary"
-          size="sm"
-          onPress={() => toast.error('Não foi possível salvar')}
-        >
-          Toast erro
+        <Button size="sm" variant="secondary" onPress={() => setSheet(true)}>
+          Sheet
         </Button>
-        <Button variant="secondary" size="sm" onPress={() => toast.info('Sincronizando bancos')}>
-          Toast info
+        <Button size="sm" variant="secondary" onPress={() => setDialog(true)}>
+          ConfirmDialog
         </Button>
       </View>
-      <View className="flex-row flex-wrap gap-2">
-        <Button variant="secondary" onPress={() => setSheetOpen(true)}>
-          Abrir sheet
-        </Button>
-        <Button variant="destructive" onPress={() => setDialogOpen(true)}>
-          Revogar consentimento
-        </Button>
-      </View>
-      <Sheet open={sheetOpen} onClose={() => setSheetOpen(false)} title="Filtros (exemplo)">
-        <Text tone="muted">Conteúdo do sheet com o visual do app.</Text>
-        <Button fullWidth onPress={() => setSheetOpen(false)}>
-          Aplicar
-        </Button>
+      <Skeleton className="h-6 w-2/3 rounded-8" />
+      <Spinner />
+      <EmptyState icon="search" title="Nada por aqui" description="Estado vazio com ícone." />
+      <ErrorState onRetry={() => toast.info('Tentando de novo')} />
+      <Sheet open={sheet} onClose={() => setSheet(false)} title="Sheet">
+        <Text>Conteúdo do sheet.</Text>
       </Sheet>
       <ConfirmDialog
-        open={dialogOpen}
-        title="Revogar consentimento?"
-        message="O Banco Exemplo deixará de ser sincronizado. Você pode conectar de novo depois."
-        confirmLabel="Revogar"
+        open={dialog}
+        title="Excluir?"
+        message="Não dá para desfazer."
         destructive
-        loading={revoking}
-        onCancel={() => setDialogOpen(false)}
-        onConfirm={() => {
-          setRevoking(true);
-          setTimeout(() => {
-            setRevoking(false);
-            setDialogOpen(false);
-            toast.success('Consentimento revogado (exemplo)');
-          }, 1200);
-        }}
+        onConfirm={() => setDialog(false)}
+        onCancel={() => setDialog(false)}
       />
     </CatalogSection>
   );
@@ -277,28 +279,29 @@ export function LayoutSection() {
   return (
     <CatalogSection
       title="Layout"
-      note="Section e ResponsiveGrid (1 coluna no celular, 2+ no tablet)."
+      note="Card, SectionCard, ListItem e ResponsiveGrid (1 coluna no celular, 2 no tablet)."
     >
-      <Section title="Metas (exemplo)" action={{ label: 'Ver tudo', onPress: () => undefined }}>
-        <ResponsiveGrid>
-          {['Reserva de emergência', 'Viagem', 'Entrada do imóvel'].map((goal) => (
-            <Card key={goal}>
-              <Text variant="label">{goal}</Text>
-              <Text variant="caption" tone="muted">
-                Meta fictícia
-              </Text>
-            </Card>
-          ))}
-        </ResponsiveGrid>
-      </Section>
-      <Example label="Ícone de lista">
-        <ListItem
-          leadingIcon={ReceiptTextIcon}
-          title="Relatórios"
-          showChevron
-          onPress={() => undefined}
-        />
-      </Example>
+      <Card>
+        <Text>Card padrão</Text>
+      </Card>
+      <SectionCard title="SectionCard" description="Título Fraunces e legenda">
+        <Text tone="muted">Conteúdo</Text>
+      </SectionCard>
+      <ListItem
+        title="Transporte por app"
+        subtitle="Hoje, 08:12"
+        leadingIcon="car"
+        showChevron
+        onPress={() => undefined}
+      />
+      <ResponsiveGrid gap={12}>
+        <Card variant="muted">
+          <Text>Coluna 1</Text>
+        </Card>
+        <Card variant="muted">
+          <Text>Coluna 2</Text>
+        </Card>
+      </ResponsiveGrid>
     </CatalogSection>
   );
 }

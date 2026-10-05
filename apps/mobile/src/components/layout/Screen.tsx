@@ -1,58 +1,75 @@
 import { colors } from '@guara/ui-tokens';
-import type { ReactNode } from 'react';
+import type { ReactNode, Ref } from 'react';
 import { RefreshControl, ScrollView, View } from 'react-native';
 import { SafeAreaView, type Edge } from 'react-native-safe-area-context';
 
 import { OfflineBanner } from '@/components/feedback/OfflineBanner';
+import { useBreakpoint } from '@/hooks/useBreakpoint';
 import { cn } from '@/lib/cn';
-
-import { ResponsiveContainer } from './ResponsiveContainer';
 
 export interface ScreenProps {
   children: ReactNode;
-  /** Wrap the content in a ScrollView. */
+  /** Fixed above the content (phone `TopBar`, app header). */
+  header?: ReactNode;
+  /** Fixed below the content (`StickyFooter` with the main action). */
+  footer?: ReactNode;
+  /** Wrap the content in a ScrollView (default true). */
   scroll?: boolean;
   /** Pull to refresh (only with `scroll`). */
   onRefresh?: () => void;
   refreshing?: boolean;
   /**
-   * Safe-area edges to respect. The native SafeAreaView only pads the part that actually
-   * overlaps system UI, so it never doubles the space under a stack header or above the tab bar.
+   * Safe-area edges to respect. Default: top only — the tab bar, the side rail and
+   * `StickyFooter` handle the bottom inset themselves.
    */
   edges?: Edge[];
-  /** Horizontal padding for the content (default true). */
+  /** Page padding: 16 on phones, 28 on tablets (default true). */
   padded?: boolean;
   /** Show the offline notice at the top (default true). */
   offlineBanner?: boolean;
-  /** Classes for the content container (inside the responsive width cap). */
+  /** Classes for the content container. Default gap: 16 (phone) / 20 (tablet). */
   contentClassName?: string;
+  /** Ref of the ScrollView (jump to a section). */
+  scrollRef?: Ref<ScrollView>;
 }
 
-/** Base of every screen: theme background, safe area, optional scroll/refresh and tablet width cap. */
+/** Base of every screen: Mata à noite background, safe area, header/footer slots, scroll. */
 export function Screen({
   children,
-  scroll = false,
+  header,
+  footer,
+  scroll = true,
   onRefresh,
   refreshing = false,
-  edges = ['top', 'left', 'right', 'bottom'],
+  edges = ['top', 'left', 'right'],
   padded = true,
   offlineBanner = true,
   contentClassName,
+  scrollRef,
 }: ScreenProps) {
+  const { isTablet } = useBreakpoint();
   const content = (
-    <ResponsiveContainer
-      className={cn(padded && 'px-4', scroll ? 'gap-4 py-4' : 'flex-1', contentClassName)}
+    <View
+      className={cn(
+        isTablet ? 'gap-5' : 'gap-4',
+        padded && (isTablet ? 'px-7 pb-10 pt-7' : 'px-4 pb-8 pt-1'),
+        !scroll && 'flex-1',
+        contentClassName,
+      )}
     >
       {offlineBanner ? <OfflineBanner /> : null}
       {children}
-    </ResponsiveContainer>
+    </View>
   );
 
   return (
     <SafeAreaView edges={edges} style={{ flex: 1, backgroundColor: colors.background.DEFAULT }}>
+      {header}
       {scroll ? (
         <ScrollView
+          ref={scrollRef}
           keyboardShouldPersistTaps="handled"
+          keyboardDismissMode="on-drag"
           contentInsetAdjustmentBehavior="automatic"
           refreshControl={
             onRefresh ? (
@@ -61,7 +78,7 @@ export function Screen({
                 onRefresh={onRefresh}
                 tintColor={colors.brand.DEFAULT}
                 colors={[colors.brand.DEFAULT]}
-                progressBackgroundColor={colors.background.elevated}
+                progressBackgroundColor={colors.surface.DEFAULT}
               />
             ) : undefined
           }
@@ -71,6 +88,7 @@ export function Screen({
       ) : (
         <View className="flex-1">{content}</View>
       )}
+      {footer}
     </SafeAreaView>
   );
 }

@@ -18,6 +18,8 @@ export interface MoneyTextProps extends Omit<TextProps, 'children'> {
   compact?: boolean;
   /** Privacy mode: hide the amount ("R$ ••••"). */
   masked?: boolean;
+  /** Drop the cents ("R$ 742"). */
+  wholeUnits?: boolean;
 }
 
 /** Formatted money from integer cents, with tabular digits and a spoken label. */
@@ -28,6 +30,7 @@ export function MoneyText({
   colorBySign = false,
   compact = false,
   masked = false,
+  wholeUnits = false,
   tone,
   ...props
 }: MoneyTextProps) {
@@ -42,9 +45,10 @@ export function MoneyText({
   }
 
   const signDisplay = showSign ? 'always' : 'auto';
+  // The UI always uses the typographic minus ("−R$ 18,40").
   const text = compact
-    ? formatCentsCompact(value, { currency, signDisplay })
-    : formatCents(value, { currency, signDisplay });
+    ? formatCentsCompact(value, { currency, signDisplay, typographicMinus: true })
+    : formatCents(value, { currency, signDisplay, wholeUnits, typographicMinus: true });
   const spoken = `${showSign && value > 0 ? 'mais ' : ''}${formatCentsForSpeech(value, currency)}`;
 
   return (

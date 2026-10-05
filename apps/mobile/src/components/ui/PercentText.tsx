@@ -28,7 +28,11 @@ export function PercentText({
     return <EmptyValue {...props} />;
   }
 
-  const options = { fractionDigits, signDisplay: showSign ? 'always' : 'auto' } as const;
+  const options = {
+    fractionDigits,
+    signDisplay: showSign ? 'always' : 'auto',
+    typographicMinus: true,
+  } as const;
   return (
     <Text
       tone={tone ?? (colorBySign ? toneForSign(value, invertColors) : undefined)}

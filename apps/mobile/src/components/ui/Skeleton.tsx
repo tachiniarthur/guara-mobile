@@ -39,7 +39,7 @@ export function Skeleton({ className }: SkeletonProps) {
     <Animated.View
       accessible={false}
       importantForAccessibility="no-hide-descendants"
-      className={cn('h-4 rounded-md bg-skeleton', className)}
+      className={cn('h-4 rounded-8 bg-skeleton', className)}
       style={animatedStyle}
     />
   );

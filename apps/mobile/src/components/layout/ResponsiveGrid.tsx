@@ -3,21 +3,40 @@ import { Children, type ReactNode } from 'react';
 import { View } from 'react-native';
 
 import { useBreakpoint } from '@/hooks/useBreakpoint';
-import { cn } from '@/lib/cn';
 
 export interface ResponsiveGridProps {
   children: ReactNode;
-  /** Columns per breakpoint (default: 1 on phones, 2 on tablets, 3 on large tablets). */
+  /**
+   * Columns per breakpoint (default: 1 on phones, 2 on tablets). Large tablets use the tablet
+   * value unless `desktop` is given: the layouts are designed for phone and tablet only.
+   */
   columns?: Partial<Record<Breakpoint, number>>;
+  /** Space between cells in dp (default 16). */
+  gap?: number;
+  /** Stretch the cells of a row to the same height (default true). */
+  stretch?: boolean;
   className?: string;
 }
 
-const DEFAULT_COLUMNS: Record<Breakpoint, number> = { phone: 1, tablet: 2, desktop: 3 };
+const DEFAULT_COLUMNS = { phone: 1, tablet: 2 } as const;
 
-/** Lays out children in equal columns that adapt to phone/tablet. */
-export function ResponsiveGrid({ children, columns, className }: ResponsiveGridProps) {
+/** Lays out children in equal columns that adapt to phone/tablet (CSS grid of the design). */
+export function ResponsiveGrid({
+  children,
+  columns,
+  gap = 16,
+  stretch = true,
+  className,
+}: ResponsiveGridProps) {
   const { breakpoint } = useBreakpoint();
-  const count = Math.max(1, { ...DEFAULT_COLUMNS, ...columns }[breakpoint]);
+  const phone = columns?.phone ?? DEFAULT_COLUMNS.phone;
+  const tablet = columns?.tablet ?? DEFAULT_COLUMNS.tablet;
+  const perBreakpoint: Record<Breakpoint, number> = {
+    phone,
+    tablet,
+    desktop: columns?.desktop ?? tablet,
+  };
+  const count = Math.max(1, perBreakpoint[breakpoint]);
   const items = Children.toArray(children);
 
   const rows: ReactNode[][] = [];
@@ -26,11 +45,15 @@ export function ResponsiveGrid({ children, columns, className }: ResponsiveGridP
   }
 
   return (
-    <View className={cn('gap-4', className)}>
+    <View style={{ gap }} className={className}>
       {rows.map((row, rowIndex) => (
-        <View key={rowIndex} className="flex-row gap-4">
+        <View
+          key={rowIndex}
+          style={{ gap, alignItems: stretch ? 'stretch' : 'flex-start' }}
+          className="flex-row"
+        >
           {row.map((item, index) => (
-            <View key={index} className="flex-1">
+            <View key={index} className="min-w-0 flex-1">
               {item}
             </View>
           ))}

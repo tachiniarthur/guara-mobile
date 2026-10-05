@@ -1,50 +1,58 @@
-import { colors, iconSize, type ControlSize } from '@guara/ui-tokens';
+import { colors, type ControlSize } from '@guara/ui-tokens';
 import { cva } from 'class-variance-authority';
-import type { LucideIcon } from 'lucide-react-native';
 import type { ReactNode } from 'react';
-import { Pressable, type GestureResponderEvent, type PressableProps } from 'react-native';
+import { Pressable, View, type GestureResponderEvent, type PressableProps } from 'react-native';
 
 import { cn } from '@/lib/cn';
 import { haptics } from '@/lib/haptics';
 
+import { Icon, type IconName } from './Icon';
 import { Spinner } from './Spinner';
 import { Text } from './Text';
 import { hitSlopFor } from './touch';
 
-export type ButtonVariant = 'primary' | 'secondary' | 'ghost' | 'destructive';
+/**
+ * - `primary`: Tucano, the main action of the screen ("Criar conta", "Salvar").
+ * - `inverse`: Areia, the main action of a step that is not the final one ("Continuar").
+ * - `secondary`: filled dark with an outline ("Continuar com Google").
+ * - `outline`: transparent with an outline ("Ver", "Criar alerta").
+ * - `ghost`: text only ("Pular").
+ * - `destructive`: Urucum ("Excluir").
+ */
+export type ButtonVariant =
+  'primary' | 'inverse' | 'secondary' | 'outline' | 'ghost' | 'destructive';
 
-const containerVariants = cva('flex-row items-center justify-center gap-2 rounded-lg border', {
+const containerVariants = cva('flex-row items-center justify-center gap-2 rounded-full border', {
   variants: {
     variant: {
-      primary: 'border-transparent bg-brand-solid active:bg-brand-pressed',
+      primary: 'border-brand bg-brand active:bg-brand-pressed',
+      inverse: 'border-foreground bg-foreground active:opacity-90',
       secondary: 'border-border-strong bg-surface active:bg-surface-pressed',
+      outline: 'border-border-strong bg-transparent active:bg-surface-pressed',
       ghost: 'border-transparent bg-transparent active:bg-surface-pressed',
-      destructive: 'border-transparent bg-negative-solid active:bg-negative-pressed',
-    },
+      destructive: 'border-negative bg-negative active:bg-negative-pressed',
+    } satisfies Record<ButtonVariant, string>,
     size: {
       sm: 'h-control-sm px-3',
-      md: 'h-control-md px-4',
-      lg: 'h-control-lg px-5',
+      md: 'h-control-md px-3.5',
+      lg: 'h-control-lg px-4.5',
     } satisfies Record<ControlSize, string>,
     fullWidth: { true: 'self-stretch', false: 'self-start' },
     disabled: { true: 'border-transparent bg-disabled-background', false: '' },
   },
 });
 
-const LABEL_CLASS: Record<ButtonVariant, string> = {
-  primary: 'text-brand-foreground',
-  secondary: 'text-foreground',
-  ghost: 'text-foreground',
-  destructive: 'text-negative-foreground',
-};
-
-/** Token colors for icons/spinner (they take a color prop, not a class). */
+/** Token colors for the label, icons and spinner. */
 const CONTENT_COLOR: Record<ButtonVariant, string> = {
   primary: colors.brand.foreground,
+  inverse: colors.foreground.inverse,
   secondary: colors.foreground.DEFAULT,
+  outline: colors.foreground.DEFAULT,
   ghost: colors.foreground.DEFAULT,
   destructive: colors.negative.foreground,
 };
+
+const LABEL_SIZE: Record<ControlSize, number> = { sm: 13, md: 14, lg: 15 };
 
 export interface ButtonProps extends Omit<PressableProps, 'children' | 'disabled'> {
   children: ReactNode;
@@ -53,8 +61,8 @@ export interface ButtonProps extends Omit<PressableProps, 'children' | 'disabled
   /** Shows a spinner and blocks presses. */
   loading?: boolean;
   disabled?: boolean;
-  leftIcon?: LucideIcon;
-  rightIcon?: LucideIcon;
+  leftIcon?: IconName;
+  rightIcon?: IconName;
   /** Stretch to the container width. */
   fullWidth?: boolean;
   /** Haptic feedback on press (default: on for `primary`). */
@@ -62,14 +70,15 @@ export interface ButtonProps extends Omit<PressableProps, 'children' | 'disabled
   className?: string;
 }
 
+/** Pill button of the design (Figtree 700, 44 or 52 tall). */
 export function Button({
   children,
   variant = 'primary',
-  size = 'md',
+  size = 'lg',
   loading = false,
   disabled = false,
-  leftIcon: LeftIcon,
-  rightIcon: RightIcon,
+  leftIcon,
+  rightIcon,
   fullWidth = false,
   haptic = variant === 'primary',
   className,
@@ -79,7 +88,6 @@ export function Button({
 }: ButtonProps) {
   const isDisabled = disabled || loading;
   const contentColor = isDisabled ? colors.disabled.foreground : CONTENT_COLOR[variant];
-  const iconPx = size === 'lg' ? iconSize.lg : iconSize.md;
 
   const handlePress = (event: GestureResponderEvent) => {
     if (haptic) haptics.impact();
@@ -104,22 +112,22 @@ export function Button({
     >
       {loading ? (
         <Spinner color={contentColor} />
-      ) : LeftIcon ? (
-        <LeftIcon size={iconPx} color={contentColor} />
+      ) : leftIcon ? (
+        <Icon name={leftIcon} size={18} color={contentColor} />
       ) : null}
       {typeof children === 'string' ? (
         <Text
-          variant={size === 'lg' ? 'body' : 'label'}
-          weight="semibold"
+          variant="label"
+          size={LABEL_SIZE[size]}
           numberOfLines={1}
-          className={isDisabled ? 'text-disabled-foreground' : LABEL_CLASS[variant]}
+          style={{ color: contentColor }}
         >
           {children}
         </Text>
       ) : (
-        children
+        <View className="flex-row items-center gap-2">{children}</View>
       )}
-      {RightIcon && !loading ? <RightIcon size={iconPx} color={contentColor} /> : null}
+      {rightIcon && !loading ? <Icon name={rightIcon} size={18} color={contentColor} /> : null}
     </Pressable>
   );
 }

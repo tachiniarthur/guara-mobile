@@ -1,7 +1,7 @@
-import { colors, iconSize } from '@guara/ui-tokens';
-import { WifiOffIcon } from 'lucide-react-native';
+import { colors } from '@guara/ui-tokens';
 import { View } from 'react-native';
 
+import { Icon } from '@/components/ui/Icon';
 import { Text } from '@/components/ui/Text';
 import { FEEDBACK_COPY } from '@/constants/copy';
 import { useOnline } from '@/hooks/useOnline';
@@ -23,9 +23,9 @@ export function OfflineBanner({ visible, className }: OfflineBannerProps) {
       accessible
       accessibilityRole="alert"
       accessibilityLiveRegion="polite"
-      className={cn('flex-row items-center gap-2 rounded-lg bg-warning-muted px-3 py-2', className)}
+      className={cn('flex-row items-center gap-2 rounded-14 bg-warning-muted px-3 py-2', className)}
     >
-      <WifiOffIcon size={iconSize.sm} color={colors.warning.DEFAULT} />
+      <Icon name="alertTriangle" size={16} color={colors.warning.DEFAULT} />
       <Text variant="caption" tone="warning" className="flex-1">
         {FEEDBACK_COPY.offline}
       </Text>

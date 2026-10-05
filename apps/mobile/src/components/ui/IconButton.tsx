@@ -1,58 +1,69 @@
-import { colors, iconSize, type ControlSize } from '@guara/ui-tokens';
+import { colors } from '@guara/ui-tokens';
 import { cva } from 'class-variance-authority';
-import type { LucideIcon } from 'lucide-react-native';
-import { Pressable, type PressableProps } from 'react-native';
+import type { ReactNode } from 'react';
+import { Pressable, View, type PressableProps } from 'react-native';
 
 import { cn } from '@/lib/cn';
 
+import { Icon, type IconName } from './Icon';
 import { hitSlopFor } from './touch';
 
-const iconButtonVariants = cva('items-center justify-center rounded-full', {
+export type IconButtonVariant = 'ghost' | 'outline' | 'filled' | 'primary';
+
+const iconButtonVariants = cva('items-center justify-center rounded-full border', {
   variants: {
     variant: {
-      ghost: 'bg-transparent active:bg-surface-pressed',
-      secondary: 'border border-border-strong bg-surface active:bg-surface-pressed',
-      primary: 'bg-brand-solid active:bg-brand-pressed',
-    },
-    size: {
-      sm: 'h-control-sm w-control-sm',
-      md: 'h-control-md w-control-md',
-      lg: 'h-control-lg w-control-lg',
-    } satisfies Record<ControlSize, string>,
+      ghost: 'border-transparent bg-transparent active:bg-surface-pressed',
+      outline: 'border-border-strong bg-transparent active:bg-surface-pressed',
+      filled: 'border-border-strong bg-surface active:bg-surface-pressed',
+      primary: 'border-brand bg-brand active:bg-brand-pressed',
+    } satisfies Record<IconButtonVariant, string>,
     disabled: { true: 'opacity-50', false: '' },
   },
 });
 
 export interface IconButtonProps extends Omit<PressableProps, 'children' | 'disabled'> {
-  icon: LucideIcon;
+  icon: IconName;
   /** Required: describes the action for screen readers ("Voltar", "Limpar busca"). */
   accessibilityLabel: string;
-  variant?: 'ghost' | 'secondary' | 'primary';
-  size?: ControlSize;
+  variant?: IconButtonVariant;
+  /** Diameter in dp (default 44). Smaller buttons still get a 44×44 target. */
+  size?: number;
+  iconSize?: number;
+  /** Icon color override (default: muted text, or dark on `primary`). */
+  color?: string;
   disabled?: boolean;
+  /** Small dot or counter over the top-right corner (unread notifications). */
+  badge?: ReactNode;
   className?: string;
 }
 
-/** Icon-only button with a 44×44 minimum touch target. */
+/** Round icon-only button with a 44×44 minimum touch target. */
 export function IconButton({
-  icon: Icon,
+  icon,
   variant = 'ghost',
-  size = 'md',
+  size = 44,
+  iconSize = 20,
+  color,
   disabled = false,
+  badge,
   className,
   ...props
 }: IconButtonProps) {
-  const color = variant === 'primary' ? colors.brand.foreground : colors.foreground.DEFAULT;
+  const iconColor =
+    color ?? (variant === 'primary' ? colors.brand.foreground : colors.foreground.muted);
   return (
     <Pressable
       accessibilityRole="button"
       accessibilityState={{ disabled }}
       disabled={disabled}
       hitSlop={hitSlopFor(size)}
-      className={cn(iconButtonVariants({ variant, size, disabled }), className)}
+      style={{ width: size, height: size }}
+      className={cn(iconButtonVariants({ variant, disabled }), className)}
       {...props}
     >
-      <Icon size={size === 'sm' ? iconSize.sm : iconSize.md} color={color} />
+      <Icon name={icon} size={iconSize} color={iconColor} />
+      {badge ? <View className="absolute right-1.5 top-1.5">{badge}</View> : null}
     </Pressable>
   );
 }
