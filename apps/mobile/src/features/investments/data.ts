@@ -2,8 +2,6 @@ import type { Cents } from '@guara/types';
 import { colors } from '@guara/ui-tokens';
 import { cents, sharesOf, sumCents } from '@guara/utils';
 
-import type { IconName } from '@/components/ui';
-
 export type RiskLevel = 'Baixo' | 'Médio' | 'Alto';
 
 /** Classes of the positions page, in the design's order. */
@@ -254,8 +252,6 @@ export const PORTFOLIO = {
   profile: 'Moderado',
   total: sumCents(POSITIONS.map((position) => position.value)),
   monthGain: '+R$ 862,40 em setembro (+1,8%)',
-  netWorth: cents(74_681_090),
-  propertiesTotal: cents(69_850_000),
   positionsCount: POSITIONS.length,
   stats: [
     {
@@ -365,34 +361,6 @@ export const EXPOSURE = [
     color: colors.positive.DEFAULT,
   },
 ] as const;
-
-export interface PropertyItem {
-  id: string;
-  name: string;
-  icon: IconName;
-  value: Cents;
-  detail: string;
-  source: string;
-}
-
-export const PROPERTIES: PropertyItem[] = [
-  {
-    id: 'apto',
-    name: 'Apartamento em Pinheiros',
-    icon: 'home',
-    value: cents(62_000_000),
-    detail: 'Imóvel · saldo devedor R$ 214.300',
-    source: 'Valor estimado por você em ago/2026',
-  },
-  {
-    id: 'onix',
-    name: 'Onix LT 2022',
-    icon: 'car',
-    value: cents(7_850_000),
-    detail: 'Veículo · quitado',
-    source: 'Tabela FIPE de setembro · −0,8% no mês',
-  },
-];
 
 export type ExposureKey = (typeof EXPOSURE)[number]['key'];
 

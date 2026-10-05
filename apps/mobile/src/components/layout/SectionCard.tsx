@@ -15,7 +15,7 @@ export interface SectionCardProps {
   /** Element before the title (icon tile, portrait). */
   leading?: ReactNode;
   /** Title size (design: 17 on list pages, 18 or 20). */
-  titleSize?: 17 | 18 | 20;
+  titleSize?: 17 | 18 | 19 | 20;
   /** Padding in dp (design: 16, 18, 20 or 24). */
   padding?: 16 | 18 | 20 | 24;
   /** Gap between blocks (design: 4–20). */

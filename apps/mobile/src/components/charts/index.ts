@@ -17,3 +17,4 @@ export * from './QuoteChart';
 export * from './RangeBar';
 export * from './ProjectionChart';
 export * from './globe';
+export * from './TrendAreaChart';

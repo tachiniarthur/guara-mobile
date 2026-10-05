@@ -3,4 +3,8 @@ export * from './AssetDetailScreen';
 export * from './ExposureScreen';
 export * from './InvestmentsScreen';
 export * from './NewManualAssetScreen';
+export * from './NewPropertyScreen';
+export * from './NewVehicleScreen';
 export * from './PositionsScreen';
+export * from './PropertiesScreen';
+export * from './PropertyDetailScreen';

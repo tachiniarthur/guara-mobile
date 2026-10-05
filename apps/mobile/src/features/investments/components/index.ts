@@ -12,3 +12,4 @@ export * from './RiskPill';
 export * from './RiskSheet';
 export * from './asset';
 export * from './new-asset';
+export * from './property';

@@ -1,3 +1,3 @@
-import { PropertiesScreen } from '@/features/properties';
+import { PropertiesScreen } from '@/features/investments';
 
 export default PropertiesScreen;

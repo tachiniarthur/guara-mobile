@@ -1,6 +1,6 @@
 import { colors } from '@guara/ui-tokens';
 import { Image } from 'expo-image';
-import type { ReactNode } from 'react';
+import { useState, type ReactNode } from 'react';
 import { StyleSheet, View, type ViewProps } from 'react-native';
 import Svg, { Defs, LinearGradient, Rect, Stop } from 'react-native-svg';
 
@@ -22,12 +22,21 @@ export function MataSurface({
   veil = [0.78, 0.45, 0.15],
   className,
   style,
+  onLayout,
   ...props
 }: MataSurfaceProps) {
+  // Explicit size: percentages in react-native-svg keep the first layout, so a card that grows
+  // later (wrapped buttons) would show the photo without the veil at the bottom.
+  const [size, setSize] = useState({ width: 0, height: 0 });
   return (
     <View
       className={className}
       style={[{ overflow: 'hidden', backgroundColor: colors.hero.DEFAULT }, style]}
+      onLayout={(event) => {
+        const { width, height } = event.nativeEvent.layout;
+        setSize({ width, height });
+        onLayout?.(event);
+      }}
       {...props}
     >
       <Image
@@ -37,7 +46,12 @@ export function MataSurface({
         contentPosition="right center"
         accessible={false}
       />
-      <Svg style={StyleSheet.absoluteFill} width="100%" height="100%" pointerEvents="none">
+      <Svg
+        style={StyleSheet.absoluteFill}
+        width={size.width}
+        height={size.height}
+        pointerEvents="none"
+      >
         <Defs>
           <LinearGradient id="veil" x1="0" y1="0" x2="1" y2="0">
             <Stop offset="0" stopColor={colors.background.DEFAULT} stopOpacity={veil[0]} />
@@ -45,7 +59,7 @@ export function MataSurface({
             <Stop offset="1" stopColor={colors.background.DEFAULT} stopOpacity={veil[2]} />
           </LinearGradient>
         </Defs>
-        <Rect width="100%" height="100%" fill="url(#veil)" />
+        <Rect width={size.width} height={size.height} fill="url(#veil)" />
       </Svg>
       {children}
     </View>

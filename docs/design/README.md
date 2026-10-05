@@ -134,7 +134,7 @@ implementada.
 | `Agentes-Avisos` · onboarding 3                                                          | M T D    | `(onboarding)/assistants`                                         |
 | `Perfil-Investidor-P1`, `-P2`, `-P4`, `-P5`, `-P6`, `-Resultado` · questionário completo | M T      | `(onboarding)/investor-profile` (as 6 perguntas e o resultado)    |
 | `Malvo-Autorizar`, `-Conectando`, `-Sucesso`, `-Erro` · conexão pelo Malvo               | M T      | `(onboarding)/connect/[bankId]`; no app `/malvo/[bankId]`         |
-| `Termos`, `Privacidade`                                                                  | M T      | —                                                                 |
+| `Termos`, `Privacidade`                                                                  | M T      | `/terms`, `/privacy`                                              |
 
 ### App
 

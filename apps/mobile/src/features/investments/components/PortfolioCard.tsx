@@ -9,6 +9,7 @@ import { Button, Chip, Icon, MoneyText, Text } from '@/components/ui';
 import { useBreakpoint } from '@/hooks/useBreakpoint';
 
 import { PERFORMANCE, PORTFOLIO } from '../data';
+import { useProperties } from '../hooks/useProperties';
 
 const PERIODS = [
   { value: '6m', label: '6M', months: 6 },
@@ -20,6 +21,7 @@ const PERIODS = [
 export function PortfolioCard() {
   const router = useRouter();
   const { isTablet } = useBreakpoint();
+  const { netWorth, total: propertiesTotal } = useProperties();
   const [period, setPeriod] = useState<(typeof PERIODS)[number]['value']>('12m');
   const months = PERIODS.find((item) => item.value === period)?.months ?? 12;
   const from = PERFORMANCE.portfolio.length - months;
@@ -125,10 +127,10 @@ export function PortfolioCard() {
         <Text size={13} tone="muted">
           Patrimônio total com bens
         </Text>
-        <MoneyText value={PORTFOLIO.netWorth} size={18} weight="bold" />
+        <MoneyText value={netWorth} size={18} weight="bold" />
         <Text size={12} tone="subtle">
           investimentos + bens de{' '}
-          <MoneyText value={PORTFOLIO.propertiesTotal} wholeUnits size={12} tone="subtle" />
+          <MoneyText value={propertiesTotal} wholeUnits size={12} tone="subtle" />
         </Text>
       </View>
       {isTablet ? null : (
