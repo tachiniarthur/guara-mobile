@@ -2,7 +2,12 @@ import { z } from 'zod';
 
 import { IsoDateTimeSchema } from './common';
 
-export const InvestorProfileTypeSchema = z.enum(['conservative', 'moderate', 'aggressive']);
+export const InvestorProfileTypeSchema = z.enum([
+  'conservative',
+  'moderate',
+  'aggressive',
+  'sophisticated',
+]);
 export type InvestorProfileType = z.infer<typeof InvestorProfileTypeSchema>;
 
 /** The six questions of the suitability questionnaire (texts live in the app). */
@@ -18,7 +23,7 @@ export const INVESTOR_PROFILE_QUESTIONS = [
 export const InvestorProfileQuestionIdSchema = z.enum(INVESTOR_PROFILE_QUESTIONS);
 export type InvestorProfileQuestionId = z.infer<typeof InvestorProfileQuestionIdSchema>;
 
-/** Options go from the most conservative (`a`) to the most aggressive (`d`). */
+/** Option ids follow the order on screen; the score of each one is defined by the API. */
 export const InvestorProfileOptionSchema = z.enum(['a', 'b', 'c', 'd']);
 export type InvestorProfileOption = z.infer<typeof InvestorProfileOptionSchema>;
 

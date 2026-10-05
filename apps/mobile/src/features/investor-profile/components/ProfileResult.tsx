@@ -20,7 +20,7 @@ import {
   profileDescription,
 } from '../lib/profile';
 
-const ORDER: InvestorProfileType[] = ['conservative', 'moderate', 'aggressive'];
+const ORDER: InvestorProfileType[] = ['conservative', 'moderate', 'aggressive', 'sophisticated'];
 
 /**
  * Target allocation of each profile. Only the Moderado one is in the design (the "Alvo do
@@ -31,16 +31,14 @@ function targetsFor(type: InvestorProfileType): Record<string, number> | null {
   return Object.fromEntries(ASSET_CLASSES.map((item) => [item.key, item.target]));
 }
 
-/** Conservador · Moderado · Arrojado with the user's profile highlighted. */
+/** Conservador · Moderado · Arrojado · Sofisticado with the user's profile highlighted. */
 function ProfileScale({ type }: { type: InvestorProfileType }) {
   const index = ORDER.indexOf(type);
   return (
     <View
       accessible
       accessibilityRole="image"
-      accessibilityLabel={`Seu perfil: ${PROFILE_LABELS[type]}${
-        index === 1 ? ', entre Conservador e Arrojado' : ''
-      }`}
+      accessibilityLabel={`Seu perfil: ${PROFILE_LABELS[type]}, ${index + 1}º de ${ORDER.length}, de Conservador a Sofisticado`}
       className="flex-row gap-1.5"
     >
       {ORDER.map((item) => (

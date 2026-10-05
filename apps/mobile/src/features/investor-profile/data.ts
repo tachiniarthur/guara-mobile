@@ -126,6 +126,7 @@ export const PROFILE_LABELS: Record<InvestorProfileType, string> = {
   conservative: 'Conservador',
   moderate: 'Moderado',
   aggressive: 'Arrojado',
+  sophisticated: 'Sofisticado',
 };
 
 /** Profile of the user in the design (Meu perfil: "Respondido em 23 set 2026"). */

@@ -9,6 +9,7 @@ import {
   differenceText,
   estimateProfile,
   profileDescription,
+  profileScore,
 } from '../lib/profile';
 import { RedoProfileScreen } from '../screens';
 import { useInvestorProfileStore } from '../store';
@@ -74,6 +75,38 @@ describe('investor profile', () => {
   });
 });
 
+describe('profile bands', () => {
+  const all = (option: 'a' | 'b' | 'c' | 'd') => ({
+    objective: option,
+    horizon: option,
+    loss_tolerance: option,
+    experience: option,
+    income_share: option,
+    liquidity_needs: option,
+  });
+
+  it('scores growth above monthly income in the objective', () => {
+    expect(profileScore({ objective: 'c' })).toBe(4);
+    expect(profileScore({ objective: 'd' })).toBe(3);
+    expect(profileScore(all('a'))).toBe(6);
+    expect(profileScore(all('d'))).toBe(23);
+  });
+
+  it('splits the total into four profiles', () => {
+    expect(estimateProfile(all('a'))).toBe('conservative');
+    expect(estimateProfile(SAVED_PROFILE.answers)).toBe('moderate');
+    expect(profileScore(SAVED_PROFILE.answers)).toBe(17);
+    expect(estimateProfile(all('c'))).toBe('aggressive');
+    expect(estimateProfile(all('d'))).toBe('sophisticated');
+  });
+
+  it('keeps Sofisticado for experienced investors', () => {
+    // 22 points, but experience below "vários tipos": stops at Arrojado.
+    expect(profileScore({ ...all('d'), experience: 'c' })).toBe(22);
+    expect(estimateProfile({ ...all('d'), experience: 'c' })).toBe('aggressive');
+  });
+});
+
 describe('Refazer perfil', () => {
   it('goes through the six questions and saves the result', () => {
     const success = jest.spyOn(toast, 'success');
@@ -84,19 +117,19 @@ describe('Refazer perfil', () => {
       screen.getByRole('header', { name: 'Qual é o seu principal objetivo ao investir?' }),
     ).toBeOnTheScreen();
 
-    // Bolder answers on the way: Arrojado at the end.
+    // Boldest answers on the way (including experience with several kinds): Sofisticado.
     for (let step = 0; step < 6; step += 1) {
       const options = screen.getAllByRole('radio');
       fireEvent.press(options.at(-1)!);
       fireEvent.press(screen.getByRole('button', { name: 'Continuar' }));
     }
-    expect(screen.getByRole('header', { name: 'Seu perfil é Arrojado' })).toBeOnTheScreen();
-    expect(screen.getByText(/^A alocação-alvo do perfil Arrojado/)).toBeOnTheScreen();
+    expect(screen.getByRole('header', { name: 'Seu perfil é Sofisticado' })).toBeOnTheScreen();
+    expect(screen.getByText(/^A alocação-alvo do perfil Sofisticado/)).toBeOnTheScreen();
     expect(screen.getByLabelText('Objetivo: Renda extra todo mês')).toBeOnTheScreen();
 
     fireEvent.press(screen.getByRole('button', { name: 'Salvar perfil' }));
-    expect(success).toHaveBeenCalledWith('Seu perfil agora é Arrojado');
-    expect(useInvestorProfileStore.getState().profile.type).toBe('aggressive');
+    expect(success).toHaveBeenCalledWith('Seu perfil agora é Sofisticado');
+    expect(useInvestorProfileStore.getState().profile.type).toBe('sophisticated');
     expect(mockBack).toHaveBeenCalled();
   });
 
