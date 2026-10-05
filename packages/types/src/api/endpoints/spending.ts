@@ -7,7 +7,10 @@ import {
   BudgetPreviewQuerySchema,
   BudgetPreviewSchema,
   BudgetSchema,
+  CategoryIdSchema,
+  CategoryMonthSummarySchema,
   CategorySchema,
+  CategorySummaryQuerySchema,
   CorrectCategoryBodySchema,
   CreateBudgetBodySchema,
   SubscriptionCalendarSchema,
@@ -17,14 +20,18 @@ import {
   TransactionIdSchema,
   TransactionListQuerySchema,
   TransactionSchema,
+  TransactionSummaryQuerySchema,
+  TransactionSummarySchema,
   UnusualStatusSchema,
   UnusualTransactionSchema,
   UpdateBudgetBodySchema,
+  UpdateTransactionBodySchema,
   YearMonthSchema,
   paginated,
 } from '../../domain';
 import { NoContentSchema, defineEndpoints } from '../define';
 
+const categoryParams = z.object({ categoryId: CategoryIdSchema });
 const transactionParams = z.object({ transactionId: TransactionIdSchema });
 const subscriptionParams = z.object({ subscriptionId: SubscriptionIdSchema });
 const budgetParams = z.object({ budgetId: BudgetIdSchema });
@@ -39,12 +46,27 @@ export const spendingEndpoints = defineEndpoints({
     summary: 'Fixed list of categories',
     response: z.array(CategorySchema),
   },
+  'categories.summary': {
+    method: 'GET',
+    path: '/v1/categories/:categoryId/summary',
+    summary: 'Spending of a category in a month: total, cap and subcategories',
+    params: categoryParams,
+    query: CategorySummaryQuerySchema,
+    response: CategoryMonthSummarySchema,
+  },
   'transactions.list': {
     method: 'GET',
     path: '/v1/transactions',
     summary: 'Transactions, newest first (cursor pagination)',
     query: TransactionListQuerySchema,
     response: paginated(TransactionSchema),
+  },
+  'transactions.summary': {
+    method: 'GET',
+    path: '/v1/transactions/summary',
+    summary: 'Count and totals of the filtered transactions (register before /:transactionId)',
+    query: TransactionSummaryQuerySchema,
+    response: TransactionSummarySchema,
   },
   'transactions.get': {
     method: 'GET',
@@ -61,6 +83,21 @@ export const spendingEndpoints = defineEndpoints({
     body: CorrectCategoryBodySchema,
     response: TransactionSchema,
   },
+  'transactions.update': {
+    method: 'PATCH',
+    path: '/v1/transactions/:transactionId',
+    summary: 'Note, duplicate mark and hiding from reports',
+    params: transactionParams,
+    body: UpdateTransactionBodySchema,
+    response: TransactionSchema,
+  },
+  'transactions.markNotSubscription': {
+    method: 'POST',
+    path: '/v1/transactions/:transactionId/not-subscription',
+    summary: "Stop treating this transaction's merchant as a recurring charge",
+    params: transactionParams,
+    response: NoContentSchema,
+  },
   'unusual.list': {
     method: 'GET',
     path: '/v1/unusual-transactions',
@@ -72,6 +109,13 @@ export const spendingEndpoints = defineEndpoints({
     method: 'POST',
     path: '/v1/unusual-transactions/:transactionId/acknowledge',
     summary: 'The user confirms the purchase was theirs',
+    params: transactionParams,
+    response: UnusualTransactionSchema,
+  },
+  'unusual.report': {
+    method: 'POST',
+    path: '/v1/unusual-transactions/:transactionId/report',
+    summary: 'The user does not recognise the purchase',
     params: transactionParams,
     response: UnusualTransactionSchema,
   },

@@ -12,8 +12,11 @@ export const UnusualReasonSchema = z.enum([
 ]);
 export type UnusualReason = z.infer<typeof UnusualReasonSchema>;
 
-/** `acknowledged`: the user confirmed the purchase was theirs. */
-export const UnusualStatusSchema = z.enum(['pending', 'acknowledged']);
+/**
+ * `acknowledged`: the user confirmed the purchase was theirs ("Fui eu");
+ * `reported`: the user does not recognise it ("Não reconheço").
+ */
+export const UnusualStatusSchema = z.enum(['pending', 'acknowledged', 'reported']);
 export type UnusualStatus = z.infer<typeof UnusualStatusSchema>;
 
 export const UnusualTransactionSchema = z.object({

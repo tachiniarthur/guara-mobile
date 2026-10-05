@@ -15,15 +15,21 @@ const transaction = {
   currency: 'BRL',
   direction: 'out',
   type: 'pix',
+  source: 'open_finance',
   date: '2026-09-20',
   occurredAt: '2026-09-20T15:30:00.000Z',
   description: 'PIX ENVIADO PADARIA',
   merchantName: 'Padaria Trigo Dourado',
-  autoCategoryId: 'restaurants',
+  autoCategoryId: 'food',
   userCategoryId: null,
-  categoryId: 'restaurants',
+  categoryId: 'food',
+  subcategoryId: 'bakery',
   installment: null,
+  invoice: null,
   isUnusual: false,
+  markedDuplicate: false,
+  hiddenFromReports: false,
+  note: null,
   createdAt: '2026-09-20T15:31:00.000Z',
   updatedAt: '2026-09-20T15:31:00.000Z',
 };
@@ -42,7 +48,21 @@ describe('domain schemas', () => {
         ...transaction,
         userCategoryId: 'leisure',
         categoryId: 'leisure',
+        subcategoryId: null,
       }).success,
+    ).toBe(true);
+  });
+
+  it('the subcategory belongs to the effective category', () => {
+    expect(
+      TransactionSchema.safeParse({
+        ...transaction,
+        userCategoryId: 'leisure',
+        categoryId: 'leisure',
+      }).success,
+    ).toBe(false);
+    expect(
+      TransactionSchema.safeParse({ ...transaction, subcategoryId: 'groceries' }).success,
     ).toBe(true);
   });
 
@@ -81,13 +101,13 @@ describe('domain schemas', () => {
     expect(
       RunSimulationBodySchema.safeParse({
         mode: 'cut_expense',
-        inputs: { categoryId: 'restaurants', monthlyCut: 30000, months: 24, annualReturn: 4 },
+        inputs: { categoryId: 'food', monthlyCut: 30000, months: 24, annualReturn: 4 },
       }).success,
     ).toBe(true);
     expect(
       RunSimulationBodySchema.safeParse({
         mode: 'retirement',
-        inputs: { categoryId: 'restaurants', monthlyCut: 30000, months: 24, annualReturn: 4 },
+        inputs: { categoryId: 'food', monthlyCut: 30000, months: 24, annualReturn: 4 },
       }).success,
     ).toBe(false);
   });
@@ -116,7 +136,7 @@ describe('domain schemas', () => {
         block: {
           type: 'budget_bar',
           budgetId: null,
-          categoryId: 'groceries',
+          categoryId: 'food',
           limit: 100000,
           spent: 5000,
         },
