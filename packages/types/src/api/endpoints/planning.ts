@@ -3,6 +3,8 @@ import { z } from 'zod';
 import {
   ConvertSimulationToGoalBodySchema,
   CreateGoalBodySchema,
+  GoalDepositBodySchema,
+  GoalDetailSchema,
   GoalIdSchema,
   GoalSchema,
   RunSimulationBodySchema,
@@ -10,6 +12,7 @@ import {
   SimulationIdSchema,
   SimulationResultSchema,
   SimulationSchema,
+  UpdateGoalBodySchema,
 } from '../../domain';
 import { NoContentSchema, defineEndpoints } from '../define';
 
@@ -69,15 +72,31 @@ export const planningEndpoints = defineEndpoints({
   'goals.get': {
     method: 'GET',
     path: '/v1/goals/:goalId',
-    summary: 'One goal',
+    summary: 'One goal with its history, movements and milestones',
     params: goalParams,
-    response: GoalSchema,
+    response: GoalDetailSchema,
   },
   'goals.create': {
     method: 'POST',
     path: '/v1/goals',
     summary: 'Create a goal',
     body: CreateGoalBodySchema,
+    response: GoalSchema,
+  },
+  'goals.update': {
+    method: 'PATCH',
+    path: '/v1/goals/:goalId',
+    summary: 'Edit a goal or pause/resume it',
+    params: goalParams,
+    body: UpdateGoalBodySchema,
+    response: GoalSchema,
+  },
+  'goals.deposit': {
+    method: 'POST',
+    path: '/v1/goals/:goalId/deposits',
+    summary: 'Register an extra deposit',
+    params: goalParams,
+    body: GoalDepositBodySchema,
     response: GoalSchema,
   },
   'goals.delete': {

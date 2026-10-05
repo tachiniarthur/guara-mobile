@@ -83,6 +83,11 @@ export const ICON_PATHS = {
   lock: ['M6 11h12v10H6zM8 11V7a4 4 0 0 1 8 0v4'],
   externalLink: ['M14 4h6v6M20 4l-9 9M18 14v5a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1h5'],
   clock: ['M12 21a9 9 0 1 0 0-18 9 9 0 0 0 0 18zM12 7v5l3 2'],
+  shieldCheck: ['M12 3l8 3v6c0 5-3.5 8-8 9-4.5-1-8-4-8-9V6zM9 12l2 2 4-4'],
+  sparkle: [
+    'M12 3v4M12 17v4M3 12h4M17 12h4M6 6l2.5 2.5M15.5 15.5 18 18M6 18l2.5-2.5M15.5 8.5 18 6',
+  ],
+  pause: ['M8 5v14M16 5v14'],
   flag: ['M5 21V4M5 4h11l-2 4 2 4H5'],
   target: ['M12 21a9 9 0 1 0 0-18 9 9 0 0 0 0 18zM12 16a4 4 0 1 0 0-8 4 4 0 0 0 0 8zM12 12h.01'],
   scissors: [

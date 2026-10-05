@@ -9,6 +9,7 @@ import { JUNGLE_SVG } from './jungle';
 
 export * from './BrazilFlag';
 export * from './MataSurface';
+export * from './MataButton';
 
 export interface JungleBackdropProps {
   /** Height of the fade from the Mata color at the top (design: 110). */

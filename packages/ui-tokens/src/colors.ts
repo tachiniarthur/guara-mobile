@@ -93,8 +93,12 @@ export const colors = {
   hero: {
     DEFAULT: '#1B4535',
     ring: '#23513C',
-    /** Wordmark over the Mata header. */
+    /** Wordmark over the Mata header; strong numbers in hero captions. */
     foreground: '#FFFFFF',
+    /** Label over the Mata texture ("Guardado nas metas"). */
+    label: '#C5D8CB',
+    /** Caption over the Mata texture ("Depósitos planejados…"). */
+    caption: '#E4EEE6',
   },
   /** Biome ring of each assistant's portrait (only in the assistants and chat UI). */
   biome: {

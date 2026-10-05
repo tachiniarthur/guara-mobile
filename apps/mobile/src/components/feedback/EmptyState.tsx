@@ -1,4 +1,5 @@
 import { colors } from '@guara/ui-tokens';
+import type { ReactNode } from 'react';
 import { View } from 'react-native';
 
 import { Button, type ButtonVariant } from '@/components/ui/Button';
@@ -21,6 +22,8 @@ export interface EmptyStateProps {
   /** `negative`: Urucum circle (errors). */
   tone?: 'neutral' | 'negative';
   action?: EmptyStateAction;
+  /** Custom buttons instead of `action` ("Criar primeira meta" + "Usar o simulador"). */
+  actions?: ReactNode;
   className?: string;
 }
 
@@ -31,6 +34,7 @@ export function EmptyState({
   icon,
   tone = 'neutral',
   action,
+  actions,
   className,
 }: EmptyStateProps) {
   return (
@@ -57,6 +61,7 @@ export function EmptyState({
           {description}
         </Text>
       ) : null}
+      {actions ? <View className="flex-row flex-wrap justify-center gap-2">{actions}</View> : null}
       {action ? (
         <Button
           variant={action.variant ?? 'secondary'}

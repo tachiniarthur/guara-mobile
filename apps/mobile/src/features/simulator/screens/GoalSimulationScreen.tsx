@@ -191,7 +191,19 @@ export function GoalSimulationScreen() {
               size="md"
               leftIcon="flag"
               className="px-4.5"
-              onPress={() => router.navigate('/new-goal')}
+              onPress={() =>
+                router.navigate({
+                  pathname: '/new-goal',
+                  params: {
+                    from: 'simulation',
+                    name: goalName,
+                    cost: String(cost),
+                    months: String(months),
+                    saved: String(start),
+                    place,
+                  },
+                })
+              }
             >
               Transformar em meta
             </Button>

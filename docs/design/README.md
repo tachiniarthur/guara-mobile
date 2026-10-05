@@ -121,37 +121,37 @@ implementada.
 
 ### App
 
-| Tela                                                                                                | Formatos | Rota no app                                                             |
-| --------------------------------------------------------------------------------------------------- | -------- | ----------------------------------------------------------------------- |
-| `Inicio` (M), `Painel` (T), `Painel-Historico` (D), `Main` (D)                                      | M T D    | `/` (`(tabs)/(home)/index`)                                             |
-| `Assistentes`                                                                                       | M        | `/assistants`                                                           |
-| `Conversa`, `Conversas` (D), `Historico-Conversas`, `Escolher-Agente`                               | M T D    | `/chat`, `/chat/[conversationId]`                                       |
-| `Conversa-Menu`, `-Apagar`, `-Anexar`, `-Anexo-Previa`, `-Gravando`, `-Transcrevendo`               | M T      | —                                                                       |
-| `Gastos`                                                                                            | M T D    | `/spending`                                                             |
-| `Lancamentos` · todos os lançamentos                                                                | M T      | `/spending/transactions`                                                |
-| `Lancamentos-Categoria` · lançamentos de uma categoria                                              | M T      | `/spending/category/[categoryId]`                                       |
-| `Lancamento-Detalhe` · detalhe do lançamento                                                        | M T      | `/spending/[transactionId]`                                             |
-| `Lancamentos-Estados` · filtro vazio, vazio e erro                                                  | M T      | estados de `/spending/transactions`                                     |
-| `Assinaturas`                                                                                       | M T D    | `/spending/subscriptions`                                               |
-| `Relatorio` (T em paisagem)                                                                         | M T D    | `/reports`                                                              |
-| `Relatorio-Linha-do-Tempo`                                                                          | M T      | —                                                                       |
-| `Alertas`                                                                                           | M T D    | `/alerts`                                                               |
-| `Novo-Teto`                                                                                         | M T D    | `/new-budget` (modal)                                                   |
-| `Novo-Alerta-Preco`                                                                                 | M T D    | `/new-price-alert` (modal)                                              |
-| `Investimentos`                                                                                     | M T D    | `/investments`                                                          |
-| `Ativo`, `Ativo-Tesouro-Selic`, `-CDB`, `-BOVA11`, `-HGLG11`, `-Bitcoin`                            | M T D    | `/investments/asset/[ticker]`                                           |
-| `Ativo-Comparar`, `-Comparar-Ibovespa`, `-Preco-Sem-Ajuste`, `-Mais-Detalhes`, `-Eventos`, `-Risco` | M T      | —                                                                       |
-| `Adicionar-Investimento`                                                                            | M T D    | `/new-manual-asset` (modal)                                             |
-| `Posicoes`, `Posicoes-Estados`                                                                      | M T      | `/investments/positions`                                                |
-| `Simulador`, `Simulador-Objetivo`, `Simulador-Corte`                                                | M T D    | `/investments/simulator/retirement`, `/goal`, `/cut-expense`            |
-| `Simulacoes`, `Simulacoes-Estados`                                                                  | M T      | `/investments/simulator/saved`                                          |
-| `Metas`, `Meta-Detalhe`, `Meta-Nova`, `Metas-Estados`                                               | M T      | `/goals`, `/goals/[goalId]`, `/new-goal`                                |
-| `Bem-Imovel`, `Bem-Veiculo`, `Bem-Imovel-Detalhe`, `Bem-Veiculo-Detalhe`                            | M T      | `/new-property`, `/new-vehicle`, `/investments/properties/[propertyId]` |
-| `Meu-Perfil`                                                                                        | M T D    | `/account`                                                              |
-| `Editar-Perfil`, `Editar-Perfil-Email`                                                              | M T      | `/account/profile`                                                      |
-| `Perfil-Refazer`, `Perfil-Refazer-Resultado`                                                        | M T      | —                                                                       |
-| `Planos`                                                                                            | M T      | `/account/plan`                                                         |
-| `Malvo-Renovar` · renovar autorização do banco                                                      | M T      | `/malvo/[bankId]?mode=renew`                                            |
-| `Inicio-Novo`, `Gastos-Novo`, `Investimentos-Novo` · usuário sem banco                              | M T      | —                                                                       |
+| Tela                                                                                                | Formatos | Rota no app                                                                           |
+| --------------------------------------------------------------------------------------------------- | -------- | ------------------------------------------------------------------------------------- |
+| `Inicio` (M), `Painel` (T), `Painel-Historico` (D), `Main` (D)                                      | M T D    | `/` (`(tabs)/(home)/index`)                                                           |
+| `Assistentes`                                                                                       | M        | `/assistants`                                                                         |
+| `Conversa`, `Conversas` (D), `Historico-Conversas`, `Escolher-Agente`                               | M T D    | `/chat`, `/chat/[conversationId]`                                                     |
+| `Conversa-Menu`, `-Apagar`, `-Anexar`, `-Anexo-Previa`, `-Gravando`, `-Transcrevendo`               | M T      | —                                                                                     |
+| `Gastos`                                                                                            | M T D    | `/spending`                                                                           |
+| `Lancamentos` · todos os lançamentos                                                                | M T      | `/spending/transactions`                                                              |
+| `Lancamentos-Categoria` · lançamentos de uma categoria                                              | M T      | `/spending/category/[categoryId]`                                                     |
+| `Lancamento-Detalhe` · detalhe do lançamento                                                        | M T      | `/spending/[transactionId]`                                                           |
+| `Lancamentos-Estados` · filtro vazio, vazio e erro                                                  | M T      | estados de `/spending/transactions`                                                   |
+| `Assinaturas`                                                                                       | M T D    | `/spending/subscriptions`                                                             |
+| `Relatorio` (T em paisagem)                                                                         | M T D    | `/reports`                                                                            |
+| `Relatorio-Linha-do-Tempo`                                                                          | M T      | —                                                                                     |
+| `Alertas`                                                                                           | M T D    | `/alerts`                                                                             |
+| `Novo-Teto`                                                                                         | M T D    | `/new-budget` (modal)                                                                 |
+| `Novo-Alerta-Preco`                                                                                 | M T D    | `/new-price-alert` (modal)                                                            |
+| `Investimentos`                                                                                     | M T D    | `/investments`                                                                        |
+| `Ativo`, `Ativo-Tesouro-Selic`, `-CDB`, `-BOVA11`, `-HGLG11`, `-Bitcoin`                            | M T D    | `/investments/asset/[ticker]`                                                         |
+| `Ativo-Comparar`, `-Comparar-Ibovespa`, `-Preco-Sem-Ajuste`, `-Mais-Detalhes`, `-Eventos`, `-Risco` | M T      | —                                                                                     |
+| `Adicionar-Investimento`                                                                            | M T D    | `/new-manual-asset` (modal)                                                           |
+| `Posicoes`, `Posicoes-Estados`                                                                      | M T      | `/investments/positions`                                                              |
+| `Simulador`, `Simulador-Objetivo`, `Simulador-Corte`                                                | M T D    | `/investments/simulator/retirement`, `/goal`, `/cut-expense`                          |
+| `Simulacoes`, `Simulacoes-Estados`                                                                  | M T      | `/investments/simulator/saved`                                                        |
+| `Metas`, `Meta-Detalhe`, `Meta-Nova`, `Metas-Estados`                                               | M T      | `/goals`, `/goals/[goalId]`, `/new-goal` (`?from=simulation`, `?goalId=` para editar) |
+| `Bem-Imovel`, `Bem-Veiculo`, `Bem-Imovel-Detalhe`, `Bem-Veiculo-Detalhe`                            | M T      | `/new-property`, `/new-vehicle`, `/investments/properties/[propertyId]`               |
+| `Meu-Perfil`                                                                                        | M T D    | `/account`                                                                            |
+| `Editar-Perfil`, `Editar-Perfil-Email`                                                              | M T      | `/account/profile`                                                                    |
+| `Perfil-Refazer`, `Perfil-Refazer-Resultado`                                                        | M T      | —                                                                                     |
+| `Planos`                                                                                            | M T      | `/account/plan`                                                                       |
+| `Malvo-Renovar` · renovar autorização do banco                                                      | M T      | `/malvo/[bankId]?mode=renew`                                                          |
+| `Inicio-Novo`, `Gastos-Novo`, `Investimentos-Novo` · usuário sem banco                              | M T      | —                                                                                     |
 
 Rotas marcadas com "—" ainda não existem ou existem sem seguir a tela nova do design.
