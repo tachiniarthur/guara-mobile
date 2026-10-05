@@ -8,3 +8,5 @@ pnpm-lock.yaml
 apps/*/android
 apps/*/ios
 expo-env.d.ts
+docs/design/screens
+docs/design/canvas.json

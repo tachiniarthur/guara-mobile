@@ -51,6 +51,20 @@ O app roda **exclusivamente no Expo Go** (iPhone/iPad e Android físicos, emulad
 4. **Paridade celular/tablet:** mesmas funcionalidades; só o layout muda (`useBreakpoint`,
    `ResponsiveContainer`).
 
+## Design
+
+O design oficial está em [`docs/design/`](docs/design/README.md): uma tela por `.dc.html`
+(`Escuro-Mobile-*`, `Escuro-Tablet-*`), os fundamentos em `screens/Fundamentos.dc.html` e o índice
+tela → rota no `README.md`.
+
+- **Fonte da verdade visual:** espaçamentos, tamanhos, textos, estados e comportamento vêm do design.
+- **Antes de codar uma tela**, leia os `.dc.html` de celular **e** de tablet dela (e os de estados,
+  quando houver).
+- **Números do design são exemplos.** Os dados vêm de `data.ts`/API; derivados são calculados.
+- **Em conflito**, vale o design. Se o conflito for de regra de negócio (cálculo, limite, fluxo),
+  pergunte antes.
+- Tela nova implementada → atualize a coluna "Rota no app" do índice.
+
 ## Arquitetura
 
 | Tema               | Escolha                                                                                                             |
