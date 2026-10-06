@@ -16,6 +16,7 @@ const INFRA_ONLY_PACKAGES = [
   'expo-apple-authentication',
   'expo-web-browser',
   'expo-notifications',
+  'expo-image-picker',
 ].map((name) => ({ name, message: 'Use the wrappers in src/lib/ instead.' }));
 
 module.exports = defineConfig([

@@ -55,7 +55,7 @@ describe('Conectar bancos (from Meu perfil)', () => {
     act(() => useBankConnectionsStore.getState().connect('inter', '2027-10-05'));
     render(<ConnectBankScreen />);
     fireEvent.press(screen.getByText('Caixa'));
-    expect(info).toHaveBeenLastCalledWith('Seu plano permite 3 bancos.');
+    expect(info).toHaveBeenLastCalledWith('Seu plano Completo permite 3 bancos.');
     expect(mockNavigate).not.toHaveBeenCalled();
   });
 });

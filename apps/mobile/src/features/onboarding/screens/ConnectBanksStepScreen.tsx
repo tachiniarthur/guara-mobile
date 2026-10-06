@@ -3,12 +3,14 @@ import { View } from 'react-native';
 
 import { StepIntro } from '@/components/layout';
 import { Button } from '@/components/ui';
-import { BankPicker, PLAN, useBankConnectionsStore } from '@/features/bank-connections';
+import { BankPicker, useBankConnectionsStore } from '@/features/bank-connections';
+import { usePlan } from '@/stores';
 
 import { OnboardingFrame, StepProgress } from '../components';
 
 /** Onboarding 1 · Conectar bancos (Open Finance). */
 export function ConnectBanksStepScreen() {
+  const plan = usePlan();
   const router = useRouter();
   const connections = useBankConnectionsStore((state) => state.connections);
 
@@ -47,7 +49,7 @@ export function ConnectBanksStepScreen() {
         onConnect={(bank) =>
           router.push({ pathname: '/connect/[bankId]', params: { bankId: bank.id } })
         }
-        planLabel={`bancos do plano ${PLAN.name}. Dá para conectar mais depois.`}
+        planLabel={`bancos do plano ${plan.name}. Dá para conectar mais depois.`}
       />
     </OnboardingFrame>
   );

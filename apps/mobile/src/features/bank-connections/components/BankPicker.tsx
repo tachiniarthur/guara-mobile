@@ -4,7 +4,9 @@ import { toast } from '@/components/feedback';
 import { ResponsiveGrid } from '@/components/layout';
 import { SearchInput, Span, Text } from '@/components/ui';
 
-import { PLAN, SUPPORTED_BANKS, type BankOptionData } from '../data';
+import { usePlan } from '@/stores';
+
+import { SUPPORTED_BANKS, type BankOptionData } from '../data';
 
 import { AccessList } from './AccessList';
 import { BankOption } from './BankOption';
@@ -22,6 +24,7 @@ export interface BankPickerProps {
 
 /** Search, bank grid (connect up to the plan limit), plan usage and what the Guará reads. */
 export function BankPicker({ connected, onConnect, connectedHint, planLabel }: BankPickerProps) {
+  const plan = usePlan();
   const [query, setQuery] = useState('');
   const normalized = query.trim().toLocaleLowerCase('pt-BR');
   const banks = SUPPORTED_BANKS.filter((bank) =>
@@ -33,8 +36,8 @@ export function BankPicker({ connected, onConnect, connectedHint, planLabel }: B
       toast.info(`${bank.name} já está conectado.${connectedHint ? ` ${connectedHint}` : ''}`);
       return;
     }
-    if (connected.length >= PLAN.bankLimit) {
-      toast.info(`Seu plano permite ${PLAN.bankLimit} bancos.`);
+    if (connected.length >= plan.bankLimit) {
+      toast.info(`Seu plano ${plan.name} permite ${plan.banksLabel}.`);
       return;
     }
     onConnect(bank);
@@ -61,7 +64,7 @@ export function BankPicker({ connected, onConnect, connectedHint, planLabel }: B
       </ResponsiveGrid>
       <Text size={14} tone="muted">
         <Span weight="bold" tone="default">
-          {connected.length} de {PLAN.bankLimit}
+          {connected.length} de {plan.bankLimit}
         </Span>{' '}
         {planLabel}
       </Text>

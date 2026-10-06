@@ -4,8 +4,7 @@ import { Pressable, ScrollView, View } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 import { LogoMark } from '@/components/brand';
-import { Avatar, Icon, Text } from '@/components/ui';
-import { CURRENT_USER } from '@/constants/current-user';
+import { Icon, Text, UserAvatar } from '@/components/ui';
 import { ASSISTANT_ORDER, ASSISTANTS, AssistantAvatar } from '@/features/chat';
 import { cn } from '@/lib/cn';
 import { haptics } from '@/lib/haptics';
@@ -114,7 +113,7 @@ export function SideRail() {
           onPress={() => go('/account')}
           className="mt-4"
         >
-          <Avatar name={CURRENT_USER.name} size={44} decorative />
+          <UserAvatar size={44} />
         </Pressable>
       </ScrollView>
     </View>

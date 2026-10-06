@@ -8,7 +8,6 @@ import { toast } from '@/components/feedback';
 import { MataSurface } from '@/components/illustrations';
 import { PageHeader, ResponsiveGrid, Screen, SectionCard, TopBar } from '@/components/layout';
 import {
-  Avatar,
   Button,
   Checkbox,
   ConfirmDialog,
@@ -18,16 +17,17 @@ import {
   Sheet,
   Switch,
   Text,
+  UserAvatar,
 } from '@/components/ui';
 import { useBreakpoint } from '@/hooks/useBreakpoint';
 import { cn } from '@/lib/cn';
-import { useUiPreferences, type TextSize } from '@/stores/ui-preferences';
+import { usePlan, useUiPreferences, useUserStore, type TextSize } from '@/stores';
 
-import { PLAN, useBankConnectionsStore, type BankConnection } from '@/features/bank-connections';
+import { useBankConnectionsStore, type BankConnection } from '@/features/bank-connections';
 import { PROFILE_LABELS, useInvestorProfileStore } from '@/features/investor-profile';
 
 import { BankConnectionCard } from '../components';
-import { CURRENT_USER, DEVICES, NOTICE_KINDS } from '../data';
+import { DEVICES, NOTICE_KINDS } from '../data';
 
 const TEXT_SIZES: { value: TextSize; label: string }[] = [
   { value: 'default', label: 'Padrão' },
@@ -102,18 +102,21 @@ export function AccountScreen() {
   const disconnect = useBankConnectionsStore((state) => state.disconnect);
   const [scopesOf, setScopesOf] = useState<BankConnection | null>(null);
   const [dialog, setDialog] = useState<Dialog>(null);
-  const free = CURRENT_USER.banksAllowed - banks.length;
+  const user = useUserStore();
+  const plan = usePlan();
+  const active = banks.filter((bank) => bank.status !== 'paused').length;
+  const free = Math.max(0, plan.bankLimit - active);
 
   const hero = (
     <MataSurface veil={[0.85, 0.55, 0.1]} className="rounded-24 border border-border-strong p-5">
       <View className="flex-row items-center gap-3.5">
-        <Avatar name={CURRENT_USER.name} size={56} tone="brand" decorative />
+        <UserAvatar size={56} />
         <View className="min-w-0 flex-1">
           <Text size={18} weight="bold" leading={1.35}>
-            {CURRENT_USER.name}
+            {user.name}
           </Text>
           <Text size={14} tone="muted" leading={1.35} numberOfLines={1}>
-            {CURRENT_USER.email}
+            {user.email}
           </Text>
         </View>
         <Pressable
@@ -268,7 +271,7 @@ export function AccountScreen() {
         />
         <TextLink
           label="Baixar meus dados (LGPD)"
-          onPress={() => toast.success(`Vamos enviar seus dados para ${CURRENT_USER.email}`)}
+          onPress={() => toast.success(`Vamos enviar seus dados para ${user.email}`)}
         />
         <TextLink
           label="Excluir conta"
@@ -284,12 +287,17 @@ export function AccountScreen() {
       key={bank.id}
       bank={bank}
       onRefresh={() => toast.success(`${bank.name} atualizado`)}
-      onRenew={() =>
+      onRenew={() => {
+        if (bank.status === 'paused' && free === 0) {
+          toast.info(`O plano ${plan.name} permite ${plan.banksLabel}. Mude de plano para voltar.`);
+          router.navigate('/account/plan');
+          return;
+        }
         router.navigate({
           pathname: '/malvo/[bankId]',
           params: { bankId: bank.id, mode: 'renew' },
-        })
-      }
+        });
+      }}
       onShowScopes={() => setScopesOf(bank)}
       onDisconnect={() => setDialog({ kind: 'disconnect', bank })}
     />
@@ -326,9 +334,9 @@ export function AccountScreen() {
         <View className="flex-row justify-between gap-3">
           <Text size={13} tone="muted" className="flex-1">
             <Text size={13} weight="bold">
-              {banks.length} de {CURRENT_USER.banksAllowed}
+              {active} de {plan.bankLimit}
             </Text>{' '}
-            conexões usadas no plano {PLAN.name}
+            conexões usadas no plano {plan.name}
           </Text>
           <Pressable
             accessibilityRole="link"
@@ -343,13 +351,13 @@ export function AccountScreen() {
         <View
           accessible
           accessibilityRole="image"
-          accessibilityLabel={`${banks.length} de ${CURRENT_USER.banksAllowed} conexões usadas`}
+          accessibilityLabel={`${active} de ${plan.bankLimit} conexões usadas`}
           className="h-2 flex-row gap-1"
         >
-          {Array.from({ length: CURRENT_USER.banksAllowed }, (_, index) => (
+          {Array.from({ length: plan.bankLimit }, (_, index) => (
             <View
               key={index}
-              className={cn('flex-1 rounded-4', index < banks.length ? 'bg-positive' : 'bg-border')}
+              className={cn('flex-1 rounded-4', index < active ? 'bg-positive' : 'bg-border')}
             />
           ))}
         </View>

@@ -1,13 +1,14 @@
 import { useRouter } from 'expo-router';
 
 import { FormScreen, StepIntro } from '@/components/layout';
+import { usePlan } from '@/stores';
 
 import { BankPicker } from '../components';
-import { PLAN } from '../data';
 import { useBankConnectionsStore } from '../store';
 
 /** Conectar bancos from Meu perfil or Gastos: choose a bank and authorize it in the Malvo. */
 export function ConnectBankScreen() {
+  const plan = usePlan();
   const router = useRouter();
   const connections = useBankConnectionsStore((state) => state.connections);
   const close = () => (router.canGoBack() ? router.back() : router.replace('/account'));
@@ -25,12 +26,12 @@ export function ConnectBankScreen() {
         description="Pelo Open Finance, via Malvo. Você autoriza no app do banco e revoga quando quiser."
       />
       <BankPicker
-        connected={connections.map((item) => item.id)}
+        connected={connections.filter((item) => item.status !== 'paused').map((item) => item.id)}
         onConnect={(bank) =>
           router.navigate({ pathname: '/malvo/[bankId]', params: { bankId: bank.id } })
         }
         connectedHint="Para desconectar, use Meu perfil."
-        planLabel={`bancos do plano ${PLAN.name}. Para desconectar um banco, use Meu perfil.`}
+        planLabel={`bancos do plano ${plan.name}. Para desconectar um banco, use Meu perfil.`}
       />
     </FormScreen>
   );

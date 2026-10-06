@@ -4,10 +4,10 @@ import { useState } from 'react';
 import { Modal, Pressable, View } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
-import { Avatar, CountBadge, Icon, Text } from '@/components/ui';
-import { CURRENT_USER } from '@/constants/current-user';
-import { PLAN, useBankConnectionsStore } from '@/features/bank-connections';
+import { CountBadge, Icon, Text, UserAvatar } from '@/components/ui';
+import { useBankConnectionsStore } from '@/features/bank-connections';
 import { haptics } from '@/lib/haptics';
+import { usePlan, useUserStore } from '@/stores';
 
 import { ACCOUNT_MENU } from './destinations';
 
@@ -16,13 +16,17 @@ export function AccountMenuButton() {
   const [open, setOpen] = useState(false);
   const router = useRouter();
   const insets = useSafeAreaInsets();
-  const banks = useBankConnectionsStore((state) => state.connections.length);
+  const banks = useBankConnectionsStore(
+    (state) => state.connections.filter((item) => item.status !== 'paused').length,
+  );
+  const name = useUserStore((state) => state.name);
+  const plan = usePlan();
 
   return (
     <>
       <Pressable
         accessibilityRole="button"
-        accessibilityLabel={`Menu da conta de ${CURRENT_USER.name}`}
+        accessibilityLabel={`Menu da conta de ${name}`}
         accessibilityState={{ expanded: open }}
         onPress={() => {
           haptics.selection();
@@ -30,7 +34,7 @@ export function AccountMenuButton() {
         }}
         className="h-11 w-11 items-center justify-center rounded-full"
       >
-        <Avatar name={CURRENT_USER.name} size={34} decorative />
+        <UserAvatar size={34} />
       </Pressable>
       <Modal
         visible={open}
@@ -60,13 +64,13 @@ export function AccountMenuButton() {
           className="absolute right-3 w-[300px] gap-0.5 rounded-22 border border-border-strong bg-surface-input p-2"
         >
           <View className="mb-1 flex-row items-center gap-3 border-b border-border px-3 pb-3 pt-2.5">
-            <Avatar name={CURRENT_USER.name} size={40} decorative />
+            <UserAvatar size={40} />
             <View className="min-w-0">
               <Text size={15} weight="bold" leading={1.3}>
-                {CURRENT_USER.name}
+                {name}
               </Text>
               <Text variant="caption" tone="subtle" leading={1.3}>
-                {`${banks} de ${PLAN.bankLimit} bancos conectados`}
+                {`${banks} de ${plan.bankLimit} bancos conectados`}
               </Text>
             </View>
           </View>

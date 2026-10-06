@@ -105,7 +105,7 @@ apps/mobile/
   src/navigation/      barra inferior (celular), trilho lateral (tablet), menu da conta, destinos
   src/dev/             ferramentas só de desenvolvimento (catálogo de UI em /ui)
   src/lib/             infraestrutura: env, runtime, supabase, auth-oauth, api (transporte), sse,
-                       query-client, storage, notifications, logger, cn, haptics
+                       query-client, storage, notifications, media, logger, cn, haptics
   src/providers/       AppProviders, QueryProvider, AuthProvider, ThemeProvider
   src/hooks/ src/stores/ src/theme/ src/constants/ src/types/
 packages/
@@ -126,8 +126,8 @@ packages/
   ```
   Depois acrescente a URL em `apps/mobile/__tests__/routes.test.tsx` (o teste abre todas as rotas).
 - **Infra isolada:** features **não** importam `expo-sqlite`, `expo-secure-store`,
-  `@supabase/supabase-js`, `expo-auth-session`, `expo-apple-authentication`, `expo-web-browser` nem
-  `expo-notifications` — o ESLint bloqueia (`no-restricted-imports`). Use `src/lib/*`.
+  `@supabase/supabase-js`, `expo-auth-session`, `expo-apple-authentication`, `expo-web-browser`,
+  `expo-notifications` nem `expo-image-picker` — o ESLint bloqueia (`no-restricted-imports`). Use `src/lib/*`.
 - **Dados das telas:** hoje vêm de `src/features/<x>/data.ts`, fiéis ao artefato de design. Valores
   derivados (totais, percentuais, simulações) são **calculados** a partir deles, nunca copiados.
   Detalhes em [Dados: hoje estáticos, amanhã a API](#dados-hoje-estáticos-amanhã-a-api).

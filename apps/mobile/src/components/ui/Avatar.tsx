@@ -17,6 +17,8 @@ export interface AvatarProps {
    * - `neutral`: Sombra disc (merchants, banks).
    */
   tone?: 'brand' | 'neutral';
+  /** Disc color of the initials (overrides `tone`; the initials stay dark). */
+  background?: string;
   /** Hide from screen readers when the name is already written next to it. */
   decorative?: boolean;
   className?: string;
@@ -38,6 +40,7 @@ export function Avatar({
   source,
   size = 40,
   tone = 'brand',
+  background,
   decorative = false,
   className,
 }: AvatarProps) {
@@ -50,7 +53,11 @@ export function Avatar({
       accessibilityRole="image"
       accessibilityLabel={decorative ? undefined : name}
       importantForAccessibility={decorative ? 'no-hide-descendants' : 'auto'}
-      style={{ width: size, height: size }}
+      style={{
+        width: size,
+        height: size,
+        ...(background ? { backgroundColor: background } : null),
+      }}
       className={cn(
         'items-center justify-center overflow-hidden rounded-full',
         tone === 'brand' ? 'bg-brand' : 'bg-surface-muted',
@@ -70,7 +77,7 @@ export function Avatar({
           weight="extrabold"
           size={Math.round(size * 0.38)}
           leading={1}
-          tone={tone === 'brand' ? 'inverse' : 'default'}
+          tone={tone === 'brand' || background ? 'inverse' : 'default'}
         >
           {getInitials(name)}
         </Text>

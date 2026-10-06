@@ -6,6 +6,7 @@ import { View } from 'react-native';
 import { LoadingRing } from '@/components/feedback';
 import { Icon, InfoNote, LinkButton, Span, Text, type IconName } from '@/components/ui';
 import { cn } from '@/lib/cn';
+import { usePlan } from '@/stores';
 
 import {
   CONSENT_MONTHS,
@@ -13,7 +14,6 @@ import {
   CONSENT_VIA,
   MALVO_ERROR,
   MALVO_SCOPES,
-  PLAN,
   type BankConnection,
   type BankOptionData,
   type MalvoFindings,
@@ -356,6 +356,7 @@ export interface SuccessBodyProps {
 
 /** "Itaú conectado": what was found and the banks of the plan. */
 export function SuccessBody({ bank, mode, findings, connections }: SuccessBodyProps) {
+  const plan = usePlan();
   const renewed = mode === 'renew';
   return (
     <>
@@ -390,17 +391,24 @@ export function SuccessBody({ bank, mode, findings, connections }: SuccessBodyPr
         <View className="gap-0.5">
           <Heading>Bancos conectados</Heading>
           <Text size={13} tone="subtle">
-            {connections.length} de {PLAN.bankLimit} conexões do plano {PLAN.name}
+            {connections.filter((item) => item.status !== 'paused').length} de {plan.bankLimit}{' '}
+            conexões do plano {plan.name}
           </Text>
         </View>
         <View className="gap-2.5">
           {connections.map((item) => {
             const expiring = item.status === 'expiring';
+            const paused = item.status === 'paused';
+            const state = paused
+              ? 'Pausado pelo plano'
+              : expiring
+                ? 'Renove em breve'
+                : 'Funcionando';
             return (
               <View
                 key={item.id}
                 accessible
-                accessibilityLabel={`${item.name}: ${expiring ? 'renovar em breve' : 'funcionando'}, atualizado ${item.updatedAt}, autorização até ${formatDate(item.authorizedUntil)}`}
+                accessibilityLabel={`${item.name}: ${state.toLowerCase()}, atualizado ${item.updatedAt}, autorização até ${formatDate(item.authorizedUntil)}`}
                 className="flex-row items-center gap-3 rounded-18 border border-border bg-surface-input p-3.5"
               >
                 <BankTile mark={item.initial} size={44} />
@@ -412,11 +420,15 @@ export function SuccessBody({ bank, mode, findings, connections }: SuccessBodyPr
                     <View
                       className={cn(
                         'h-2 w-2 rounded-full',
-                        expiring ? 'bg-warning' : 'bg-positive',
+                        paused ? 'bg-foreground-subtle' : expiring ? 'bg-warning' : 'bg-positive',
                       )}
                     />
-                    <Text size={13} weight="bold" tone={expiring ? 'warning' : 'positive'}>
-                      {expiring ? 'Renove em breve' : 'Funcionando'}
+                    <Text
+                      size={13}
+                      weight="bold"
+                      tone={paused ? 'muted' : expiring ? 'warning' : 'positive'}
+                    >
+                      {state}
                     </Text>
                   </View>
                 </View>

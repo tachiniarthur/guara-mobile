@@ -21,9 +21,6 @@ export const SUPPORTED_BANKS: BankOptionData[] = [
   { id: 'santander', name: 'Santander', mark: 'S' },
 ];
 
-/** Plan of the user and the connections it allows. */
-export const PLAN = { name: 'Completo', bankLimit: 3 } as const;
-
 export const ACCESS_ITEMS = [
   { allowed: true, label: 'Vemos: Saldos e extratos' },
   { allowed: true, label: 'Vemos: Cartões e faturas' },
@@ -36,8 +33,11 @@ export interface BankConnection {
   id: string;
   name: string;
   initial: string;
-  /** `expiring`: the consent ends soon and should be renewed (the API decides). */
-  status: 'ok' | 'expiring';
+  /**
+   * `expiring`: the consent ends soon and should be renewed (the API decides). `paused`: over
+   * the bank limit of the plan; it stops updating until the plan allows it again.
+   */
+  status: 'ok' | 'expiring' | 'paused';
   /** What the Guará reads from the bank. */
   scopes: string[];
   /** "Hoje, 14:30" (last sync, as the API labels it). */

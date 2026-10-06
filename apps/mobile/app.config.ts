@@ -83,6 +83,14 @@ export default ({ config }: ConfigContext): ExpoConfig => {
       'expo-apple-authentication',
       'expo-sqlite',
       [
+        'expo-image-picker',
+        {
+          photosPermission: 'Permitir que o Guará use uma foto sua no perfil.',
+          cameraPermission: false,
+          microphonePermission: false,
+        },
+      ],
+      [
         'expo-secure-store',
         {
           configureAndroidBackup: true,

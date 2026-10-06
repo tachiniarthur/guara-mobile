@@ -22,7 +22,17 @@ export const useBankConnectionsStore = create<BankConnectionsState>()((set) => (
   connect: (bankId, authorizedUntil) =>
     set(({ connections }) => {
       const bank = SUPPORTED_BANKS.find((item) => item.id === bankId);
-      if (!bank || connections.some((item) => item.id === bankId)) return {};
+      if (!bank) return {};
+      // A paused bank (over the plan limit) comes back when connected again.
+      if (connections.some((item) => item.id === bankId)) {
+        return {
+          connections: connections.map((item) =>
+            item.id === bankId
+              ? { ...item, status: 'ok', authorizedUntil, updatedAt: 'Agora' }
+              : item,
+          ),
+        };
+      }
       return {
         connections: [
           ...connections,

@@ -9,10 +9,12 @@ import {
   LegendSwatch,
   ProjectionChart,
   RangeBar,
+  TrendAreaChart,
 } from '@/components/charts';
 import { EmptyState, ErrorState, toast } from '@/components/feedback';
 import { ResponsiveGrid, SectionCard } from '@/components/layout';
 import {
+  AVATAR_COLORS,
   Avatar,
   Badge,
   Button,
@@ -38,6 +40,7 @@ import {
   Switch,
   Text,
   UnderlineTabs,
+  UserAvatar,
 } from '@/components/ui';
 
 import { CatalogSection, Example } from './CatalogSection';
@@ -127,7 +130,7 @@ export function DisplaySection() {
   return (
     <CatalogSection
       title="Exibição"
-      note="Badge, CountBadge, Avatar, ProgressBar, InfoNote, InfoTip, DataRow, DataTable e Disclosure."
+      note="Badge, CountBadge, Avatar (cor das iniciais), UserAvatar, ProgressBar, InfoNote, InfoTip, DataRow, DataTable e Disclosure."
     >
       <View className="flex-row flex-wrap gap-2">
         {(['neutral', 'positive', 'negative', 'warning', 'info', 'brand'] as const).map((tone) => (
@@ -139,6 +142,8 @@ export function DisplaySection() {
       <View className="flex-row items-center gap-3">
         <Avatar name="Arthur Rocha" tone="brand" />
         <Avatar name="Bia" tone="neutral" size={32} />
+        <Avatar name="Carla Lima" background={AVATAR_COLORS.info.color} />
+        <UserAvatar size={40} />
         <CountBadge count={2} accessibilityLabel="2 alertas" />
       </View>
       <ProgressBar percent={74} tone="warning" marker={70} accessibilityLabel="74% do teto" />
@@ -227,6 +232,13 @@ export function ChartsSection() {
         goal={{ value: 70, label: 'Meta' }}
         xLabels={['hoje', '5 anos']}
         accessibilityLabel="Projeção de exemplo"
+      />
+      <TrendAreaChart
+        values={[80_900, 80_300, 79_800, 79_400, 79_130, 78_500]}
+        xLabels={['abr', 'mai', 'jun', 'jul', 'ago', 'set']}
+        step={2000}
+        formatTick={(value) => `${value / 1000} mil`}
+        accessibilityLabel="Tendência de exemplo (Tabela FIPE)"
       />
       <View className="flex-row gap-4">
         <LegendSwatch label="Linha" color={colors.info.DEFAULT} />

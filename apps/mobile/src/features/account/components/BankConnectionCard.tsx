@@ -24,6 +24,7 @@ export function BankConnectionCard({
   onDisconnect,
 }: BankConnectionCardProps) {
   const expiring = bank.status === 'expiring';
+  const paused = bank.status === 'paused';
 
   return (
     <View
@@ -43,9 +44,19 @@ export function BankConnectionCard({
             {bank.name}
           </Text>
           <View className="flex-row items-center gap-1.5">
-            <View className={cn('h-2 w-2 rounded-full', expiring ? 'bg-warning' : 'bg-positive')} />
-            <Text size={13} weight="bold" tone={expiring ? 'warning' : 'positive'} leading={1.3}>
-              {expiring ? 'Renove em breve' : 'Funcionando'}
+            <View
+              className={cn(
+                'h-2 w-2 rounded-full',
+                paused ? 'bg-foreground-subtle' : expiring ? 'bg-warning' : 'bg-positive',
+              )}
+            />
+            <Text
+              size={13}
+              weight="bold"
+              tone={paused ? 'muted' : expiring ? 'warning' : 'positive'}
+              leading={1.3}
+            >
+              {paused ? 'Pausado pelo plano' : expiring ? 'Renove em breve' : 'Funcionando'}
             </Text>
           </View>
         </View>
@@ -53,18 +64,26 @@ export function BankConnectionCard({
       <View
         className={cn(
           'flex-row items-start gap-2.5 rounded-14 px-3.5 py-3',
-          expiring ? 'bg-warning-muted' : 'bg-positive-muted',
+          paused ? 'bg-surface-muted' : expiring ? 'bg-warning-muted' : 'bg-positive-muted',
         )}
       >
         <View style={{ marginTop: 1 }}>
           <Icon
-            name={expiring ? 'alertTriangle' : 'checkThin'}
+            name={paused ? 'pause' : expiring ? 'alertTriangle' : 'checkThin'}
             size={16}
-            color={expiring ? colors.warning.DEFAULT : colors.positive.DEFAULT}
+            color={
+              paused
+                ? colors.foreground.muted
+                : expiring
+                  ? colors.warning.DEFAULT
+                  : colors.positive.DEFAULT
+            }
           />
         </View>
         <Text size={13} className="flex-1">
-          {expiring ? (
+          {paused ? (
+            `Seu plano não comporta mais este banco, então o ${bank.name} parou de atualizar. O que já chegou continua no app. Volte a atualizar quando o plano permitir.`
+          ) : expiring ? (
             <>
               A autorização termina em{' '}
               <Span weight="bold">{formatDate(bank.authorizedUntil, "d 'de' MMMM")}</Span>. Depois
@@ -109,7 +128,11 @@ export function BankConnectionCard({
         </View>
       </View>
       <View className="flex-row flex-wrap gap-2">
-        {expiring ? (
+        {paused ? (
+          <Button size="sm" leftIcon="relink" className="h-10 px-3.5" onPress={onRenew}>
+            Voltar a atualizar
+          </Button>
+        ) : expiring ? (
           <Button size="sm" leftIcon="relink" className="h-10 px-3.5" onPress={onRenew}>
             Renovar autorização
           </Button>

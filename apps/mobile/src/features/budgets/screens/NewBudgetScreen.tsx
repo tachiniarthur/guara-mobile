@@ -9,8 +9,8 @@ import { CapBarChart, DashedLine, LegendSwatch } from '@/components/charts';
 import { toast } from '@/components/feedback';
 import { FormScreen, ResponsiveGrid, SectionCard } from '@/components/layout';
 import { Checkbox, MoneyInput, SelectField, Text } from '@/components/ui';
-import { CURRENT_USER } from '@/constants/current-user';
 import { useBreakpoint } from '@/hooks/useBreakpoint';
+import { useUserStore } from '@/stores';
 
 import { BudgetMilestoneBar, MilestoneInputs } from '../components';
 import {
@@ -45,6 +45,7 @@ function Stat({ label, value, tone }: { label: string; value: string; tone?: 'ne
 export function NewBudgetScreen() {
   const router = useRouter();
   const { isTablet } = useBreakpoint();
+  const userEmail = useUserStore((state) => state.email);
   const [category, setCategory] = useState<BudgetCategory>('food');
   const [period, setPeriod] = useState<BudgetPeriod>('monthly');
   const [limit, setLimit] = useState<Cents | null>(cents(100_000));
@@ -119,7 +120,7 @@ export function NewBudgetScreen() {
           checked={email}
           onChange={setEmail}
           label="E-mail"
-          description={isTablet ? undefined : CURRENT_USER.email}
+          description={isTablet ? undefined : userEmail}
           tone={isTablet ? 'default' : 'brand'}
           labelWeight={isTablet ? 'medium' : 'bold'}
         />
