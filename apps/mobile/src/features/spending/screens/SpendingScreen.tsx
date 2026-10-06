@@ -15,6 +15,7 @@ import {
   Span,
   Text,
 } from '@/components/ui';
+import { useBankConnectionsStore } from '@/features/bank-connections';
 import { useBreakpoint } from '@/hooks/useBreakpoint';
 import { routeTo } from '@/constants/routes';
 import { AccountMenuButton, ChatFab } from '@/navigation';
@@ -25,6 +26,7 @@ import {
   MonthBudgetRow,
   SubscriptionRow,
   TransactionRow,
+  NewUserSpending,
 } from '../components';
 import {
   ACTIVE_SUBSCRIPTIONS,
@@ -78,6 +80,8 @@ export function SpendingScreen() {
   const [month, setMonth] = useState('2026-09');
   const [monthOpen, setMonthOpen] = useState(false);
   const [query, setQuery] = useState('');
+  // Without a connected bank, Gastos explains what will show up ("Gastos · novo").
+  const newUser = useBankConnectionsStore((state) => state.connections.length === 0);
 
   const track = (key: SectionKey) => ({
     onLayout: (event: { nativeEvent: { layout: { y: number } } }) => {
@@ -368,7 +372,7 @@ export function SpendingScreen() {
               leading="none"
               actions={
                 <>
-                  {monthPicker}
+                  {newUser ? null : monthPicker}
                   <AccountMenuButton />
                 </>
               }
@@ -377,7 +381,12 @@ export function SpendingScreen() {
         }
         contentClassName={isTablet ? 'pb-32' : undefined}
       >
-        {isTablet ? (
+        {newUser ? (
+          <>
+            {isTablet ? <PageHeader title="Gastos" /> : null}
+            <NewUserSpending />
+          </>
+        ) : isTablet ? (
           <>
             <PageHeader title="Gastos" subtitle={SPENDING.subtitle} actions={monthPicker} />
             <View className="flex-row flex-wrap items-center justify-between gap-3">

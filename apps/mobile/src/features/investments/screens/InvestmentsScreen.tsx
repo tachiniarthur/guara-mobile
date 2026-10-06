@@ -15,7 +15,9 @@ import {
   PortfolioCard,
   PositionsCard,
   PropertiesCard,
+  NewUserInvestments,
 } from '../components';
+import { usePositions } from '../hooks/usePositions';
 import { PORTFOLIO } from '../data';
 
 /** Investimentos: net worth, allocation vs profile, countries, assets, alerts and positions. */
@@ -23,6 +25,8 @@ export function InvestmentsScreen() {
   const router = useRouter();
   const { isTablet } = useBreakpoint();
   const addInvestment = () => router.navigate('/new-manual-asset');
+  // An empty portfolio shows where to start ("Investimentos · novo").
+  const empty = usePositions().status === 'empty';
 
   const alertsCard = (
     <SectionCard
@@ -70,7 +74,12 @@ export function InvestmentsScreen() {
         }
         contentClassName={isTablet ? 'pb-32' : undefined}
       >
-        {isTablet ? (
+        {empty ? (
+          <>
+            {isTablet ? <PageHeader title="Investimentos" /> : null}
+            <NewUserInvestments />
+          </>
+        ) : isTablet ? (
           <>
             <PageHeader
               title="Investimentos"

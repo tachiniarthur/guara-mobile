@@ -1,5 +1,7 @@
 import type { CategoryId, UnusualReason, UnusualStatus } from '@guara/types';
 
+import { useBankConnectionsStore } from '@/features/bank-connections';
+
 import {
   BANK_SYNC,
   CATEGORY_DETAILS,
@@ -38,7 +40,8 @@ export interface UnusualInfo {
 export function useLedger() {
   const edits = useSpendingStore((state) => state.edits);
   const transactions = LEDGER.map((tx) => applyEdits(tx, edits));
-  const status: LedgerStatus = BANK_SYNC.length === 0 ? 'empty' : 'ready';
+  const banks = useBankConnectionsStore((state) => state.connections.length);
+  const status: LedgerStatus = BANK_SYNC.length === 0 || banks === 0 ? 'empty' : 'ready';
 
   const unusualOf = (id: string): UnusualInfo | null => {
     const base = UNUSUAL[id];

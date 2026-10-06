@@ -9,3 +9,4 @@ export * from './SubcategoryCard';
 export * from './SubscriptionRow';
 export * from './SummaryTiles';
 export * from './TransactionRow';
+export * from './NewUserSpending';

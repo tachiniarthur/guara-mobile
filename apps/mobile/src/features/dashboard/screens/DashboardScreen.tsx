@@ -14,13 +14,16 @@ import {
   Text,
 } from '@/components/ui';
 import { AssistantCard, HOME_TEAM, TEAM_CARDS } from '@/features/assistants';
+import { useBankConnectionsStore } from '@/features/bank-connections';
 import { useBreakpoint } from '@/hooks/useBreakpoint';
 import { AccountMenuButton, ChatFab } from '@/navigation';
+import { useUserStore } from '@/stores';
 
 import {
   AttentionCard,
   BalanceCard,
   CategoryBudgetsCard,
+  NewUserHome,
   RecentTransactionsCard,
 } from '../components';
 import { HOME } from '../data';
@@ -43,6 +46,10 @@ export function DashboardScreen() {
   const [month, setMonth] = useState<MonthValue>('2026-09');
   const [monthOpen, setMonthOpen] = useState(false);
   const selectedMonth = MONTHS.find((item) => item.value === month) ?? MONTHS[0];
+  const name = useUserStore((state) => state.name);
+  // Without a connected bank, Início shows the first steps ("Início · novo").
+  const newUser = useBankConnectionsStore((state) => state.connections.length === 0);
+  const greeting = `Boa tarde, ${name}.`;
 
   const subtitle = (
     <Text size={isTablet ? 16 : 15} tone="muted">
@@ -101,95 +108,111 @@ export function DashboardScreen() {
       >
         {isTablet ? (
           <PageHeader
-            title={HOME.greeting}
+            title={greeting}
             size={36}
-            subtitle={subtitle}
+            subtitle={newUser ? undefined : subtitle}
             actions={
-              <>
-                {bankToggle}
-                {monthPicker}
-                <IconButton
-                  icon="bell"
-                  variant="outline"
-                  size={48}
-                  accessibilityLabel="Notificações, 3 novas"
-                  onPress={() => router.navigate('/alerts')}
-                />
-              </>
+              newUser ? null : (
+                <>
+                  {bankToggle}
+                  {monthPicker}
+                  <IconButton
+                    icon="bell"
+                    variant="outline"
+                    size={48}
+                    accessibilityLabel="Notificações, 3 novas"
+                    onPress={() => router.navigate('/alerts')}
+                  />
+                </>
+              )
             }
           />
         ) : (
           <View className="gap-4">
             <View className="gap-1.5">
               <Text variant="display" accessibilityRole="header">
-                {HOME.greeting}
+                {greeting}
               </Text>
-              {subtitle}
+              {newUser ? null : subtitle}
             </View>
-            <View className="flex-row items-center justify-between gap-2.5">
-              {bankToggle}
-              {monthPicker}
-            </View>
+            {newUser ? null : (
+              <View className="flex-row items-center justify-between gap-2.5">
+                {bankToggle}
+                {monthPicker}
+              </View>
+            )}
           </View>
         )}
 
-        <Section
-          title="Resumo de setembro"
-          description="Como está o seu mês"
-          aside={HOME.updatedLabel}
-        >
-          <View className="gap-4">
-            <BalanceCard />
-            <AttentionCard />
-          </View>
-        </Section>
-
-        <Section
-          title="Seus assistentes"
-          description="Cada um cuida de uma parte do seu dinheiro"
-          aside={
-            <LinkButton label="Ver assistentes" onPress={() => router.navigate('/assistants')} />
-          }
-        >
-          {isTablet ? (
-            <ResponsiveGrid columns={{ tablet: 2 }}>
-              {teamCards.map((card) => (
-                <AssistantCard
-                  key={card.assistant}
-                  card={card}
-                  imageHeight={184}
-                  className="flex-1"
-                />
-              ))}
-            </ResponsiveGrid>
-          ) : (
-            <ScrollView
-              horizontal
-              showsHorizontalScrollIndicator={false}
-              snapToInterval={276 + 12}
-              decelerationRate="fast"
-              className="-mx-4"
-              contentContainerClassName="gap-3 px-4 pb-1"
+        {newUser ? (
+          <NewUserHome />
+        ) : (
+          <>
+            <Section
+              title="Resumo de setembro"
+              description="Como está o seu mês"
+              aside={HOME.updatedLabel}
             >
-              {teamCards.map((card) => (
-                <AssistantCard key={card.assistant} card={card} className="w-[276px]" />
-              ))}
-            </ScrollView>
-          )}
-        </Section>
+              <View className="gap-4">
+                <BalanceCard />
+                <AttentionCard />
+              </View>
+            </Section>
 
-        <Section
-          title="Detalhes de setembro"
-          description="Para onde foi o dinheiro"
-          aside={
-            <LinkButton label="Relatório completo" onPress={() => router.navigate('/reports')} />
-          }
-        >
-          <View className="gap-4">
-            <CategoryBudgetsCard />
-            <RecentTransactionsCard />
-          </View>
-        </Section>
+            <Section
+              title="Seus assistentes"
+              description="Cada um cuida de uma parte do seu dinheiro"
+              aside={
+                <LinkButton
+                  label="Ver assistentes"
+                  onPress={() => router.navigate('/assistants')}
+                />
+              }
+            >
+              {isTablet ? (
+                <ResponsiveGrid columns={{ tablet: 2 }}>
+                  {teamCards.map((card) => (
+                    <AssistantCard
+                      key={card.assistant}
+                      card={card}
+                      imageHeight={184}
+                      className="flex-1"
+                    />
+                  ))}
+                </ResponsiveGrid>
+              ) : (
+                <ScrollView
+                  horizontal
+                  showsHorizontalScrollIndicator={false}
+                  snapToInterval={276 + 12}
+                  decelerationRate="fast"
+                  className="-mx-4"
+                  contentContainerClassName="gap-3 px-4 pb-1"
+                >
+                  {teamCards.map((card) => (
+                    <AssistantCard key={card.assistant} card={card} className="w-[276px]" />
+                  ))}
+                </ScrollView>
+              )}
+            </Section>
+
+            <Section
+              title="Detalhes de setembro"
+              description="Para onde foi o dinheiro"
+              aside={
+                <LinkButton
+                  label="Relatório completo"
+                  onPress={() => router.navigate('/reports')}
+                />
+              }
+            >
+              <View className="gap-4">
+                <CategoryBudgetsCard />
+                <RecentTransactionsCard />
+              </View>
+            </Section>
+          </>
+        )}
       </Screen>
       {isTablet ? <ChatFab /> : null}
       <OptionSheet

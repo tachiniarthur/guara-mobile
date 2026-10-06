@@ -169,6 +169,6 @@ implementada.
 | `Perfil-Refazer`, `Perfil-Refazer-Resultado`                                                        | M T      | `/account/investor-profile`                                                           |
 | `Planos`                                                                                            | M T      | `/account/plan`                                                                       |
 | `Malvo-Renovar` · renovar autorização do banco                                                      | M T      | `/malvo/[bankId]?mode=renew`                                                          |
-| `Inicio-Novo`, `Gastos-Novo`, `Investimentos-Novo` · usuário sem banco                              | M T      | —                                                                                     |
+| `Inicio-Novo`, `Gastos-Novo`, `Investimentos-Novo` · usuário sem banco                              | M T      | `/`, `/spending`, `/investments` sem banco conectado (ou carteira vazia)              |
 
 Rotas marcadas com "—" ainda não existem ou existem sem seguir a tela nova do design.

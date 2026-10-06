@@ -1,6 +1,7 @@
 export * from './AllocationCard';
 export * from './DuplicateNotice';
 export * from './ExposureCard';
+export * from './NewUserInvestments';
 export * from './PortfolioCard';
 export * from './PositionClassBand';
 export * from './PositionItem';
