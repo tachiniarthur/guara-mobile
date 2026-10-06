@@ -1,14 +1,23 @@
 import { colors } from '@guara/ui-tokens';
 import { Pressable, View } from 'react-native';
 
-import { toast } from '@/components/feedback';
+import { useRouter } from 'expo-router';
+import { useState } from 'react';
+
 import { DataRow, Icon, Text } from '@/components/ui';
 
 import { RISK_INFO, type FundAsset } from '../../assets';
+import type { Position } from '../../data';
+import { usePositions } from '../../hooks/usePositions';
 import { RiskPill } from '../RiskPill';
+import { RiskSheet } from '../RiskSheet';
 
 /** "Detalhes do ativo": name, class, instrument, issuer and the computed risk. */
 export function AssetDetailsCard({ asset }: { asset: FundAsset }) {
+  const router = useRouter();
+  const positions = usePositions();
+  const position = positions.positions.find((item) => item.ticker === asset.header.ticker);
+  const [riskTarget, setRiskTarget] = useState<Position | null>(null);
   const { details } = asset;
   const [name, ...rows] = details.rows;
 
@@ -35,26 +44,49 @@ export function AssetDetailsCard({ asset }: { asset: FundAsset }) {
         ))}
         <DataRow
           label="Risco"
-          value={<RiskPill risk={details.risk} />}
+          value={
+            position ? (
+              <RiskPill
+                risk={position.risk}
+                assetName={position.name}
+                onPress={() => setRiskTarget(position)}
+              />
+            ) : (
+              <RiskPill risk={details.risk} />
+            )
+          }
           info={RISK_INFO}
           density="relaxed"
         />
       </View>
       <View>
-        <Pressable
-          accessibilityRole="button"
-          onPress={() => toast.info('Mais detalhes do ativo em breve.')}
-          className="min-h-11 flex-row items-center gap-2 self-start pt-1"
-        >
-          <Icon name="moreHorizontal" size={18} color={colors.foreground.muted} />
-          <Text size={14} weight="semibold" tone="muted">
-            Mais detalhes
-          </Text>
-        </Pressable>
+        {asset.moreDetails ? (
+          <Pressable
+            accessibilityRole="link"
+            onPress={() =>
+              router.navigate({
+                pathname: '/investments/asset/[ticker]/details',
+                params: { ticker: asset.header.ticker },
+              })
+            }
+            className="min-h-11 flex-row items-center gap-2 self-start pt-1"
+          >
+            <Icon name="moreHorizontal" size={18} color={colors.foreground.muted} />
+            <Text size={14} weight="semibold" tone="muted">
+              Mais detalhes
+            </Text>
+          </Pressable>
+        ) : null}
         <Text size={13} tone="subtle">
           {details.extra}
         </Text>
       </View>
+      <RiskSheet
+        target={riskTarget}
+        onClose={() => setRiskTarget(null)}
+        onChange={positions.setRisk}
+        onReset={positions.clearRisk}
+      />
     </View>
   );
 }

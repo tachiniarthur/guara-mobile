@@ -236,6 +236,20 @@ export const POSITIONS: Position[] = POSITION_INPUTS.map((position, index) => ({
   share: POSITION_SHARES[index]!,
 }));
 
+/** Why the asset got its computed risk ("Por que “Alto”?"), when the source says. */
+export const RISK_REASONS: Record<string, { label: string; value: string }[]> = {
+  petr4: [
+    { label: 'Volatilidade em 12 meses', value: '26,3% ao ano' },
+    { label: 'Setor', value: 'Petróleo, sensível a preço e política' },
+    { label: 'Liquidez', value: 'Alta' },
+  ],
+  bova11: [
+    { label: 'Volatilidade em 12 meses', value: '18,4% ao ano' },
+    { label: 'Liquidez', value: 'Alta, resgate em D+2' },
+    { label: 'Garantia do FGC', value: 'Não tem' },
+  ],
+};
+
 /**
  * Last quote update (Brapi, through our API). `fallbackTime` is set when the last update failed
  * and older quotes are shown ("Mostrando valores das 13:45").

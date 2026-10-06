@@ -8,6 +8,8 @@ interface InvestmentsState {
   /** Risk chosen by the user, by position id (overrides the asset's registered risk). */
   riskOverrides: Record<string, RiskLevel>;
   setRisk: (positionId: string, risk: RiskLevel) => void;
+  /** Back to the computed risk ("Voltar para o automático"). */
+  clearRisk: (positionId: string) => void;
   /** Real estate and vehicles of the net worth. */
   properties: Property[];
   /** Adds a property and returns its id. */
@@ -30,6 +32,12 @@ export const useInvestmentsStore = create<InvestmentsState>()((set) => ({
   riskOverrides: {},
   setRisk: (positionId, risk) =>
     set(({ riskOverrides }) => ({ riskOverrides: { ...riskOverrides, [positionId]: risk } })),
+  clearRisk: (positionId) =>
+    set(({ riskOverrides }) => {
+      const next = { ...riskOverrides };
+      delete next[positionId];
+      return { riskOverrides: next };
+    }),
   properties: PROPERTIES,
   addProperty: (property) => {
     const id = `property-${Date.now()}`;

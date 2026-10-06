@@ -66,6 +66,8 @@ export interface AssetHeader {
 export interface EventItem {
   date: string;
   kind: string;
+  /** Value per unit in cents when it has no fraction of a cent (sums by year). */
+  perUnitCents?: Cents;
   /** Value per share/unit with 4 decimals ("R$ 0,7200"). */
   perUnit: string;
   /** What the user received; `null` when they did not hold the asset on the record date. */
@@ -108,6 +110,35 @@ export interface StockAsset {
   footnote: string;
 }
 
+/** "Mais detalhes": every field of the asset, "—" when the source does not say. */
+export interface AssetMoreDetails {
+  sections: { title: string; rows: InfoRow[] }[];
+  note: string;
+}
+
+/** An index the fund can be compared with besides the CDI (derived from the fund itself). */
+export interface IndexComparison {
+  key: 'ibovespa';
+  label: string;
+  /** Yearly cost of the fund, in percent: the index is the fund plus this fee. */
+  fee: number;
+  /** Caption of "Diferença" and the note under the numbers. */
+  differenceCaption: string;
+  note: string;
+}
+
+/** Quote without the income ("Preço ajustado" off). */
+export interface UnadjustedPrice {
+  /** Quote at the start of the 12 months, as traded. */
+  start: Cents;
+  startDate: string;
+  end: Cents;
+  /** Total return with the income reinvested, in percent (the adjusted chart). */
+  adjustedReturn: number;
+  /** Income of each month ("R$ 1,10 por cota"). */
+  monthlyIncome: Cents;
+}
+
 export interface FundAsset {
   kind: 'fund';
   header: AssetHeader;
@@ -135,6 +166,9 @@ export interface FundAsset {
   events: { subtitle: string } & ({ kind: 'note'; text: string } | ({ kind: 'list' } & EventList));
   questions: string[];
   footnote: string;
+  moreDetails?: AssetMoreDetails;
+  comparison?: IndexComparison;
+  unadjusted?: UnadjustedPrice;
 }
 
 export type Asset = StockAsset | FundAsset;
@@ -174,8 +208,55 @@ const twelveMonths = (
   };
 };
 
-const monthlyIncome = (dates: string[]): EventItem[] =>
-  dates.map((date) => ({ date, kind: 'Rendimento', perUnit: 'R$ 1,1000', received: cents(4_620) }));
+/** Payment day of a monthly income: the 15th, or the business day before it. */
+export function paymentDate(year: number, month: number): string {
+  const date = new Date(Date.UTC(year, month - 1, 15));
+  // Weekends and 15/11 (Proclamação da República) move the payment back.
+  while (
+    date.getUTCDay() === 0 ||
+    date.getUTCDay() === 6 ||
+    (date.getUTCMonth() === 10 && date.getUTCDate() === 15)
+  ) {
+    date.setUTCDate(date.getUTCDate() - 1);
+  }
+  const day = String(date.getUTCDate()).padStart(2, '0');
+  return `${day}/${String(month).padStart(2, '0')}/${year}`;
+}
+
+/**
+ * Monthly income of a FII from `from` to `to` (YYYY-MM, newest first): same value per unit,
+ * received only from the month the user bought (`heldSince`).
+ */
+function monthlyIncome(
+  from: string,
+  to: string,
+  perUnit: Cents,
+  quantity: number,
+  heldSince: string,
+): EventItem[] {
+  const items: EventItem[] = [];
+  let [year, month] = to.split('-').map(Number) as [number, number];
+  const end = from.replace('-', '');
+  while (`${year}${String(month).padStart(2, '0')}` >= end) {
+    const key = `${year}-${String(month).padStart(2, '0')}`;
+    items.push({
+      date: paymentDate(year, month),
+      kind: 'Rendimento',
+      perUnit: `R$ ${(perUnit / 100).toFixed(4).replace('.', ',')}`,
+      perUnitCents: perUnit,
+      received: key >= heldSince ? cents(perUnit * quantity) : null,
+    });
+    month -= 1;
+    if (month === 0) {
+      month = 12;
+      year -= 1;
+    }
+  }
+  return items;
+}
+
+/** HGLG11 income since January 2025 (42 cotas bought in April 2026). */
+const HGLG11_INCOME = monthlyIncome('2025-01', '2026-09', cents(110), 42, '2026-04');
 
 export const ASSETS: Record<string, Asset> = {
   PETR4: {
@@ -381,6 +462,58 @@ export const ASSETS: Record<string, Asset> = {
       'BOVA11 é uma boa forma de investir no Ibovespa?',
       'Quanto do meu patrimônio está em renda variável?',
     ],
+    moreDetails: {
+      sections: [
+        {
+          title: 'Identificação',
+          rows: [
+            { label: 'Nome', value: 'iShares Ibovespa Fundo de Índice' },
+            { label: 'Código na B3', value: 'BOVA11' },
+            { label: 'Tipo', value: 'ETF de ações' },
+            { label: 'Índice de referência', value: 'Ibovespa' },
+            { label: 'Gestora', value: 'BlackRock' },
+            { label: 'Administrador', value: '—' },
+          ],
+        },
+        {
+          title: 'Negociação',
+          rows: [
+            { label: 'Onde negocia', value: 'B3, em horário de pregão' },
+            { label: 'Lote mínimo', value: '1 cota' },
+            { label: 'Cotação de hoje', value: 'R$ 125,10' },
+            { label: 'Mínima e máxima do ano', value: 'R$ 109,80 e R$ 126,40' },
+            { label: 'Volume médio diário', value: '—' },
+          ],
+        },
+        {
+          title: 'Custos e impostos',
+          rows: [
+            { label: 'Taxa de administração', value: '0,10% ao ano' },
+            { label: 'Taxa de performance', value: 'Não tem' },
+            { label: 'Imposto de renda', value: '15% sobre o lucro na venda' },
+            { label: 'Isenção de R$ 20 mil', value: 'Não se aplica a ETF' },
+            { label: 'Proventos', value: 'Reinvestidos no fundo' },
+          ],
+        },
+        {
+          title: 'Risco no Guará',
+          rows: [
+            { label: 'Risco', value: 'Médio · calculado' },
+            { label: 'Volatilidade anualizada', value: '18,4%' },
+            { label: 'Liquidez', value: 'Alta, resgate em D+2' },
+            { label: 'Garantia do FGC', value: 'Não tem' },
+          ],
+        },
+      ],
+      note: 'Dados de exemplo via Brapi, com atraso de até 15 minutos. “—” quando a fonte não informa. Não é recomendação de investimento.',
+    },
+    comparison: {
+      key: 'ibovespa',
+      label: 'Ibovespa',
+      fee: 0.1,
+      differenceCaption: 'custo do fundo',
+      note: 'O BOVA11 replica o Ibovespa. A pequena diferença vem da taxa de 0,10% ao ano.',
+    },
     footnote: BRAPI_FOOTNOTE,
   },
   HGLG11: {
@@ -455,17 +588,8 @@ export const ASSETS: Record<string, Asset> = {
       subtitle: 'Rendimentos · valores por cota',
       kind: 'list',
       summary: 'Últimos 12 meses: R$ 13,20 por cota · dividend yield de 8,2%',
-      items: monthlyIncome([
-        '15/09/2026',
-        '14/08/2026',
-        '15/07/2026',
-        '15/06/2026',
-        '15/05/2026',
-        '15/04/2026',
-        '13/03/2026',
-        '13/02/2026',
-      ]),
-      total: 184,
+      items: HGLG11_INCOME,
+      total: HGLG11_INCOME.length,
       note: 'Rendimentos de FII são isentos de IR para pessoa física, dentro das regras. Valores de exemplo.',
     },
     questions: [
@@ -473,6 +597,13 @@ export const ASSETS: Record<string, Asset> = {
       'Os rendimentos do HGLG11 estão estáveis?',
       'Quais são os riscos de um FII de galpões?',
     ],
+    unadjusted: {
+      start: cents(15_190),
+      startDate: '23/09/2025',
+      end: cents(16_130),
+      adjustedReturn: 15,
+      monthlyIncome: cents(110),
+    },
     footnote: BRAPI_FOOTNOTE,
   },
   BTC: {

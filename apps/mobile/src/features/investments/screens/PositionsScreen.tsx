@@ -304,7 +304,12 @@ export function PositionsScreen() {
         )}
         {footnote}
       </Screen>
-      <RiskSheet target={riskTarget} onClose={() => setRiskTarget(null)} onChange={data.setRisk} />
+      <RiskSheet
+        target={riskTarget}
+        onClose={() => setRiskTarget(null)}
+        onChange={data.setRisk}
+        onReset={data.clearRisk}
+      />
       <OptionSheet
         open={sortOpen}
         onClose={() => setSortOpen(false)}

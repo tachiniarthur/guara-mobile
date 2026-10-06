@@ -16,6 +16,10 @@ export interface BenchmarkChartProps {
   describePoint?: (index: number) => string;
   /** Tablet canvas (720×320, month by month). `tickYs` stay in the 357×240 scale. */
   wide?: boolean;
+  /** Dashed line color (default Seriema for the CDI; Arara-azul for an index). */
+  benchmarkColor?: string;
+  /** Only the asset ("Comparar com: Nenhum"). */
+  hideBenchmark?: boolean;
   accessibilityLabel: string;
 }
 
@@ -72,6 +76,8 @@ export function BenchmarkChart({
   xLabels,
   describePoint,
   wide = false,
+  benchmarkColor = colors.foreground.subtle,
+  hideBenchmark = false,
   accessibilityLabel,
 }: BenchmarkChartProps) {
   const [selected, setSelected] = useState<number | null>(null);
@@ -126,13 +132,15 @@ export function BenchmarkChart({
         />,
       ])}
       <Path d={`${line(asset)} L${right},${bottom} L${LEFT},${bottom} Z`} fill="url(#bench)" />
-      <Path
-        d={line(benchmark)}
-        fill="none"
-        stroke={colors.foreground.subtle}
-        strokeWidth={canvas.dash}
-        strokeDasharray={canvas.gap}
-      />
+      {hideBenchmark ? null : (
+        <Path
+          d={line(benchmark)}
+          fill="none"
+          stroke={benchmarkColor}
+          strokeWidth={canvas.dash}
+          strokeDasharray={canvas.gap}
+        />
+      )}
       <Path
         d={line(asset)}
         fill="none"

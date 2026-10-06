@@ -1,5 +1,7 @@
 export * from './AllocationScreen';
 export * from './AssetDetailScreen';
+export * from './AssetEventsScreen';
+export * from './AssetMoreDetailsScreen';
 export * from './ExposureScreen';
 export * from './InvestmentsScreen';
 export * from './NewManualAssetScreen';

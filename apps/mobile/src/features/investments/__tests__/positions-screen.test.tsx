@@ -78,11 +78,18 @@ describe('Posições', () => {
     const success = jest.spyOn(toast, 'success');
     render(<PositionsScreen />);
     fireEvent.press(screen.getByRole('button', { name: 'Risco Alto. Ajustar risco de PETR4' }));
+    expect(screen.getByText('Oscila bastante · calculado para este ativo')).toBeOnTheScreen();
+    fireEvent.press(screen.getByRole('button', { name: /Por que “Alto”\?/ }));
+    expect(screen.getByText('Petróleo, sensível a preço e política')).toBeOnTheScreen();
     fireEvent.press(screen.getByRole('radio', { name: /^Médio/ }));
+    fireEvent.press(screen.getByRole('button', { name: 'Salvar risco' }));
     expect(success).toHaveBeenCalledWith('Risco de PETR4 ajustado para médio');
     expect(
       screen.getByRole('button', { name: 'Risco Médio. Ajustar risco de PETR4' }),
     ).toBeOnTheScreen();
+    fireEvent.press(screen.getByRole('button', { name: 'Risco Médio. Ajustar risco de PETR4' }));
+    fireEvent.press(screen.getByRole('link', { name: 'Voltar para o automático' }));
+    expect(useInvestmentsStore.getState().riskOverrides).toEqual({});
   });
 
   it('opens asset pages and explains the ones still missing', () => {

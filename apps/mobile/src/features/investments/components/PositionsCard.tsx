@@ -123,7 +123,12 @@ export function PositionsCard() {
         Toque numa posição para ver classe, instrumento, risco, quantidade e preço médio. O risco
         vem do cadastro do ativo (volatilidade, crédito e liquidez) e pode ser ajustado.
       </Text>
-      <RiskSheet target={riskTarget} onClose={() => setRiskTarget(null)} onChange={data.setRisk} />
+      <RiskSheet
+        target={riskTarget}
+        onClose={() => setRiskTarget(null)}
+        onChange={data.setRisk}
+        onReset={data.clearRisk}
+      />
     </SectionCard>
   );
 }

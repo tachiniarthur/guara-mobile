@@ -1,5 +1,5 @@
 import { formatCents } from '@guara/utils';
-import { useLocalSearchParams } from 'expo-router';
+import { useLocalSearchParams, useRouter } from 'expo-router';
 import { View } from 'react-native';
 
 import { EmptyState } from '@/components/feedback';
@@ -35,7 +35,15 @@ function Footnote({ children }: { children: string }) {
   );
 }
 
+/** Opens "Eventos corporativos" of the asset. */
+function useOpenEvents() {
+  const router = useRouter();
+  return (ticker: string) =>
+    router.navigate({ pathname: '/investments/asset/[ticker]/events', params: { ticker } });
+}
+
 function StockDetail({ asset, wide }: { asset: StockAsset; wide: boolean }) {
+  const openEvents = useOpenEvents();
   const current = formatCents(asset.price);
   const today = (
     <RangeCard
@@ -103,13 +111,19 @@ function StockDetail({ asset, wide }: { asset: StockAsset; wide: boolean }) {
         </>
       )}
       <MetricsCard metrics={asset.metrics} wide={wide} />
-      <EventsCard kind="list" wide={wide} {...asset.events} />
+      <EventsCard
+        kind="list"
+        wide={wide}
+        {...asset.events}
+        onSeeAll={() => openEvents(asset.header.ticker)}
+      />
       <Footnote>{asset.footnote}</Footnote>
     </>
   );
 }
 
 function FundDetail({ asset, wide }: { asset: FundAsset; wide: boolean }) {
+  const openEvents = useOpenEvents();
   return (
     <>
       {wide ? (
@@ -137,7 +151,7 @@ function FundDetail({ asset, wide }: { asset: FundAsset; wide: boolean }) {
       )}
       <FeesCard asset={asset} />
       <MetricsCard metrics={asset.metrics} wide={wide} />
-      <EventsCard wide={wide} {...asset.events} />
+      <EventsCard wide={wide} {...asset.events} onSeeAll={() => openEvents(asset.header.ticker)} />
       <AskAssistantCard
         assistant="pacu"
         subject="sobre este ativo"

@@ -157,7 +157,7 @@ implementada.
 | `Novo-Alerta-Preco`                                                                                 | M T D    | `/new-price-alert` (modal)                                                            |
 | `Investimentos`                                                                                     | M T D    | `/investments`                                                                        |
 | `Ativo`, `Ativo-Tesouro-Selic`, `-CDB`, `-BOVA11`, `-HGLG11`, `-Bitcoin`                            | M T D    | `/investments/asset/[ticker]`                                                         |
-| `Ativo-Comparar`, `-Comparar-Ibovespa`, `-Preco-Sem-Ajuste`, `-Mais-Detalhes`, `-Eventos`, `-Risco` | M T      | —                                                                                     |
+| `Ativo-Comparar`, `-Comparar-Ibovespa`, `-Preco-Sem-Ajuste`, `-Mais-Detalhes`, `-Eventos`, `-Risco` | M T      | estados de `/investments/asset/[ticker]`; `/details`, `/events`                       |
 | `Adicionar-Investimento`                                                                            | M T D    | `/new-manual-asset` (modal)                                                           |
 | `Posicoes`, `Posicoes-Estados`                                                                      | M T      | `/investments/positions`                                                              |
 | `Simulador`, `Simulador-Objetivo`, `Simulador-Corte`                                                | M T D    | `/investments/simulator/retirement`, `/goal`, `/cut-expense`                          |

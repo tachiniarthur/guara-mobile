@@ -39,6 +39,8 @@ const APP_ROUTES: RouteCase[] = [
   ['/investments/allocation', 'Alocação', null],
   ['/investments/exposure', 'Exposição por país', null],
   ['/investments/asset/PETR4', 'Detalhes do ativo', null],
+  ['/investments/asset/BOVA11/details', 'Detalhes do ativo', null],
+  ['/investments/asset/HGLG11/events', 'Eventos corporativos', null],
   ['/investments/asset/HGLG11', 'HGLG11', null],
   ['/investments/properties', 'Bens', null],
   ['/investments/properties/apto', 'Apartamento em Pinheiros', null],

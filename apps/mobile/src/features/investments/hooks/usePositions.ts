@@ -18,6 +18,7 @@ export function staleQuotesMessage(quotes: typeof QUOTES): string | null {
 export function usePositions() {
   const riskOverrides = useInvestmentsStore((state) => state.riskOverrides);
   const setRisk = useInvestmentsStore((state) => state.setRisk);
+  const clearRisk = useInvestmentsStore((state) => state.clearRisk);
   // Widened on purpose: the API also answers with `error`.
   const status = (POSITIONS.length === 0 ? 'empty' : 'ready') as PositionsStatus;
   const positions = POSITIONS.map((position) => {
@@ -28,6 +29,7 @@ export function usePositions() {
     status,
     positions,
     setRisk,
+    clearRisk,
     total: PORTFOLIO.total,
     quotesTime: QUOTES.time,
     staleMessage: staleQuotesMessage(QUOTES),

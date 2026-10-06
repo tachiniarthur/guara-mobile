@@ -1,8 +1,6 @@
 import { colors } from '@guara/ui-tokens';
-import { useState } from 'react';
 import { Pressable, View } from 'react-native';
 
-import { toast } from '@/components/feedback';
 import { SectionCard } from '@/components/layout';
 import { DataTable, EmptyValue, Icon, MoneyText, Text } from '@/components/ui';
 
@@ -11,25 +9,25 @@ import type { EventItem, EventList } from '../../assets';
 /** Items listed before "Ver todos" (design: 6 on phones, 8 on tablets). */
 const VISIBLE = { phone: 6, tablet: 8 } as const;
 
-export type EventsCardProps = { subtitle: string; wide?: boolean } & (
-  { kind: 'note'; text: string } | ({ kind: 'list' } & EventList)
-);
+export type EventsCardProps = {
+  subtitle: string;
+  wide?: boolean;
+  /** "Ver todos (N)": opens the full history. */
+  onSeeAll: () => void;
+} & ({ kind: 'note'; text: string } | ({ kind: 'list' } & EventList));
 
 function SeeAll({
   total,
-  expanded,
   onPress,
   padded,
 }: {
   total: number;
-  expanded: boolean;
   onPress: () => void;
   padded: boolean;
 }) {
   return (
     <Pressable
-      accessibilityRole="button"
-      accessibilityState={{ expanded }}
+      accessibilityRole="link"
       onPress={onPress}
       className={
         padded
@@ -38,11 +36,9 @@ function SeeAll({
       }
     >
       <Text size={14} weight="semibold" tone="muted">
-        {expanded ? 'Mostrar menos' : `Ver todos (${total})`}
+        {`Ver todos (${total})`}
       </Text>
-      <View style={{ transform: [{ rotate: expanded ? '180deg' : '0deg' }] }}>
-        <Icon name="chevronDown" size={14} color={colors.foreground.muted} />
-      </View>
+      <Icon name="chevronRight" size={14} color={colors.foreground.muted} />
     </Pressable>
   );
 }
@@ -78,15 +74,10 @@ function PhoneEvent({ item }: { item: EventItem }) {
 
 /** Dividends and other payments: a note when the asset pays none, a list (table on tablets) otherwise. */
 export function EventsCard(props: EventsCardProps) {
-  const [expanded, setExpanded] = useState(false);
   const { subtitle, wide = false } = props;
   const visible = VISIBLE[wide ? 'tablet' : 'phone'];
-  const items =
-    props.kind === 'list' ? (expanded ? props.items : props.items.slice(0, visible)) : [];
-  const toggle = () => {
-    if (props.kind === 'list' && props.items.length > visible) setExpanded((value) => !value);
-    else toast.info('Histórico completo em breve.');
-  };
+  const items = props.kind === 'list' ? props.items.slice(0, visible) : [];
+  const toggle = props.onSeeAll;
 
   return (
     <SectionCard
@@ -149,7 +140,7 @@ export function EventsCard(props: EventsCardProps) {
                   ),
                 ],
               }))}
-              footer={<SeeAll total={props.total} expanded={expanded} onPress={toggle} padded />}
+              footer={<SeeAll total={props.total} onPress={toggle} padded />}
             />
           ) : (
             <>
@@ -158,7 +149,7 @@ export function EventsCard(props: EventsCardProps) {
                   <PhoneEvent key={`${item.date}-${index}`} item={item} />
                 ))}
               </View>
-              <SeeAll total={props.total} expanded={expanded} onPress={toggle} padded={false} />
+              <SeeAll total={props.total} onPress={toggle} padded={false} />
             </>
           )}
           <Text size={13} tone="subtle">
