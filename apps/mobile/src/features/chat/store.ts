@@ -1,7 +1,14 @@
 import type { AssistantId } from '@guara/types';
 import { create } from 'zustand';
 
-import { CONVERSATION, type ChatMessage, type RichText } from './data';
+import {
+  CONVERSATION,
+  CONVERSATION_GROUPS,
+  type ChatFile,
+  type ChatMessage,
+  type ConversationGroup,
+  type RichText,
+} from './data';
 
 export type ChatPanelView = 'history' | 'conversation';
 
@@ -18,8 +25,17 @@ export interface ChatContext {
 interface ChatState {
   /** The current conversation, shared by the side panel and the full-screen page. */
   messages: ChatMessage[];
-  send: (text: string) => void;
+  /** Id and title of the open conversation (`null` id: a new one, not saved yet). */
+  currentId: string | null;
+  title: string;
+  /** History, by period. */
+  groups: ConversationGroup[];
+  send: (text: string, attachment?: ChatFile) => void;
   startNew: () => void;
+  rename: (title: string) => void;
+  togglePin: (id: string) => void;
+  /** Deletes a conversation from the history (the spending data stays). */
+  remove: (id: string) => void;
   /** Assistant the composer is talking to ("@Pacu"); `null` = the whole team. */
   addressee: AssistantId | null;
   setAddressee: (assistant: AssistantId | null) => void;
@@ -34,16 +50,67 @@ interface ChatState {
   setContext: (context: ChatContext | null) => void;
 }
 
+const NEW_TITLE = 'Nova conversa';
+
+const updateItem = (
+  groups: ConversationGroup[],
+  id: string,
+  patch: (item: ConversationGroup['items'][number]) => Partial<ConversationGroup['items'][number]>,
+) =>
+  groups.map((group) => ({
+    ...group,
+    items: group.items.map((item) => (item.id === id ? { ...item, ...patch(item) } : item)),
+  }));
+
 export const useChatStore = create<ChatState>()((set) => ({
   messages: CONVERSATION.messages,
-  send: (text) =>
+  currentId: CONVERSATION.id,
+  title: CONVERSATION.title,
+  groups: CONVERSATION_GROUPS,
+  send: (text, attachment) =>
     set((state) => ({
-      messages: [...state.messages, { id: `u-${state.messages.length}`, role: 'user', text }],
+      messages: [
+        ...state.messages,
+        {
+          id: `u-${state.messages.length}`,
+          role: 'user',
+          text,
+          ...(attachment ? { attachment } : null),
+        },
+      ],
       // Once the user writes, the page context gives way to the conversation.
       context: null,
       panelView: 'conversation',
     })),
-  startNew: () => set({ messages: [], context: null, panelView: 'conversation' }),
+  startNew: () =>
+    set({
+      messages: [],
+      currentId: null,
+      title: NEW_TITLE,
+      context: null,
+      panelView: 'conversation',
+    }),
+  rename: (title) =>
+    set((state) => ({
+      title,
+      groups: state.currentId
+        ? updateItem(state.groups, state.currentId, () => ({ title }))
+        : state.groups,
+    })),
+  togglePin: (id) =>
+    set((state) => ({
+      groups: updateItem(state.groups, id, (item) => ({ pinned: !item.pinned })),
+    })),
+  remove: (id) =>
+    set((state) => ({
+      groups: state.groups.map((group) => ({
+        ...group,
+        items: group.items.filter((item) => item.id !== id),
+      })),
+      ...(state.currentId === id
+        ? { messages: [], currentId: null, title: NEW_TITLE, context: null }
+        : null),
+    })),
   addressee: null,
   setAddressee: (addressee) => set({ addressee }),
   panelOpen: true,

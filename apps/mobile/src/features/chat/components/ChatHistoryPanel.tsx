@@ -4,7 +4,7 @@ import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 import { IconButton, SearchInput, Text } from '@/components/ui';
 
-import { CONVERSATION_GROUPS, CONVERSATIONS_COUNT } from '../data';
+import { useConversationHistory } from '../hooks/useConversationHistory';
 
 import { ChatColumnHeader } from './ChatSideColumn';
 import { ConversationList } from './ConversationList';
@@ -22,13 +22,7 @@ export interface ChatHistoryPanelProps {
 export function ChatHistoryPanel({ currentId, onSelect, onNew, onClose }: ChatHistoryPanelProps) {
   const insets = useSafeAreaInsets();
   const [query, setQuery] = useState('');
-  const normalized = query.trim().toLocaleLowerCase('pt-BR');
-  const groups = CONVERSATION_GROUPS.map((group) => ({
-    ...group,
-    items: group.items.filter((item) =>
-      `${item.title} ${item.preview}`.toLocaleLowerCase('pt-BR').includes(normalized),
-    ),
-  })).filter((group) => group.items.length > 0);
+  const { groups, count } = useConversationHistory(query);
 
   return (
     <>
@@ -38,7 +32,7 @@ export function ChatHistoryPanel({ currentId, onSelect, onNew, onClose }: ChatHi
             Conversas
           </Text>
           <Text size={12} tone="subtle" leading={1.3}>
-            {CONVERSATIONS_COUNT} conversas com a equipe
+            {count} {count === 1 ? 'conversa' : 'conversas'} com a equipe
           </Text>
         </View>
         {onClose ? (

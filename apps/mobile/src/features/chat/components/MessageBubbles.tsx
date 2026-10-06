@@ -3,9 +3,10 @@ import { View } from 'react-native';
 import { Span, Text } from '@/components/ui';
 
 import { ASSISTANTS } from '../assistants';
-import type { AssistantBlock, ChatMessage, RichText } from '../data';
+import type { AssistantBlock, ChatFile, ChatMessage, RichText } from '../data';
 
 import { AssistantAvatar } from './AssistantAvatar';
+import { AttachmentChip } from './ComposerAttachments';
 import { ChatBudgetCard } from './ChatBudgetCard';
 
 function Rich({ content }: { content: RichText }) {
@@ -30,22 +31,31 @@ function Block({ block }: { block: AssistantBlock }) {
 }
 
 /** User message: Tucano bubble aligned to the right. */
-export function UserBubble({ text }: { text: string }) {
+export function UserBubble({ text, attachment }: { text: string; attachment?: ChatFile }) {
   return (
-    <View className="flex-row justify-end">
-      <View
-        className="max-w-[320px] bg-brand px-3.5 py-2.5"
-        style={{
-          borderTopLeftRadius: 20,
-          borderTopRightRadius: 20,
-          borderBottomLeftRadius: 20,
-          borderBottomRightRadius: 6,
-        }}
-      >
-        <Text size={15} weight="medium" tone="inverse">
-          {text}
-        </Text>
-      </View>
+    <View className="items-end gap-1.5">
+      {attachment ? (
+        <View className="w-full max-w-[320px]">
+          <AttachmentChip file={attachment} />
+        </View>
+      ) : null}
+      {text ? (
+        <View className="flex-row justify-end">
+          <View
+            className="max-w-[320px] bg-brand px-3.5 py-2.5"
+            style={{
+              borderTopLeftRadius: 20,
+              borderTopRightRadius: 20,
+              borderBottomLeftRadius: 20,
+              borderBottomRightRadius: 6,
+            }}
+          >
+            <Text size={15} weight="medium" tone="inverse">
+              {text}
+            </Text>
+          </View>
+        </View>
+      ) : null}
     </View>
   );
 }
@@ -77,7 +87,7 @@ export function AssistantAnswer({
 
 export function ChatMessageView({ message }: { message: ChatMessage }) {
   return message.role === 'user' ? (
-    <UserBubble text={message.text} />
+    <UserBubble text={message.text} attachment={message.attachment} />
   ) : (
     <AssistantAnswer message={message} />
   );

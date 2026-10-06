@@ -6,9 +6,10 @@ import {
   ConversationSchema,
   CreateConversationBodySchema,
   CursorQuerySchema,
+  UpdateConversationBodySchema,
   paginated,
 } from '../../domain';
-import { defineEndpoints } from '../define';
+import { NoContentSchema, defineEndpoints } from '../define';
 
 const conversationParams = z.object({ conversationId: ConversationIdSchema });
 
@@ -34,6 +35,21 @@ export const chatEndpoints = defineEndpoints({
     summary: 'One conversation',
     params: conversationParams,
     response: ConversationSchema,
+  },
+  'chat.updateConversation': {
+    method: 'PATCH',
+    path: '/v1/chat/conversations/:conversationId',
+    summary: 'Rename or pin a conversation',
+    params: conversationParams,
+    body: UpdateConversationBodySchema,
+    response: ConversationSchema,
+  },
+  'chat.deleteConversation': {
+    method: 'DELETE',
+    path: '/v1/chat/conversations/:conversationId',
+    summary: 'Delete a conversation (spending data stays)',
+    params: conversationParams,
+    response: NoContentSchema,
   },
   'chat.listMessages': {
     method: 'GET',

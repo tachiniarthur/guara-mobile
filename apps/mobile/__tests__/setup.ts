@@ -113,3 +113,30 @@ jest.mock('@shopify/flash-list', () => {
   }
   return { FlashList };
 });
+
+// Native audio does not exist in Jest: a recorder that records nothing.
+jest.mock('expo-audio', () => ({
+  RecordingPresets: { HIGH_QUALITY: {} },
+  requestRecordingPermissionsAsync: jest.fn(async () => ({ granted: true })),
+  setAudioModeAsync: jest.fn(async () => undefined),
+  useAudioRecorder: () => ({
+    prepareToRecordAsync: jest.fn(async () => undefined),
+    record: jest.fn(),
+    stop: jest.fn(async () => undefined),
+    getStatus: () => ({ durationMillis: 7000, metering: -20, isRecording: true }),
+    uri: 'file:///pergunta.m4a',
+  }),
+}));
+
+jest.mock('expo-print', () => ({
+  printToFileAsync: jest.fn(async () => ({ uri: 'file:///conversa.pdf' })),
+}));
+
+jest.mock('expo-sharing', () => ({
+  isAvailableAsync: jest.fn(async () => true),
+  shareAsync: jest.fn(async () => undefined),
+}));
+
+jest.mock('expo-document-picker', () => ({
+  getDocumentAsync: jest.fn(async () => ({ canceled: true, assets: null })),
+}));

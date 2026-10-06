@@ -17,6 +17,10 @@ const INFRA_ONLY_PACKAGES = [
   'expo-web-browser',
   'expo-notifications',
   'expo-image-picker',
+  'expo-document-picker',
+  'expo-audio',
+  'expo-print',
+  'expo-sharing',
 ].map((name) => ({ name, message: 'Use the wrappers in src/lib/ instead.' }));
 
 module.exports = defineConfig([

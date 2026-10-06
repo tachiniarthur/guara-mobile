@@ -59,6 +59,11 @@ export const ICON_PATHS = {
   grid: ['M4 4h7v7H4zM13 4h7v7h-7zM4 13h7v7H4zM13 13h7v7h-7z'],
   eye: ['M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7S2 12 2 12zM12 15a3 3 0 1 0 0-6 3 3 0 0 0 0 6z'],
   merge: ['M6 3v6a6 6 0 0 0 6 6h6M15 12l3 3-3 3M6 21v-6'],
+  camera: ['M4 8h3l2-3h6l2 3h3v11H4zM12 17a4 4 0 1 0 0-8 4 4 0 0 0 0 8z'],
+  image: ['M4 5h16v14H4zM4 15l5-5 5 5 3-3 3 3M15 9h.01'],
+  pin: ['M12 17v5M8 3h8l-1 6 3 4H6l3-4z'],
+  stop: ['M7 7h10v10H7z'],
+  document: ['M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8zM14 3v5h5M9 13h6M9 17h4'],
   bank: ['M3 10h18M5 10v8M10 10v8M14 10v8M19 10v8M3 21h18M12 3l9 5H3z'],
   building: [
     'M5 21V4h10v17M15 9h4v12M3 21h18M8 8h.01M12 8h.01M8 12h.01M12 12h.01M8 16h.01M12 16h.01',

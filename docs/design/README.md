@@ -143,7 +143,7 @@ implementada.
 | `Inicio` (M), `Painel` (T), `Painel-Historico` (D), `Main` (D)                                      | M T D    | `/` (`(tabs)/(home)/index`)                                                           |
 | `Assistentes`                                                                                       | M        | `/assistants`                                                                         |
 | `Conversa`, `Conversas` (D), `Historico-Conversas`, `Escolher-Agente`                               | M T D    | `/chat`, `/chat/[conversationId]`                                                     |
-| `Conversa-Menu`, `-Apagar`, `-Anexar`, `-Anexo-Previa`, `-Gravando`, `-Transcrevendo`               | M T      | —                                                                                     |
+| `Conversa-Menu`, `-Apagar`, `-Anexar`, `-Anexo-Previa`, `-Gravando`, `-Transcrevendo`               | M T      | estados de `/chat/[conversationId]`                                                   |
 | `Gastos`                                                                                            | M T D    | `/spending`                                                                           |
 | `Lancamentos` · todos os lançamentos                                                                | M T      | `/spending/transactions`                                                              |
 | `Lancamentos-Categoria` · lançamentos de uma categoria                                              | M T      | `/spending/category/[categoryId]`                                                     |

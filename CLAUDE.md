@@ -105,7 +105,8 @@ apps/mobile/
   src/navigation/      barra inferior (celular), trilho lateral (tablet), menu da conta, destinos
   src/dev/             ferramentas só de desenvolvimento (catálogo de UI em /ui)
   src/lib/             infraestrutura: env, runtime, supabase, auth-oauth, api (transporte), sse,
-                       query-client, storage, notifications, media, logger, cn, haptics
+                       query-client, storage, notifications, media, share, voice, transcription,
+                       logger, cn, haptics
   src/providers/       AppProviders, QueryProvider, AuthProvider, ThemeProvider
   src/hooks/ src/stores/ src/theme/ src/constants/ src/types/
 packages/
@@ -127,7 +128,9 @@ packages/
   Depois acrescente a URL em `apps/mobile/__tests__/routes.test.tsx` (o teste abre todas as rotas).
 - **Infra isolada:** features **não** importam `expo-sqlite`, `expo-secure-store`,
   `@supabase/supabase-js`, `expo-auth-session`, `expo-apple-authentication`, `expo-web-browser`,
-  `expo-notifications` nem `expo-image-picker` — o ESLint bloqueia (`no-restricted-imports`). Use `src/lib/*`.
+  `expo-notifications`, `expo-image-picker`, `expo-document-picker`, `expo-audio`, `expo-print` nem
+  `expo-sharing` — o ESLint bloqueia (`no-restricted-imports`). Use `src/lib/*` (`media`, `share`,
+  `voice`, `transcription`).
 - **Dados das telas:** hoje vêm de `src/features/<x>/data.ts`, fiéis ao artefato de design. Valores
   derivados (totais, percentuais, simulações) são **calculados** a partir deles, nunca copiados.
   Detalhes em [Dados: hoje estáticos, amanhã a API](#dados-hoje-estáticos-amanhã-a-api).
@@ -213,6 +216,8 @@ subtitle/body/lead/label/caption/micro`, ou `size`/`weight`/`serif` explícitos)
 - **Linhas de `dl` com valor longo:** rótulo com `flexShrink: 0` e valor com `flex: 1, minWidth: 0`
   (por estilo, não classe); códigos sem espaço ("LOJAELETRON*ONLINE SP") quebram no meio da palavra
   no Android — insira `\u200B` onde a quebra pode acontecer.
+- **Módulos nativos nos testes:** `expo-audio`, `expo-print`, `expo-sharing` e
+  `expo-document-picker` têm mocks em `__tests__/setup.ts` (o `expo-audio` real quebra no Jest).
 - **Código só de dev:** carregue com `__DEV__ ? require(...) : null` para o Metro remover do bundle
   de produção (veja `app/(dev)/ui.tsx`).
 

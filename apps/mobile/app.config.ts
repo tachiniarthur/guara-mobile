@@ -83,10 +83,15 @@ export default ({ config }: ConfigContext): ExpoConfig => {
       'expo-apple-authentication',
       'expo-sqlite',
       [
+        'expo-audio',
+        { microphonePermission: 'Permitir que o Guará grave suas perguntas para os assistentes.' },
+      ],
+      'expo-sharing',
+      [
         'expo-image-picker',
         {
-          photosPermission: 'Permitir que o Guará use uma foto sua no perfil.',
-          cameraPermission: false,
+          photosPermission: 'Permitir que o Guará use suas fotos no perfil e nas conversas.',
+          cameraPermission: 'Permitir que o Guará fotografe documentos para os assistentes.',
           microphonePermission: false,
         },
       ],

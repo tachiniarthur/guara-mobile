@@ -12,7 +12,7 @@ import { createApiTransport } from './validation';
 
 export * from './auth';
 export * from './errors';
-export { createHttpTransport, toQueryString } from './http-transport';
+export { createHttpTransport, errorFromResponse, toQueryString } from './http-transport';
 export type * from './transport';
 export { ContractViolationError, createApiTransport } from './validation';
 

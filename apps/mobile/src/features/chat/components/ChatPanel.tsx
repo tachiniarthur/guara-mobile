@@ -37,6 +37,8 @@ export function ChatPanel() {
     showConversation,
     addressee,
     setAddressee,
+    title,
+    currentId,
   } = useChatStore();
   const [pickerOpen, setPickerOpen] = useState(false);
 
@@ -49,7 +51,7 @@ export function ChatPanel() {
     return (
       <ChatSideColumn side="right" accessibilityLabel="Conversas">
         <ChatHistoryPanel
-          currentId={CONVERSATION.id}
+          currentId={currentId ?? undefined}
           onSelect={showConversation}
           onNew={startNew}
           onClose={closePanel}
@@ -70,10 +72,11 @@ export function ChatPanel() {
         {speaker ? <AssistantAvatar assistant={speaker} size={34} /> : null}
         <View className="min-w-0 flex-1">
           <Text size={15} weight="bold" leading={1.3} numberOfLines={1} accessibilityRole="header">
-            {speaker ? ASSISTANTS[speaker].name : CONVERSATION.title}
+            {speaker ? ASSISTANTS[speaker].name : title}
           </Text>
           <Text size={12} tone="subtle" leading={1.3} numberOfLines={1}>
-            {context?.subtitle ?? CONVERSATION.updatedLabel}
+            {context?.subtitle ??
+              (currentId === CONVERSATION.id ? CONVERSATION.updatedLabel : 'Agora')}
           </Text>
         </View>
         <IconButton

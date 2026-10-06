@@ -7,6 +7,8 @@ export * from './ChatComposer';
 export * from './ChatHistoryPanel';
 export * from './ChatPanel';
 export * from './ChatSideColumn';
+export * from './ComposerAttachments';
+export * from './ConversationActions';
 export * from './ConversationList';
 export * from './MessageBubbles';
 export * from './NewConversationButton';

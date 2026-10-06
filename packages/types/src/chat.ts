@@ -106,6 +106,8 @@ export type SuggestedAction = z.infer<typeof SuggestedActionSchema>;
 export const ConversationSchema = z.object({
   id: ConversationIdSchema,
   title: z.string().min(1).nullable(),
+  /** Pinned conversations come first in the history ("Fixar no topo"). */
+  pinned: z.boolean(),
   /** Assistant that answered last. */
   assistantId: AssistantIdSchema.nullable(),
   lastMessageAt: IsoDateTimeSchema.nullable(),
@@ -132,8 +134,36 @@ export const CreateConversationBodySchema = z.object({
 });
 export type CreateConversationBody = z.infer<typeof CreateConversationBodySchema>;
 
+export const UpdateConversationBodySchema = z.object({
+  title: z.string().trim().min(1).max(80).optional(),
+  pinned: z.boolean().optional(),
+});
+export type UpdateConversationBody = z.infer<typeof UpdateConversationBodySchema>;
+
+/** A file sent with a message (PDF, JPG or PNG up to 10 MB, kept 30 days). */
+export const ChatAttachmentSchema = z.object({
+  name: z.string().min(1),
+  mimeType: z.enum(['application/pdf', 'image/jpeg', 'image/png']),
+  sizeBytes: z
+    .number()
+    .int()
+    .positive()
+    .max(10 * 1024 * 1024),
+});
+export type ChatAttachment = z.infer<typeof ChatAttachmentSchema>;
+
 export const SendMessageBodySchema = z.object({ content: z.string().min(1).max(4000) });
 export type SendMessageBody = z.infer<typeof SendMessageBodySchema>;
+
+/**
+ * Answer of `POST /v1/chat/transcriptions` (multipart `audio` field, outside the JSON
+ * endpoints): the spoken question as text, for the user to review before sending.
+ */
+export const TranscriptionSchema = z.object({
+  text: z.string(),
+  durationSeconds: z.number().nonnegative(),
+});
+export type Transcription = z.infer<typeof TranscriptionSchema>;
 
 // --- Streaming (SSE) -------------------------------------------------------------------------
 

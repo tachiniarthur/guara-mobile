@@ -10,7 +10,8 @@ import { AccountMenuButton } from '@/navigation/AccountMenu';
 import { conversationHref } from '@/navigation/destinations';
 
 import { ConversationList, NewConversationButton } from '../components';
-import { CONVERSATION, CONVERSATION_GROUPS, CONVERSATIONS_COUNT } from '../data';
+import { useConversationHistory } from '../hooks/useConversationHistory';
+import { useChatStore } from '../store';
 
 import { ConversationScreen } from './ConversationScreen';
 
@@ -20,13 +21,8 @@ export function ChatHistoryScreen() {
   const { isTablet } = useBreakpoint();
   const docked = useChatDocked();
   const [query, setQuery] = useState('');
-  const normalized = query.trim().toLocaleLowerCase('pt-BR');
-  const groups = CONVERSATION_GROUPS.map((group) => ({
-    ...group,
-    items: group.items.filter((item) =>
-      `${item.title} ${item.preview}`.toLocaleLowerCase('pt-BR').includes(normalized),
-    ),
-  })).filter((group) => group.items.length > 0);
+  const { groups, count } = useConversationHistory(query);
+  const currentId = useChatStore((state) => state.currentId);
 
   const startNew = () => router.navigate(conversationHref());
 
@@ -50,7 +46,7 @@ export function ChatHistoryScreen() {
                 Histórico de conversas
               </Text>
               <Text variant="caption" tone="subtle" leading={1.3}>
-                {CONVERSATIONS_COUNT} conversas com a equipe
+                {count} {count === 1 ? 'conversa' : 'conversas'} com a equipe
               </Text>
             </View>
             <NewConversationButton variant="pill" onPress={startNew} />
@@ -68,7 +64,7 @@ export function ChatHistoryScreen() {
         placeholder="Buscar conversas"
         accessibilityLabel="Buscar conversas"
       />
-      <ConversationList groups={groups} currentId={CONVERSATION.id} />
+      <ConversationList groups={groups} currentId={currentId ?? undefined} />
     </Screen>
   );
 }

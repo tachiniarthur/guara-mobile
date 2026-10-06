@@ -14,8 +14,17 @@ export type AssistantBlock =
       milestones: Cents[];
     };
 
+/** A file sent with a question (PDF or photo, up to 10 MB). */
+export interface ChatFile {
+  uri: string;
+  name: string;
+  kind: 'pdf' | 'image';
+  /** Bytes; `null` when the system does not say. */
+  sizeBytes: number | null;
+}
+
 export type ChatMessage =
-  | { id: string; role: 'user'; text: string }
+  | { id: string; role: 'user'; text: string; attachment?: ChatFile }
   | {
       id: string;
       role: 'assistant';
@@ -93,9 +102,13 @@ export interface ConversationSummary {
   title: string;
   preview: string;
   time: string;
+  /** "Fixar no topo": shown first in the history. */
+  pinned?: boolean;
 }
 
-export const CONVERSATION_GROUPS: { label: string; items: ConversationSummary[] }[] = [
+export type ConversationGroup = { label: string; items: ConversationSummary[] };
+
+export const CONVERSATION_GROUPS: ConversationGroup[] = [
   {
     label: 'Hoje',
     items: [
@@ -155,10 +168,17 @@ export const CONVERSATION_GROUPS: { label: string; items: ConversationSummary[] 
   },
 ];
 
-export const CONVERSATIONS_COUNT = CONVERSATION_GROUPS.reduce(
-  (total, group) => total + group.items.length,
-  0,
-);
+/** History with the pinned conversations first ("Fixadas"); empty groups are left out. */
+export function historyGroups(groups: readonly ConversationGroup[]): ConversationGroup[] {
+  const pinned = groups.flatMap((group) => group.items.filter((item) => item.pinned));
+  const rest = groups
+    .map((group) => ({ ...group, items: group.items.filter((item) => !item.pinned) }))
+    .filter((group) => group.items.length > 0);
+  return pinned.length > 0 ? [{ label: 'Fixadas', items: pinned }, ...rest] : rest;
+}
+
+export const countConversations = (groups: readonly ConversationGroup[]) =>
+  groups.reduce((total, group) => total + group.items.length, 0);
 
 /** Assistants offered in "Falar com um bicho" (the Capivara routes by default). */
 export const PICKABLE_ASSISTANTS: { id: AssistantId; label: string }[] = [

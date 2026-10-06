@@ -18,6 +18,7 @@ import {
   ChatHistoryPanel,
   ChatMessageView,
   ChatSideColumn,
+  ConversationActions,
   NewConversationButton,
 } from '../components';
 import { CONVERSATION, SUGGESTIONS } from '../data';
@@ -36,7 +37,10 @@ export function ConversationScreen() {
     startNew,
     addressee: assistant,
     setAddressee: setAssistant,
+    title,
+    currentId,
   } = useChatStore();
+  const updatedLabel = currentId === CONVERSATION.id ? CONVERSATION.updatedLabel : 'Agora';
   const { ask, assistant: askedAssistant } = useLocalSearchParams<{
     ask?: string;
     assistant?: string;
@@ -85,10 +89,10 @@ export function ConversationScreen() {
           leading={1.3}
           accessibilityRole="header"
         >
-          {CONVERSATION.title}
+          {title}
         </Text>
         <Text variant="caption" tone="subtle" leading={1.3}>
-          {CONVERSATION.updatedLabel}
+          {updatedLabel}
         </Text>
       </View>
       {docked ? null : (
@@ -97,7 +101,7 @@ export function ConversationScreen() {
         </Button>
       )}
       <NewConversationButton variant="icon" onPress={startNew} />
-      <IconButton icon="moreHorizontal" accessibilityLabel="Mais opções da conversa" />
+      <ConversationActions onDeleted={isTablet ? undefined : openHistory} />
     </View>
   ) : (
     <View className="h-[60px] flex-row items-center gap-1 border-b border-border px-2">
@@ -108,10 +112,10 @@ export function ConversationScreen() {
       />
       <View className="min-w-0 flex-1 items-center">
         <Text size={16} weight="bold" leading={1.3} numberOfLines={1} accessibilityRole="header">
-          {CONVERSATION.title}
+          {title}
         </Text>
         <Text size={12} tone="subtle" leading={1.3}>
-          {CONVERSATION.updatedLabel}
+          {updatedLabel}
         </Text>
       </View>
       <IconButton
@@ -119,7 +123,7 @@ export function ConversationScreen() {
         accessibilityLabel="Histórico de conversas"
         onPress={openHistory}
       />
-      <IconButton icon="moreHorizontal" accessibilityLabel="Mais opções da conversa" />
+      <ConversationActions onDeleted={isTablet ? undefined : openHistory} />
     </View>
   );
 
@@ -177,7 +181,7 @@ export function ConversationScreen() {
     <View className="flex-1 flex-row bg-background">
       <ChatSideColumn side="left" accessibilityLabel="Conversas">
         <ChatHistoryPanel
-          currentId={CONVERSATION.id}
+          currentId={currentId ?? undefined}
           onNew={startNew}
           onSelect={(conversationId) =>
             router.navigate({ pathname: '/chat/[conversationId]', params: { conversationId } })
