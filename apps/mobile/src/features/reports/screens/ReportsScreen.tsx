@@ -201,7 +201,7 @@ export function ReportsScreen() {
         <LinkButton
           label={isTablet ? 'Ver 118 lançamentos' : 'Todos'}
           className="min-h-6"
-          onPress={() => router.navigate('/spending')}
+          onPress={() => router.navigate('/reports/timeline')}
         />
       }
     >

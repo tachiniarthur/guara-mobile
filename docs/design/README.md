@@ -151,7 +151,7 @@ implementada.
 | `Lancamentos-Estados` · filtro vazio, vazio e erro                                                  | M T      | estados de `/spending/transactions`                                                   |
 | `Assinaturas`                                                                                       | M T D    | `/spending/subscriptions`                                                             |
 | `Relatorio` (T em paisagem)                                                                         | M T D    | `/reports`                                                                            |
-| `Relatorio-Linha-do-Tempo`                                                                          | M T      | —                                                                                     |
+| `Relatorio-Linha-do-Tempo`                                                                          | M T      | `/reports/timeline`                                                                   |
 | `Alertas`                                                                                           | M T D    | `/alerts`                                                                             |
 | `Novo-Teto`                                                                                         | M T D    | `/new-budget` (modal)                                                                 |
 | `Novo-Alerta-Preco`                                                                                 | M T D    | `/new-price-alert` (modal)                                                            |

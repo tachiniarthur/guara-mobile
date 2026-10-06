@@ -51,6 +51,7 @@ const APP_ROUTES: RouteCase[] = [
   ['/budgets', 'Tetos de gasto', null],
   ['/budgets/budget-1', 'Teto de gasto', 'budget-1'],
   ['/reports', 'Relatório', null],
+  ['/reports/timeline', 'Linha do tempo', null],
   ['/alerts', 'Alertas', null],
   ['/price-alerts/alert-1', 'Alerta de preço', 'alert-1'],
   ['/investments/simulator', 'O caminho do seu futuro', null],
