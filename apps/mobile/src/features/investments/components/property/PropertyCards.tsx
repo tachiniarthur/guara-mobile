@@ -11,7 +11,6 @@ import { DataRow, Icon, InfoNote, MoneyText, Text } from '@/components/ui';
 import { useBreakpoint } from '@/hooks/useBreakpoint';
 import { cn } from '@/lib/cn';
 
-import { PORTFOLIO } from '../../data';
 import type { FipeEntry, RealEstate, Vehicle } from '../../property-data';
 import {
   fipeChange,
@@ -323,4 +322,4 @@ export function FipeCard({ name, entry }: { name: string; entry: FipeEntry }) {
 }
 
 /** "Alocação do perfil Moderado" (bens never enter the profile allocation). */
-export const PROFILE_ALLOCATION_LABEL = `Alocação do perfil ${PORTFOLIO.profile}`;
+export const profileAllocationLabel = (profile: string) => `Alocação do perfil ${profile}`;

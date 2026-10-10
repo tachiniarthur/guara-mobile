@@ -6,6 +6,7 @@ import { View } from 'react-native';
 import { DonutChart } from '@/components/charts';
 import { SectionCard } from '@/components/layout';
 import { InfoNote, Span, Text } from '@/components/ui';
+import { classTargets } from '@/constants/target-allocations';
 import { ASSET_CLASSES } from '@/features/investments';
 import { useBreakpoint } from '@/hooks/useBreakpoint';
 import { cn } from '@/lib/cn';
@@ -21,15 +22,6 @@ import {
 } from '../lib/profile';
 
 const ORDER: InvestorProfileType[] = ['conservative', 'moderate', 'aggressive', 'sophisticated'];
-
-/**
- * Target allocation of each profile. Only the Moderado one is in the design (the "Alvo do
- * perfil" of Investimentos); the others come with the API.
- */
-function targetsFor(type: InvestorProfileType): Record<string, number> | null {
-  if (type !== 'moderate') return null;
-  return Object.fromEntries(ASSET_CLASSES.map((item) => [item.key, item.target]));
-}
 
 /** Conservador · Moderado · Arrojado · Sofisticado with the user's profile highlighted. */
 function ProfileScale({ type }: { type: InvestorProfileType }) {
@@ -61,15 +53,8 @@ function ProfileScale({ type }: { type: InvestorProfileType }) {
 
 function TargetAllocationCard({ type }: { type: InvestorProfileType }) {
   const { isTablet } = useBreakpoint();
-  const targets = targetsFor(type);
+  const targets = classTargets(type);
   const label = PROFILE_LABELS[type];
-  if (!targets) {
-    return (
-      <InfoNote icon="info" size={13} className="rounded-14 px-3.5 py-3">
-        {`A alocação-alvo do perfil ${label} aparece quando a sua carteira for analisada pelo Pacu.`}
-      </InfoNote>
-    );
-  }
   const comparison = compareAllocation(ASSET_CLASSES, targets);
   const donut = (
     <DonutChart

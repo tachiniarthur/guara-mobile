@@ -263,7 +263,6 @@ export const QUOTES: { time: string; fallbackTime: string | null } = {
 export const PORTFOLIO = {
   quotesLabel: `Cotações atualizadas às ${QUOTES.time}`,
   sourcesLabel: `Cotações atualizadas às ${QUOTES.time} · posições dos bancos conectados e cadastradas por você`,
-  profile: 'Moderado',
   total: sumCents(POSITIONS.map((position) => position.value)),
   monthGain: '+R$ 862,40 em setembro (+1,8%)',
   positionsCount: POSITIONS.length,
@@ -304,7 +303,6 @@ export const ASSET_CLASSES = [
     short: 'R. fixa',
     color: colors.info.DEFAULT,
     current: 46,
-    target: 50,
   },
   {
     key: 'stocks',
@@ -312,7 +310,6 @@ export const ASSET_CLASSES = [
     short: 'Ações',
     color: colors.negative.DEFAULT,
     current: 22,
-    target: 20,
   },
   {
     key: 'reits',
@@ -320,7 +317,6 @@ export const ASSET_CLASSES = [
     short: 'FIIs',
     color: colors.brand.DEFAULT,
     current: 14,
-    target: 15,
   },
   {
     key: 'crypto',
@@ -328,7 +324,6 @@ export const ASSET_CLASSES = [
     short: 'Cripto',
     color: colors.positive.DEFAULT,
     current: 10,
-    target: 5,
   },
   {
     key: 'intl',
@@ -336,7 +331,6 @@ export const ASSET_CLASSES = [
     short: 'Intern.',
     color: colors.foreground.subtle,
     current: 8,
-    target: 10,
   },
 ] as const;
 

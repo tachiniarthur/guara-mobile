@@ -17,6 +17,7 @@ import {
   PropertiesCard,
   NewUserInvestments,
 } from '../components';
+import { useProfileTargets } from '../hooks/useProfileTargets';
 import { usePositions } from '../hooks/usePositions';
 import { PORTFOLIO } from '../data';
 
@@ -25,6 +26,7 @@ export function InvestmentsScreen() {
   const router = useRouter();
   const { isTablet } = useBreakpoint();
   const addInvestment = () => router.navigate('/new-manual-asset');
+  const profile = useProfileTargets();
   // An empty portfolio shows where to start ("Investimentos · novo").
   const empty = usePositions().status === 'empty';
 
@@ -87,13 +89,13 @@ export function InvestmentsScreen() {
               actions={
                 <Pressable
                   accessibilityRole="link"
-                  accessibilityLabel={`Perfil de investidor: ${PORTFOLIO.profile}`}
+                  accessibilityLabel={`Perfil de investidor: ${profile.label}`}
                   onPress={() => router.navigate('/account/investor-profile')}
                   className="h-11 flex-row items-center gap-2 rounded-full border border-border-strong bg-surface px-3.5"
                 >
                   <Icon name="shield" size={18} color={colors.foreground.DEFAULT} />
                   <Text size={14}>
-                    Perfil <Span weight="bold">{PORTFOLIO.profile}</Span>
+                    Perfil <Span weight="bold">{profile.label}</Span>
                   </Text>
                 </Pressable>
               }

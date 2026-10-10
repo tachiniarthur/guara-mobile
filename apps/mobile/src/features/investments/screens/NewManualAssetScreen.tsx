@@ -10,6 +10,7 @@ import { FormScreen, ResponsiveGrid } from '@/components/layout';
 import { Icon, InfoNote, Input, MoneyInput, Text } from '@/components/ui';
 import { useBreakpoint } from '@/hooks/useBreakpoint';
 
+import { useProfileTargets } from '../hooks/useProfileTargets';
 import { ChatEntryTip, InvestmentTypePicker, PositionPreview } from '../components';
 import { ASSET_CLASSES, PORTFOLIO } from '../data';
 import {
@@ -66,6 +67,7 @@ export function NewManualAssetScreen() {
   const invested =
     amount && averagePrice !== null ? multiplyCentsByDecimal(averagePrice, amount) : null;
   const worth = amount && quote ? multiplyCentsByDecimal(quote.price, amount) : null;
+  const profile = useProfileTargets();
   const assetClass = quote ? ASSET_CLASSES.find((item) => item.key === quote.classKey) : undefined;
   const classValue = assetClass ? (assetClass.current / 100) * PORTFOLIO.total : 0;
 
@@ -191,10 +193,10 @@ export function NewManualAssetScreen() {
                 label: assetClass.label,
                 ticker: quote.ticker,
                 color: assetClass.color,
-                profile: PORTFOLIO.profile,
+                profile: profile.label,
                 current: assetClass.current,
                 after: ((classValue + worth) / (PORTFOLIO.total + worth)) * 100,
-                target: assetClass.target,
+                target: profile.targets[assetClass.key],
               }
             : null
         }

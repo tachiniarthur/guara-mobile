@@ -124,7 +124,9 @@ describe('Refazer perfil', () => {
       fireEvent.press(screen.getByRole('button', { name: 'Continuar' }));
     }
     expect(screen.getByRole('header', { name: 'Seu perfil é Sofisticado' })).toBeOnTheScreen();
-    expect(screen.getByText(/^A alocação-alvo do perfil Sofisticado/)).toBeOnTheScreen();
+    expect(
+      screen.getByLabelText('Internacional: alvo 47%, sua carteira 8%, −39 p.p.'),
+    ).toBeOnTheScreen();
     expect(screen.getByLabelText('Objetivo: Renda extra todo mês')).toBeOnTheScreen();
 
     fireEvent.press(screen.getByRole('button', { name: 'Salvar perfil' }));
@@ -143,6 +145,9 @@ describe('Refazer perfil', () => {
       screen.getByText(/Seu perfil continua o mesmo; ao salvar, a data é atualizada\./),
     ).toBeOnTheScreen();
     expect(screen.getByLabelText('Cripto: alvo 5%, sua carteira 10%, +5 p.p.')).toBeOnTheScreen();
-    expect(screen.getByText(/Cripto, 5 p\.p\. acima/)).toBeOnTheScreen();
+    expect(
+      screen.getByLabelText('Renda fixa: alvo 48%, sua carteira 46%, −2 p.p.'),
+    ).toBeOnTheScreen();
+    expect(screen.getByText(/Internacional, 20 p\.p\. abaixo/)).toBeOnTheScreen();
   });
 });

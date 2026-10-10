@@ -8,6 +8,7 @@ import { SectionCard } from '@/components/layout';
 import { Button, Chip, Icon, MoneyText, Text } from '@/components/ui';
 import { useBreakpoint } from '@/hooks/useBreakpoint';
 
+import { useProfileTargets } from '../hooks/useProfileTargets';
 import { PERFORMANCE, PORTFOLIO } from '../data';
 import { useProperties } from '../hooks/useProperties';
 
@@ -19,6 +20,7 @@ const PERIODS = [
 
 /** Invested net worth, return against the CDI and the year's numbers. */
 export function PortfolioCard() {
+  const profile = useProfileTargets();
   const router = useRouter();
   const { isTablet } = useBreakpoint();
   const { netWorth, total: propertiesTotal } = useProperties();
@@ -43,12 +45,12 @@ export function PortfolioCard() {
         {isTablet ? null : (
           <Pressable
             accessibilityRole="link"
-            accessibilityLabel={`Perfil de investidor: ${PORTFOLIO.profile}`}
+            accessibilityLabel={`Perfil de investidor: ${profile.label}`}
             onPress={() => router.navigate('/account/investor-profile')}
             className="min-h-8 flex-row items-center gap-1"
           >
             <Icon name="shield" size={16} color={colors.foreground.DEFAULT} />
-            <Text size={13}>{PORTFOLIO.profile}</Text>
+            <Text size={13}>{profile.label}</Text>
           </Pressable>
         )}
       </View>

@@ -7,7 +7,9 @@ import { View } from 'react-native';
 import { SectionCard } from '@/components/layout';
 import { DataRow, Icon, MoneyText, Text } from '@/components/ui';
 
-import { PROFILE_ALLOCATION_LABEL } from './PropertyCards';
+import { useProfileTargets } from '../../hooks/useProfileTargets';
+
+import { profileAllocationLabel } from './PropertyCards';
 
 export interface PropertyPreviewProps {
   /** Net worth without this property. */
@@ -31,6 +33,7 @@ export function PropertyPreview({
   children,
 }: PropertyPreviewProps) {
   const after = addCents(today, value ?? cents(0));
+  const profile = useProfileTargets();
   return (
     <SectionCard
       title="Prévia no patrimônio"
@@ -59,7 +62,10 @@ export function PropertyPreview({
           value={value ? <MoneyText value={value} showSign wholeUnits weight="semibold" /> : '—'}
         />
         {debtRow}
-        <DataRow label={PROFILE_ALLOCATION_LABEL} value="não muda · só investimentos" />
+        <DataRow
+          label={profileAllocationLabel(profile.label)}
+          value="não muda · só investimentos"
+        />
       </View>
       {children}
     </SectionCard>

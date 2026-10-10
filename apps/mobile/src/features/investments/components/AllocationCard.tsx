@@ -5,20 +5,27 @@ import { View } from 'react-native';
 import { DonutChart, LegendSwatch, TargetBarChart } from '@/components/charts';
 import { SectionCard } from '@/components/layout';
 import { LinkButton, Span, Text } from '@/components/ui';
+import type { AllocationClassKey } from '@/constants/target-allocations';
+// Straight to the file: the investor-profile index imports Investimentos back.
+import { compareAllocation } from '@/features/investor-profile/lib/profile';
 import { conversationHref } from '@/navigation';
 
 import { ASSET_CLASSES, PORTFOLIO } from '../data';
+import { useProfileTargets } from '../hooks/useProfileTargets';
+
+/** Gap under which the other classes count as close to the profile. */
+const CLOSE_GAP = 5;
 
 function Ring({
   title,
   caption,
   value,
-  kind,
+  shares,
 }: {
   title: string;
   caption: string;
   value: string;
-  kind: 'current' | 'target';
+  shares: Record<AllocationClassKey, number>;
 }) {
   return (
     <View className="min-w-0 flex-1 items-center gap-2.5">
@@ -32,7 +39,7 @@ function Ring({
         trackColor={colors.surface.muted}
         segments={ASSET_CLASSES.map((item) => ({
           key: item.key,
-          value: item[kind],
+          value: shares[item.key],
           color: item.color,
         }))}
       >
@@ -50,7 +57,14 @@ function Ring({
 /** Allocation against the investor profile: two rings, legend and class-by-class bars. */
 export function AllocationCard() {
   const router = useRouter();
-  const profile = PORTFOLIO.profile.toLowerCase();
+  const { label, targets } = useProfileTargets();
+  const profile = label.toLowerCase();
+  const current = Object.fromEntries(
+    ASSET_CLASSES.map((item) => [item.key, item.current]),
+  ) as Record<AllocationClassKey, number>;
+  const comparison = compareAllocation(ASSET_CLASSES, targets);
+  const others = comparison.rows.filter((row) => row.label !== comparison.biggest?.label);
+  const restClose = others.every((row) => Math.abs(row.difference) <= CLOSE_GAP);
   return (
     <SectionCard
       title="Alocação"
@@ -62,16 +76,16 @@ export function AllocationCard() {
     >
       <View
         accessible
-        accessibilityLabel={`Sua carteira: ${ASSET_CLASSES.map((item) => `${item.label} ${item.current}%`).join(', ')}. Perfil ${profile}: ${ASSET_CLASSES.map((item) => `${item.label} ${item.target}%`).join(', ')}.`}
+        accessibilityLabel={`Sua carteira: ${ASSET_CLASSES.map((item) => `${item.label} ${item.current}%`).join(', ')}. Perfil ${profile}: ${ASSET_CLASSES.map((item) => `${item.label} ${targets[item.key]}%`).join(', ')}.`}
         className="flex-row gap-3"
       >
         <Ring
           title="Sua carteira"
           caption="Atual"
           value={`${PORTFOLIO.positionsCount} ativos`}
-          kind="current"
+          shares={current}
         />
-        <Ring title={`Perfil ${profile}`} caption="Alvo" value={PORTFOLIO.profile} kind="target" />
+        <Ring title={`Perfil ${profile}`} caption="Alvo" value={label} shares={targets} />
       </View>
       <View className="flex-row flex-wrap justify-center gap-x-4 gap-y-1.5">
         {ASSET_CLASSES.map((item) => (
@@ -103,22 +117,28 @@ export function AllocationCard() {
             label: item.short,
             color: item.color,
             current: item.current,
-            target: item.target,
-            alert: Math.abs(item.current - item.target) >= 5,
+            target: targets[item.key],
+            alert: Math.abs(item.current - targets[item.key]) >= CLOSE_GAP,
           }))}
-          accessibilityLabel={`Comparação por classe, sua carteira contra o alvo do perfil ${profile}: ${ASSET_CLASSES.map((item) => `${item.label} ${item.current}% contra ${item.target}%`).join('; ')}.`}
+          accessibilityLabel={`Comparação por classe, sua carteira contra o alvo do perfil ${profile}: ${ASSET_CLASSES.map((item) => `${item.label} ${item.current}% contra ${targets[item.key]}%`).join('; ')}.`}
         />
       </View>
       <View className="flex-row flex-wrap items-center justify-between gap-x-4 gap-y-2 border-t border-border pt-3">
         <Text variant="caption" tone="muted" className="min-w-0 flex-shrink">
-          <Span weight="bold" tone="brand">
-            Cripto
-          </Span>{' '}
-          está{' '}
-          <Span weight="bold" tone="default">
-            5 p.p. acima
-          </Span>{' '}
-          do alvo. O resto está perto do perfil.
+          {comparison.biggest ? (
+            <>
+              <Span weight="bold" tone="brand">
+                {comparison.biggest.label}
+              </Span>{' '}
+              está{' '}
+              <Span weight="bold" tone="default">
+                {`${comparison.biggest.points} p.p. ${comparison.biggest.direction}`}
+              </Span>{' '}
+              do alvo.{restClose ? ' O resto está perto do perfil.' : ''}
+            </>
+          ) : (
+            'Sua carteira está no alvo do perfil.'
+          )}
         </Text>
         <LinkButton
           label="Rebalancear com o Pacu"
