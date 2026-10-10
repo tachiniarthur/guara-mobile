@@ -32,8 +32,12 @@ export const navigationSize = {
   railWidth: 88,
   /** The chat beside the pages (history or open conversation): one width everywhere. */
   chatPanelWidth: 360,
-  /** Window width from which the chat docks beside the pages instead of opening full screen. */
+  /** Window width from which the chat docks beside the pages instead of opening over them. */
   chatPanelMinWindow: 1100,
+  /** Narrower tablets: the chat opens over the page, in a panel on the right. */
+  chatOverlayWidth: 440,
+  /** Phones: the chat sheet starts this far from the top of the screen. */
+  chatSheetTop: 64,
 } as const;
 
 export type ControlSize = keyof typeof controlHeight;

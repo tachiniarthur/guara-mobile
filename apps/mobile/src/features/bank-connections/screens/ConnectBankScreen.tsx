@@ -15,6 +15,7 @@ export function ConnectBankScreen() {
 
   return (
     <FormScreen
+      chat={false}
       title="Conectar bancos"
       parents={[{ label: 'Meu perfil', href: '/account' }]}
       current="Conectar bancos"

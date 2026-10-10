@@ -35,8 +35,9 @@ export const bankingEndpoints = defineEndpoints({
   'bankConnections.revoke': {
     method: 'POST',
     path: '/v1/bank-connections/:connectionId/revoke',
-    summary: 'Revoke the Open Finance consent',
+    summary: 'Revoke the Open Finance consent, keeping or deleting the imported history',
     params: connectionParams,
+    body: z.object({ keepHistory: z.boolean() }),
     response: BankConnectionSchema,
   },
   'accounts.list': {

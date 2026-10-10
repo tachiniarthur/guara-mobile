@@ -98,6 +98,8 @@ export interface MalvoFindings {
   transactionsMonth: YearMonth;
   /** Investment also typed in manually: asked later in Investimentos. */
   duplicateNotice: string | null;
+  /** Id of that duplicate ("Resolver agora"). */
+  duplicateId: string | null;
 }
 
 export const MALVO_FINDINGS: Partial<Record<string, MalvoFindings>> = {
@@ -110,6 +112,7 @@ export const MALVO_FINDINGS: Partial<Record<string, MalvoFindings>> = {
     transactionsMonth: '2026-09',
     duplicateNotice:
       'O Tesouro Selic 2029 do Itaú também está no seu cadastro manual. Vamos perguntar em Investimentos se você quer somar ou manter separado.',
+    duplicateId: 'dup-selic',
   },
 };
 

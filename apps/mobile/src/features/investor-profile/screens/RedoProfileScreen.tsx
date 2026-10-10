@@ -6,6 +6,7 @@ import { toast } from '@/components/feedback';
 import { PageHeader, Screen, StickyFooter, TopBar } from '@/components/layout';
 import { Badge, Button, InfoNote, Span, Text } from '@/components/ui';
 import { useBreakpoint } from '@/hooks/useBreakpoint';
+import { ChatFab } from '@/navigation';
 
 import { ProfileQuestionView, ProfileResult } from '../components';
 import { PROFILE_LABELS, type ProfileAnswers } from '../data';
@@ -106,35 +107,41 @@ export function RedoProfileScreen() {
 
   if (isTablet) {
     return (
-      <Screen contentClassName="pb-16">
-        <PageHeader
-          title="Refazer perfil"
-          breadcrumb={{
-            parents: [{ label: 'Meu perfil', href: '/account' }],
-            current: 'Perfil de investidor',
-          }}
-        />
-        <View className="w-full max-w-[640px] gap-6 rounded-24 border border-border bg-surface p-8">
-          {body}
-          <View className="flex-row items-center gap-2.5 pt-2">{actions}</View>
-        </View>
-      </Screen>
+      <View className="flex-1">
+        <Screen contentClassName="pb-28">
+          <PageHeader
+            title="Refazer perfil"
+            breadcrumb={{
+              parents: [{ label: 'Meu perfil', href: '/account' }],
+              current: 'Perfil de investidor',
+            }}
+          />
+          <View className="w-full max-w-[640px] gap-6 rounded-24 border border-border bg-surface p-8">
+            {body}
+            <View className="flex-row items-center gap-2.5 pt-2">{actions}</View>
+          </View>
+        </Screen>
+        <ChatFab />
+      </View>
     );
   }
 
   return (
-    <Screen
-      header={
-        <TopBar
-          title="Refazer perfil"
-          leading={flow.step === 0 ? 'close' : 'back'}
-          onLeadingPress={back}
-        />
-      }
-      footer={<StickyFooter>{actions}</StickyFooter>}
-      contentClassName="gap-5 pt-2"
-    >
-      {body}
-    </Screen>
+    <View className="flex-1">
+      <Screen
+        header={
+          <TopBar
+            title="Refazer perfil"
+            leading={flow.step === 0 ? 'close' : 'back'}
+            onLeadingPress={back}
+          />
+        }
+        footer={<StickyFooter>{actions}</StickyFooter>}
+        contentClassName="gap-5 pb-20 pt-2"
+      >
+        {body}
+      </Screen>
+      <ChatFab />
+    </View>
   );
 }

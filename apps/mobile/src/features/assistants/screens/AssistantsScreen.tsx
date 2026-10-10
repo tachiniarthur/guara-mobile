@@ -5,6 +5,7 @@ import { AppLogo } from '@/components/brand';
 import { PageHeader, ResponsiveGrid, Screen, TopBar } from '@/components/layout';
 import { IconButton, Text } from '@/components/ui';
 import { ASSISTANT_ORDER } from '@/features/chat';
+import { bellLabel, useNotifications } from '@/features/notifications';
 import { useBreakpoint } from '@/hooks/useBreakpoint';
 import { AccountMenuButton, ChatFab } from '@/navigation';
 
@@ -17,6 +18,7 @@ const INTRO =
 /** Seus assistentes: the whole team with what each one is doing. */
 export function AssistantsScreen() {
   const router = useRouter();
+  const { unread } = useNotifications();
   const { isTablet } = useBreakpoint();
 
   return (
@@ -30,8 +32,8 @@ export function AssistantsScreen() {
                 <>
                   <IconButton
                     icon="bell"
-                    accessibilityLabel="Notificações, 3 novas"
-                    onPress={() => router.navigate('/alerts')}
+                    accessibilityLabel={bellLabel(unread)}
+                    onPress={() => router.navigate('/notifications')}
                   />
                   <AccountMenuButton />
                 </>

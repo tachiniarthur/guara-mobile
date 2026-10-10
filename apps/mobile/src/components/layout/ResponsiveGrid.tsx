@@ -1,5 +1,5 @@
 import type { Breakpoint } from '@guara/ui-tokens';
-import { Children, type ReactNode } from 'react';
+import { Children, createContext, useContext, type ReactNode } from 'react';
 import { View } from 'react-native';
 
 import { useBreakpoint } from '@/hooks/useBreakpoint';
@@ -19,6 +19,26 @@ export interface ResponsiveGridProps {
 }
 
 const DEFAULT_COLUMNS = { phone: 1, tablet: 2 } as const;
+
+/**
+ * Whether the content sits directly in a stretched grid cell: cards (`SectionCard`) then grow
+ * to the height of the row ("cards da mesma linha terminam na mesma altura").
+ */
+const GridCellContext = createContext(false);
+
+/** Cards call this to fill a stretched grid cell; their own content resets it. */
+export function useFillsGridCell(): boolean {
+  return useContext(GridCellContext);
+}
+
+/** Makes the card inside fill the rest of a column that is stretched to the row's height. */
+export function FillColumn({ children }: { children: ReactNode }) {
+  return <GridCellContext.Provider value>{children}</GridCellContext.Provider>;
+}
+
+export function GridCellReset({ children }: { children: ReactNode }) {
+  return <GridCellContext.Provider value={false}>{children}</GridCellContext.Provider>;
+}
 
 /** Lays out children in equal columns that adapt to phone/tablet (CSS grid of the design). */
 export function ResponsiveGrid({
@@ -54,7 +74,9 @@ export function ResponsiveGrid({
         >
           {row.map((item, index) => (
             <View key={index} className="min-w-0 flex-1">
-              {item}
+              <GridCellContext.Provider value={stretch && count > 1}>
+                {item}
+              </GridCellContext.Provider>
             </View>
           ))}
           {/* Keep cell widths equal on an incomplete last row. */}

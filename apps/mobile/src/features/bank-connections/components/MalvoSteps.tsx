@@ -352,10 +352,18 @@ export interface SuccessBodyProps {
   mode: MalvoMode;
   findings: MalvoFindings | null;
   connections: readonly BankConnection[];
+  /** "Resolver agora" on the duplicated investment (inside the app, not in the onboarding). */
+  onResolveDuplicate?: () => void;
 }
 
 /** "Itaú conectado": what was found and the banks of the plan. */
-export function SuccessBody({ bank, mode, findings, connections }: SuccessBodyProps) {
+export function SuccessBody({
+  bank,
+  mode,
+  findings,
+  connections,
+  onResolveDuplicate,
+}: SuccessBodyProps) {
   const plan = usePlan();
   const renewed = mode === 'renew';
   return (
@@ -447,7 +455,17 @@ export function SuccessBody({ bank, mode, findings, connections }: SuccessBodyPr
       </Card>
       {!renewed && findings?.duplicateNotice ? (
         <InfoNote icon="copy" tone="warning" size={13}>
-          {findings.duplicateNotice}
+          <Text size={13} leading={1.5}>
+            {findings.duplicateNotice}
+            {onResolveDuplicate ? (
+              <>
+                {' '}
+                <Span weight="bold" accessibilityRole="link" onPress={onResolveDuplicate}>
+                  Resolver agora
+                </Span>
+              </>
+            ) : null}
+          </Text>
         </InfoNote>
       ) : null}
     </>
@@ -508,6 +526,7 @@ export function MalvoBody({
   flow,
   connections,
   onSupport,
+  onResolveDuplicate,
 }: {
   flow: {
     bank: BankOptionData;
@@ -522,6 +541,7 @@ export function MalvoBody({
   };
   connections: readonly BankConnection[];
   onSupport: () => void;
+  onResolveDuplicate?: () => void;
 }) {
   switch (flow.step) {
     case 'authorize':
@@ -549,6 +569,7 @@ export function MalvoBody({
           mode={flow.mode}
           findings={flow.findings}
           connections={connections}
+          onResolveDuplicate={onResolveDuplicate}
         />
       );
     case 'error':

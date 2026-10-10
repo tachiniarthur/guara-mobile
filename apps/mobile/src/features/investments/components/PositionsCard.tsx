@@ -39,7 +39,7 @@ export function PositionsCard() {
     [...positions].sort((a, b) => (sort === 'value' ? b.value - a.value : b.share - a.share));
 
   const items = (positions: Position[]) => (
-    <ResponsiveGrid columns={{ phone: 1, tablet: 2 }} gap={8} stretch={false}>
+    <ResponsiveGrid columns={{ phone: 1, tablet: 2 }} gap={8}>
       {ordered(positions).map((position) => (
         <PositionItem
           key={position.id}

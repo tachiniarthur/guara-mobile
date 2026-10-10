@@ -57,7 +57,7 @@ export function AssetMoreDetailsScreen() {
         {details ? (
           <>
             {isTablet ? (
-              <ResponsiveGrid columns={{ tablet: 2 }} gap={16} stretch={false}>
+              <ResponsiveGrid columns={{ tablet: 2 }} gap={16}>
                 {sections}
               </ResponsiveGrid>
             ) : (

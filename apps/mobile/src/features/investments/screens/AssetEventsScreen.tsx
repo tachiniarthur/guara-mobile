@@ -196,7 +196,7 @@ export function AssetEventsScreen() {
           action={{ label: 'Ver todos', onPress: () => setKind('all') }}
         />
       ) : (
-        <ResponsiveGrid columns={{ tablet: 2 }} gap={16} stretch={false}>
+        <ResponsiveGrid columns={{ tablet: 2 }} gap={16}>
           {visibleYears.map((year, index) => {
             const collapsed = index > 0 && !expanded.includes(year.year);
             const shown = collapsed ? year.items.slice(0, COLLAPSED) : year.items;

@@ -1,4 +1,3 @@
-import type { AssistantId } from '@guara/types';
 import { useLocalSearchParams, useRouter } from 'expo-router';
 import { useEffect, useRef, useState } from 'react';
 import { KeyboardAvoidingView, Platform, ScrollView, View } from 'react-native';
@@ -11,7 +10,7 @@ import { useChatDocked } from '@/hooks/useChatDocked';
 import { cn } from '@/lib/cn';
 import { colors } from '@guara/ui-tokens';
 
-import { ASSISTANTS } from '../assistants';
+import { assistantWith, isAssistantId } from '../assistants';
 import {
   AssistantPickerSheet,
   ChatComposer,
@@ -22,6 +21,7 @@ import {
   NewConversationButton,
 } from '../components';
 import { CONVERSATION, SUGGESTIONS } from '../data';
+import { useChatNavigation } from '../hooks/useChatNavigation';
 import { useChatStore } from '../store';
 
 /** Conversation with the team (full screen on phones, beside the rail on tablets). */
@@ -30,6 +30,7 @@ export function ConversationScreen() {
   const { isTablet } = useBreakpoint();
   const scrollRef = useRef<ScrollView>(null);
   const docked = useChatDocked();
+  const chat = useChatNavigation();
   // The same conversation as the side panel of wide tablets.
   const {
     messages,
@@ -53,7 +54,7 @@ export function ConversationScreen() {
   useEffect(() => {
     if (!request || handledRequest.current === request) return;
     handledRequest.current = request;
-    if (askedAssistant && askedAssistant in ASSISTANTS) setAssistant(askedAssistant as AssistantId);
+    if (askedAssistant && isAssistantId(askedAssistant)) setAssistant(askedAssistant);
     if (ask) send(ask);
   }, [request, ask, askedAssistant, send, setAssistant]);
 
@@ -67,10 +68,19 @@ export function ConversationScreen() {
 
   const openHistory = () => router.navigate('/chat');
   const placeholder = assistant
-    ? `Pergunte ao ${ASSISTANTS[assistant].name}`
+    ? `Pergunte ${assistantWith('a', assistant)}`
     : isTablet
       ? 'Pergunte qualquer coisa sobre seu dinheiro'
       : 'Pergunte qualquer coisa';
+
+  // "Sair da tela cheia": back to the page with the chat open over it.
+  const exitFullScreen = (
+    <IconButton
+      icon="minimize"
+      accessibilityLabel="Sair da tela cheia"
+      onPress={chat.exitFullScreen}
+    />
+  );
 
   const header = isTablet ? (
     // Beside the history column the header matches its 68 dp so the divider lines up.
@@ -102,6 +112,7 @@ export function ConversationScreen() {
       )}
       <NewConversationButton variant="icon" onPress={startNew} />
       <ConversationActions onDeleted={isTablet ? undefined : openHistory} />
+      {exitFullScreen}
     </View>
   ) : (
     <View className="h-[60px] flex-row items-center gap-1 border-b border-border px-2">
@@ -123,6 +134,7 @@ export function ConversationScreen() {
         accessibilityLabel="Histórico de conversas"
         onPress={openHistory}
       />
+      {exitFullScreen}
       <ConversationActions onDeleted={isTablet ? undefined : openHistory} />
     </View>
   );
@@ -162,7 +174,7 @@ export function ConversationScreen() {
             placeholder={placeholder}
             large={isTablet}
           />
-          {isTablet ? <AiDisclaimer className="justify-center" /> : null}
+          <AiDisclaimer />
         </SafeAreaView>
       </KeyboardAvoidingView>
       <AssistantPickerSheet

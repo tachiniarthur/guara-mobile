@@ -234,10 +234,11 @@ export function NewPropertyScreen() {
     />
   ) : null;
 
-  const preview = (
+  const preview = (notes?: ReactNode) => (
     <PropertyPreview
       today={today}
       value={value}
+      padding={notes ? 22 : 16}
       debtRow={
         financed ? (
           <DataRow
@@ -254,7 +255,9 @@ export function NewPropertyScreen() {
           <DataRow label="Saldo devedor" value="— · quitado" />
         )
       }
-    />
+    >
+      {notes}
+    </PropertyPreview>
   );
   const note = (
     <InfoNote icon="info" size={13} className="rounded-14 px-3.5 py-3">
@@ -318,10 +321,7 @@ export function NewPropertyScreen() {
               </Grid>
             ) : null}
           </SectionCard>
-          <ResponsiveGrid columns={{ tablet: 2 }} gap={16} stretch={false}>
-            {preview}
-            {note}
-          </ResponsiveGrid>
+          {preview(note)}
         </>
       ) : (
         <>
@@ -334,7 +334,7 @@ export function NewPropertyScreen() {
           {financedField}
           {balanceField}
           {bankField}
-          {preview}
+          {preview()}
           {note}
         </>
       )}

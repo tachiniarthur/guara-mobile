@@ -10,3 +10,4 @@ export * from './NewVehicleScreen';
 export * from './PositionsScreen';
 export * from './PropertiesScreen';
 export * from './PropertyDetailScreen';
+export * from './ResolveDuplicateScreen';

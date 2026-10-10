@@ -8,8 +8,10 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 
 import { EmptyState, ErrorState } from '@/components/feedback';
 import { PageHeader, TopBar } from '@/components/layout';
-import { Button, IconButton, InfoNote, Text } from '@/components/ui';
+import { Button, InfoNote, Text } from '@/components/ui';
 import { routeTo } from '@/constants/routes';
+// Straight to the file: the Relatórios index imports Gastos back.
+import { ExportMenu } from '@/features/reports/components/ExportMenu';
 import { useBreakpoint } from '@/hooks/useBreakpoint';
 import { ChatFab } from '@/navigation';
 
@@ -70,7 +72,6 @@ export function TransactionsScreen() {
   const visibleDays = days.slice(0, pages * DAYS_PER_PAGE);
   const monthSummary = ledger.summaryFor('all');
   const subtitle = `${orEmpty(monthSummary?.count)} lançamentos em ${monthWord(filters.month)} · ${BANKS_TEXT}`;
-  const exportReport = () => router.navigate('/export-report');
   const padding = isTablet ? 28 : 16;
 
   const header = isTablet ? (
@@ -78,17 +79,7 @@ export function TransactionsScreen() {
       title="Todos os lançamentos"
       subtitle={subtitle}
       breadcrumb={{ parents: [{ label: 'Gastos', href: '/spending' }], current: 'Lançamentos' }}
-      actions={
-        <Button
-          variant="secondary"
-          size="md"
-          leftIcon="download"
-          className="h-10 px-4.5"
-          onPress={exportReport}
-        >
-          Exportar
-        </Button>
-      }
+      actions={<ExportMenu variant="button" />}
     />
   ) : null;
 
@@ -215,13 +206,7 @@ export function TransactionsScreen() {
           <TopBar
             title="Lançamentos"
             fallbackHref="/spending"
-            actions={
-              <IconButton
-                icon="download"
-                accessibilityLabel="Exportar lançamentos"
-                onPress={exportReport}
-              />
-            }
+            actions={<ExportMenu variant="icon" accessibilityLabel="Exportar lançamentos" />}
           />
         )}
         {content}

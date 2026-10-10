@@ -5,6 +5,8 @@ import { View } from 'react-native';
 import { Button } from '@/components/ui/Button';
 import type { IconName } from '@/components/ui/Icon';
 import { useBreakpoint } from '@/hooks/useBreakpoint';
+import { cn } from '@/lib/cn';
+import { ChatFab } from '@/navigation/ChatFab';
 
 import { type Crumb } from './Breadcrumb';
 import { PageHeader } from './PageHeader';
@@ -26,6 +28,8 @@ export interface FormScreenProps {
   submit: { label: string; icon?: IconName; onPress: () => void; disabled?: boolean };
   /** Phone content classes (default: 22 gap). */
   contentClassName?: string;
+  /** "Chat em qualquer tela": the chat button (off in the bank connection flow). */
+  chat?: boolean;
   children: ReactNode;
 }
 
@@ -41,6 +45,7 @@ export function FormScreen({
   fallbackHref,
   submit,
   contentClassName = 'gap-5.5 pt-2',
+  chat = true,
   children,
 }: FormScreenProps) {
   const router = useRouter();
@@ -62,26 +67,32 @@ export function FormScreen({
 
   if (isTablet) {
     return (
-      <Screen>
-        <PageHeader title={tabletTitle ?? title} breadcrumb={{ parents, current }} />
-        {children}
-        <View className="flex-row justify-end gap-2.5">
-          <Button variant="secondary" size="md" className="px-4.5" onPress={close}>
-            Cancelar
-          </Button>
-          {submitButton}
-        </View>
-      </Screen>
+      <View className="flex-1">
+        <Screen contentClassName={chat ? 'pb-28' : undefined}>
+          <PageHeader title={tabletTitle ?? title} breadcrumb={{ parents, current }} />
+          {children}
+          <View className="flex-row justify-end gap-2.5">
+            <Button variant="secondary" size="md" className="px-4.5" onPress={close}>
+              Cancelar
+            </Button>
+            {submitButton}
+          </View>
+        </Screen>
+        {chat ? <ChatFab /> : null}
+      </View>
     );
   }
 
   return (
-    <Screen
-      header={<TopBar title={title} leading="close" onLeadingPress={close} />}
-      footer={<StickyFooter>{submitButton}</StickyFooter>}
-      contentClassName={contentClassName}
-    >
-      {children}
-    </Screen>
+    <View className="flex-1">
+      <Screen
+        header={<TopBar title={title} leading="close" onLeadingPress={close} />}
+        footer={<StickyFooter>{submitButton}</StickyFooter>}
+        contentClassName={cn(contentClassName, chat && 'pb-20')}
+      >
+        {children}
+      </Screen>
+      {chat ? <ChatFab /> : null}
+    </View>
   );
 }

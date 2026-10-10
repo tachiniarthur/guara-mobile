@@ -4,6 +4,8 @@ import { View } from 'react-native';
 import { EmptyState, toast } from '@/components/feedback';
 import { PageHeader, Screen, StickyFooter, TopBar } from '@/components/layout';
 import { useBreakpoint } from '@/hooks/useBreakpoint';
+// Straight to the file: the navigation index imports this feature (account menu).
+import { ChatFab } from '@/navigation/ChatFab';
 
 import { BankAppSheet, MalvoActions, MalvoBody } from '../components';
 import { useMalvoFlow, type MalvoMode } from '../hooks/useMalvoFlow';
@@ -48,7 +50,23 @@ export function MalvoScreen() {
       }}
     />
   );
-  const body = <MalvoBody flow={{ ...flow, bank }} connections={connections} onSupport={support} />;
+  const duplicateId = flow.findings?.duplicateId;
+  const body = (
+    <MalvoBody
+      flow={{ ...flow, bank }}
+      connections={connections}
+      onSupport={support}
+      onResolveDuplicate={
+        duplicateId
+          ? () =>
+              router.replace({
+                pathname: '/resolve-duplicate/[duplicateId]',
+                params: { duplicateId },
+              })
+          : undefined
+      }
+    />
+  );
 
   if (isTablet) {
     return (
@@ -70,6 +88,7 @@ export function MalvoScreen() {
           </View>
         </Screen>
         <BankAppSheet flow={flow} />
+        {mode === 'renew' ? <ChatFab /> : null}
       </View>
     );
   }
@@ -85,6 +104,7 @@ export function MalvoScreen() {
         {body}
       </Screen>
       <BankAppSheet flow={flow} />
+      {mode === 'renew' ? <ChatFab /> : null}
     </View>
   );
 }

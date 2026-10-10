@@ -20,6 +20,10 @@ export const conversationHref = (
   params: { conversationId, ...(ask ? { ask } : {}), ...(assistant ? { assistant } : {}) },
 });
 
+/** The chat pages (history and full-screen conversation), not the chat opened over a page. */
+export const isChatPath = (pathname: string) =>
+  pathname === '/chat' || pathname.startsWith('/chat/');
+
 export type TabKey = 'home' | 'spending' | 'chat' | 'investments' | 'assistants';
 
 export interface Destination<K extends string> {
@@ -42,7 +46,7 @@ export const TAB_DESTINATIONS: Destination<TabKey>[] = [
 export function activeTab(pathname: string): TabKey | null {
   if (pathname === '/') return 'home';
   if (pathname.startsWith('/spending')) return 'spending';
-  if (pathname.startsWith('/chat')) return 'chat';
+  if (isChatPath(pathname)) return 'chat';
   if (pathname.startsWith('/investments')) return 'investments';
   if (pathname.startsWith('/assistants')) return 'assistants';
   return null;

@@ -1,7 +1,7 @@
 # Design oficial do Guará
 
 Cópia do artefato de design ("Guará · Design do app",
-<https://claude.ai/artifact/JQTwTAjHXMBuJZeTCvBZcc>, versão `1791220150-f1a1`). É a **fonte da
+<https://claude.ai/artifact/JQTwTAjHXMBuJZeTCvBZcc>, versão `1791581958-5fb1`). É a **fonte da
 verdade visual** do app: espaçamentos, tamanhos, textos, estados e comportamento.
 
 ```
@@ -85,10 +85,13 @@ ilustradas saíram do app.
 **Formatos** — mesmas funções nos três; muda o arranjo, nunca a função.
 
 - Celular (393): barra superior 60, barra inferior 84 (Conversar amarelo no centro), margem 16 e 16
-  entre cards; formulários com fechar no topo e ação fixa embaixo; tabelas viram cartões.
+  entre cards; formulários com fechar no topo e ação fixa embaixo; tabelas viram cartões. Telas sem
+  barra têm o botão redondo de chat (56) no canto.
 - Tablet (820 / 1180 no Relatório): trilho de 88 (logo, 7 destinos, a turma e o avatar), margem 28 e
-  20 entre cards, Conversar flutuante; formulários com trilha, título, card e ações à direita;
-  onboarding com topo de mata e card de 600.
+  20 entre cards, Conversar flutuante em todas as páginas; formulários com trilha, título, card e
+  ações à direita; onboarding com topo de mata e card de 600.
+- **Chat em qualquer tela:** abre por cima da página (folha de baixo no celular, painel de 440 à
+  direita no tablet), com "Abrir em tela cheia"; na tela cheia, "Sair da tela cheia" volta ao painel.
 
 **Composição** — cards da mesma linha com a mesma altura; nada de card grande com pouca informação;
 barras e textos alinhados em colunas; valores em R$ 1.234,56, datas brasileiras e variação com sinal
@@ -144,6 +147,9 @@ implementada.
 | `Assistentes`                                                                                       | M        | `/assistants`                                                                         |
 | `Conversa`, `Conversas` (D), `Historico-Conversas`, `Escolher-Agente`                               | M T D    | `/chat`, `/chat/[conversationId]`                                                     |
 | `Conversa-Menu`, `-Apagar`, `-Anexar`, `-Anexo-Previa`, `-Gravando`, `-Transcrevendo`               | M T      | estados de `/chat/[conversationId]`                                                   |
+| `Chat-Painel` · chat aberto sobre a tela                                                            | M T      | `/chat-panel` (tablet largo: painel fixo do `(app)/_layout`)                          |
+| `Conversa-Limite` · limite de perguntas do plano                                                    | M T      | estado do campo do chat (`/chat/[conversationId]`, `/chat-panel`)                     |
+| `Notificacoes`                                                                                      | M T      | `/notifications`                                                                      |
 | `Gastos`                                                                                            | M T D    | `/spending`                                                                           |
 | `Lancamentos` · todos os lançamentos                                                                | M T      | `/spending/transactions`                                                              |
 | `Lancamentos-Categoria` · lançamentos de uma categoria                                              | M T      | `/spending/category/[categoryId]`                                                     |
@@ -152,6 +158,7 @@ implementada.
 | `Assinaturas`                                                                                       | M T D    | `/spending/subscriptions`                                                             |
 | `Relatorio` (T em paisagem)                                                                         | M T D    | `/reports`                                                                            |
 | `Relatorio-Linha-do-Tempo`                                                                          | M T      | `/reports/timeline`                                                                   |
+| `Relatorio-Exportar`, `Relatorio-Exportado`                                                         | M T      | folha "Exportar" de `/reports` (também em Lançamentos e na Linha do tempo)            |
 | `Alertas`                                                                                           | M T D    | `/alerts`                                                                             |
 | `Novo-Teto`                                                                                         | M T D    | `/new-budget` (modal)                                                                 |
 | `Novo-Alerta-Preco`                                                                                 | M T D    | `/new-price-alert` (modal)                                                            |
@@ -160,6 +167,7 @@ implementada.
 | `Ativo-Comparar`, `-Comparar-Ibovespa`, `-Preco-Sem-Ajuste`, `-Mais-Detalhes`, `-Eventos`, `-Risco` | M T      | estados de `/investments/asset/[ticker]`; `/details`, `/events`                       |
 | `Adicionar-Investimento`                                                                            | M T D    | `/new-manual-asset` (modal)                                                           |
 | `Posicoes`, `Posicoes-Estados`                                                                      | M T      | `/investments/positions`                                                              |
+| `Investimentos-Duplicidade` · somar, separar ou excluir                                             | M T      | `/resolve-duplicate/[duplicateId]`                                                    |
 | `Simulador`, `Simulador-Objetivo`, `Simulador-Corte`                                                | M T D    | `/investments/simulator/retirement`, `/goal`, `/cut-expense`                          |
 | `Simulacoes`, `Simulacoes-Estados`                                                                  | M T      | `/investments/simulator/saved`                                                        |
 | `Metas`, `Meta-Detalhe`, `Meta-Nova`, `Metas-Estados`                                               | M T      | `/goals`, `/goals/[goalId]`, `/new-goal` (`?from=simulation`, `?goalId=` para editar) |
@@ -168,6 +176,8 @@ implementada.
 | `Editar-Perfil`, `Editar-Perfil-Email`                                                              | M T      | `/account/profile`                                                                    |
 | `Perfil-Refazer`, `Perfil-Refazer-Resultado`                                                        | M T      | `/account/investor-profile`                                                           |
 | `Planos`                                                                                            | M T      | `/account/plan`                                                                       |
+| `Banco-Desconectar`                                                                                 | M T      | folha "Desconectar" de `/account`                                                     |
+| `Excluir-Conta` · LGPD                                                                              | M T      | `/account/delete`                                                                     |
 | `Malvo-Renovar` · renovar autorização do banco                                                      | M T      | `/malvo/[bankId]?mode=renew`                                                          |
 | `Inicio-Novo`, `Gastos-Novo`, `Investimentos-Novo` · usuário sem banco                              | M T      | `/`, `/spending`, `/investments` sem banco conectado (ou carteira vazia)              |
 

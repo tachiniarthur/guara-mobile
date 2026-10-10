@@ -98,6 +98,8 @@ export const ICON_PATHS = {
     'M12 3v4M12 17v4M3 12h4M17 12h4M6 6l2.5 2.5M15.5 15.5 18 18M6 18l2.5-2.5M15.5 8.5 18 6',
   ],
   pause: ['M8 5v14M16 5v14'],
+  maximize: ['M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7'],
+  minimize: ['M4 14h6v6M20 10h-6V4M14 10l7-7M3 21l7-7'],
   flag: ['M5 21V4M5 4h11l-2 4 2 4H5'],
   target: ['M12 21a9 9 0 1 0 0-18 9 9 0 0 0 0 18zM12 16a4 4 0 1 0 0-8 4 4 0 0 0 0 8zM12 12h.01'],
   scissors: [

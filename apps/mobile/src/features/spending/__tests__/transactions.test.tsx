@@ -92,7 +92,7 @@ describe('Todos os lançamentos', () => {
     render(<TransactionsScreen />);
     expect(screen.getByRole('header', { name: 'Todos os lançamentos' })).toBeOnTheScreen();
     fireEvent.press(screen.getByRole('button', { name: 'Exportar' }));
-    expect(mockNavigate).toHaveBeenCalledWith('/export-report');
+    expect(screen.getByRole('button', { name: 'Gerar arquivo' })).toBeOnTheScreen();
     expect(screen.getByLabelText('Buscar lançamento')).toBeOnTheScreen();
   });
 });

@@ -4,6 +4,8 @@ import { View } from 'react-native';
 import { Text } from '@/components/ui/Text';
 import { cn } from '@/lib/cn';
 
+import { GridCellReset, useFillsGridCell } from './ResponsiveGrid';
+
 export interface SectionCardProps {
   title?: string;
   /** Caption under the title ("Gasto acumulado dia a dia"). */
@@ -17,14 +19,14 @@ export interface SectionCardProps {
   /** Title size (design: 17 on list pages, 18 or 20). */
   titleSize?: 17 | 18 | 19 | 20;
   /** Padding in dp (design: 16, 18, 20 or 24). */
-  padding?: 16 | 18 | 20 | 24;
+  padding?: 16 | 18 | 20 | 22 | 24;
   /** Gap between blocks (design: 4–20). */
   gap?: number;
   children: ReactNode;
   className?: string;
 }
 
-const PADDING = { 16: 'p-4', 18: 'p-4.5', 20: 'p-5', 24: 'p-6' } as const;
+const PADDING = { 16: 'p-4', 18: 'p-4.5', 20: 'p-5', 22: 'p-[22px]', 24: 'p-6' } as const;
 
 /** Card of a page section: Fraunces title + caption, optional action, then the content. */
 export function SectionCard({
@@ -39,11 +41,13 @@ export function SectionCard({
   children,
   className,
 }: SectionCardProps) {
+  const fill = useFillsGridCell();
   return (
     <View
       style={{ gap }}
       className={cn(
         'min-w-0 rounded-24 border border-border bg-surface',
+        fill && 'flex-grow',
         PADDING[padding],
         className,
       )}
@@ -73,7 +77,7 @@ export function SectionCard({
           {action}
         </View>
       ) : null}
-      {children}
+      <GridCellReset>{children}</GridCellReset>
     </View>
   );
 }

@@ -7,13 +7,14 @@ import { Pressable, ScrollView, View } from 'react-native';
 
 import { EmptyState } from '@/components/feedback';
 import { PageHeader, Screen, TopBar } from '@/components/layout';
-import { Badge, Button, Chip, IconButton, MoneyText, Span, Text } from '@/components/ui';
+import { Badge, Button, Chip, MoneyText, Span, Text } from '@/components/ui';
 import { routeTo } from '@/constants/routes';
 import { displayName, rowDetail, useLedger } from '@/features/spending';
 import { useBreakpoint } from '@/hooks/useBreakpoint';
 import { cn } from '@/lib/cn';
 import { ChatFab } from '@/navigation';
 
+import { ExportMenu } from '../components';
 import { PERIODS, type ReportPeriod } from '../data';
 import {
   TIMELINE_FILTERS,
@@ -280,13 +281,7 @@ export function ReportTimelineScreen() {
               title="Linha do tempo"
               subtitle={subtitle}
               fallbackHref="/reports"
-              actions={
-                <IconButton
-                  icon="download"
-                  accessibilityLabel="Exportar"
-                  onPress={() => router.navigate('/export-report')}
-                />
-              }
+              actions={<ExportMenu variant="icon" accessibilityLabel="Exportar" />}
             />
           )
         }
@@ -300,17 +295,7 @@ export function ReportTimelineScreen() {
               parents: [{ label: 'Relatórios', href: '/reports' }],
               current: 'Linha do tempo',
             }}
-            actions={
-              <Button
-                variant="secondary"
-                size="md"
-                leftIcon="download"
-                className="h-10 px-4.5"
-                onPress={() => router.navigate('/export-report')}
-              >
-                Exportar
-              </Button>
-            }
+            actions={<ExportMenu variant="button" />}
           />
         ) : null}
         {periodChips}

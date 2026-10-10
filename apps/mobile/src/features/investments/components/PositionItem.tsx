@@ -10,6 +10,8 @@ import type { Position } from '../data';
 import { changeText, shareText } from '../lib/positions';
 
 import { RiskPill } from './RiskPill';
+import { useFillsGridCell } from '@/components/layout';
+import { cn } from '@/lib/cn';
 
 const ORIGIN_ICON = { openFinance: 'link', manual: 'user', chat: 'message' } as const;
 
@@ -38,9 +40,16 @@ export function PositionItem({
   const [open, setOpen] = useState(defaultOpen);
   const up = position.change >= 0;
   const changeLabel = changeText(position.change);
+  // Beside another position on tablets: both end at the same height.
+  const fill = useFillsGridCell();
 
   return (
-    <View className="overflow-hidden rounded-18 border border-border bg-surface-input">
+    <View
+      className={cn(
+        'overflow-hidden rounded-18 border border-border bg-surface-input',
+        fill && 'flex-grow',
+      )}
+    >
       <Pressable
         accessibilityRole="button"
         accessibilityState={{ expanded: open }}

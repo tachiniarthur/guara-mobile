@@ -2,6 +2,7 @@ import type { Cents, YearMonth } from '@guara/types';
 import { create } from 'zustand';
 
 import type { RiskLevel } from '../data';
+import type { DuplicateChoice } from '../duplicate-data';
 import { PROPERTIES, type Financing, type Property } from '../property-data';
 
 interface InvestmentsState {
@@ -21,6 +22,9 @@ interface InvestmentsState {
   /** New debt balance ("Atualizar saldo"); `null` marks the asset as paid off. */
   setFinancing: (id: string, financing: Financing | null) => void;
   removeProperty: (id: string) => void;
+  /** Decisions on duplicated investments, by duplicate id (`duplicates.resolve`). */
+  resolvedDuplicates: Record<string, DuplicateChoice>;
+  resolveDuplicate: (id: string, choice: DuplicateChoice) => void;
   reset: () => void;
 }
 
@@ -39,6 +43,11 @@ export const useInvestmentsStore = create<InvestmentsState>()((set) => ({
       return { riskOverrides: next };
     }),
   properties: PROPERTIES,
+  resolvedDuplicates: {},
+  resolveDuplicate: (id, choice) =>
+    set(({ resolvedDuplicates }) => ({
+      resolvedDuplicates: { ...resolvedDuplicates, [id]: choice },
+    })),
   addProperty: (property) => {
     const id = `property-${Date.now()}`;
     set(({ properties }) => ({ properties: [...properties, { ...property, id } as Property] }));
@@ -68,5 +77,5 @@ export const useInvestmentsStore = create<InvestmentsState>()((set) => ({
     })),
   removeProperty: (id) =>
     set(({ properties }) => ({ properties: properties.filter((item) => item.id !== id) })),
-  reset: () => set({ riskOverrides: {}, properties: PROPERTIES }),
+  reset: () => set({ riskOverrides: {}, properties: PROPERTIES, resolvedDuplicates: {} }),
 }));

@@ -8,7 +8,7 @@ import { Icon, IconButton, Text } from '@/components/ui';
 import { cn } from '@/lib/cn';
 import { conversationHref } from '@/navigation/destinations';
 
-import { ASSISTANTS } from '../assistants';
+import { assistantWith } from '../assistants';
 
 import { AssistantAvatar } from './AssistantAvatar';
 
@@ -30,7 +30,6 @@ export function AskAssistantCard({
 }: AskAssistantCardProps) {
   const router = useRouter();
   const [text, setText] = useState('');
-  const { name } = ASSISTANTS[assistant];
   const ask = (question?: string) =>
     router.navigate(conversationHref(undefined, { ask: question, assistant }));
   const send = () => {
@@ -49,7 +48,7 @@ export function AskAssistantCard({
       >
         <AssistantAvatar assistant={assistant} size={28} />
         <Text size={16} weight="bold" accessibilityRole="header">
-          Pergunte ao {name}
+          {`Pergunte ${assistantWith('a', assistant)}`}
         </Text>
         <Text size={13} tone="subtle" className="shrink">
           {subject}
@@ -60,7 +59,7 @@ export function AskAssistantCard({
           <Pressable
             key={question}
             accessibilityRole="link"
-            accessibilityHint={`Abre a conversa com ${name}`}
+            accessibilityHint={`Abre a conversa ${assistantWith('com', assistant)}`}
             onPress={() => ask(question)}
             className="min-h-11 flex-row items-center justify-between gap-3 border-b border-border py-3 active:opacity-80"
           >
@@ -79,7 +78,7 @@ export function AskAssistantCard({
           placeholderTextColor={colors.foreground.subtle}
           selectionColor={colors.brand.DEFAULT}
           cursorColor={colors.brand.DEFAULT}
-          accessibilityLabel={`Pergunta para ${name}`}
+          accessibilityLabel={`Pergunta ${assistantWith('a', assistant)}`}
           returnKeyType="send"
           onSubmitEditing={send}
           className="h-10 min-w-0 flex-1 text-foreground"

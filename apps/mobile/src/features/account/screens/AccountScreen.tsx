@@ -21,12 +21,13 @@ import {
 } from '@/components/ui';
 import { useBreakpoint } from '@/hooks/useBreakpoint';
 import { cn } from '@/lib/cn';
+import { ChatFab } from '@/navigation';
 import { usePlan, useUiPreferences, useUserStore, type TextSize } from '@/stores';
 
 import { useBankConnectionsStore, type BankConnection } from '@/features/bank-connections';
 import { PROFILE_LABELS, useInvestorProfileStore } from '@/features/investor-profile';
 
-import { BankConnectionCard } from '../components';
+import { BankConnectionCard, DisconnectBankSheet } from '../components';
 import { DEVICES, NOTICE_KINDS } from '../data';
 
 const TEXT_SIZES: { value: TextSize; label: string }[] = [
@@ -89,8 +90,7 @@ function TextLink({
   );
 }
 
-type Dialog =
-  { kind: 'disconnect'; bank: BankConnection } | { kind: 'signOutAll' } | { kind: 'delete' } | null;
+type Dialog = { kind: 'signOutAll' } | null;
 
 /** Meu perfil e configurações: profile, investor profile, banks, notices, appearance and security. */
 export function AccountScreen() {
@@ -102,6 +102,7 @@ export function AccountScreen() {
   const disconnect = useBankConnectionsStore((state) => state.disconnect);
   const [scopesOf, setScopesOf] = useState<BankConnection | null>(null);
   const [dialog, setDialog] = useState<Dialog>(null);
+  const [disconnecting, setDisconnecting] = useState<BankConnection | null>(null);
   const user = useUserStore();
   const plan = usePlan();
   const active = banks.filter((bank) => bank.status !== 'paused').length;
@@ -276,7 +277,7 @@ export function AccountScreen() {
         <TextLink
           label="Excluir conta"
           tone="negative"
-          onPress={() => setDialog({ kind: 'delete' })}
+          onPress={() => router.navigate('/account/delete')}
         />
       </View>
     </SettingsCard>
@@ -299,7 +300,7 @@ export function AccountScreen() {
         });
       }}
       onShowScopes={() => setScopesOf(bank)}
-      onDisconnect={() => setDialog({ kind: 'disconnect', bank })}
+      onDisconnect={() => setDisconnecting(bank)}
     />
   ));
   const addBank =
@@ -383,15 +384,7 @@ export function AccountScreen() {
   );
 
   const confirm = () => {
-    if (dialog?.kind === 'disconnect') {
-      const { bank } = dialog;
-      disconnect(bank.id);
-      toast.success(`${bank.name} desconectado`);
-    } else if (dialog?.kind === 'signOutAll') {
-      toast.success('Os outros aparelhos foram desconectados');
-    } else if (dialog?.kind === 'delete') {
-      toast.info('Enviamos um e-mail para confirmar a exclusão');
-    }
+    toast.success('Os outros aparelhos foram desconectados');
     setDialog(null);
   };
 
@@ -399,7 +392,7 @@ export function AccountScreen() {
     <>
       <Screen
         header={isTablet ? null : <TopBar title="Meu perfil" leading="back" fallbackHref="/" />}
-        contentClassName={isTablet ? 'gap-5 pb-28' : 'gap-4 pt-1'}
+        contentClassName={isTablet ? 'gap-5 pb-28' : 'gap-4 pb-28 pt-1'}
       >
         {isTablet ? (
           <>
@@ -428,6 +421,7 @@ export function AccountScreen() {
           </>
         )}
       </Screen>
+      <ChatFab />
       <Sheet
         open={scopesOf !== null}
         onClose={() => setScopesOf(null)}
@@ -444,29 +438,25 @@ export function AccountScreen() {
           Autorização válida até {scopesOf?.authorizedUntil}.
         </Text>
       </Sheet>
+      <DisconnectBankSheet
+        bank={disconnecting}
+        activeCount={active}
+        onClose={() => setDisconnecting(null)}
+        onConfirm={(bank, keepHistory) => {
+          disconnect(bank.id);
+          setDisconnecting(null);
+          toast.success(
+            keepHistory
+              ? `${bank.name} desconectado. O histórico continua no Guará.`
+              : `${bank.name} desconectado e histórico apagado.`,
+          );
+        }}
+      />
       <ConfirmDialog
         open={dialog !== null}
-        title={
-          dialog?.kind === 'disconnect'
-            ? `Desconectar o ${dialog.bank.name}?`
-            : dialog?.kind === 'signOutAll'
-              ? 'Sair de todos os aparelhos?'
-              : 'Excluir sua conta?'
-        }
-        message={
-          dialog?.kind === 'disconnect'
-            ? 'Gastos e saldo deste banco param de atualizar. Você pode conectar de novo quando quiser.'
-            : dialog?.kind === 'signOutAll'
-              ? 'Você continua conectado só neste aparelho.'
-              : 'Seus dados serão apagados e não dá para desfazer.'
-        }
-        confirmLabel={
-          dialog?.kind === 'delete'
-            ? 'Excluir conta'
-            : dialog?.kind === 'disconnect'
-              ? 'Desconectar'
-              : 'Sair'
-        }
+        title="Sair de todos os aparelhos?"
+        message="Você continua conectado só neste aparelho."
+        confirmLabel="Sair"
         destructive
         onConfirm={confirm}
         onCancel={() => setDialog(null)}

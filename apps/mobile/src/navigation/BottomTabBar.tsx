@@ -4,6 +4,7 @@ import { Pressable, View } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 import { Icon, Text } from '@/components/ui';
+import { useChatNavigation } from '@/features/chat/hooks/useChatNavigation';
 import { cn } from '@/lib/cn';
 import { haptics } from '@/lib/haptics';
 
@@ -14,6 +15,7 @@ export function BottomTabBar() {
   const pathname = usePathname();
   const router = useRouter();
   const insets = useSafeAreaInsets();
+  const chat = useChatNavigation();
   if (hidesTabBar(pathname)) return null;
 
   const current = activeTab(pathname);
@@ -38,7 +40,9 @@ export function BottomTabBar() {
             accessibilityState={{ selected }}
             onPress={() => {
               haptics.selection();
-              router.navigate(item.href);
+              // "Conversar" opens the chat over the current page.
+              if (isChat) chat.open();
+              else router.navigate(item.href);
             }}
             className="min-w-14 flex-1 items-center gap-1"
           >

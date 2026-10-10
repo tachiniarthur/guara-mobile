@@ -8,13 +8,14 @@ import { useBankConnectionsStore } from '../store';
 
 const mockBack = jest.fn();
 const mockNavigate = jest.fn();
+const mockReplace = jest.fn();
 let mockParams: Record<string, string> = {};
 
 jest.mock('expo-router', () => ({
   ...jest.requireActual('expo-router'),
   useRouter: () => ({
     back: mockBack,
-    replace: jest.fn(),
+    replace: mockReplace,
     navigate: mockNavigate,
     canGoBack: () => true,
   }),
@@ -90,6 +91,22 @@ describe('Conectar banco pelo Malvo', () => {
 
     fireEvent.press(screen.getByRole('button', { name: 'Continuar' }));
     expect(mockBack).toHaveBeenCalled();
+  });
+
+  it('offers to resolve the investment that came twice', () => {
+    act(() => useBankConnectionsStore.getState().disconnect('itau'));
+    mockParams = { bankId: 'itau' };
+    render(<MalvoScreen />);
+    fireEvent.press(screen.getByRole('button', { name: 'Continuar para o Itaú' }));
+    fireEvent.press(screen.getByRole('button', { name: 'Autorizar no Itaú' }));
+    finishImport();
+    expect(screen.getByRole('header', { name: 'Itaú conectado' })).toBeOnTheScreen();
+    fireEvent.press(screen.getByRole('link', { name: 'Resolver agora' }));
+    expect(mockReplace).toHaveBeenCalledWith({
+      pathname: '/resolve-duplicate/[duplicateId]',
+      params: { duplicateId: 'dup-selic' },
+    });
+    act(() => useBankConnectionsStore.getState().reset());
   });
 
   it('explains a canceled authorization and lets the user try again', () => {

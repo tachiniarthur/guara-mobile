@@ -2,6 +2,7 @@
 export * from './components';
 export type { BudgetWithMilestones, LedgerTransaction } from './data';
 export { useLedger } from './hooks/useLedger';
+export { categoryLabel } from './categories';
 export { rowDetail } from './lib/format';
 export { displayName, signedAmount } from './lib/ledger';
 export { useSpendingStore } from './store';

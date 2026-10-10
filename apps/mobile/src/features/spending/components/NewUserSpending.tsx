@@ -5,10 +5,9 @@ import { View } from 'react-native';
 
 import { EmptyState } from '@/components/feedback';
 import { MataButton } from '@/components/illustrations';
-import { ResponsiveGrid, SectionCard } from '@/components/layout';
+import { SectionCard } from '@/components/layout';
 import { Icon, Text, type IconName } from '@/components/ui';
 import { AssistantNote } from '@/features/chat';
-import { useBreakpoint } from '@/hooks/useBreakpoint';
 import { cn } from '@/lib/cn';
 
 const EXAMPLES: { label: string; caption: string; icon: IconName }[] = [
@@ -20,7 +19,6 @@ const EXAMPLES: { label: string; caption: string; icon: IconName }[] = [
 /** Gastos of a user without a connected bank: what will show up, with no invented values. */
 export function NewUserSpending() {
   const router = useRouter();
-  const { isTablet } = useBreakpoint();
 
   const intro = (
     <View className="rounded-24 border border-border bg-surface p-3">
@@ -79,17 +77,6 @@ export function NewUserSpending() {
     </SectionCard>
   );
 
-  if (isTablet) {
-    return (
-      <>
-        {intro}
-        <ResponsiveGrid columns={{ tablet: 2 }} gap={16} stretch={false}>
-          {example}
-          {tamandua}
-        </ResponsiveGrid>
-      </>
-    );
-  }
   return (
     <>
       {intro}

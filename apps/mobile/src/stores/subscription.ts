@@ -24,6 +24,8 @@ interface SubscriptionState {
   schedule: (planId: PlanId, keepBankId: string | null) => void;
   /** Keeps the current plan (undoes a scheduled change or cancellation). */
   keepPlan: () => void;
+  /** One more question to the assistants this month. */
+  countQuestion: () => void;
   reset: () => void;
 }
 
@@ -48,6 +50,7 @@ export const useSubscriptionStore = create<SubscriptionState>()((set) => ({
   setPlan: (planId, billing) => set({ planId, billing, scheduled: null }),
   schedule: (planId, keepBankId) => set({ scheduled: { planId, keepBankId } }),
   keepPlan: () => set({ scheduled: null }),
+  countQuestion: () => set(({ questionsUsed }) => ({ questionsUsed: questionsUsed + 1 })),
   reset: () => set(INITIAL),
 }));
 

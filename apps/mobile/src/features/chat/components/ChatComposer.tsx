@@ -12,7 +12,9 @@ import { transcribeAudio } from '@/lib/transcription';
 import { useVoiceRecorder } from '@/lib/voice';
 
 import type { ChatFile } from '../data';
+import { useQuestionLimit } from '../hooks/useQuestionLimit';
 
+import { ChatLimitNotice } from './ChatLimitNotice';
 import { AttachSheet, AttachmentChip, MAX_ATTACHMENT_BYTES } from './ComposerAttachments';
 
 export interface ChatComposerProps {
@@ -71,6 +73,10 @@ export function ChatComposer({
   const [recorded, setRecorded] = useState(0);
   const [controller, setController] = useState<AbortController | null>(null);
   const voice = useVoiceRecorder();
+  const limit = useQuestionLimit();
+  // "Entendi" hides the notice; trying to send again brings it back.
+  const [limitDismissed, setLimitDismissed] = useState(false);
+  const showLimit = limit.reached && !limitDismissed;
 
   // Each metering sample becomes a bar of the waveform.
   const levels = voice.levels.map(barHeight);
@@ -78,6 +84,10 @@ export function ChatComposer({
   const send = (value = text) => {
     const message = value.trim();
     if (!message && !attachment) return;
+    if (limit.reached) {
+      setLimitDismissed(false);
+      return;
+    }
     haptics.impact();
     onSend(message, attachment ?? undefined);
     setText('');
@@ -167,10 +177,11 @@ export function ChatComposer({
           ))}
         </ScrollView>
       ) : null}
-      {attachment && mode === 'idle' ? (
+      {showLimit ? <ChatLimitNotice onDismiss={() => setLimitDismissed(true)} /> : null}
+      {attachment && mode === 'idle' && !showLimit ? (
         <AttachmentChip file={attachment} onRemove={() => setAttachment(null)} />
       ) : null}
-      {mode === 'idle' ? (
+      {showLimit ? null : mode === 'idle' ? (
         <View className="min-h-14 flex-row items-center gap-0.5 rounded-full border border-border-strong bg-surface-input p-1.5">
           <IconButton
             icon="paperclip"

@@ -15,6 +15,7 @@ import {
 } from '@/components/ui';
 import { AssistantCard, HOME_TEAM, TEAM_CARDS } from '@/features/assistants';
 import { useBankConnectionsStore } from '@/features/bank-connections';
+import { bellLabel, useNotifications } from '@/features/notifications';
 import { useBreakpoint } from '@/hooks/useBreakpoint';
 import { AccountMenuButton, ChatFab } from '@/navigation';
 import { useUserStore } from '@/stores';
@@ -41,6 +42,7 @@ type MonthValue = (typeof MONTHS)[number]['value'];
 /** Início: summary of the month, what needs the user, the team and where the money went. */
 export function DashboardScreen() {
   const router = useRouter();
+  const { unread } = useNotifications();
   const { isTablet } = useBreakpoint();
   const [bankView, setBankView] = useState<BankView>('all');
   const [month, setMonth] = useState<MonthValue>('2026-09');
@@ -95,8 +97,8 @@ export function DashboardScreen() {
                 <>
                   <IconButton
                     icon="bell"
-                    accessibilityLabel="Notificações, 3 novas"
-                    onPress={() => router.navigate('/alerts')}
+                    accessibilityLabel={bellLabel(unread)}
+                    onPress={() => router.navigate('/notifications')}
                   />
                   <AccountMenuButton />
                 </>
@@ -120,8 +122,8 @@ export function DashboardScreen() {
                     icon="bell"
                     variant="outline"
                     size={48}
-                    accessibilityLabel="Notificações, 3 novas"
-                    onPress={() => router.navigate('/alerts')}
+                    accessibilityLabel={bellLabel(unread)}
+                    onPress={() => router.navigate('/notifications')}
                   />
                 </>
               )

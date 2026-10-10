@@ -77,9 +77,11 @@ const APP_ROUTES: RouteCase[] = [
   ['/new-property', 'Cadastrar imóvel', null],
   ['/new-vehicle', 'Cadastrar veículo', null],
   ['/new-goal', 'Nova meta', null],
-  ['/resolve-duplicate/dup-1', 'Lançamento duplicado', 'dup-1'],
+  ['/resolve-duplicate/dup-selic', 'Investimento duplicado', null],
   ['/edit-category/tx-1', 'Editar categoria', 'tx-1'],
-  ['/export-report', 'Exportar relatório', null],
+  ['/notifications', 'Notificações', null],
+  ['/account/delete', 'Excluir conta', null],
+  ['/chat-panel', 'Gastos de setembro', null],
 ];
 
 async function expectRoute(url: string, title: string, param: string | null) {

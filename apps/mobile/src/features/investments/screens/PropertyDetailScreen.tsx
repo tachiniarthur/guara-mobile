@@ -204,7 +204,7 @@ export function PropertyDetailScreen() {
         ) : null}
         {hero}
         {isTablet ? (
-          <ResponsiveGrid columns={{ tablet: 2 }} gap={16} stretch={false}>
+          <ResponsiveGrid columns={{ tablet: 2 }} gap={16}>
             {cards.filter(Boolean)}
           </ResponsiveGrid>
         ) : (

@@ -105,7 +105,8 @@ apps/mobile/
   src/navigation/      barra inferior (celular), trilho lateral (tablet), menu da conta, destinos
   src/dev/             ferramentas só de desenvolvimento (catálogo de UI em /ui)
   src/lib/             infraestrutura: env, runtime, supabase, auth-oauth, api (transporte), sse,
-                       query-client, storage, notifications, media, share, voice, transcription,
+                       query-client, storage, notifications, media, share (arquivos no cache +
+                       compartilhar), spreadsheet (.xlsx/CSV com fflate), voice, transcription,
                        logger, cn, haptics
   src/providers/       AppProviders, QueryProvider, AuthProvider, ThemeProvider
   src/hooks/ src/stores/ src/theme/ src/constants/ src/types/
@@ -144,14 +145,22 @@ packages/
 - **Sessão simulada:** `devSession.status` em `src/providers/AuthProvider.tsx`
   (`signedOut` → (auth), `onboarding` → (onboarding), `signedIn` → (app)).
 
-### Chat em tablets
+### Chat em qualquer tela
 
-- **Uma largura só:** toda coluna de chat (histórico ou conversa aberta) usa `ChatSideColumn`, com
-  `navigationSize.chatPanelWidth` (360 dp). Não crie painéis de chat com largura própria.
+- **Abrir:** sempre por `useChatNavigation()` (`open`, `openFullScreen`, `openHistory`,
+  `exitFullScreen`), nunca navegando direto para `/chat`. Celular: aba Conversar da barra e
+  `ChatFab` redondo nas telas sem barra (o `FormScreen` já põe; `chat={false}` desliga). Tablet:
+  `ChatFab` "Conversar" em todas as páginas.
+- **Celular e tablet em pé:** o chat abre por cima da página na rota `/chat-panel`
+  (`transparentModal`; folha de baixo no celular, painel de `chatOverlayWidth` 440 dp à direita no
+  tablet). "Abrir em tela cheia" usa `router.dismissTo` (um `navigate` empilharia outra barra de
+  abas); "Sair da tela cheia" volta para a página de origem (`origin` no store) com o painel aberto.
 - **Tablet largo** (`useChatDocked()`: janela ≥ `chatPanelMinWindow`, 1100 dp): o `ChatPanel`
   fica à direita de todas as páginas (`app/(app)/_layout.tsx`); o botão "Conversar" reabre o painel.
-  Nas rotas `/chat`, o histórico vira coluna fixa à esquerda da conversa.
-- **Tablet em pé e celular:** conversa e histórico abrem como página inteira.
+  Nas rotas `/chat`, o histórico vira coluna fixa à esquerda da conversa. Colunas fixas de chat
+  usam `ChatSideColumn` (`chatPanelWidth`, 360 dp).
+- **Limite do plano:** cada pergunta conta em `useSubscriptionStore`; no limite, o `ChatComposer`
+  troca o campo pelo aviso (`ChatLimitNotice`).
 - **Estado compartilhado:** mensagens, destinatário (@) e painel ficam em `useChatStore`
   (`src/features/chat/store.ts`). Uma página pode abrir o chat sobre si com `setContext` (ex.:
   Relatório com o Tamanduá) e deve limpar ao sair.
@@ -198,6 +207,12 @@ subtitle/body/lead/label/caption/micro`, ou `size`/`weight`/`serif` explícitos)
   simulado; em `renderHook` com o `createQueryClient()` real eles levam tempo de verdade.
 - **Raio + fundo dinâmico no Android:** um `View` que ganha `bg-*` depois de montado pode perder o
   `rounded-*` (cantos retos). Em pílulas que trocam de fundo, passe também `style={{ borderRadius }}`.
+- **Cards da mesma linha:** dentro de `ResponsiveGrid` (com `stretch`) o `SectionCard` cresce até a
+  altura da linha sozinho. Em colunas montadas à mão (`flex-row` com duas colunas), envolva o
+  último card com `FillColumn` para ele ocupar o resto da coluna.
+- **Ciclos de import:** features que a navegação importa (bank-connections, chat) importam o
+  `ChatFab` de `@/navigation/ChatFab`, não do índice. Relatórios e Gastos se usam mutuamente:
+  `useReportExport` importa módulos de Gastos direto e Lançamentos importa o `ExportMenu` do arquivo.
 - **Tabelas/linhas com conteúdo largo:** o Yoga deixa uma célula larga empurrar as vizinhas mesmo
   com `flex`. Use larguras fixas (como o `DataTable`) quando as colunas precisam alinhar.
 - **Worklets (Reanimated/Skia):** dentro de `useDerivedValue`/gestos, nada de `.map`/`.forEach` com

@@ -1,6 +1,8 @@
 import type { AssistantId } from '@guara/types';
 import { create } from 'zustand';
 
+import { useSubscriptionStore } from '@/stores';
+
 import {
   CONVERSATION,
   CONVERSATION_GROUPS,
@@ -48,6 +50,12 @@ interface ChatState {
   showHistory: () => void;
   showConversation: () => void;
   setContext: (context: ChatContext | null) => void;
+  /**
+   * Page under the chat when it was opened ("/spending"): "Sair da tela cheia" goes back to it
+   * with the chat open again.
+   */
+  origin: string | null;
+  setOrigin: (origin: string) => void;
 }
 
 const NEW_TITLE = 'Nova conversa';
@@ -67,7 +75,9 @@ export const useChatStore = create<ChatState>()((set) => ({
   currentId: CONVERSATION.id,
   title: CONVERSATION.title,
   groups: CONVERSATION_GROUPS,
-  send: (text, attachment) =>
+  send: (text, attachment) => {
+    // Each question counts toward the plan's monthly limit.
+    useSubscriptionStore.getState().countQuestion();
     set((state) => ({
       messages: [
         ...state.messages,
@@ -81,7 +91,8 @@ export const useChatStore = create<ChatState>()((set) => ({
       // Once the user writes, the page context gives way to the conversation.
       context: null,
       panelView: 'conversation',
-    })),
+    }));
+  },
   startNew: () =>
     set({
       messages: [],
@@ -122,4 +133,6 @@ export const useChatStore = create<ChatState>()((set) => ({
   showConversation: () => set({ panelView: 'conversation' }),
   setContext: (context) =>
     set(context ? { context, panelOpen: true, panelView: 'conversation' } : { context: null }),
+  origin: null,
+  setOrigin: (origin) => set({ origin }),
 }));

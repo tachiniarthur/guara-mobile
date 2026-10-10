@@ -21,6 +21,8 @@ export interface SheetProps {
   children: ReactNode;
   /** Fixed snap points (e.g. ['50%', '90%']). Default: sized to the content. */
   snapPoints?: (string | number)[];
+  /** Tablet dialog width (design: 460, 480 or 520). */
+  width?: 460 | 480 | 520;
 }
 
 function Backdrop(props: BottomSheetBackdropProps) {
@@ -39,7 +41,7 @@ function Backdrop(props: BottomSheetBackdropProps) {
  * Panel controlled by `open`. Phone: bottom sheet with a handle (requires
  * BottomSheetModalProvider). Tablet: centered dialog, like the Fundamentos.
  */
-export function Sheet({ open, onClose, title, children, snapPoints }: SheetProps) {
+export function Sheet({ open, onClose, title, children, snapPoints, width = 480 }: SheetProps) {
   const ref = useRef<BottomSheetModal>(null);
   /** Whether the modal is currently presented (avoids dismissing a closed modal). */
   const presented = useRef(false);
@@ -83,8 +85,9 @@ export function Sheet({ open, onClose, title, children, snapPoints }: SheetProps
           />
           <View
             accessibilityViewIsModal
-            className="max-h-[85%] w-full max-w-[480px] rounded-28 border border-border-strong bg-surface"
+            className="max-h-[85%] w-full rounded-28 border border-border-strong bg-surface"
             style={{
+              maxWidth: width,
               shadowColor: colors.shadow,
               shadowOpacity: 0.5,
               shadowRadius: 32,

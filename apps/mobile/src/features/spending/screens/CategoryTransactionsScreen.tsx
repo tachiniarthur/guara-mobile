@@ -7,7 +7,7 @@ import { View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
 import { EmptyState } from '@/components/feedback';
-import { PageHeader, TopBar } from '@/components/layout';
+import { FillColumn, PageHeader, TopBar } from '@/components/layout';
 import { Button, IconButton, SearchInput } from '@/components/ui';
 import { routeTo } from '@/constants/routes';
 import { AssistantNote } from '@/features/chat';
@@ -100,11 +100,11 @@ export function CategoryTransactionsScreen() {
           </Button>
         }
       />
-      <View className="flex-row items-start gap-4">
+      <View className="flex-row gap-4">
         <View className="min-w-0 flex-1">{summaryCard}</View>
         <View className="min-w-0 flex-1 gap-4">
           {note}
-          {where}
+          <FillColumn>{where}</FillColumn>
         </View>
       </View>
     </>

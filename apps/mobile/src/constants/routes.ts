@@ -36,7 +36,6 @@ export const ROUTES = {
     newProperty: '/new-property',
     newVehicle: '/new-vehicle',
     newGoal: '/new-goal',
-    exportReport: '/export-report',
   },
 } as const;
 

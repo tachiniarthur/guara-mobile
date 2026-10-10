@@ -6,7 +6,7 @@ import { useState, type ReactNode } from 'react';
 import { View } from 'react-native';
 
 import { EmptyState, toast } from '@/components/feedback';
-import { PageHeader, Screen, SectionCard, TopBar } from '@/components/layout';
+import { FillColumn, PageHeader, Screen, SectionCard, TopBar } from '@/components/layout';
 import {
   Badge,
   Button,
@@ -361,15 +361,15 @@ export function GoalDetailScreen() {
         breadcrumb={{ parents: [{ label: 'Suas metas', href: '/goals' }], current: goal.name }}
       />
       {hero}
-      <View className="flex-row items-start gap-4">
+      <View className="flex-row gap-4">
         <View className="min-w-0 flex-1 gap-4">
           {history}
-          {milestonesCard}
+          <FillColumn>{milestonesCard}</FillColumn>
         </View>
         <View className="min-w-0 flex-1 gap-4">
           {suggestion}
           {movementsCard}
-          {settings}
+          <FillColumn>{settings}</FillColumn>
         </View>
       </View>
     </>

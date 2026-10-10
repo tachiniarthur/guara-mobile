@@ -64,32 +64,30 @@ export type ReportSummary = z.infer<typeof ReportSummarySchema>;
 export const ExportFormatSchema = z.enum(['pdf', 'xlsx', 'csv']);
 export type ExportFormat = z.infer<typeof ExportFormatSchema>;
 
-/** `download`: file link in the app; `email`: sent to the user's address. */
-export const ExportDeliverySchema = z.enum(['download', 'email']);
-export type ExportDelivery = z.infer<typeof ExportDeliverySchema>;
-
 export const ExportStatusSchema = z.enum(['queued', 'processing', 'ready', 'sent', 'failed']);
 export type ExportStatus = z.infer<typeof ExportStatusSchema>;
 
+/** The file is always offered for download; `emailCopy` also sends it to the user's address. */
 export const CreateReportExportBodySchema = z.object({
   format: ExportFormatSchema,
   period: PeriodSchema,
-  delivery: ExportDeliverySchema,
+  emailCopy: z.boolean(),
 });
 export type CreateReportExportBody = z.infer<typeof CreateReportExportBodySchema>;
 
 export const ReportExportSchema = z.object({
   id: ReportExportIdSchema,
   format: ExportFormatSchema,
-  delivery: ExportDeliverySchema,
   range: DateRangeSchema,
   status: ExportStatusSchema,
   requestedAt: IsoDateTimeSchema,
   completedAt: IsoDateTimeSchema.nullable(),
-  /** Temporary link (`download` + `ready`). */
+  /** "guara-relatorio-setembro-2026.pdf". */
+  fileName: z.string().min(1),
+  /** Temporary link (once `ready`). */
   downloadUrl: z.url().nullable(),
   expiresAt: IsoDateTimeSchema.nullable(),
-  /** Destination for `email` deliveries. */
+  /** Where the copy was sent (`null` without `emailCopy`). */
   email: z.email().nullable(),
 });
 export type ReportExport = z.infer<typeof ReportExportSchema>;

@@ -135,6 +135,8 @@ export const colors = {
   },
   /** Backdrop behind sheets, dialogs and the account menu. */
   overlay: 'rgba(5, 9, 7, 0.72)',
+  /** Lighter backdrops behind the chat opened over a page (phone sheet / tablet panel). */
+  chatOverlay: { phone: 'rgba(5, 9, 7, 0.6)', tablet: 'rgba(5, 9, 7, 0.45)' },
   /** Dark scrims over photos (badges on the assistants' scenes). */
   scrim: {
     soft: 'rgba(0, 0, 0, 0.45)',

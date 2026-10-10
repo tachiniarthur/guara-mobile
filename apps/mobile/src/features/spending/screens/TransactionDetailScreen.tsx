@@ -6,7 +6,7 @@ import { useState, type ReactNode } from 'react';
 import { Pressable, Share, View } from 'react-native';
 
 import { EmptyState, toast } from '@/components/feedback';
-import { PageHeader, Screen, SectionCard, TopBar } from '@/components/layout';
+import { FillColumn, PageHeader, Screen, SectionCard, TopBar } from '@/components/layout';
 import {
   Badge,
   Button,
@@ -238,7 +238,12 @@ export function TransactionDetailScreen() {
   ) : null;
 
   const fields = (
-    <View className="rounded-24 border border-border bg-surface px-4.5 py-2">
+    <View
+      className={cn(
+        'rounded-24 border border-border bg-surface px-4.5 py-2',
+        isTablet && 'flex-grow',
+      )}
+    >
       {detailRows(tx, account).map((row) => (
         <View
           key={row.label}
@@ -373,15 +378,15 @@ export function TransactionDetailScreen() {
           actions={shareButton}
         />
         {hero}
-        <View className="flex-row items-start gap-4">
+        <View className="flex-row gap-4">
           <View className="min-w-0 flex-1 gap-4">
             {quero}
-            {fields}
             {budgetInfo}
+            {fields}
           </View>
           <View className="min-w-0 flex-1 gap-4">
             {categories}
-            {actions}
+            <FillColumn>{actions}</FillColumn>
           </View>
         </View>
       </>

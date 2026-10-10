@@ -6,6 +6,8 @@ import type { ImageSourcePropType } from 'react-native';
 export interface AssistantMeta {
   id: AssistantId;
   name: string;
+  /** Article of the name ("a Capivara", "o Pacu"). */
+  article: 'a' | 'o';
   scientificName: string;
   /** Area of the money it takes care of ("Gastos", "Investimentos"…). */
   area: string;
@@ -27,6 +29,7 @@ export const ASSISTANTS: Record<AssistantId, AssistantMeta> = {
   capivara: {
     id: 'capivara',
     name: 'Capivara',
+    article: 'a',
     scientificName: 'Hydrochoerus hydrochaeris',
     area: 'Coordenação',
     railLabel: 'Coordena a equipe',
@@ -39,6 +42,7 @@ export const ASSISTANTS: Record<AssistantId, AssistantMeta> = {
   tamandua: {
     id: 'tamandua',
     name: 'Tamanduá',
+    article: 'o',
     scientificName: 'Myrmecophaga tridactyla',
     area: 'Gastos',
     railLabel: 'Gastos',
@@ -51,6 +55,7 @@ export const ASSISTANTS: Record<AssistantId, AssistantMeta> = {
   pacu: {
     id: 'pacu',
     name: 'Pacu',
+    article: 'o',
     scientificName: 'Piaractus mesopotamicus',
     area: 'Investimentos',
     railLabel: 'Investimentos',
@@ -63,6 +68,7 @@ export const ASSISTANTS: Record<AssistantId, AssistantMeta> = {
   caramelo: {
     id: 'caramelo',
     name: 'Caramelo',
+    article: 'o',
     scientificName: 'Canis lupus familiaris',
     area: 'Alertas de preço',
     railLabel: 'Alertas de preço',
@@ -75,6 +81,7 @@ export const ASSISTANTS: Record<AssistantId, AssistantMeta> = {
   quero_quero: {
     id: 'quero_quero',
     name: 'Quero-quero',
+    article: 'o',
     scientificName: 'Vanellus chilensis',
     area: 'Fora do padrão',
     railLabel: 'Fora do padrão',
@@ -87,6 +94,7 @@ export const ASSISTANTS: Record<AssistantId, AssistantMeta> = {
   onca: {
     id: 'onca',
     name: 'Onça',
+    article: 'a',
     scientificName: 'Panthera onca',
     area: 'Metas',
     railLabel: 'Metas e objetivos',
@@ -117,3 +125,12 @@ export const ONBOARDING_ASSISTANT_ORDER: AssistantId[] = [
   'quero_quero',
   'onca',
 ];
+
+/** "com a Capivara", "ao Pacu", "à Onça": the name with its article after a preposition. */
+export function assistantWith(preposition: 'com' | 'a', id: AssistantId): string {
+  const { name, article } = ASSISTANTS[id];
+  if (preposition === 'a') return `${article === 'a' ? 'à' : 'ao'} ${name}`;
+  return `com ${article} ${name}`;
+}
+
+export const isAssistantId = (value: string): value is AssistantId => value in ASSISTANTS;

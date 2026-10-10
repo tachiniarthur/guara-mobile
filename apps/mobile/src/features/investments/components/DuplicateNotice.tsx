@@ -1,20 +1,31 @@
-import { useState } from 'react';
+import { formatDate } from '@guara/utils';
+import { useRouter } from 'expo-router';
 import { View } from 'react-native';
 
-import { toast } from '@/components/feedback';
 import { Button, Text } from '@/components/ui';
 import { useBreakpoint } from '@/hooks/useBreakpoint';
 
-/** "Possível duplicidade": the same asset came from Open Finance and from a manual entry. */
-export function DuplicateNotice() {
-  const { isTablet } = useBreakpoint();
-  const [open, setOpen] = useState(true);
-  if (!open) return null;
+import type { DuplicateChoice } from '../duplicate-data';
+import { usePositionDuplicates } from '../hooks/usePositionDuplicates';
 
-  const resolve = (message: string) => {
-    setOpen(false);
-    toast.success(message);
-  };
+/**
+ * "Possível duplicidade": the same asset came from Open Finance and from a manual entry. Each
+ * button opens "Investimento duplicado" with that choice selected (nothing changes until the
+ * user confirms there).
+ */
+export function DuplicateNotice() {
+  const router = useRouter();
+  const { isTablet } = useBreakpoint();
+  const { pending, find } = usePositionDuplicates();
+  const found = find(pending[0]?.id);
+  if (!found) return null;
+  const { duplicate, position } = found;
+
+  const open = (choice: DuplicateChoice) =>
+    router.navigate({
+      pathname: '/resolve-duplicate/[duplicateId]',
+      params: { duplicateId: duplicate.id, choice },
+    });
 
   const merge = (
     <Button
@@ -23,7 +34,7 @@ export function DuplicateNotice() {
       leftIcon="merge"
       fullWidth={!isTablet}
       className={isTablet ? 'h-10 px-4.5' : undefined}
-      onPress={() => resolve('Posições somadas')}
+      onPress={() => open('sum')}
     >
       Somar em uma posição
     </Button>
@@ -34,7 +45,7 @@ export function DuplicateNotice() {
       size="md"
       fullWidth={!isTablet}
       className={isTablet ? 'h-10 px-4.5' : 'flex-1'}
-      onPress={() => resolve('Posições mantidas separadas')}
+      onPress={() => open('keep_separate')}
     >
       Manter separados
     </Button>
@@ -45,7 +56,7 @@ export function DuplicateNotice() {
       size="md"
       fullWidth={!isTablet}
       className={isTablet ? 'h-10 px-4.5' : 'flex-1'}
-      onPress={() => resolve('Uma das posições foi excluída')}
+      onPress={() => open('delete_manual')}
     >
       Excluir um
     </Button>
@@ -61,8 +72,8 @@ export function DuplicateNotice() {
       </Text>
       <Text size={14} tone="muted">
         {isTablet
-          ? '“Tesouro Selic 2029” chegou pelo Itaú e também foi cadastrado por você em agosto. Como prefere tratar?'
-          : '“Tesouro Selic 2029” veio do Itaú e também está no seu cadastro manual.'}
+          ? `“${position.name}” chegou pelo ${duplicate.bank} e também foi cadastrado por você em ${formatDate(duplicate.manual.registeredOn, 'MMMM')}. Como prefere tratar?`
+          : `“${position.name}” veio do ${duplicate.bank} e também está no seu cadastro manual.`}
       </Text>
       {isTablet ? (
         <View className="flex-row flex-wrap gap-2">

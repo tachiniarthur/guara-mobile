@@ -3,7 +3,7 @@ import { EMPTY } from '@guara/utils';
 import { useRouter, type Href } from 'expo-router';
 import { Pressable, View } from 'react-native';
 
-import { MataButton, MataSurface } from '@/components/illustrations';
+import { MataSurface } from '@/components/illustrations';
 import { ResponsiveGrid, SectionCard } from '@/components/layout';
 import { Button, Icon, Text, type IconName } from '@/components/ui';
 import { AssistantNote } from '@/features/chat';
@@ -112,7 +112,7 @@ export function NewUserHome() {
   const balance = (
     <MataSurface
       veil={[0.85, 0.55, 0.1]}
-      className="gap-2 rounded-24 border border-border-strong bg-hero p-5"
+      className="gap-2.5 rounded-24 border border-border-strong bg-hero p-5"
     >
       <Text size={14} style={{ color: colors.hero.label }}>
         Saldo em 0 bancos
@@ -130,13 +130,14 @@ export function NewUserHome() {
       <Text size={14} leading={1.5} style={{ color: colors.hero.caption }}>
         Conecte um banco para ver saldo, entradas e saídas do mês.
       </Text>
-      <View className="mt-1 self-start">
-        <MataButton
-          label="Conectar banco"
-          size={44}
-          onPress={() => router.navigate('/connect-bank')}
-        />
-      </View>
+      <Button
+        size="lg"
+        fullWidth={!isTablet}
+        className="mt-1 h-12 px-4.5"
+        onPress={() => router.navigate('/connect-bank')}
+      >
+        Conectar banco
+      </Button>
     </MataSurface>
   );
 
@@ -214,7 +215,7 @@ export function NewUserHome() {
           {balance}
           {capivara}
         </ResponsiveGrid>
-        <ResponsiveGrid columns={{ tablet: 2 }} gap={16} stretch={false}>
+        <ResponsiveGrid columns={{ tablet: 2 }} gap={16}>
           {firstSteps}
           {afterConnect}
         </ResponsiveGrid>
