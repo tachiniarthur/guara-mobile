@@ -1,6 +1,6 @@
-import type { Cents } from '@guara/types';
-import { cents, formatCents, formatPercent } from '@guara/utils';
-import { useRouter } from 'expo-router';
+import type { Cents, NotificationChannel } from '@guara/types';
+import { cents, EMPTY, formatCents, formatDate, formatPercent } from '@guara/utils';
+import { useLocalSearchParams, useRouter } from 'expo-router';
 import { useState } from 'react';
 import { View } from 'react-native';
 
@@ -12,11 +12,25 @@ import { AssistantAvatar } from '@/features/chat';
 import { useBreakpoint } from '@/hooks/useBreakpoint';
 
 import { AlertKindOption } from '../components';
-import { ALERT_ASSET, SHORTCUTS } from '../data';
+import { QUOTES, SHORTCUTS } from '../data';
+import { distancePercent, formatPrice, niceTicks, tickLabel } from '../lib/price-alerts';
+import { usePriceAlertsStore } from '../store';
 
-const reais = (value: Cents) => formatCents(value, { wholeUnits: true });
 const thousands = (value: number) =>
   `${(value / 1000).toLocaleString('pt-BR', { maximumFractionDigits: 1 })} mil`;
+/** "R$ 650 mil" from R$ 1.000 up, otherwise the full price. */
+const short = (reais: number) =>
+  reais >= 1000 ? `R$ ${thousands(reais)}` : formatCents(Math.round(reais * 100));
+/** Chart dates every week ("25 ago", "1 set"…, "hoje"). */
+function weekLabels(start: string, count: number) {
+  const labels = [];
+  for (let index = 0; index < count - 1; index += 7) {
+    const date = new Date(`${start}T12:00:00Z`);
+    date.setUTCDate(date.getUTCDate() + index);
+    labels.push({ index, label: formatDate(date, 'd MMM').replace('.', '') });
+  }
+  return [...labels, { index: count - 1, label: 'hoje' }];
+}
 
 function Stat({
   label,
@@ -39,18 +53,37 @@ function Stat({
   );
 }
 
-/** Novo alerta de preço: asset, buy/sell, trigger value, shortcuts and channels. */
+/**
+ * Novo alerta de preço / Editar alerta: asset, buy/sell, trigger value, shortcuts and channels.
+ * A triggered alert is renewed here with another target.
+ */
 export function NewPriceAlertScreen() {
   const router = useRouter();
   const { isTablet } = useBreakpoint();
-  const [asset, setAsset] = useState<string>(ALERT_ASSET.name);
-  const [kind, setKind] = useState<'buy' | 'sell'>('sell');
-  const [trigger, setTrigger] = useState<Cents | null>(cents(65_000_000));
-  const [shortcut, setShortcut] = useState<number | null>(null);
-  const [push, setPush] = useState(true);
-  const [email, setEmail] = useState(true);
+  const params = useLocalSearchParams<{ alertId?: string; ticker?: string }>();
+  const editing = usePriceAlertsStore((state) =>
+    state.alerts.find((alert) => alert.id === params.alertId),
+  );
+  const { add, update } = usePriceAlertsStore();
+  const renewing = editing?.status === 'triggered';
+  const quote = QUOTES[editing?.ticker ?? params.ticker ?? 'BTC'] ?? QUOTES.BTC!;
+  const assetLabel = quote.name === quote.ticker ? quote.ticker : `${quote.name} (${quote.ticker})`;
+  const quoteLabel = `Cotação às ${formatDate(quote.quotedAt, 'HH:mm')}`;
 
-  const distance = trigger ? ((trigger - ALERT_ASSET.price) / ALERT_ASSET.price) * 100 : null;
+  const [asset, setAsset] = useState<string>(assetLabel);
+  const [kind, setKind] = useState<'buy' | 'sell'>(editing?.side ?? 'sell');
+  const [trigger, setTrigger] = useState<Cents | null>(
+    renewing ? null : (editing?.targetPrice ?? cents(65_000_000)),
+  );
+  const [shortcut, setShortcut] = useState<number | null>(null);
+  const [push, setPush] = useState(editing ? editing.channels.includes('push') : true);
+  const [email, setEmail] = useState(editing ? editing.channels.includes('email') : true);
+  const channels: NotificationChannel[] = [
+    ...(push ? (['push'] as const) : []),
+    ...(email ? (['email'] as const) : []),
+  ];
+
+  const distance = trigger ? distancePercent(quote.price, trigger) : null;
   const distanceLabel =
     distance === null
       ? undefined
@@ -60,14 +93,47 @@ export function NewPriceAlertScreen() {
   const applyShortcut = (percent: number) => {
     setShortcut(percent);
     const factor = kind === 'sell' ? 1 + percent / 100 : 1 - percent / 100;
-    setTrigger(cents(Math.round((ALERT_ASSET.price * factor) / 100) * 100));
+    // Round to whole reais from R$ 1.000 up, to cents below.
+    const step = quote.price >= 100_000 ? 100 : 1;
+    setTrigger(cents(Math.round((quote.price * factor) / step) * step));
   };
 
   const save = () => {
-    toast.success('Alerta de preço criado');
+    if (!trigger) return;
+    if (editing) {
+      update(editing.id, {
+        side: kind,
+        targetPrice: trigger,
+        channels,
+        ...(renewing
+          ? { status: 'active' as const, triggeredAt: null, triggeredPrice: null }
+          : null),
+      });
+      toast.success(renewing ? 'Alerta renovado' : 'Alerta atualizado');
+    } else {
+      add({
+        ticker: quote.ticker,
+        side: kind,
+        targetPrice: trigger,
+        status: 'active',
+        channels,
+        createdAt: new Date().toISOString(),
+        triggeredAt: null,
+        triggeredPrice: null,
+      });
+      toast.success('Alerta de preço criado');
+    }
     if (router.canGoBack()) router.back();
     else router.replace('/alerts');
   };
+
+  const history = quote.history;
+  const low = history ? Math.min(...history.values) : null;
+  const high = history ? Math.max(...history.values) : null;
+  const ticks =
+    history && low !== null && high !== null
+      ? niceTicks(Math.min(low, targetReais ?? low), Math.max(high, targetReais ?? high))
+      : [];
 
   const form = (
     <View className="gap-5.5">
@@ -77,7 +143,8 @@ export function NewPriceAlertScreen() {
         strong
         value={asset}
         onChangeText={setAsset}
-        helperText={`${ALERT_ASSET.quoteLabel}: ${reais(ALERT_ASSET.price)}`}
+        disabled={Boolean(editing)}
+        helperText={`${quoteLabel}: ${formatPrice(quote.price)}`}
       />
       <View className="gap-2">
         <Text variant="label" className="mb-1">
@@ -118,6 +185,11 @@ export function NewPriceAlertScreen() {
         </Text>
         <Checkbox checked={push} onChange={setPush} label="Notificação no celular" />
         <Checkbox checked={email} onChange={setEmail} label="E-mail" />
+        {channels.length ? null : (
+          <Text size={13} tone="negative" className="mt-1">
+            Escolha pelo menos um jeito de receber o aviso.
+          </Text>
+        )}
       </View>
     </View>
   );
@@ -132,39 +204,48 @@ export function NewPriceAlertScreen() {
           leading={1.25}
           accessibilityRole="header"
         >
-          {ALERT_ASSET.shortName} nos últimos 30 dias
+          {quote.name} nos últimos 30 dias
         </Text>
         <Text size={14} tone="muted">
-          {ALERT_ASSET.quoteLabel}
+          {quoteLabel}
         </Text>
       </View>
-      <PriceLineChart
-        values={ALERT_ASSET.history}
-        minValue={550000}
-        maxValue={650000}
-        ticks={[
-          { value: 550000, label: '550 mil' },
-          { value: 600000, label: '600 mil' },
-        ]}
-        xLabels={ALERT_ASSET.xLabels}
-        target={
-          targetReais
-            ? {
-                value: targetReais,
-                label: `Alerta de ${kind === 'sell' ? 'venda' : 'compra'}: R$ ${thousands(targetReais)}`,
-                axisLabel: thousands(targetReais),
-                tone: kind === 'sell' ? 'negative' : 'positive',
-              }
-            : undefined
-        }
-        minLabel={`mín. ${thousands(Math.min(...ALERT_ASSET.history))}`}
-        describePoint={(index) => `R$ ${ALERT_ASSET.history[index]?.toLocaleString('pt-BR')}`}
-        accessibilityLabel={`Bitcoin nos últimos 30 dias: mínima de R$ 553,6 mil, máxima de R$ 624,2 mil, agora R$ 615,2 mil.${distanceLabel ? ` Alerta em ${distanceLabel}.` : ''}`}
-      />
+      {history && low !== null && high !== null ? (
+        <PriceLineChart
+          values={history.values}
+          minValue={ticks[0]!}
+          maxValue={ticks.at(-1)!}
+          ticks={ticks.slice(0, -1).map((value) => ({ value, label: tickLabel(value) }))}
+          xLabels={weekLabels(history.start, history.values.length)}
+          target={
+            targetReais
+              ? {
+                  value: targetReais,
+                  label: `Alerta de ${kind === 'sell' ? 'venda' : 'compra'}: ${short(targetReais)}`,
+                  axisLabel: targetReais >= 1000 ? thousands(targetReais) : short(targetReais),
+                  tone: kind === 'sell' ? 'negative' : 'positive',
+                }
+              : undefined
+          }
+          minLabel={`mín. ${low >= 1000 ? thousands(low) : short(low)}`}
+          describePoint={(index) => `R$ ${history.values[index]?.toLocaleString('pt-BR')}`}
+          accessibilityLabel={`${quote.name} nos últimos 30 dias: mínima de ${short(low)}, máxima de ${short(high)}, agora ${formatPrice(quote.price)}.${distanceLabel ? ` Alerta em ${distanceLabel}.` : ''}`}
+        />
+      ) : (
+        <Text size={14} tone="muted" leading={1.55}>
+          {`Ainda não temos o histórico de 30 dias de ${quote.name}.`}
+        </Text>
+      )}
       <ResponsiveGrid columns={{ phone: 2, tablet: 4 }} gap={12}>
-        <Stat label="Preço agora" value={reais(ALERT_ASSET.price)} />
-        <Stat label="Máxima em 30 dias" value={reais(ALERT_ASSET.high)} />
-        <Stat label="Mínima em 30 dias" value={reais(ALERT_ASSET.low)} />
+        <Stat label="Preço agora" value={formatPrice(quote.price)} />
+        <Stat
+          label="Máxima em 30 dias"
+          value={high === null ? EMPTY : formatPrice(cents(high * 100))}
+        />
+        <Stat
+          label="Mínima em 30 dias"
+          value={low === null ? EMPTY : formatPrice(cents(low * 100))}
+        />
         <Stat
           label="Falta para o alerta"
           value={
@@ -191,11 +272,15 @@ export function NewPriceAlertScreen() {
 
   return (
     <FormScreen
-      title="Novo alerta de preço"
+      title={editing ? (renewing ? 'Renovar alerta' : 'Editar alerta') : 'Novo alerta de preço'}
       parents={[{ label: 'Alertas', href: '/alerts' }]}
-      current="Novo alerta de preço"
+      current={editing ? quote.name : 'Novo alerta de preço'}
       fallbackHref="/alerts"
-      submit={{ label: 'Criar alerta', onPress: save, disabled: !trigger }}
+      submit={{
+        label: editing ? (renewing ? 'Renovar alerta' : 'Salvar alterações') : 'Criar alerta',
+        onPress: save,
+        disabled: !trigger || channels.length === 0,
+      }}
     >
       {isTablet ? (
         <SectionCard padding={24} gap={16}>

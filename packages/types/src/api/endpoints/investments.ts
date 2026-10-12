@@ -7,6 +7,7 @@ import {
   AssetSearchQuerySchema,
   CreateManualPositionBodySchema,
   CreatePriceAlertBodySchema,
+  UpdatePriceAlertBodySchema,
   CreateRealEstateBodySchema,
   CreateVehicleBodySchema,
   DuplicateIdSchema,
@@ -180,6 +181,14 @@ export const investmentEndpoints = defineEndpoints({
     path: '/v1/price-alerts',
     summary: 'Create a buy or sell price alert',
     body: CreatePriceAlertBodySchema,
+    response: PriceAlertSchema,
+  },
+  'priceAlerts.update': {
+    method: 'PATCH',
+    path: '/v1/price-alerts/:alertId',
+    summary: 'Edit, pause, resume or renew a price alert',
+    params: alertParams,
+    body: UpdatePriceAlertBodySchema,
     response: PriceAlertSchema,
   },
   'priceAlerts.cancel': {

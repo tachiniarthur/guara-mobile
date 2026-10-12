@@ -2,44 +2,6 @@ import type { AssistantId } from '@guara/types';
 
 /** Alertas as shown in the design (static until the API exists). */
 
-export interface PriceAlertSummary {
-  id: string;
-  asset: string;
-  side: 'buy' | 'sell';
-  /** "Quando subir a R$ 650.000 · agora R$ 615.200". */
-  condition: string;
-  /** How close the price is to the target (0–100). */
-  progress: number;
-  remaining: string;
-}
-
-export const PRICE_ALERTS: PriceAlertSummary[] = [
-  {
-    id: 'btc',
-    asset: 'Bitcoin',
-    side: 'sell',
-    condition: 'Quando subir a R$ 650.000 · agora R$ 615.200',
-    progress: 95,
-    remaining: 'Faltam 5,4%',
-  },
-  {
-    id: 'petr4',
-    asset: 'PETR4',
-    side: 'buy',
-    condition: 'Quando cair a R$ 34,00 · agora R$ 37,82',
-    progress: 78,
-    remaining: 'Faltam 10,1%',
-  },
-  {
-    id: 'ivvb11',
-    asset: 'IVVB11',
-    side: 'buy',
-    condition: 'Quando cair a R$ 330,00 · agora R$ 351,40',
-    progress: 88,
-    remaining: 'Faltam 6,1%',
-  },
-];
-
 export interface NoticeHistoryItem {
   id: string;
   assistant: AssistantId;

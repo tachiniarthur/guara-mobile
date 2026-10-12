@@ -53,5 +53,9 @@ export const routeTo = {
     params: { conversationId },
   }),
   budget: (budgetId: string): Href => ({ pathname: '/budgets/[budgetId]', params: { budgetId } }),
+  priceAlert: (alertId: string): Href => ({
+    pathname: '/price-alerts/[alertId]',
+    params: { alertId },
+  }),
   goal: (goalId: string): Href => ({ pathname: '/goals/[goalId]', params: { goalId } }),
 };

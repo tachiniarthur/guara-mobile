@@ -6,20 +6,24 @@ import { Button, Text } from '@/components/ui';
 import { routeTo } from '@/constants/routes';
 // Straight to the hook: the budgets index pulls in screens that open the chat.
 import { useBudgets } from '@/features/budgets/hooks/useBudgets';
+// Straight to the files: the price-alerts index pulls in screens that open the chat.
+import { PriceAlertRow } from '@/features/price-alerts/components/PriceAlertRow';
+import { usePriceAlerts } from '@/features/price-alerts/hooks/usePriceAlerts';
 import { MonthBudgetRow } from '@/features/spending';
 import { useBreakpoint } from '@/hooks/useBreakpoint';
 import { ChatFab } from '@/navigation';
 
-import { NoticeHistoryRow, PriceAlertRow } from '../components';
-import { NOTICE_HISTORY, PRICE_ALERTS } from '../data';
+import { NoticeHistoryRow } from '../components';
+import { NOTICE_HISTORY } from '../data';
 
 /** Alertas: spending caps, price alerts and the notices already sent. */
 export function AlertsScreen() {
   const router = useRouter();
   const { isTablet } = useBreakpoint();
   const { budgets } = useBudgets();
+  const { alerts } = usePriceAlerts();
   const newBudget = () => router.navigate('/new-budget');
-  const subtitle = `${budgets.length} ${budgets.length === 1 ? 'teto' : 'tetos'} e ${PRICE_ALERTS.length} ${PRICE_ALERTS.length === 1 ? 'alerta' : 'alertas'} de preço`;
+  const subtitle = `${budgets.length} ${budgets.length === 1 ? 'teto' : 'tetos'} e ${alerts.length} ${alerts.length === 1 ? 'alerta' : 'alertas'} de preço`;
   const newPriceAlert = () => router.navigate('/new-price-alert');
 
   const budgetsCard = (
@@ -57,6 +61,7 @@ export function AlertsScreen() {
     <SectionCard
       title="Alertas de preço"
       description="Aviso por notificação e e-mail"
+      onTitlePress={() => router.navigate('/price-alerts')}
       titleSize={isTablet ? 20 : 18}
       padding={isTablet ? 20 : 16}
       gap={4}
@@ -73,11 +78,22 @@ export function AlertsScreen() {
         </Button>
       }
     >
-      <View>
-        {PRICE_ALERTS.map((alert) => (
-          <PriceAlertRow key={alert.id} alert={alert} />
-        ))}
-      </View>
+      {alerts.length ? (
+        <View>
+          {alerts.map((alert, index) => (
+            <PriceAlertRow
+              key={alert.id}
+              alert={alert}
+              last={index === alerts.length - 1}
+              onPress={() => router.navigate(routeTo.priceAlert(alert.id))}
+            />
+          ))}
+        </View>
+      ) : (
+        <Text size={14} tone="muted" leading={1.55}>
+          Nenhum alerta de preço. Avisamos uma única vez quando o preço chegar ao valor escolhido.
+        </Text>
+      )}
     </SectionCard>
   );
 

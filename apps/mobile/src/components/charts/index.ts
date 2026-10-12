@@ -11,6 +11,7 @@ export * from './GroupedBarChart';
 export * from './CapBarChart';
 export * from './MonthCapChart';
 export * from './PriceLineChart';
+export * from './TargetLineChart';
 export * from './ReturnChart';
 export * from './TargetBarChart';
 export * from './BenchmarkChart';

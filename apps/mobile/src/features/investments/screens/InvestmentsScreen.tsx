@@ -4,7 +4,10 @@ import { Pressable, View } from 'react-native';
 
 import { PageHeader, ResponsiveGrid, Screen, SectionCard, TopBar } from '@/components/layout';
 import { Button, Icon, IconButton, LinkButton, Span, Text } from '@/components/ui';
-import { PRICE_ALERTS, PriceAlertRow } from '@/features/alerts';
+import { routeTo } from '@/constants/routes';
+// Straight to the files: the price-alerts index pulls in screens that open the chat.
+import { PriceAlertRow } from '@/features/price-alerts/components/PriceAlertRow';
+import { usePriceAlerts } from '@/features/price-alerts/hooks/usePriceAlerts';
 import { useBreakpoint } from '@/hooks/useBreakpoint';
 import { AccountMenuButton, ChatFab } from '@/navigation';
 
@@ -29,6 +32,7 @@ export function InvestmentsScreen() {
   const profile = useAllocation();
   // An empty portfolio shows where to start ("Investimentos · novo").
   const empty = usePositions().status === 'empty';
+  const { alerts } = usePriceAlerts();
 
   const alertsCard = (
     <SectionCard
@@ -46,8 +50,13 @@ export function InvestmentsScreen() {
       }
     >
       <View>
-        {PRICE_ALERTS.map((alert) => (
-          <PriceAlertRow key={alert.id} alert={alert} />
+        {alerts.map((alert, index) => (
+          <PriceAlertRow
+            key={alert.id}
+            alert={alert}
+            last={index === alerts.length - 1}
+            onPress={() => router.navigate(routeTo.priceAlert(alert.id))}
+          />
         ))}
       </View>
     </SectionCard>

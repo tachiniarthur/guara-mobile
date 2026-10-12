@@ -5,7 +5,7 @@ import { CategoryIdSchema } from './category';
 import { IsoDateTimeSchema, YearMonthSchema, timestamps } from './common';
 import { BudgetIdSchema } from './ids';
 import { NonNegativeCentsSchema, PositiveCentsSchema } from './money';
-import { NotificationChannelSchema } from './notification';
+import { NotificationChannelSchema, NotificationChannelsSchema } from './notification';
 import { PercentSchema } from './percent';
 
 /**
@@ -24,12 +24,7 @@ export const BudgetStatusSchema = z.enum(['ok', 'warning', 'exceeded']);
 export type BudgetStatus = z.infer<typeof BudgetStatusSchema>;
 
 /** Where the warnings go (at least one). */
-export const BudgetChannelsSchema = z
-  .array(NotificationChannelSchema)
-  .min(1)
-  .refine((values) => new Set(values).size === values.length, {
-    message: 'Channels must not repeat',
-  });
+export const BudgetChannelsSchema = NotificationChannelsSchema;
 
 /** A warning already sent this month (the cap itself included). */
 export const BudgetNoticeSchema = z.object({

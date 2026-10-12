@@ -6,6 +6,14 @@ import { NotificationIdSchema } from './ids';
 export const NotificationChannelSchema = z.enum(['push', 'email']);
 export type NotificationChannel = z.infer<typeof NotificationChannelSchema>;
 
+/** Where a warning goes: at least one channel, none repeated. */
+export const NotificationChannelsSchema = z
+  .array(NotificationChannelSchema)
+  .min(1)
+  .refine((values) => new Set(values).size === values.length, {
+    message: 'Channels must not repeat',
+  });
+
 export const NotificationTypeSchema = z.enum([
   'budget_warning',
   'budget_exceeded',
