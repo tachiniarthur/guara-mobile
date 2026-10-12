@@ -9,7 +9,7 @@
    "title": "Desktop · Adicionar investimento",
    "w": 2560,
    "x": 0,
-   "y": 52140
+   "y": 52370
   },
   "Escuro-Desktop-Agentes-Avisos.dc.html": {
    "h": 1440,
@@ -18,7 +18,7 @@
    "title": "Desktop · Assistentes e avisos",
    "w": 2560,
    "x": 0,
-   "y": 5640
+   "y": 18800
   },
   "Escuro-Desktop-Alertas.dc.html": {
    "h": 1440,
@@ -45,7 +45,7 @@
    "title": "Desktop · Detalhe do ativo (BOVA11)",
    "w": 2560,
    "x": 0,
-   "y": 39250
+   "y": 39480
   },
   "Escuro-Desktop-Ativo-Bitcoin.dc.html": {
    "h": 2120,
@@ -54,7 +54,7 @@
    "title": "Desktop · Detalhe do ativo (Bitcoin)",
    "w": 2560,
    "x": 0,
-   "y": 47960
+   "y": 48190
   },
   "Escuro-Desktop-Ativo-CDB.dc.html": {
    "h": 2160,
@@ -63,7 +63,7 @@
    "title": "Desktop · Detalhe do ativo (CDB 110% CDI)",
    "w": 2560,
    "x": 0,
-   "y": 35060
+   "y": 35290
   },
   "Escuro-Desktop-Ativo-HGLG11.dc.html": {
    "h": 2610,
@@ -72,7 +72,7 @@
    "title": "Desktop · Detalhe do ativo (HGLG11)",
    "w": 2560,
    "x": 0,
-   "y": 43420
+   "y": 43650
   },
   "Escuro-Desktop-Ativo-Tesouro-Selic.dc.html": {
    "h": 2160,
@@ -81,7 +81,7 @@
    "title": "Desktop · Detalhe do ativo (Tesouro Selic 2029)",
    "w": 2560,
    "x": 0,
-   "y": 30930
+   "y": 31160
   },
   "Escuro-Desktop-Ativo.dc.html": {
    "h": 2650,
@@ -90,7 +90,7 @@
    "title": "Desktop · Detalhe do ativo (PETR4)",
    "w": 2560,
    "x": 0,
-   "y": 26170
+   "y": 26400
   },
   "Escuro-Desktop-Boas-Vindas.dc.html": {
    "h": 1440,
@@ -108,7 +108,7 @@
    "title": "Desktop · Conectar bancos",
    "w": 2560,
    "x": 0,
-   "y": 1880
+   "y": 15040
   },
   "Escuro-Desktop-Conversas.dc.html": {
    "h": 1440,
@@ -144,7 +144,7 @@
    "title": "Desktop · Meu perfil e configurações",
    "w": 2560,
    "x": 0,
-   "y": 66850
+   "y": 67150
   },
   "Escuro-Desktop-Novo-Alerta-Preco.dc.html": {
    "h": 1440,
@@ -180,7 +180,7 @@
    "title": "Desktop · Perfil de investidor",
    "w": 2560,
    "x": 0,
-   "y": 3760
+   "y": 16920
   },
   "Escuro-Desktop-Relatorio.dc.html": {
    "h": 1680,
@@ -198,7 +198,7 @@
    "title": "Desktop · Simulador (Cortar um gasto)",
    "w": 2560,
    "x": 0,
-   "y": 62730
+   "y": 63030
   },
   "Escuro-Desktop-Simulador-Objetivo.dc.html": {
    "h": 1720,
@@ -207,7 +207,7 @@
    "title": "Desktop · Simulador (Juntar para um objetivo)",
    "w": 2560,
    "x": 0,
-   "y": 58590
+   "y": 58890
   },
   "Escuro-Desktop-Simulador.dc.html": {
    "h": 1860,
@@ -216,16 +216,16 @@
    "title": "Desktop · Simulador (Aposentadoria)",
    "w": 2560,
    "x": 0,
-   "y": 54210
+   "y": 54510
   },
   "Escuro-Mobile-Adicionar-Investimento.dc.html": {
-   "h": 1630,
+   "h": 1700,
    "is_interactive": true,
    "page": "escuro-app",
    "title": "Mobile · Adicionar investimento",
    "w": 393,
    "x": 3540,
-   "y": 52140
+   "y": 52370
   },
   "Escuro-Mobile-Agentes-Avisos.dc.html": {
    "h": 1350,
@@ -234,7 +234,7 @@
    "title": "Mobile · Assistentes e avisos",
    "w": 393,
    "x": 3540,
-   "y": 5640
+   "y": 18800
   },
   "Escuro-Mobile-Alertas.dc.html": {
    "h": 1540,
@@ -270,7 +270,7 @@
    "title": "Mobile · Detalhe do ativo (BOVA11)",
    "w": 393,
    "x": 3540,
-   "y": 39250
+   "y": 39480
   },
   "Escuro-Mobile-Ativo-Bitcoin.dc.html": {
    "h": 3740,
@@ -279,7 +279,7 @@
    "title": "Mobile · Detalhe do ativo (Bitcoin)",
    "w": 393,
    "x": 3540,
-   "y": 47960
+   "y": 48190
   },
   "Escuro-Mobile-Ativo-CDB.dc.html": {
    "h": 3750,
@@ -288,7 +288,7 @@
    "title": "Mobile · Detalhe do ativo (CDB 110% CDI)",
    "w": 393,
    "x": 3540,
-   "y": 35060
+   "y": 35290
   },
   "Escuro-Mobile-Ativo-HGLG11.dc.html": {
    "h": 4100,
@@ -297,7 +297,7 @@
    "title": "Mobile · Detalhe do ativo (HGLG11)",
    "w": 393,
    "x": 3540,
-   "y": 43420
+   "y": 43650
   },
   "Escuro-Mobile-Ativo-Tesouro-Selic.dc.html": {
    "h": 3690,
@@ -306,7 +306,7 @@
    "title": "Mobile · Detalhe do ativo (Tesouro Selic 2029)",
    "w": 393,
    "x": 3540,
-   "y": 30930
+   "y": 31160
   },
   "Escuro-Mobile-Ativo.dc.html": {
    "h": 4320,
@@ -315,7 +315,7 @@
    "title": "Mobile · Detalhe do ativo (PETR4)",
    "w": 393,
    "x": 3540,
-   "y": 26170
+   "y": 26400
   },
   "Escuro-Mobile-Boas-Vindas.dc.html": {
    "h": 1010,
@@ -333,7 +333,7 @@
    "title": "Mobile · Conectar bancos",
    "w": 393,
    "x": 3540,
-   "y": 1880
+   "y": 15040
   },
   "Escuro-Mobile-Conversa.dc.html": {
    "h": 852,
@@ -381,7 +381,7 @@
    "y": 0
   },
   "Escuro-Mobile-Investimentos.dc.html": {
-   "h": 5020,
+   "h": 5250,
    "is_interactive": true,
    "page": "escuro-app",
    "title": "Mobile · Investimentos",
@@ -396,7 +396,7 @@
    "title": "Mobile · Meu perfil e configurações",
    "w": 393,
    "x": 3540,
-   "y": 66850
+   "y": 67150
   },
   "Escuro-Mobile-Novo-Alerta-Preco.dc.html": {
    "h": 1540,
@@ -423,7 +423,7 @@
    "title": "Mobile · Perfil de investidor",
    "w": 393,
    "x": 3540,
-   "y": 3760
+   "y": 16920
   },
   "Escuro-Mobile-Relatorio.dc.html": {
    "h": 3040,
@@ -441,7 +441,7 @@
    "title": "Mobile · Simulador (Cortar um gasto)",
    "w": 393,
    "x": 3540,
-   "y": 62730
+   "y": 63030
   },
   "Escuro-Mobile-Simulador-Objetivo.dc.html": {
    "h": 3700,
@@ -450,7 +450,7 @@
    "title": "Mobile · Simulador (Juntar para um objetivo)",
    "w": 393,
    "x": 3540,
-   "y": 58590
+   "y": 58890
   },
   "Escuro-Mobile-Simulador.dc.html": {
    "h": 3940,
@@ -459,7 +459,7 @@
    "title": "Mobile · Simulador (Aposentadoria)",
    "w": 393,
    "x": 3540,
-   "y": 54210
+   "y": 54510
   },
   "Escuro-Tablet-Adicionar-Investimento.dc.html": {
    "h": 1510,
@@ -468,7 +468,7 @@
    "title": "Tablet · Adicionar investimento",
    "w": 820,
    "x": 2640,
-   "y": 52140
+   "y": 52370
   },
   "Escuro-Tablet-Agentes-Avisos.dc.html": {
    "h": 1180,
@@ -477,7 +477,7 @@
    "title": "Tablet · Assistentes e avisos",
    "w": 820,
    "x": 2640,
-   "y": 5640
+   "y": 18800
   },
   "Escuro-Tablet-Alertas.dc.html": {
    "h": 1190,
@@ -504,7 +504,7 @@
    "title": "Tablet · Detalhe do ativo (BOVA11)",
    "w": 820,
    "x": 2640,
-   "y": 39250
+   "y": 39480
   },
   "Escuro-Tablet-Ativo-Bitcoin.dc.html": {
    "h": 2940,
@@ -513,7 +513,7 @@
    "title": "Tablet · Detalhe do ativo (Bitcoin)",
    "w": 820,
    "x": 2640,
-   "y": 47960
+   "y": 48190
   },
   "Escuro-Tablet-Ativo-CDB.dc.html": {
    "h": 2990,
@@ -522,7 +522,7 @@
    "title": "Tablet · Detalhe do ativo (CDB 110% CDI)",
    "w": 820,
    "x": 2640,
-   "y": 35060
+   "y": 35290
   },
   "Escuro-Tablet-Ativo-HGLG11.dc.html": {
    "h": 3370,
@@ -531,7 +531,7 @@
    "title": "Tablet · Detalhe do ativo (HGLG11)",
    "w": 820,
    "x": 2640,
-   "y": 43420
+   "y": 43650
   },
   "Escuro-Tablet-Ativo-Tesouro-Selic.dc.html": {
    "h": 2970,
@@ -540,7 +540,7 @@
    "title": "Tablet · Detalhe do ativo (Tesouro Selic 2029)",
    "w": 820,
    "x": 2640,
-   "y": 30930
+   "y": 31160
   },
   "Escuro-Tablet-Ativo.dc.html": {
    "h": 3810,
@@ -549,7 +549,7 @@
    "title": "Tablet · Detalhe do ativo (PETR4)",
    "w": 820,
    "x": 2640,
-   "y": 26170
+   "y": 26400
   },
   "Escuro-Tablet-Boas-Vindas.dc.html": {
    "h": 1180,
@@ -567,7 +567,7 @@
    "title": "Tablet · Conectar bancos",
    "w": 820,
    "x": 2640,
-   "y": 1880
+   "y": 15040
   },
   "Escuro-Tablet-Conversa.dc.html": {
    "h": 1180,
@@ -597,7 +597,7 @@
    "y": 3440
   },
   "Escuro-Tablet-Investimentos.dc.html": {
-   "h": 3530,
+   "h": 3680,
    "is_interactive": true,
    "page": "escuro-app",
    "title": "Tablet · Investimentos",
@@ -612,7 +612,7 @@
    "title": "Tablet · Meu perfil e configurações",
    "w": 820,
    "x": 2640,
-   "y": 66850
+   "y": 67150
   },
   "Escuro-Tablet-Novo-Alerta-Preco.dc.html": {
    "h": 1560,
@@ -648,7 +648,7 @@
    "title": "Tablet · Perfil de investidor",
    "w": 820,
    "x": 2640,
-   "y": 3760
+   "y": 16920
   },
   "Escuro-Tablet-Relatorio.dc.html": {
    "h": 2460,
@@ -666,7 +666,7 @@
    "title": "Tablet · Simulador (Cortar um gasto)",
    "w": 820,
    "x": 2640,
-   "y": 62730
+   "y": 63030
   },
   "Escuro-Tablet-Simulador-Objetivo.dc.html": {
    "h": 3160,
@@ -675,7 +675,7 @@
    "title": "Tablet · Simulador (Juntar para um objetivo)",
    "w": 820,
    "x": 2640,
-   "y": 58590
+   "y": 58890
   },
   "Escuro-Tablet-Simulador.dc.html": {
    "h": 3300,
@@ -684,10 +684,10 @@
    "title": "Tablet · Simulador (Aposentadoria)",
    "w": 820,
    "x": 2640,
-   "y": 54210
+   "y": 54510
   },
   "Fundamentos.dc.html": {
-   "h": 7250,
+   "h": 11010,
    "page": "fundamentos",
    "title": "Fundamentos do design",
    "w": 1440,
@@ -710,7 +710,7 @@
    "title": "Desktop · Refazer perfil · pergunta 1",
    "w": 2560,
    "x": 0,
-   "y": 70090
+   "y": 70390
   },
   "Escuro-Tablet-Perfil-Refazer.dc.html": {
    "h": 1180,
@@ -719,7 +719,7 @@
    "title": "Tablet · Refazer perfil · pergunta 1",
    "w": 820,
    "x": 2640,
-   "y": 70090
+   "y": 70390
   },
   "Escuro-Mobile-Perfil-Refazer.dc.html": {
    "h": 890,
@@ -728,7 +728,7 @@
    "title": "Mobile · Refazer perfil · pergunta 1",
    "w": 393,
    "x": 3540,
-   "y": 70090
+   "y": 70390
   },
   "Escuro-Desktop-Perfil-Refazer-Resultado.dc.html": {
    "h": 1440,
@@ -737,25 +737,25 @@
    "title": "Desktop · Refazer perfil · resultado",
    "w": 2560,
    "x": 0,
-   "y": 71970
+   "y": 72270
   },
   "Escuro-Tablet-Perfil-Refazer-Resultado.dc.html": {
-   "h": 1430,
+   "h": 1760,
    "is_interactive": true,
    "page": "escuro-app",
    "title": "Tablet · Refazer perfil · resultado",
    "w": 820,
    "x": 2640,
-   "y": 71970
+   "y": 72270
   },
   "Escuro-Mobile-Perfil-Refazer-Resultado.dc.html": {
-   "h": 1720,
+   "h": 2120,
    "is_interactive": true,
    "page": "escuro-app",
    "title": "Mobile · Refazer perfil · resultado",
    "w": 393,
    "x": 3540,
-   "y": 71970
+   "y": 72270
   },
   "Escuro-Desktop-Planos.dc.html": {
    "h": 1440,
@@ -764,7 +764,7 @@
    "title": "Desktop · Planos",
    "w": 2560,
    "x": 0,
-   "y": 74130
+   "y": 74830
   },
   "Escuro-Tablet-Planos.dc.html": {
    "h": 1740,
@@ -773,7 +773,7 @@
    "title": "Tablet · Planos",
    "w": 820,
    "x": 2640,
-   "y": 74130
+   "y": 74830
   },
   "Escuro-Mobile-Planos.dc.html": {
    "h": 2060,
@@ -782,7 +782,7 @@
    "title": "Mobile · Planos",
    "w": 393,
    "x": 3540,
-   "y": 74130
+   "y": 74830
   },
   "Escuro-Desktop-Malvo-Renovar.dc.html": {
    "h": 1440,
@@ -791,7 +791,7 @@
    "title": "Desktop · Renovar autorização (Itaú)",
    "w": 2560,
    "x": 0,
-   "y": 76630
+   "y": 77330
   },
   "Escuro-Tablet-Malvo-Renovar.dc.html": {
    "h": 1220,
@@ -800,7 +800,7 @@
    "title": "Tablet · Renovar autorização (Itaú)",
    "w": 820,
    "x": 2640,
-   "y": 76630
+   "y": 77330
   },
   "Escuro-Mobile-Malvo-Renovar.dc.html": {
    "h": 1230,
@@ -809,7 +809,7 @@
    "title": "Mobile · Renovar autorização (Itaú)",
    "w": 393,
    "x": 3540,
-   "y": 76630
+   "y": 77330
   },
   "Escuro-Desktop-Editar-Perfil.dc.html": {
    "h": 1440,
@@ -818,7 +818,7 @@
    "title": "Desktop · Editar perfil",
    "w": 2560,
    "x": 0,
-   "y": 78510
+   "y": 79210
   },
   "Escuro-Tablet-Editar-Perfil.dc.html": {
    "h": 1180,
@@ -827,7 +827,7 @@
    "title": "Tablet · Editar perfil",
    "w": 820,
    "x": 2640,
-   "y": 78510
+   "y": 79210
   },
   "Escuro-Mobile-Editar-Perfil.dc.html": {
    "h": 852,
@@ -836,7 +836,7 @@
    "title": "Mobile · Editar perfil",
    "w": 393,
    "x": 3540,
-   "y": 78510
+   "y": 79210
   },
   "Escuro-Desktop-Editar-Perfil-Email.dc.html": {
    "h": 1440,
@@ -845,7 +845,7 @@
    "title": "Desktop · Editar perfil · confirmar e-mail",
    "w": 2560,
    "x": 0,
-   "y": 80390
+   "y": 81090
   },
   "Escuro-Tablet-Editar-Perfil-Email.dc.html": {
    "h": 1180,
@@ -854,7 +854,7 @@
    "title": "Tablet · Editar perfil · confirmar e-mail",
    "w": 820,
    "x": 2640,
-   "y": 80390
+   "y": 81090
   },
   "Escuro-Mobile-Editar-Perfil-Email.dc.html": {
    "h": 852,
@@ -863,7 +863,7 @@
    "title": "Mobile · Editar perfil · confirmar e-mail",
    "w": 393,
    "x": 3540,
-   "y": 80390
+   "y": 81090
   },
   "Escuro-Desktop-Meta-Nova.dc.html": {
    "h": 1440,
@@ -872,7 +872,7 @@
    "title": "Desktop · Nova meta (da simulação)",
    "w": 2560,
    "x": 0,
-   "y": 82270
+   "y": 82970
   },
   "Escuro-Tablet-Meta-Nova.dc.html": {
    "h": 1590,
@@ -881,7 +881,7 @@
    "title": "Tablet · Nova meta (da simulação)",
    "w": 820,
    "x": 2640,
-   "y": 82270
+   "y": 82970
   },
   "Escuro-Mobile-Meta-Nova.dc.html": {
    "h": 1810,
@@ -890,7 +890,7 @@
    "title": "Mobile · Nova meta (da simulação)",
    "w": 393,
    "x": 3540,
-   "y": 82270
+   "y": 82970
   },
   "Escuro-Desktop-Metas.dc.html": {
    "h": 1440,
@@ -899,7 +899,7 @@
    "title": "Desktop · Suas metas",
    "w": 2560,
    "x": 0,
-   "y": 84520
+   "y": 85220
   },
   "Escuro-Tablet-Metas.dc.html": {
    "h": 1180,
@@ -908,7 +908,7 @@
    "title": "Tablet · Suas metas",
    "w": 820,
    "x": 2640,
-   "y": 84520
+   "y": 85220
   },
   "Escuro-Mobile-Metas.dc.html": {
    "h": 1310,
@@ -917,7 +917,7 @@
    "title": "Mobile · Suas metas",
    "w": 393,
    "x": 3540,
-   "y": 84520
+   "y": 85220
   },
   "Escuro-Desktop-Meta-Detalhe.dc.html": {
    "h": 1440,
@@ -926,7 +926,7 @@
    "title": "Desktop · Detalhe da meta (Reserva)",
    "w": 2560,
    "x": 0,
-   "y": 86400
+   "y": 87100
   },
   "Escuro-Tablet-Meta-Detalhe.dc.html": {
    "h": 1670,
@@ -935,7 +935,7 @@
    "title": "Tablet · Detalhe da meta (Reserva)",
    "w": 820,
    "x": 2640,
-   "y": 86400
+   "y": 87100
   },
   "Escuro-Mobile-Meta-Detalhe.dc.html": {
    "h": 2180,
@@ -944,7 +944,7 @@
    "title": "Mobile · Detalhe da meta (Reserva)",
    "w": 393,
    "x": 3540,
-   "y": 86400
+   "y": 87100
   },
   "Escuro-Desktop-Metas-Estados.dc.html": {
    "h": 1440,
@@ -953,7 +953,7 @@
    "title": "Desktop · Suas metas · vazio e erro",
    "w": 2560,
    "x": 0,
-   "y": 89020
+   "y": 89720
   },
   "Escuro-Tablet-Metas-Estados.dc.html": {
    "h": 1180,
@@ -962,7 +962,7 @@
    "title": "Tablet · Suas metas · vazio e erro",
    "w": 820,
    "x": 2640,
-   "y": 89020
+   "y": 89720
   },
   "Escuro-Mobile-Metas-Estados.dc.html": {
    "h": 960,
@@ -971,7 +971,7 @@
    "title": "Mobile · Suas metas · vazio e erro",
    "w": 393,
    "x": 3540,
-   "y": 89020
+   "y": 89720
   },
   "Escuro-Desktop-Bem-Imovel.dc.html": {
    "h": 1440,
@@ -980,7 +980,7 @@
    "title": "Desktop · Cadastrar imóvel",
    "w": 2560,
    "x": 0,
-   "y": 90900
+   "y": 91600
   },
   "Escuro-Tablet-Bem-Imovel.dc.html": {
    "h": 1650,
@@ -989,7 +989,7 @@
    "title": "Tablet · Cadastrar imóvel",
    "w": 820,
    "x": 2640,
-   "y": 90900
+   "y": 91600
   },
   "Escuro-Mobile-Bem-Imovel.dc.html": {
    "h": 1750,
@@ -998,7 +998,7 @@
    "title": "Mobile · Cadastrar imóvel",
    "w": 393,
    "x": 3540,
-   "y": 90900
+   "y": 91600
   },
   "Escuro-Desktop-Bem-Veiculo.dc.html": {
    "h": 1440,
@@ -1007,7 +1007,7 @@
    "title": "Desktop · Cadastrar veículo (FIPE)",
    "w": 2560,
    "x": 0,
-   "y": 93090
+   "y": 93790
   },
   "Escuro-Tablet-Bem-Veiculo.dc.html": {
    "h": 1230,
@@ -1016,7 +1016,7 @@
    "title": "Tablet · Cadastrar veículo (FIPE)",
    "w": 820,
    "x": 2640,
-   "y": 93090
+   "y": 93790
   },
   "Escuro-Mobile-Bem-Veiculo.dc.html": {
    "h": 1540,
@@ -1025,7 +1025,7 @@
    "title": "Mobile · Cadastrar veículo (FIPE)",
    "w": 393,
    "x": 3540,
-   "y": 93090
+   "y": 93790
   },
   "Escuro-Desktop-Bem-Imovel-Detalhe.dc.html": {
    "h": 1440,
@@ -1034,7 +1034,7 @@
    "title": "Desktop · Detalhe do imóvel",
    "w": 2560,
    "x": 0,
-   "y": 95070
+   "y": 95770
   },
   "Escuro-Tablet-Bem-Imovel-Detalhe.dc.html": {
    "h": 1180,
@@ -1043,7 +1043,7 @@
    "title": "Tablet · Detalhe do imóvel",
    "w": 820,
    "x": 2640,
-   "y": 95070
+   "y": 95770
   },
   "Escuro-Mobile-Bem-Imovel-Detalhe.dc.html": {
    "h": 1440,
@@ -1052,7 +1052,7 @@
    "title": "Mobile · Detalhe do imóvel",
    "w": 393,
    "x": 3540,
-   "y": 95070
+   "y": 95770
   },
   "Escuro-Desktop-Bem-Veiculo-Detalhe.dc.html": {
    "h": 1440,
@@ -1061,7 +1061,7 @@
    "title": "Desktop · Detalhe do veículo",
    "w": 2560,
    "x": 0,
-   "y": 96950
+   "y": 97650
   },
   "Escuro-Tablet-Bem-Veiculo-Detalhe.dc.html": {
    "h": 1180,
@@ -1070,7 +1070,7 @@
    "title": "Tablet · Detalhe do veículo",
    "w": 820,
    "x": 2640,
-   "y": 96950
+   "y": 97650
   },
   "Escuro-Mobile-Bem-Veiculo-Detalhe.dc.html": {
    "h": 1340,
@@ -1079,7 +1079,7 @@
    "title": "Mobile · Detalhe do veículo",
    "w": 393,
    "x": 3540,
-   "y": 96950
+   "y": 97650
   },
   "Escuro-Desktop-Posicoes.dc.html": {
    "h": 1850,
@@ -1088,7 +1088,7 @@
    "title": "Desktop · Todas as posições",
    "w": 2560,
    "x": 0,
-   "y": 98830
+   "y": 99530
   },
   "Escuro-Tablet-Posicoes.dc.html": {
    "h": 1780,
@@ -1097,7 +1097,7 @@
    "title": "Tablet · Todas as posições",
    "w": 820,
    "x": 2640,
-   "y": 98830
+   "y": 99530
   },
   "Escuro-Mobile-Posicoes.dc.html": {
    "h": 2020,
@@ -1106,7 +1106,7 @@
    "title": "Mobile · Todas as posições",
    "w": 393,
    "x": 3540,
-   "y": 98830
+   "y": 99530
   },
   "Escuro-Desktop-Posicoes-Estados.dc.html": {
    "h": 1440,
@@ -1115,7 +1115,7 @@
    "title": "Desktop · Posições · busca vazia, vazio e erro",
    "w": 2560,
    "x": 0,
-   "y": 101290
+   "y": 101990
   },
   "Escuro-Tablet-Posicoes-Estados.dc.html": {
    "h": 1470,
@@ -1124,7 +1124,7 @@
    "title": "Tablet · Posições · busca vazia, vazio e erro",
    "w": 820,
    "x": 2640,
-   "y": 101290
+   "y": 101990
   },
   "Escuro-Mobile-Posicoes-Estados.dc.html": {
    "h": 1460,
@@ -1133,7 +1133,7 @@
    "title": "Mobile · Posições · busca vazia, vazio e erro",
    "w": 393,
    "x": 3540,
-   "y": 101290
+   "y": 101990
   },
   "Escuro-Desktop-Lancamentos.dc.html": {
    "h": 1440,
@@ -1142,7 +1142,7 @@
    "title": "Desktop · Todos os lançamentos",
    "w": 2560,
    "x": 0,
-   "y": 103200
+   "y": 103900
   },
   "Escuro-Tablet-Lancamentos.dc.html": {
    "h": 2040,
@@ -1151,7 +1151,7 @@
    "title": "Tablet · Todos os lançamentos",
    "w": 820,
    "x": 2640,
-   "y": 103200
+   "y": 103900
   },
   "Escuro-Mobile-Lancamentos.dc.html": {
    "h": 2020,
@@ -1160,7 +1160,7 @@
    "title": "Mobile · Todos os lançamentos",
    "w": 393,
    "x": 3540,
-   "y": 103200
+   "y": 103900
   },
   "Escuro-Desktop-Lancamentos-Estados.dc.html": {
    "h": 1440,
@@ -1169,7 +1169,7 @@
    "title": "Desktop · Lançamentos · filtro vazio, vazio e erro",
    "w": 2560,
    "x": 0,
-   "y": 105680
+   "y": 106380
   },
   "Escuro-Tablet-Lancamentos-Estados.dc.html": {
    "h": 1540,
@@ -1178,7 +1178,7 @@
    "title": "Tablet · Lançamentos · filtro vazio, vazio e erro",
    "w": 820,
    "x": 2640,
-   "y": 105680
+   "y": 106380
   },
   "Escuro-Mobile-Lancamentos-Estados.dc.html": {
    "h": 1490,
@@ -1187,7 +1187,7 @@
    "title": "Mobile · Lançamentos · filtro vazio, vazio e erro",
    "w": 393,
    "x": 3540,
-   "y": 105680
+   "y": 106380
   },
   "Escuro-Desktop-Lancamentos-Categoria.dc.html": {
    "h": 1440,
@@ -1196,7 +1196,7 @@
    "title": "Desktop · Lançamentos de uma categoria",
    "w": 2560,
    "x": 0,
-   "y": 107660
+   "y": 108360
   },
   "Escuro-Tablet-Lancamentos-Categoria.dc.html": {
    "h": 1680,
@@ -1205,7 +1205,7 @@
    "title": "Tablet · Lançamentos de uma categoria",
    "w": 820,
    "x": 2640,
-   "y": 107660
+   "y": 108360
   },
   "Escuro-Mobile-Lancamentos-Categoria.dc.html": {
    "h": 1820,
@@ -1214,7 +1214,7 @@
    "title": "Mobile · Lançamentos de uma categoria",
    "w": 393,
    "x": 3540,
-   "y": 107660
+   "y": 108360
   },
   "Escuro-Desktop-Lancamento-Detalhe.dc.html": {
    "h": 1440,
@@ -1223,7 +1223,7 @@
    "title": "Desktop · Detalhe do lançamento",
    "w": 2560,
    "x": 0,
-   "y": 109920
+   "y": 110620
   },
   "Escuro-Tablet-Lancamento-Detalhe.dc.html": {
    "h": 1180,
@@ -1232,7 +1232,7 @@
    "title": "Tablet · Detalhe do lançamento",
    "w": 820,
    "x": 2640,
-   "y": 109920
+   "y": 110620
   },
   "Escuro-Mobile-Lancamento-Detalhe.dc.html": {
    "h": 1540,
@@ -1241,7 +1241,7 @@
    "title": "Mobile · Detalhe do lançamento",
    "w": 393,
    "x": 3540,
-   "y": 109920
+   "y": 110620
   },
   "Escuro-Desktop-Relatorio-Linha-do-Tempo.dc.html": {
    "h": 1440,
@@ -1250,7 +1250,7 @@
    "title": "Desktop · Relatório · linha do tempo completa",
    "w": 2560,
    "x": 0,
-   "y": 111900
+   "y": 112600
   },
   "Escuro-Tablet-Relatorio-Linha-do-Tempo.dc.html": {
    "h": 2070,
@@ -1259,7 +1259,7 @@
    "title": "Tablet · Relatório · linha do tempo completa",
    "w": 820,
    "x": 2640,
-   "y": 111900
+   "y": 112600
   },
   "Escuro-Mobile-Relatorio-Linha-do-Tempo.dc.html": {
    "h": 2070,
@@ -1268,7 +1268,7 @@
    "title": "Mobile · Relatório · linha do tempo completa",
    "w": 393,
    "x": 3540,
-   "y": 111900
+   "y": 112600
   },
   "Escuro-Desktop-Simulacoes.dc.html": {
    "h": 1440,
@@ -1277,7 +1277,7 @@
    "title": "Desktop · Simulações salvas",
    "w": 2560,
    "x": 0,
-   "y": 114410
+   "y": 115110
   },
   "Escuro-Tablet-Simulacoes.dc.html": {
    "h": 1180,
@@ -1286,7 +1286,7 @@
    "title": "Tablet · Simulações salvas",
    "w": 820,
    "x": 2640,
-   "y": 114410
+   "y": 115110
   },
   "Escuro-Mobile-Simulacoes.dc.html": {
    "h": 852,
@@ -1295,7 +1295,7 @@
    "title": "Mobile · Simulações salvas",
    "w": 393,
    "x": 3540,
-   "y": 114410
+   "y": 115110
   },
   "Escuro-Desktop-Simulacoes-Estados.dc.html": {
    "h": 1440,
@@ -1304,7 +1304,7 @@
    "title": "Desktop · Simulações salvas · estados",
    "w": 2560,
    "x": 0,
-   "y": 116290
+   "y": 116990
   },
   "Escuro-Tablet-Simulacoes-Estados.dc.html": {
    "h": 1180,
@@ -1313,7 +1313,7 @@
    "title": "Tablet · Simulações salvas · estados",
    "w": 820,
    "x": 2640,
-   "y": 116290
+   "y": 116990
   },
   "Escuro-Mobile-Simulacoes-Estados.dc.html": {
    "h": 990,
@@ -1322,7 +1322,7 @@
    "title": "Mobile · Simulações salvas · estados",
    "w": 393,
    "x": 3540,
-   "y": 116290
+   "y": 116990
   },
   "Escuro-Desktop-Chat-Painel.dc.html": {
    "h": 1440,
@@ -1331,7 +1331,7 @@
    "title": "Desktop · Chat aberto sobre a tela",
    "w": 2560,
    "x": 0,
-   "y": 118170
+   "y": 118870
   },
   "Escuro-Tablet-Chat-Painel.dc.html": {
    "h": 1180,
@@ -1340,7 +1340,7 @@
    "title": "Tablet · Chat aberto sobre a tela",
    "w": 820,
    "x": 2640,
-   "y": 118170
+   "y": 118870
   },
   "Escuro-Mobile-Chat-Painel.dc.html": {
    "h": 852,
@@ -1349,7 +1349,7 @@
    "title": "Mobile · Chat aberto sobre a tela",
    "w": 393,
    "x": 3540,
-   "y": 118170
+   "y": 118870
   },
   "Escuro-Desktop-Conversa-Menu.dc.html": {
    "h": 1440,
@@ -1358,7 +1358,7 @@
    "title": "Desktop · Conversa · mais opções",
    "w": 2560,
    "x": 0,
-   "y": 120050
+   "y": 120750
   },
   "Escuro-Tablet-Conversa-Menu.dc.html": {
    "h": 1180,
@@ -1367,7 +1367,7 @@
    "title": "Tablet · Conversa · mais opções",
    "w": 820,
    "x": 2640,
-   "y": 120050
+   "y": 120750
   },
   "Escuro-Mobile-Conversa-Menu.dc.html": {
    "h": 852,
@@ -1376,7 +1376,7 @@
    "title": "Mobile · Conversa · mais opções",
    "w": 393,
    "x": 3540,
-   "y": 120050
+   "y": 120750
   },
   "Escuro-Desktop-Conversa-Apagar.dc.html": {
    "h": 1440,
@@ -1385,7 +1385,7 @@
    "title": "Desktop · Conversa · apagar",
    "w": 2560,
    "x": 0,
-   "y": 121930
+   "y": 122630
   },
   "Escuro-Tablet-Conversa-Apagar.dc.html": {
    "h": 1180,
@@ -1394,7 +1394,7 @@
    "title": "Tablet · Conversa · apagar",
    "w": 820,
    "x": 2640,
-   "y": 121930
+   "y": 122630
   },
   "Escuro-Mobile-Conversa-Apagar.dc.html": {
    "h": 852,
@@ -1403,7 +1403,7 @@
    "title": "Mobile · Conversa · apagar",
    "w": 393,
    "x": 3540,
-   "y": 121930
+   "y": 122630
   },
   "Escuro-Desktop-Conversa-Anexar.dc.html": {
    "h": 1440,
@@ -1412,7 +1412,7 @@
    "title": "Desktop · Conversa · anexar arquivo",
    "w": 2560,
    "x": 0,
-   "y": 123810
+   "y": 124510
   },
   "Escuro-Tablet-Conversa-Anexar.dc.html": {
    "h": 1180,
@@ -1421,7 +1421,7 @@
    "title": "Tablet · Conversa · anexar arquivo",
    "w": 820,
    "x": 2640,
-   "y": 123810
+   "y": 124510
   },
   "Escuro-Mobile-Conversa-Anexar.dc.html": {
    "h": 852,
@@ -1430,7 +1430,7 @@
    "title": "Mobile · Conversa · anexar arquivo",
    "w": 393,
    "x": 3540,
-   "y": 123810
+   "y": 124510
   },
   "Escuro-Desktop-Conversa-Anexo-Previa.dc.html": {
    "h": 1440,
@@ -1439,7 +1439,7 @@
    "title": "Desktop · Conversa · anexo pronto para enviar",
    "w": 2560,
    "x": 0,
-   "y": 125690
+   "y": 126390
   },
   "Escuro-Tablet-Conversa-Anexo-Previa.dc.html": {
    "h": 1180,
@@ -1448,7 +1448,7 @@
    "title": "Tablet · Conversa · anexo pronto para enviar",
    "w": 820,
    "x": 2640,
-   "y": 125690
+   "y": 126390
   },
   "Escuro-Mobile-Conversa-Anexo-Previa.dc.html": {
    "h": 852,
@@ -1457,7 +1457,7 @@
    "title": "Mobile · Conversa · anexo pronto para enviar",
    "w": 393,
    "x": 3540,
-   "y": 125690
+   "y": 126390
   },
   "Escuro-Desktop-Conversa-Gravando.dc.html": {
    "h": 1440,
@@ -1466,7 +1466,7 @@
    "title": "Desktop · Conversa · gravando voz",
    "w": 2560,
    "x": 0,
-   "y": 127570
+   "y": 128270
   },
   "Escuro-Tablet-Conversa-Gravando.dc.html": {
    "h": 1180,
@@ -1475,7 +1475,7 @@
    "title": "Tablet · Conversa · gravando voz",
    "w": 820,
    "x": 2640,
-   "y": 127570
+   "y": 128270
   },
   "Escuro-Mobile-Conversa-Gravando.dc.html": {
    "h": 852,
@@ -1484,7 +1484,7 @@
    "title": "Mobile · Conversa · gravando voz",
    "w": 393,
    "x": 3540,
-   "y": 127570
+   "y": 128270
   },
   "Escuro-Desktop-Conversa-Transcrevendo.dc.html": {
    "h": 1440,
@@ -1493,7 +1493,7 @@
    "title": "Desktop · Conversa · transcrevendo",
    "w": 2560,
    "x": 0,
-   "y": 129450
+   "y": 130150
   },
   "Escuro-Tablet-Conversa-Transcrevendo.dc.html": {
    "h": 1180,
@@ -1502,7 +1502,7 @@
    "title": "Tablet · Conversa · transcrevendo",
    "w": 820,
    "x": 2640,
-   "y": 129450
+   "y": 130150
   },
   "Escuro-Mobile-Conversa-Transcrevendo.dc.html": {
    "h": 852,
@@ -1511,7 +1511,7 @@
    "title": "Mobile · Conversa · transcrevendo",
    "w": 393,
    "x": 3540,
-   "y": 129450
+   "y": 130150
   },
   "Escuro-Desktop-Conversa-Limite.dc.html": {
    "h": 1440,
@@ -1520,7 +1520,7 @@
    "title": "Desktop · Conversa · limite de perguntas do plano",
    "w": 2560,
    "x": 0,
-   "y": 131330
+   "y": 132030
   },
   "Escuro-Tablet-Conversa-Limite.dc.html": {
    "h": 1180,
@@ -1529,7 +1529,7 @@
    "title": "Tablet · Conversa · limite de perguntas do plano",
    "w": 820,
    "x": 2640,
-   "y": 131330
+   "y": 132030
   },
   "Escuro-Mobile-Conversa-Limite.dc.html": {
    "h": 852,
@@ -1538,7 +1538,7 @@
    "title": "Mobile · Conversa · limite de perguntas do plano",
    "w": 393,
    "x": 3540,
-   "y": 131330
+   "y": 132030
   },
   "Escuro-Desktop-Ativo-Comparar.dc.html": {
    "h": 1440,
@@ -1547,7 +1547,7 @@
    "title": "Desktop · Ativo · comparar com (opções)",
    "w": 2560,
    "x": 0,
-   "y": 133210
+   "y": 133910
   },
   "Escuro-Tablet-Ativo-Comparar.dc.html": {
    "h": 1180,
@@ -1556,7 +1556,7 @@
    "title": "Tablet · Ativo · comparar com (opções)",
    "w": 820,
    "x": 2640,
-   "y": 133210
+   "y": 133910
   },
   "Escuro-Mobile-Ativo-Comparar.dc.html": {
    "h": 852,
@@ -1565,7 +1565,7 @@
    "title": "Mobile · Ativo · comparar com (opções)",
    "w": 393,
    "x": 3540,
-   "y": 133210
+   "y": 133910
   },
   "Escuro-Desktop-Ativo-Comparar-Ibovespa.dc.html": {
    "h": 1440,
@@ -1574,7 +1574,7 @@
    "title": "Desktop · Ativo · comparado ao Ibovespa",
    "w": 2560,
    "x": 0,
-   "y": 135090
+   "y": 135790
   },
   "Escuro-Tablet-Ativo-Comparar-Ibovespa.dc.html": {
    "h": 1300,
@@ -1583,7 +1583,7 @@
    "title": "Tablet · Ativo · comparado ao Ibovespa",
    "w": 820,
    "x": 2640,
-   "y": 135090
+   "y": 135790
   },
   "Escuro-Mobile-Ativo-Comparar-Ibovespa.dc.html": {
    "h": 1110,
@@ -1592,7 +1592,7 @@
    "title": "Mobile · Ativo · comparado ao Ibovespa",
    "w": 393,
    "x": 3540,
-   "y": 135090
+   "y": 135790
   },
   "Escuro-Desktop-Ativo-Preco-Sem-Ajuste.dc.html": {
    "h": 1440,
@@ -1601,7 +1601,7 @@
    "title": "Desktop · Ativo · preço sem ajuste",
    "w": 2560,
    "x": 0,
-   "y": 136970
+   "y": 137670
   },
   "Escuro-Tablet-Ativo-Preco-Sem-Ajuste.dc.html": {
    "h": 1430,
@@ -1610,7 +1610,7 @@
    "title": "Tablet · Ativo · preço sem ajuste",
    "w": 820,
    "x": 2640,
-   "y": 136970
+   "y": 137670
   },
   "Escuro-Mobile-Ativo-Preco-Sem-Ajuste.dc.html": {
    "h": 1340,
@@ -1619,7 +1619,7 @@
    "title": "Mobile · Ativo · preço sem ajuste",
    "w": 393,
    "x": 3540,
-   "y": 136970
+   "y": 137670
   },
   "Escuro-Desktop-Ativo-Mais-Detalhes.dc.html": {
    "h": 1440,
@@ -1628,7 +1628,7 @@
    "title": "Desktop · Ativo · mais detalhes",
    "w": 2560,
    "x": 0,
-   "y": 138850
+   "y": 139550
   },
   "Escuro-Tablet-Ativo-Mais-Detalhes.dc.html": {
    "h": 1180,
@@ -1637,7 +1637,7 @@
    "title": "Tablet · Ativo · mais detalhes",
    "w": 820,
    "x": 2640,
-   "y": 138850
+   "y": 139550
   },
   "Escuro-Mobile-Ativo-Mais-Detalhes.dc.html": {
    "h": 1520,
@@ -1646,7 +1646,7 @@
    "title": "Mobile · Ativo · mais detalhes",
    "w": 393,
    "x": 3540,
-   "y": 138850
+   "y": 139550
   },
   "Escuro-Desktop-Ativo-Eventos.dc.html": {
    "h": 1440,
@@ -1655,7 +1655,7 @@
    "title": "Desktop · Ativo · todos os eventos corporativos",
    "w": 2560,
    "x": 0,
-   "y": 140810
+   "y": 141510
   },
   "Escuro-Tablet-Ativo-Eventos.dc.html": {
    "h": 1240,
@@ -1664,7 +1664,7 @@
    "title": "Tablet · Ativo · todos os eventos corporativos",
    "w": 820,
    "x": 2640,
-   "y": 140810
+   "y": 141510
   },
   "Escuro-Mobile-Ativo-Eventos.dc.html": {
    "h": 1510,
@@ -1673,7 +1673,7 @@
    "title": "Mobile · Ativo · todos os eventos corporativos",
    "w": 393,
    "x": 3540,
-   "y": 140810
+   "y": 141510
   },
   "Escuro-Desktop-Ativo-Risco.dc.html": {
    "h": 1850,
@@ -1682,7 +1682,7 @@
    "title": "Desktop · Ajustar risco do ativo",
    "w": 2560,
    "x": 0,
-   "y": 142760
+   "y": 143460
   },
   "Escuro-Tablet-Ativo-Risco.dc.html": {
    "h": 1180,
@@ -1691,7 +1691,7 @@
    "title": "Tablet · Ajustar risco do ativo",
    "w": 820,
    "x": 2640,
-   "y": 142760
+   "y": 143460
   },
   "Escuro-Mobile-Ativo-Risco.dc.html": {
    "h": 852,
@@ -1700,7 +1700,7 @@
    "title": "Mobile · Ajustar risco do ativo",
    "w": 393,
    "x": 3540,
-   "y": 142760
+   "y": 143460
   },
   "Escuro-Desktop-Inicio-Novo.dc.html": {
    "h": 1440,
@@ -1709,7 +1709,7 @@
    "title": "Desktop · Início · usuário novo",
    "w": 2560,
    "x": 0,
-   "y": 145050
+   "y": 145750
   },
   "Escuro-Tablet-Inicio-Novo.dc.html": {
    "h": 1180,
@@ -1718,7 +1718,7 @@
    "title": "Tablet · Início · usuário novo",
    "w": 820,
    "x": 2640,
-   "y": 145050
+   "y": 145750
   },
   "Escuro-Mobile-Inicio-Novo.dc.html": {
    "h": 1320,
@@ -1727,7 +1727,7 @@
    "title": "Mobile · Início · usuário novo",
    "w": 393,
    "x": 3540,
-   "y": 145050
+   "y": 145750
   },
   "Escuro-Desktop-Gastos-Novo.dc.html": {
    "h": 1440,
@@ -1736,7 +1736,7 @@
    "title": "Desktop · Gastos · usuário novo",
    "w": 2560,
    "x": 0,
-   "y": 146930
+   "y": 147630
   },
   "Escuro-Tablet-Gastos-Novo.dc.html": {
    "h": 1180,
@@ -1745,7 +1745,7 @@
    "title": "Tablet · Gastos · usuário novo",
    "w": 820,
    "x": 2640,
-   "y": 146930
+   "y": 147630
   },
   "Escuro-Mobile-Gastos-Novo.dc.html": {
    "h": 990,
@@ -1754,7 +1754,7 @@
    "title": "Mobile · Gastos · usuário novo",
    "w": 393,
    "x": 3540,
-   "y": 146930
+   "y": 147630
   },
   "Escuro-Desktop-Investimentos-Novo.dc.html": {
    "h": 1440,
@@ -1763,7 +1763,7 @@
    "title": "Desktop · Investimentos · usuário novo",
    "w": 2560,
    "x": 0,
-   "y": 148810
+   "y": 149510
   },
   "Escuro-Tablet-Investimentos-Novo.dc.html": {
    "h": 1180,
@@ -1772,7 +1772,7 @@
    "title": "Tablet · Investimentos · usuário novo",
    "w": 820,
    "x": 2640,
-   "y": 148810
+   "y": 149510
   },
   "Escuro-Mobile-Investimentos-Novo.dc.html": {
    "h": 1020,
@@ -1781,7 +1781,7 @@
    "title": "Mobile · Investimentos · usuário novo",
    "w": 393,
    "x": 3540,
-   "y": 148810
+   "y": 149510
   },
   "Escuro-Desktop-Notificacoes.dc.html": {
    "h": 1440,
@@ -1790,7 +1790,7 @@
    "title": "Desktop · Notificações",
    "w": 2560,
    "x": 0,
-   "y": 150690
+   "y": 151390
   },
   "Escuro-Tablet-Notificacoes.dc.html": {
    "h": 1360,
@@ -1799,7 +1799,7 @@
    "title": "Tablet · Notificações",
    "w": 820,
    "x": 2640,
-   "y": 150690
+   "y": 151390
   },
   "Escuro-Mobile-Notificacoes.dc.html": {
    "h": 1630,
@@ -1808,7 +1808,7 @@
    "title": "Mobile · Notificações",
    "w": 393,
    "x": 3540,
-   "y": 150690
+   "y": 151390
   },
   "Escuro-Desktop-Investimentos-Duplicidade.dc.html": {
    "h": 1440,
@@ -1817,7 +1817,7 @@
    "title": "Desktop · Investimento duplicado (somar, separar ou excluir)",
    "w": 2560,
    "x": 0,
-   "y": 152760
+   "y": 153460
   },
   "Escuro-Tablet-Investimentos-Duplicidade.dc.html": {
    "h": 1180,
@@ -1826,7 +1826,7 @@
    "title": "Tablet · Investimento duplicado (somar, separar ou excluir)",
    "w": 820,
    "x": 2640,
-   "y": 152760
+   "y": 153460
   },
   "Escuro-Mobile-Investimentos-Duplicidade.dc.html": {
    "h": 1270,
@@ -1835,7 +1835,7 @@
    "title": "Mobile · Investimento duplicado (somar, separar ou excluir)",
    "w": 393,
    "x": 3540,
-   "y": 152760
+   "y": 153460
   },
   "Escuro-Desktop-Banco-Desconectar.dc.html": {
    "h": 1440,
@@ -1844,7 +1844,7 @@
    "title": "Desktop · Desconectar banco",
    "w": 2560,
    "x": 0,
-   "y": 154640
+   "y": 155340
   },
   "Escuro-Tablet-Banco-Desconectar.dc.html": {
    "h": 1180,
@@ -1853,7 +1853,7 @@
    "title": "Tablet · Desconectar banco",
    "w": 820,
    "x": 2640,
-   "y": 154640
+   "y": 155340
   },
   "Escuro-Mobile-Banco-Desconectar.dc.html": {
    "h": 852,
@@ -1862,7 +1862,7 @@
    "title": "Mobile · Desconectar banco",
    "w": 393,
    "x": 3540,
-   "y": 154640
+   "y": 155340
   },
   "Escuro-Desktop-Excluir-Conta.dc.html": {
    "h": 1440,
@@ -1871,7 +1871,7 @@
    "title": "Desktop · Excluir conta (LGPD)",
    "w": 2560,
    "x": 0,
-   "y": 156520
+   "y": 157220
   },
   "Escuro-Tablet-Excluir-Conta.dc.html": {
    "h": 1180,
@@ -1880,7 +1880,7 @@
    "title": "Tablet · Excluir conta (LGPD)",
    "w": 820,
    "x": 2640,
-   "y": 156520
+   "y": 157220
   },
   "Escuro-Mobile-Excluir-Conta.dc.html": {
    "h": 1100,
@@ -1889,7 +1889,7 @@
    "title": "Mobile · Excluir conta (LGPD)",
    "w": 393,
    "x": 3540,
-   "y": 156520
+   "y": 157220
   },
   "Escuro-Desktop-Relatorio-Exportar.dc.html": {
    "h": 1440,
@@ -1898,7 +1898,7 @@
    "title": "Desktop · Exportar relatório (PDF, Excel, CSV)",
    "w": 2560,
    "x": 0,
-   "y": 158400
+   "y": 159100
   },
   "Escuro-Tablet-Relatorio-Exportar.dc.html": {
    "h": 1180,
@@ -1907,7 +1907,7 @@
    "title": "Tablet · Exportar relatório (PDF, Excel, CSV)",
    "w": 820,
    "x": 2640,
-   "y": 158400
+   "y": 159100
   },
   "Escuro-Mobile-Relatorio-Exportar.dc.html": {
    "h": 852,
@@ -1916,7 +1916,7 @@
    "title": "Mobile · Exportar relatório (PDF, Excel, CSV)",
    "w": 393,
    "x": 3540,
-   "y": 158400
+   "y": 159100
   },
   "Escuro-Desktop-Relatorio-Exportado.dc.html": {
    "h": 1440,
@@ -1925,7 +1925,7 @@
    "title": "Desktop · Relatório pronto",
    "w": 2560,
    "x": 0,
-   "y": 160280
+   "y": 160980
   },
   "Escuro-Tablet-Relatorio-Exportado.dc.html": {
    "h": 1180,
@@ -1934,7 +1934,7 @@
    "title": "Tablet · Relatório pronto",
    "w": 820,
    "x": 2640,
-   "y": 160280
+   "y": 160980
   },
   "Escuro-Mobile-Relatorio-Exportado.dc.html": {
    "h": 852,
@@ -1943,7 +1943,1060 @@
    "title": "Mobile · Relatório pronto",
    "w": 393,
    "x": 3540,
-   "y": 160280
+   "y": 160980
+  },
+  "Escuro-Desktop-Desbloqueio.dc.html": {
+   "h": 1440,
+   "is_interactive": true,
+   "page": "escuro-app",
+   "title": "Desktop · Desbloqueio com biometria",
+   "w": 2560,
+   "x": 0,
+   "y": 162860
+  },
+  "Escuro-Tablet-Desbloqueio.dc.html": {
+   "h": 1180,
+   "is_interactive": true,
+   "page": "escuro-app",
+   "title": "Tablet · Desbloqueio com biometria",
+   "w": 820,
+   "x": 2640,
+   "y": 162860
+  },
+  "Escuro-Mobile-Desbloqueio.dc.html": {
+   "h": 852,
+   "is_interactive": true,
+   "page": "escuro-app",
+   "title": "Mobile · Desbloqueio com biometria",
+   "w": 393,
+   "x": 3540,
+   "y": 162860
+  },
+  "Escuro-Desktop-Inicio-Oculto.dc.html": {
+   "h": 1440,
+   "is_interactive": true,
+   "page": "escuro-app",
+   "title": "Desktop · Início com valores ocultos",
+   "w": 2560,
+   "x": 0,
+   "y": 164740
+  },
+  "Escuro-Tablet-Inicio-Oculto.dc.html": {
+   "h": 2940,
+   "is_interactive": true,
+   "page": "escuro-app",
+   "title": "Tablet · Início com valores ocultos",
+   "w": 820,
+   "x": 2640,
+   "y": 164740
+  },
+  "Escuro-Mobile-Inicio-Oculto.dc.html": {
+   "h": 2720,
+   "is_interactive": true,
+   "page": "escuro-app",
+   "title": "Mobile · Início com valores ocultos",
+   "w": 393,
+   "x": 3540,
+   "y": 164740
+  },
+  "Escuro-Desktop-Investimentos-Oculto.dc.html": {
+   "h": 2600,
+   "is_interactive": true,
+   "page": "escuro-app",
+   "title": "Desktop · Investimentos com valores ocultos",
+   "w": 2560,
+   "x": 0,
+   "y": 168120
+  },
+  "Escuro-Tablet-Investimentos-Oculto.dc.html": {
+   "h": 3680,
+   "is_interactive": true,
+   "page": "escuro-app",
+   "title": "Tablet · Investimentos com valores ocultos",
+   "w": 820,
+   "x": 2640,
+   "y": 168120
+  },
+  "Escuro-Mobile-Investimentos-Oculto.dc.html": {
+   "h": 5250,
+   "is_interactive": true,
+   "page": "escuro-app",
+   "title": "Mobile · Investimentos com valores ocultos",
+   "w": 393,
+   "x": 3540,
+   "y": 168120
+  },
+  "Escuro-Desktop-Tetos.dc.html": {
+   "h": 1440,
+   "is_interactive": true,
+   "page": "escuro-app",
+   "title": "Desktop · Tetos de gasto · lista",
+   "w": 2560,
+   "x": 0,
+   "y": 173810
+  },
+  "Escuro-Tablet-Tetos.dc.html": {
+   "h": 1190,
+   "is_interactive": true,
+   "page": "escuro-app",
+   "title": "Tablet · Tetos de gasto · lista",
+   "w": 820,
+   "x": 2640,
+   "y": 173810
+  },
+  "Escuro-Mobile-Tetos.dc.html": {
+   "h": 1380,
+   "is_interactive": true,
+   "page": "escuro-app",
+   "title": "Mobile · Tetos de gasto · lista",
+   "w": 393,
+   "x": 3540,
+   "y": 173810
+  },
+  "Escuro-Desktop-Teto-Detalhe.dc.html": {
+   "h": 1440,
+   "is_interactive": true,
+   "page": "escuro-app",
+   "title": "Desktop · Detalhe do teto (Alimentação)",
+   "w": 2560,
+   "x": 0,
+   "y": 175690
+  },
+  "Escuro-Tablet-Teto-Detalhe.dc.html": {
+   "h": 1180,
+   "is_interactive": true,
+   "page": "escuro-app",
+   "title": "Tablet · Detalhe do teto (Alimentação)",
+   "w": 820,
+   "x": 2640,
+   "y": 175690
+  },
+  "Escuro-Mobile-Teto-Detalhe.dc.html": {
+   "h": 1540,
+   "is_interactive": true,
+   "page": "escuro-app",
+   "title": "Mobile · Detalhe do teto (Alimentação)",
+   "w": 393,
+   "x": 3540,
+   "y": 175690
+  },
+  "Escuro-Desktop-Teto-Editar.dc.html": {
+   "h": 1440,
+   "is_interactive": true,
+   "page": "escuro-app",
+   "title": "Desktop · Editar teto",
+   "w": 2560,
+   "x": 0,
+   "y": 177670
+  },
+  "Escuro-Tablet-Teto-Editar.dc.html": {
+   "h": 1720,
+   "is_interactive": true,
+   "page": "escuro-app",
+   "title": "Tablet · Editar teto",
+   "w": 820,
+   "x": 2640,
+   "y": 177670
+  },
+  "Escuro-Mobile-Teto-Editar.dc.html": {
+   "h": 1880,
+   "is_interactive": true,
+   "page": "escuro-app",
+   "title": "Mobile · Editar teto",
+   "w": 393,
+   "x": 3540,
+   "y": 177670
+  },
+  "Escuro-Desktop-Tetos-Vazio.dc.html": {
+   "h": 1440,
+   "is_interactive": true,
+   "page": "escuro-app",
+   "title": "Desktop · Tetos de gasto · vazio",
+   "w": 2560,
+   "x": 0,
+   "y": 179990
+  },
+  "Escuro-Tablet-Tetos-Vazio.dc.html": {
+   "h": 1180,
+   "is_interactive": true,
+   "page": "escuro-app",
+   "title": "Tablet · Tetos de gasto · vazio",
+   "w": 820,
+   "x": 2640,
+   "y": 179990
+  },
+  "Escuro-Mobile-Tetos-Vazio.dc.html": {
+   "h": 1070,
+   "is_interactive": true,
+   "page": "escuro-app",
+   "title": "Mobile · Tetos de gasto · vazio",
+   "w": 393,
+   "x": 3540,
+   "y": 179990
+  },
+  "Escuro-Desktop-Teto-Excluir.dc.html": {
+   "h": 1440,
+   "is_interactive": true,
+   "page": "escuro-app",
+   "title": "Desktop · Excluir teto (confirmação)",
+   "w": 2560,
+   "x": 0,
+   "y": 181870
+  },
+  "Escuro-Tablet-Teto-Excluir.dc.html": {
+   "h": 1180,
+   "is_interactive": true,
+   "page": "escuro-app",
+   "title": "Tablet · Excluir teto (confirmação)",
+   "w": 820,
+   "x": 2640,
+   "y": 181870
+  },
+  "Escuro-Mobile-Teto-Excluir.dc.html": {
+   "h": 852,
+   "is_interactive": true,
+   "page": "escuro-app",
+   "title": "Mobile · Excluir teto (confirmação)",
+   "w": 393,
+   "x": 3540,
+   "y": 181870
+  },
+  "Escuro-Desktop-Alerta-Detalhe.dc.html": {
+   "h": 1440,
+   "is_interactive": true,
+   "page": "escuro-app",
+   "title": "Desktop · Detalhe do alerta (Bitcoin)",
+   "w": 2560,
+   "x": 0,
+   "y": 183750
+  },
+  "Escuro-Tablet-Alerta-Detalhe.dc.html": {
+   "h": 1390,
+   "is_interactive": true,
+   "page": "escuro-app",
+   "title": "Tablet · Detalhe do alerta (Bitcoin)",
+   "w": 820,
+   "x": 2640,
+   "y": 183750
+  },
+  "Escuro-Mobile-Alerta-Detalhe.dc.html": {
+   "h": 1630,
+   "is_interactive": true,
+   "page": "escuro-app",
+   "title": "Mobile · Detalhe do alerta (Bitcoin)",
+   "w": 393,
+   "x": 3540,
+   "y": 183750
+  },
+  "Escuro-Desktop-Alerta-Editar.dc.html": {
+   "h": 1440,
+   "is_interactive": true,
+   "page": "escuro-app",
+   "title": "Desktop · Editar alerta de preço",
+   "w": 2560,
+   "x": 0,
+   "y": 185820
+  },
+  "Escuro-Tablet-Alerta-Editar.dc.html": {
+   "h": 1560,
+   "is_interactive": true,
+   "page": "escuro-app",
+   "title": "Tablet · Editar alerta de preço",
+   "w": 820,
+   "x": 2640,
+   "y": 185820
+  },
+  "Escuro-Mobile-Alerta-Editar.dc.html": {
+   "h": 1540,
+   "is_interactive": true,
+   "page": "escuro-app",
+   "title": "Mobile · Editar alerta de preço",
+   "w": 393,
+   "x": 3540,
+   "y": 185820
+  },
+  "Escuro-Desktop-Alerta-Disparado.dc.html": {
+   "h": 1440,
+   "is_interactive": true,
+   "page": "escuro-app",
+   "title": "Desktop · Alerta disparado (aviso do Caramelo)",
+   "w": 2560,
+   "x": 0,
+   "y": 187820
+  },
+  "Escuro-Tablet-Alerta-Disparado.dc.html": {
+   "h": 1370,
+   "is_interactive": true,
+   "page": "escuro-app",
+   "title": "Tablet · Alerta disparado (aviso do Caramelo)",
+   "w": 820,
+   "x": 2640,
+   "y": 187820
+  },
+  "Escuro-Mobile-Alerta-Disparado.dc.html": {
+   "h": 1670,
+   "is_interactive": true,
+   "page": "escuro-app",
+   "title": "Mobile · Alerta disparado (aviso do Caramelo)",
+   "w": 393,
+   "x": 3540,
+   "y": 187820
+  },
+  "Escuro-Desktop-Alertas-Vazio.dc.html": {
+   "h": 1440,
+   "is_interactive": true,
+   "page": "escuro-app",
+   "title": "Desktop · Alertas de preço · vazio",
+   "w": 2560,
+   "x": 0,
+   "y": 189930
+  },
+  "Escuro-Tablet-Alertas-Vazio.dc.html": {
+   "h": 1180,
+   "is_interactive": true,
+   "page": "escuro-app",
+   "title": "Tablet · Alertas de preço · vazio",
+   "w": 820,
+   "x": 2640,
+   "y": 189930
+  },
+  "Escuro-Mobile-Alertas-Vazio.dc.html": {
+   "h": 1030,
+   "is_interactive": true,
+   "page": "escuro-app",
+   "title": "Mobile · Alertas de preço · vazio",
+   "w": 393,
+   "x": 3540,
+   "y": 189930
+  },
+  "Escuro-Desktop-Alerta-Cancelar.dc.html": {
+   "h": 1440,
+   "is_interactive": true,
+   "page": "escuro-app",
+   "title": "Desktop · Cancelar alerta (confirmação)",
+   "w": 2560,
+   "x": 0,
+   "y": 191810
+  },
+  "Escuro-Tablet-Alerta-Cancelar.dc.html": {
+   "h": 1180,
+   "is_interactive": true,
+   "page": "escuro-app",
+   "title": "Tablet · Cancelar alerta (confirmação)",
+   "w": 820,
+   "x": 2640,
+   "y": 191810
+  },
+  "Escuro-Mobile-Alerta-Cancelar.dc.html": {
+   "h": 852,
+   "is_interactive": true,
+   "page": "escuro-app",
+   "title": "Mobile · Cancelar alerta (confirmação)",
+   "w": 393,
+   "x": 3540,
+   "y": 191810
+  },
+  "Escuro-Desktop-Alocacao.dc.html": {
+   "h": 1440,
+   "is_interactive": true,
+   "page": "escuro-app",
+   "title": "Desktop · Alocação (carteira × alvo do perfil)",
+   "w": 2560,
+   "x": 0,
+   "y": 193690
+  },
+  "Escuro-Tablet-Alocacao.dc.html": {
+   "h": 2110,
+   "is_interactive": true,
+   "page": "escuro-app",
+   "title": "Tablet · Alocação (carteira × alvo do perfil)",
+   "w": 820,
+   "x": 2640,
+   "y": 193690
+  },
+  "Escuro-Mobile-Alocacao.dc.html": {
+   "h": 2570,
+   "is_interactive": true,
+   "page": "escuro-app",
+   "title": "Mobile · Alocação (carteira × alvo do perfil)",
+   "w": 393,
+   "x": 3540,
+   "y": 193690
+  },
+  "Escuro-Desktop-Alocacao-Perfis.dc.html": {
+   "h": 1440,
+   "is_interactive": true,
+   "page": "escuro-app",
+   "title": "Desktop · Os 4 perfis (carteira-alvo de cada um)",
+   "w": 2560,
+   "x": 0,
+   "y": 196700
+  },
+  "Escuro-Tablet-Alocacao-Perfis.dc.html": {
+   "h": 1700,
+   "is_interactive": true,
+   "page": "escuro-app",
+   "title": "Tablet · Os 4 perfis (carteira-alvo de cada um)",
+   "w": 820,
+   "x": 2640,
+   "y": 196700
+  },
+  "Escuro-Mobile-Alocacao-Perfis.dc.html": {
+   "h": 3000,
+   "is_interactive": true,
+   "page": "escuro-app",
+   "title": "Mobile · Os 4 perfis (carteira-alvo de cada um)",
+   "w": 393,
+   "x": 3540,
+   "y": 196700
+  },
+  "Escuro-Desktop-Assinatura-Detalhe.dc.html": {
+   "h": 1440,
+   "is_interactive": true,
+   "page": "escuro-app",
+   "title": "Desktop · Detalhe da assinatura (Netflix)",
+   "w": 2560,
+   "x": 0,
+   "y": 200140
+  },
+  "Escuro-Tablet-Assinatura-Detalhe.dc.html": {
+   "h": 1780,
+   "is_interactive": true,
+   "page": "escuro-app",
+   "title": "Tablet · Detalhe da assinatura (Netflix)",
+   "w": 820,
+   "x": 2640,
+   "y": 200140
+  },
+  "Escuro-Mobile-Assinatura-Detalhe.dc.html": {
+   "h": 2220,
+   "is_interactive": true,
+   "page": "escuro-app",
+   "title": "Mobile · Detalhe da assinatura (Netflix)",
+   "w": 393,
+   "x": 3540,
+   "y": 200140
+  },
+  "Escuro-Desktop-Assinaturas-Calendario.dc.html": {
+   "h": 1440,
+   "is_interactive": true,
+   "page": "escuro-app",
+   "title": "Desktop · Calendário de cobranças do mês",
+   "w": 2560,
+   "x": 0,
+   "y": 202800
+  },
+  "Escuro-Tablet-Assinaturas-Calendario.dc.html": {
+   "h": 1390,
+   "is_interactive": true,
+   "page": "escuro-app",
+   "title": "Tablet · Calendário de cobranças do mês",
+   "w": 820,
+   "x": 2640,
+   "y": 202800
+  },
+  "Escuro-Mobile-Assinaturas-Calendario.dc.html": {
+   "h": 1120,
+   "is_interactive": true,
+   "page": "escuro-app",
+   "title": "Mobile · Calendário de cobranças do mês",
+   "w": 393,
+   "x": 3540,
+   "y": 202800
+  },
+  "Escuro-Desktop-Inicio-Estados.dc.html": {
+   "h": 1440,
+   "is_interactive": true,
+   "page": "escuro-app",
+   "title": "Desktop · Início · estados",
+   "w": 2560,
+   "x": 0,
+   "y": 204680
+  },
+  "Escuro-Tablet-Inicio-Estados.dc.html": {
+   "h": 2460,
+   "is_interactive": true,
+   "page": "escuro-app",
+   "title": "Tablet · Início · estados",
+   "w": 820,
+   "x": 2640,
+   "y": 204680
+  },
+  "Escuro-Mobile-Inicio-Estados.dc.html": {
+   "h": 2490,
+   "is_interactive": true,
+   "page": "escuro-app",
+   "title": "Mobile · Início · estados",
+   "w": 393,
+   "x": 3540,
+   "y": 204680
+  },
+  "Escuro-Desktop-Gastos-Estados.dc.html": {
+   "h": 1440,
+   "is_interactive": true,
+   "page": "escuro-app",
+   "title": "Desktop · Gastos · estados",
+   "w": 2560,
+   "x": 0,
+   "y": 207610
+  },
+  "Escuro-Tablet-Gastos-Estados.dc.html": {
+   "h": 2540,
+   "is_interactive": true,
+   "page": "escuro-app",
+   "title": "Tablet · Gastos · estados",
+   "w": 820,
+   "x": 2640,
+   "y": 207610
+  },
+  "Escuro-Mobile-Gastos-Estados.dc.html": {
+   "h": 2580,
+   "is_interactive": true,
+   "page": "escuro-app",
+   "title": "Mobile · Gastos · estados",
+   "w": 393,
+   "x": 3540,
+   "y": 207610
+  },
+  "Escuro-Desktop-Investimentos-Estados.dc.html": {
+   "h": 1440,
+   "is_interactive": true,
+   "page": "escuro-app",
+   "title": "Desktop · Investimentos · estados",
+   "w": 2560,
+   "x": 0,
+   "y": 210630
+  },
+  "Escuro-Tablet-Investimentos-Estados.dc.html": {
+   "h": 2540,
+   "is_interactive": true,
+   "page": "escuro-app",
+   "title": "Tablet · Investimentos · estados",
+   "w": 820,
+   "x": 2640,
+   "y": 210630
+  },
+  "Escuro-Mobile-Investimentos-Estados.dc.html": {
+   "h": 2540,
+   "is_interactive": true,
+   "page": "escuro-app",
+   "title": "Mobile · Investimentos · estados",
+   "w": 393,
+   "x": 3540,
+   "y": 210630
+  },
+  "Escuro-Desktop-Ativo-Estados.dc.html": {
+   "h": 1440,
+   "is_interactive": true,
+   "page": "escuro-app",
+   "title": "Desktop · PETR4 · estados",
+   "w": 2560,
+   "x": 0,
+   "y": 213610
+  },
+  "Escuro-Tablet-Ativo-Estados.dc.html": {
+   "h": 2640,
+   "is_interactive": true,
+   "page": "escuro-app",
+   "title": "Tablet · PETR4 · estados",
+   "w": 820,
+   "x": 2640,
+   "y": 213610
+  },
+  "Escuro-Mobile-Ativo-Estados.dc.html": {
+   "h": 2650,
+   "is_interactive": true,
+   "page": "escuro-app",
+   "title": "Mobile · PETR4 · estados",
+   "w": 393,
+   "x": 3540,
+   "y": 213610
+  },
+  "Escuro-Desktop-Relatorio-Estados.dc.html": {
+   "h": 1440,
+   "is_interactive": true,
+   "page": "escuro-app",
+   "title": "Desktop · Relatório · estados",
+   "w": 2560,
+   "x": 0,
+   "y": 216700
+  },
+  "Escuro-Tablet-Relatorio-Estados.dc.html": {
+   "h": 2890,
+   "is_interactive": true,
+   "page": "escuro-app",
+   "title": "Tablet · Relatório · estados",
+   "w": 820,
+   "x": 2640,
+   "y": 216700
+  },
+  "Escuro-Mobile-Relatorio-Estados.dc.html": {
+   "h": 2820,
+   "is_interactive": true,
+   "page": "escuro-app",
+   "title": "Mobile · Relatório · estados",
+   "w": 393,
+   "x": 3540,
+   "y": 216700
+  },
+  "Escuro-Desktop-Alertas-Estados.dc.html": {
+   "h": 1440,
+   "is_interactive": true,
+   "page": "escuro-app",
+   "title": "Desktop · Alertas · estados",
+   "w": 2560,
+   "x": 0,
+   "y": 220030
+  },
+  "Escuro-Tablet-Alertas-Estados.dc.html": {
+   "h": 2780,
+   "is_interactive": true,
+   "page": "escuro-app",
+   "title": "Tablet · Alertas · estados",
+   "w": 820,
+   "x": 2640,
+   "y": 220030
+  },
+  "Escuro-Mobile-Alertas-Estados.dc.html": {
+   "h": 2850,
+   "is_interactive": true,
+   "page": "escuro-app",
+   "title": "Mobile · Alertas · estados",
+   "w": 393,
+   "x": 3540,
+   "y": 220030
+  },
+  "Escuro-Desktop-Assinaturas-Estados.dc.html": {
+   "h": 1440,
+   "is_interactive": true,
+   "page": "escuro-app",
+   "title": "Desktop · Assinaturas · estados",
+   "w": 2560,
+   "x": 0,
+   "y": 223320
+  },
+  "Escuro-Tablet-Assinaturas-Estados.dc.html": {
+   "h": 2710,
+   "is_interactive": true,
+   "page": "escuro-app",
+   "title": "Tablet · Assinaturas · estados",
+   "w": 820,
+   "x": 2640,
+   "y": 223320
+  },
+  "Escuro-Mobile-Assinaturas-Estados.dc.html": {
+   "h": 2710,
+   "is_interactive": true,
+   "page": "escuro-app",
+   "title": "Mobile · Assinaturas · estados",
+   "w": 393,
+   "x": 3540,
+   "y": 223320
+  },
+  "Escuro-Desktop-Notificacoes-Estados.dc.html": {
+   "h": 1440,
+   "is_interactive": true,
+   "page": "escuro-app",
+   "title": "Desktop · Notificações · estados",
+   "w": 2560,
+   "x": 0,
+   "y": 226470
+  },
+  "Escuro-Tablet-Notificacoes-Estados.dc.html": {
+   "h": 2780,
+   "is_interactive": true,
+   "page": "escuro-app",
+   "title": "Tablet · Notificações · estados",
+   "w": 820,
+   "x": 2640,
+   "y": 226470
+  },
+  "Escuro-Mobile-Notificacoes-Estados.dc.html": {
+   "h": 2850,
+   "is_interactive": true,
+   "page": "escuro-app",
+   "title": "Mobile · Notificações · estados",
+   "w": 393,
+   "x": 3540,
+   "y": 226470
+  },
+  "Escuro-Desktop-Meta-Detalhe-Estados.dc.html": {
+   "h": 1440,
+   "is_interactive": true,
+   "page": "escuro-app",
+   "title": "Desktop · Reserva de emergência · estados",
+   "w": 2560,
+   "x": 0,
+   "y": 229760
+  },
+  "Escuro-Tablet-Meta-Detalhe-Estados.dc.html": {
+   "h": 2660,
+   "is_interactive": true,
+   "page": "escuro-app",
+   "title": "Tablet · Reserva de emergência · estados",
+   "w": 820,
+   "x": 2640,
+   "y": 229760
+  },
+  "Escuro-Mobile-Meta-Detalhe-Estados.dc.html": {
+   "h": 2540,
+   "is_interactive": true,
+   "page": "escuro-app",
+   "title": "Mobile · Reserva de emergência · estados",
+   "w": 393,
+   "x": 3540,
+   "y": 229760
+  },
+  "Escuro-Desktop-Lancamento-Detalhe-Estados.dc.html": {
+   "h": 1440,
+   "is_interactive": true,
+   "page": "escuro-app",
+   "title": "Desktop · Detalhe do lançamento · estados",
+   "w": 2560,
+   "x": 0,
+   "y": 232860
+  },
+  "Escuro-Tablet-Lancamento-Detalhe-Estados.dc.html": {
+   "h": 2200,
+   "is_interactive": true,
+   "page": "escuro-app",
+   "title": "Tablet · Detalhe do lançamento · estados",
+   "w": 820,
+   "x": 2640,
+   "y": 232860
+  },
+  "Escuro-Mobile-Lancamento-Detalhe-Estados.dc.html": {
+   "h": 2140,
+   "is_interactive": true,
+   "page": "escuro-app",
+   "title": "Mobile · Detalhe do lançamento · estados",
+   "w": 393,
+   "x": 3540,
+   "y": 232860
+  },
+  "Escuro-Desktop-Conversa-Nova.dc.html": {
+   "h": 1440,
+   "is_interactive": true,
+   "page": "escuro-app",
+   "title": "Desktop · Conversa · Conversa nova (boas-vindas da Capivara)",
+   "w": 2560,
+   "x": 0,
+   "y": 235500
+  },
+  "Escuro-Tablet-Conversa-Nova.dc.html": {
+   "h": 1180,
+   "is_interactive": true,
+   "page": "escuro-app",
+   "title": "Tablet · Conversa · Conversa nova (boas-vindas da Capivara)",
+   "w": 820,
+   "x": 2640,
+   "y": 235500
+  },
+  "Escuro-Mobile-Conversa-Nova.dc.html": {
+   "h": 852,
+   "is_interactive": true,
+   "page": "escuro-app",
+   "title": "Mobile · Conversa · Conversa nova (boas-vindas da Capivara)",
+   "w": 393,
+   "x": 3540,
+   "y": 235500
+  },
+  "Escuro-Desktop-Conversa-Digitando.dc.html": {
+   "h": 1440,
+   "is_interactive": true,
+   "page": "escuro-app",
+   "title": "Desktop · Conversa · Resposta chegando (digitando)",
+   "w": 2560,
+   "x": 0,
+   "y": 237380
+  },
+  "Escuro-Tablet-Conversa-Digitando.dc.html": {
+   "h": 1180,
+   "is_interactive": true,
+   "page": "escuro-app",
+   "title": "Tablet · Conversa · Resposta chegando (digitando)",
+   "w": 820,
+   "x": 2640,
+   "y": 237380
+  },
+  "Escuro-Mobile-Conversa-Digitando.dc.html": {
+   "h": 852,
+   "is_interactive": true,
+   "page": "escuro-app",
+   "title": "Mobile · Conversa · Resposta chegando (digitando)",
+   "w": 393,
+   "x": 3540,
+   "y": 237380
+  },
+  "Escuro-Desktop-Conversa-Indisponivel.dc.html": {
+   "h": 1440,
+   "is_interactive": true,
+   "page": "escuro-app",
+   "title": "Desktop · Conversa · Assistente indisponível",
+   "w": 2560,
+   "x": 0,
+   "y": 239260
+  },
+  "Escuro-Tablet-Conversa-Indisponivel.dc.html": {
+   "h": 1180,
+   "is_interactive": true,
+   "page": "escuro-app",
+   "title": "Tablet · Conversa · Assistente indisponível",
+   "w": 820,
+   "x": 2640,
+   "y": 239260
+  },
+  "Escuro-Mobile-Conversa-Indisponivel.dc.html": {
+   "h": 852,
+   "is_interactive": true,
+   "page": "escuro-app",
+   "title": "Mobile · Conversa · Assistente indisponível",
+   "w": 393,
+   "x": 3540,
+   "y": 239260
+  },
+  "Escuro-Desktop-Conversa-Nao-Enviada.dc.html": {
+   "h": 1440,
+   "is_interactive": true,
+   "page": "escuro-app",
+   "title": "Desktop · Conversa · Mensagem não enviada",
+   "w": 2560,
+   "x": 0,
+   "y": 241140
+  },
+  "Escuro-Tablet-Conversa-Nao-Enviada.dc.html": {
+   "h": 1180,
+   "is_interactive": true,
+   "page": "escuro-app",
+   "title": "Tablet · Conversa · Mensagem não enviada",
+   "w": 820,
+   "x": 2640,
+   "y": 241140
+  },
+  "Escuro-Mobile-Conversa-Nao-Enviada.dc.html": {
+   "h": 852,
+   "is_interactive": true,
+   "page": "escuro-app",
+   "title": "Mobile · Conversa · Mensagem não enviada",
+   "w": 393,
+   "x": 3540,
+   "y": 241140
+  },
+  "Escuro-Desktop-Conversa-Anexo-Falhou.dc.html": {
+   "h": 1440,
+   "is_interactive": true,
+   "page": "escuro-app",
+   "title": "Desktop · Conversa · Envio do anexo falhou",
+   "w": 2560,
+   "x": 0,
+   "y": 243020
+  },
+  "Escuro-Tablet-Conversa-Anexo-Falhou.dc.html": {
+   "h": 1180,
+   "is_interactive": true,
+   "page": "escuro-app",
+   "title": "Tablet · Conversa · Envio do anexo falhou",
+   "w": 820,
+   "x": 2640,
+   "y": 243020
+  },
+  "Escuro-Mobile-Conversa-Anexo-Falhou.dc.html": {
+   "h": 852,
+   "is_interactive": true,
+   "page": "escuro-app",
+   "title": "Mobile · Conversa · Envio do anexo falhou",
+   "w": 393,
+   "x": 3540,
+   "y": 243020
+  },
+  "Escuro-Desktop-Chat-Painel-Nova.dc.html": {
+   "h": 1440,
+   "is_interactive": true,
+   "page": "escuro-app",
+   "title": "Desktop · Chat sobre a tela · Conversa nova (boas-vindas da Capivara)",
+   "w": 2560,
+   "x": 0,
+   "y": 244900
+  },
+  "Escuro-Tablet-Chat-Painel-Nova.dc.html": {
+   "h": 1180,
+   "is_interactive": true,
+   "page": "escuro-app",
+   "title": "Tablet · Chat sobre a tela · Conversa nova (boas-vindas da Capivara)",
+   "w": 820,
+   "x": 2640,
+   "y": 244900
+  },
+  "Escuro-Mobile-Chat-Painel-Nova.dc.html": {
+   "h": 852,
+   "is_interactive": true,
+   "page": "escuro-app",
+   "title": "Mobile · Chat sobre a tela · Conversa nova (boas-vindas da Capivara)",
+   "w": 393,
+   "x": 3540,
+   "y": 244900
+  },
+  "Escuro-Desktop-Chat-Painel-Digitando.dc.html": {
+   "h": 1440,
+   "is_interactive": true,
+   "page": "escuro-app",
+   "title": "Desktop · Chat sobre a tela · Resposta chegando (digitando)",
+   "w": 2560,
+   "x": 0,
+   "y": 246780
+  },
+  "Escuro-Tablet-Chat-Painel-Digitando.dc.html": {
+   "h": 1180,
+   "is_interactive": true,
+   "page": "escuro-app",
+   "title": "Tablet · Chat sobre a tela · Resposta chegando (digitando)",
+   "w": 820,
+   "x": 2640,
+   "y": 246780
+  },
+  "Escuro-Mobile-Chat-Painel-Digitando.dc.html": {
+   "h": 852,
+   "is_interactive": true,
+   "page": "escuro-app",
+   "title": "Mobile · Chat sobre a tela · Resposta chegando (digitando)",
+   "w": 393,
+   "x": 3540,
+   "y": 246780
+  },
+  "Escuro-Desktop-Chat-Painel-Indisponivel.dc.html": {
+   "h": 1440,
+   "is_interactive": true,
+   "page": "escuro-app",
+   "title": "Desktop · Chat sobre a tela · Assistente indisponível",
+   "w": 2560,
+   "x": 0,
+   "y": 248660
+  },
+  "Escuro-Tablet-Chat-Painel-Indisponivel.dc.html": {
+   "h": 1180,
+   "is_interactive": true,
+   "page": "escuro-app",
+   "title": "Tablet · Chat sobre a tela · Assistente indisponível",
+   "w": 820,
+   "x": 2640,
+   "y": 248660
+  },
+  "Escuro-Mobile-Chat-Painel-Indisponivel.dc.html": {
+   "h": 852,
+   "is_interactive": true,
+   "page": "escuro-app",
+   "title": "Mobile · Chat sobre a tela · Assistente indisponível",
+   "w": 393,
+   "x": 3540,
+   "y": 248660
+  },
+  "Escuro-Desktop-Chat-Painel-Nao-Enviada.dc.html": {
+   "h": 1440,
+   "is_interactive": true,
+   "page": "escuro-app",
+   "title": "Desktop · Chat sobre a tela · Mensagem não enviada",
+   "w": 2560,
+   "x": 0,
+   "y": 250540
+  },
+  "Escuro-Tablet-Chat-Painel-Nao-Enviada.dc.html": {
+   "h": 1180,
+   "is_interactive": true,
+   "page": "escuro-app",
+   "title": "Tablet · Chat sobre a tela · Mensagem não enviada",
+   "w": 820,
+   "x": 2640,
+   "y": 250540
+  },
+  "Escuro-Mobile-Chat-Painel-Nao-Enviada.dc.html": {
+   "h": 852,
+   "is_interactive": true,
+   "page": "escuro-app",
+   "title": "Mobile · Chat sobre a tela · Mensagem não enviada",
+   "w": 393,
+   "x": 3540,
+   "y": 250540
+  },
+  "Escuro-Desktop-Chat-Painel-Anexo-Falhou.dc.html": {
+   "h": 1440,
+   "is_interactive": true,
+   "page": "escuro-app",
+   "title": "Desktop · Chat sobre a tela · Envio do anexo falhou",
+   "w": 2560,
+   "x": 0,
+   "y": 252420
+  },
+  "Escuro-Tablet-Chat-Painel-Anexo-Falhou.dc.html": {
+   "h": 1180,
+   "is_interactive": true,
+   "page": "escuro-app",
+   "title": "Tablet · Chat sobre a tela · Envio do anexo falhou",
+   "w": 820,
+   "x": 2640,
+   "y": 252420
+  },
+  "Escuro-Mobile-Chat-Painel-Anexo-Falhou.dc.html": {
+   "h": 852,
+   "is_interactive": true,
+   "page": "escuro-app",
+   "title": "Mobile · Chat sobre a tela · Envio do anexo falhou",
+   "w": 393,
+   "x": 3540,
+   "y": 252420
+  },
+  "Escuro-Desktop-Notificacoes-Desligadas.dc.html": {
+   "h": 1440,
+   "is_interactive": true,
+   "page": "escuro-app",
+   "title": "Desktop · Notificações · aparelho sem permissão",
+   "w": 2560,
+   "x": 0,
+   "y": 254300
+  },
+  "Escuro-Tablet-Notificacoes-Desligadas.dc.html": {
+   "h": 1580,
+   "is_interactive": true,
+   "page": "escuro-app",
+   "title": "Tablet · Notificações · aparelho sem permissão",
+   "w": 820,
+   "x": 2640,
+   "y": 254300
+  },
+  "Escuro-Mobile-Notificacoes-Desligadas.dc.html": {
+   "h": 2000,
+   "is_interactive": true,
+   "page": "escuro-app",
+   "title": "Mobile · Notificações · aparelho sem permissão",
+   "w": 393,
+   "x": 3540,
+   "y": 254300
+  },
+  "Escuro-Desktop-Meu-Perfil-Notificacoes-Desligadas.dc.html": {
+   "h": 1440,
+   "is_interactive": true,
+   "page": "escuro-app",
+   "title": "Desktop · Meu perfil · aparelho sem permissão",
+   "w": 2560,
+   "x": 0,
+   "y": 256740
+  },
+  "Escuro-Tablet-Meu-Perfil-Notificacoes-Desligadas.dc.html": {
+   "h": 2140,
+   "is_interactive": true,
+   "page": "escuro-app",
+   "title": "Tablet · Meu perfil · aparelho sem permissão",
+   "w": 820,
+   "x": 2640,
+   "y": 256740
+  },
+  "Escuro-Mobile-Meu-Perfil-Notificacoes-Desligadas.dc.html": {
+   "h": 3160,
+   "is_interactive": true,
+   "page": "escuro-app",
+   "title": "Mobile · Meu perfil · aparelho sem permissão",
+   "w": 393,
+   "x": 3540,
+   "y": 256740
   },
   "Escuro-Desktop-Perfil-Investidor-P1.dc.html": {
    "h": 1440,
@@ -1952,7 +3005,7 @@
    "title": "Desktop · Perfil de investidor · pergunta 1",
    "w": 2560,
    "x": 0,
-   "y": 7520
+   "y": 22800
   },
   "Escuro-Tablet-Perfil-Investidor-P1.dc.html": {
    "h": 1180,
@@ -1961,7 +3014,7 @@
    "title": "Tablet · Perfil de investidor · pergunta 1",
    "w": 820,
    "x": 2640,
-   "y": 7520
+   "y": 22800
   },
   "Escuro-Mobile-Perfil-Investidor-P1.dc.html": {
    "h": 852,
@@ -1970,7 +3023,7 @@
    "title": "Mobile · Perfil de investidor · pergunta 1",
    "w": 393,
    "x": 3540,
-   "y": 7520
+   "y": 22800
   },
   "Escuro-Desktop-Perfil-Investidor-P2.dc.html": {
    "h": 1440,
@@ -1979,7 +3032,7 @@
    "title": "Desktop · Perfil de investidor · pergunta 2",
    "w": 2560,
    "x": 0,
-   "y": 9400
+   "y": 24680
   },
   "Escuro-Tablet-Perfil-Investidor-P2.dc.html": {
    "h": 1180,
@@ -1988,7 +3041,7 @@
    "title": "Tablet · Perfil de investidor · pergunta 2",
    "w": 820,
    "x": 2640,
-   "y": 9400
+   "y": 24680
   },
   "Escuro-Mobile-Perfil-Investidor-P2.dc.html": {
    "h": 852,
@@ -1997,7 +3050,7 @@
    "title": "Mobile · Perfil de investidor · pergunta 2",
    "w": 393,
    "x": 3540,
-   "y": 9400
+   "y": 24680
   },
   "Escuro-Desktop-Perfil-Investidor-P4.dc.html": {
    "h": 1440,
@@ -2006,7 +3059,7 @@
    "title": "Desktop · Perfil de investidor · pergunta 4",
    "w": 2560,
    "x": 0,
-   "y": 11280
+   "y": 26560
   },
   "Escuro-Tablet-Perfil-Investidor-P4.dc.html": {
    "h": 1180,
@@ -2015,16 +3068,16 @@
    "title": "Tablet · Perfil de investidor · pergunta 4",
    "w": 820,
    "x": 2640,
-   "y": 11280
+   "y": 26560
   },
   "Escuro-Mobile-Perfil-Investidor-P4.dc.html": {
-   "h": 852,
+   "h": 880,
    "is_interactive": true,
    "page": "escuro-onb",
    "title": "Mobile · Perfil de investidor · pergunta 4",
    "w": 393,
    "x": 3540,
-   "y": 11280
+   "y": 26560
   },
   "Escuro-Desktop-Perfil-Investidor-P5.dc.html": {
    "h": 1440,
@@ -2033,7 +3086,7 @@
    "title": "Desktop · Perfil de investidor · pergunta 5",
    "w": 2560,
    "x": 0,
-   "y": 13160
+   "y": 28440
   },
   "Escuro-Tablet-Perfil-Investidor-P5.dc.html": {
    "h": 1180,
@@ -2042,7 +3095,7 @@
    "title": "Tablet · Perfil de investidor · pergunta 5",
    "w": 820,
    "x": 2640,
-   "y": 13160
+   "y": 28440
   },
   "Escuro-Mobile-Perfil-Investidor-P5.dc.html": {
    "h": 852,
@@ -2051,7 +3104,7 @@
    "title": "Mobile · Perfil de investidor · pergunta 5",
    "w": 393,
    "x": 3540,
-   "y": 13160
+   "y": 28440
   },
   "Escuro-Desktop-Perfil-Investidor-P6.dc.html": {
    "h": 1440,
@@ -2060,7 +3113,7 @@
    "title": "Desktop · Perfil de investidor · pergunta 6",
    "w": 2560,
    "x": 0,
-   "y": 15040
+   "y": 30320
   },
   "Escuro-Tablet-Perfil-Investidor-P6.dc.html": {
    "h": 1180,
@@ -2069,7 +3122,7 @@
    "title": "Tablet · Perfil de investidor · pergunta 6",
    "w": 820,
    "x": 2640,
-   "y": 15040
+   "y": 30320
   },
   "Escuro-Mobile-Perfil-Investidor-P6.dc.html": {
    "h": 852,
@@ -2078,7 +3131,7 @@
    "title": "Mobile · Perfil de investidor · pergunta 6",
    "w": 393,
    "x": 3540,
-   "y": 15040
+   "y": 30320
   },
   "Escuro-Desktop-Perfil-Investidor-Resultado.dc.html": {
    "h": 1440,
@@ -2087,25 +3140,25 @@
    "title": "Desktop · Perfil de investidor · resultado",
    "w": 2560,
    "x": 0,
-   "y": 16920
+   "y": 32200
   },
   "Escuro-Tablet-Perfil-Investidor-Resultado.dc.html": {
-   "h": 1600,
+   "h": 2140,
    "is_interactive": true,
    "page": "escuro-onb",
    "title": "Tablet · Perfil de investidor · resultado",
    "w": 820,
    "x": 2640,
-   "y": 16920
+   "y": 32200
   },
   "Escuro-Mobile-Perfil-Investidor-Resultado.dc.html": {
-   "h": 1690,
+   "h": 2090,
    "is_interactive": true,
    "page": "escuro-onb",
    "title": "Mobile · Perfil de investidor · resultado",
    "w": 393,
    "x": 3540,
-   "y": 16920
+   "y": 32200
   },
   "Escuro-Desktop-Malvo-Autorizar.dc.html": {
    "h": 1440,
@@ -2114,7 +3167,7 @@
    "title": "Desktop · Conectar banco · autorização",
    "w": 2560,
    "x": 0,
-   "y": 19050
+   "y": 34780
   },
   "Escuro-Tablet-Malvo-Autorizar.dc.html": {
    "h": 1420,
@@ -2123,7 +3176,7 @@
    "title": "Tablet · Conectar banco · autorização",
    "w": 820,
    "x": 2640,
-   "y": 19050
+   "y": 34780
   },
   "Escuro-Mobile-Malvo-Autorizar.dc.html": {
    "h": 1180,
@@ -2132,7 +3185,7 @@
    "title": "Mobile · Conectar banco · autorização",
    "w": 393,
    "x": 3540,
-   "y": 19050
+   "y": 34780
   },
   "Escuro-Desktop-Malvo-Conectando.dc.html": {
    "h": 1440,
@@ -2141,7 +3194,7 @@
    "title": "Desktop · Conectar banco · conectando",
    "w": 2560,
    "x": 0,
-   "y": 20930
+   "y": 36660
   },
   "Escuro-Tablet-Malvo-Conectando.dc.html": {
    "h": 1180,
@@ -2150,7 +3203,7 @@
    "title": "Tablet · Conectar banco · conectando",
    "w": 820,
    "x": 2640,
-   "y": 20930
+   "y": 36660
   },
   "Escuro-Mobile-Malvo-Conectando.dc.html": {
    "h": 852,
@@ -2159,7 +3212,7 @@
    "title": "Mobile · Conectar banco · conectando",
    "w": 393,
    "x": 3540,
-   "y": 20930
+   "y": 36660
   },
   "Escuro-Desktop-Malvo-Sucesso.dc.html": {
    "h": 1440,
@@ -2168,7 +3221,7 @@
    "title": "Desktop · Conectar banco · sucesso",
    "w": 2560,
    "x": 0,
-   "y": 22810
+   "y": 38540
   },
   "Escuro-Tablet-Malvo-Sucesso.dc.html": {
    "h": 1210,
@@ -2177,7 +3230,7 @@
    "title": "Tablet · Conectar banco · sucesso",
    "w": 820,
    "x": 2640,
-   "y": 22810
+   "y": 38540
   },
   "Escuro-Mobile-Malvo-Sucesso.dc.html": {
    "h": 1000,
@@ -2186,7 +3239,7 @@
    "title": "Mobile · Conectar banco · sucesso",
    "w": 393,
    "x": 3540,
-   "y": 22810
+   "y": 38540
   },
   "Escuro-Desktop-Malvo-Erro.dc.html": {
    "h": 1440,
@@ -2195,7 +3248,7 @@
    "title": "Desktop · Conectar banco · erro ou cancelado",
    "w": 2560,
    "x": 0,
-   "y": 24690
+   "y": 40420
   },
   "Escuro-Tablet-Malvo-Erro.dc.html": {
    "h": 1180,
@@ -2204,7 +3257,7 @@
    "title": "Tablet · Conectar banco · erro ou cancelado",
    "w": 820,
    "x": 2640,
-   "y": 24690
+   "y": 40420
   },
   "Escuro-Mobile-Malvo-Erro.dc.html": {
    "h": 852,
@@ -2213,7 +3266,7 @@
    "title": "Mobile · Conectar banco · erro ou cancelado",
    "w": 393,
    "x": 3540,
-   "y": 24690
+   "y": 40420
   },
   "Escuro-Desktop-Termos.dc.html": {
    "h": 1440,
@@ -2222,7 +3275,7 @@
    "title": "Desktop · Termos de uso",
    "w": 2560,
    "x": 0,
-   "y": 26570
+   "y": 42300
   },
   "Escuro-Tablet-Termos.dc.html": {
    "h": 1610,
@@ -2231,7 +3284,7 @@
    "title": "Tablet · Termos de uso",
    "w": 820,
    "x": 2640,
-   "y": 26570
+   "y": 42300
   },
   "Escuro-Mobile-Termos.dc.html": {
    "h": 1570,
@@ -2240,7 +3293,7 @@
    "title": "Mobile · Termos de uso",
    "w": 393,
    "x": 3540,
-   "y": 26570
+   "y": 42300
   },
   "Escuro-Desktop-Privacidade.dc.html": {
    "h": 1440,
@@ -2249,7 +3302,7 @@
    "title": "Desktop · Política de privacidade",
    "w": 2560,
    "x": 0,
-   "y": 28620
+   "y": 44350
   },
   "Escuro-Tablet-Privacidade.dc.html": {
    "h": 1500,
@@ -2258,7 +3311,7 @@
    "title": "Tablet · Política de privacidade",
    "w": 820,
    "x": 2640,
-   "y": 28620
+   "y": 44350
   },
   "Escuro-Mobile-Privacidade.dc.html": {
    "h": 1470,
@@ -2267,7 +3320,223 @@
    "title": "Mobile · Política de privacidade",
    "w": 393,
    "x": 3540,
-   "y": 28620
+   "y": 44350
+  },
+  "Escuro-Desktop-Entrar.dc.html": {
+   "h": 1440,
+   "is_interactive": true,
+   "page": "escuro-onb",
+   "title": "Desktop · Entrar com e-mail",
+   "w": 2560,
+   "x": 0,
+   "y": 1880
+  },
+  "Escuro-Tablet-Entrar.dc.html": {
+   "h": 1180,
+   "is_interactive": true,
+   "page": "escuro-onb",
+   "title": "Tablet · Entrar com e-mail",
+   "w": 820,
+   "x": 2640,
+   "y": 1880
+  },
+  "Escuro-Mobile-Entrar.dc.html": {
+   "h": 860,
+   "is_interactive": true,
+   "page": "escuro-onb",
+   "title": "Mobile · Entrar com e-mail",
+   "w": 393,
+   "x": 3540,
+   "y": 1880
+  },
+  "Escuro-Desktop-Codigo.dc.html": {
+   "h": 1440,
+   "is_interactive": true,
+   "page": "escuro-onb",
+   "title": "Desktop · Código de 6 dígitos (entrar)",
+   "w": 2560,
+   "x": 0,
+   "y": 3760
+  },
+  "Escuro-Tablet-Codigo.dc.html": {
+   "h": 1180,
+   "is_interactive": true,
+   "page": "escuro-onb",
+   "title": "Tablet · Código de 6 dígitos (entrar)",
+   "w": 820,
+   "x": 2640,
+   "y": 3760
+  },
+  "Escuro-Mobile-Codigo.dc.html": {
+   "h": 852,
+   "is_interactive": true,
+   "page": "escuro-onb",
+   "title": "Mobile · Código de 6 dígitos (entrar)",
+   "w": 393,
+   "x": 3540,
+   "y": 3760
+  },
+  "Escuro-Desktop-Codigo-Criar.dc.html": {
+   "h": 1440,
+   "is_interactive": true,
+   "page": "escuro-onb",
+   "title": "Desktop · Código de 6 dígitos (criar conta)",
+   "w": 2560,
+   "x": 0,
+   "y": 5640
+  },
+  "Escuro-Tablet-Codigo-Criar.dc.html": {
+   "h": 1180,
+   "is_interactive": true,
+   "page": "escuro-onb",
+   "title": "Tablet · Código de 6 dígitos (criar conta)",
+   "w": 820,
+   "x": 2640,
+   "y": 5640
+  },
+  "Escuro-Mobile-Codigo-Criar.dc.html": {
+   "h": 852,
+   "is_interactive": true,
+   "page": "escuro-onb",
+   "title": "Mobile · Código de 6 dígitos (criar conta)",
+   "w": 393,
+   "x": 3540,
+   "y": 5640
+  },
+  "Escuro-Desktop-Codigo-Erro.dc.html": {
+   "h": 1440,
+   "is_interactive": true,
+   "page": "escuro-onb",
+   "title": "Desktop · Código incorreto",
+   "w": 2560,
+   "x": 0,
+   "y": 7520
+  },
+  "Escuro-Tablet-Codigo-Erro.dc.html": {
+   "h": 1180,
+   "is_interactive": true,
+   "page": "escuro-onb",
+   "title": "Tablet · Código incorreto",
+   "w": 820,
+   "x": 2640,
+   "y": 7520
+  },
+  "Escuro-Mobile-Codigo-Erro.dc.html": {
+   "h": 852,
+   "is_interactive": true,
+   "page": "escuro-onb",
+   "title": "Mobile · Código incorreto",
+   "w": 393,
+   "x": 3540,
+   "y": 7520
+  },
+  "Escuro-Desktop-Codigo-Vencido.dc.html": {
+   "h": 1440,
+   "is_interactive": true,
+   "page": "escuro-onb",
+   "title": "Desktop · Código vencido",
+   "w": 2560,
+   "x": 0,
+   "y": 9400
+  },
+  "Escuro-Tablet-Codigo-Vencido.dc.html": {
+   "h": 1180,
+   "is_interactive": true,
+   "page": "escuro-onb",
+   "title": "Tablet · Código vencido",
+   "w": 820,
+   "x": 2640,
+   "y": 9400
+  },
+  "Escuro-Mobile-Codigo-Vencido.dc.html": {
+   "h": 852,
+   "is_interactive": true,
+   "page": "escuro-onb",
+   "title": "Mobile · Código vencido",
+   "w": 393,
+   "x": 3540,
+   "y": 9400
+  },
+  "Escuro-Desktop-Entrar-Sem-Conta.dc.html": {
+   "h": 1440,
+   "is_interactive": true,
+   "page": "escuro-onb",
+   "title": "Desktop · E-mail sem conta (oferece criar)",
+   "w": 2560,
+   "x": 0,
+   "y": 11280
+  },
+  "Escuro-Tablet-Entrar-Sem-Conta.dc.html": {
+   "h": 1180,
+   "is_interactive": true,
+   "page": "escuro-onb",
+   "title": "Tablet · E-mail sem conta (oferece criar)",
+   "w": 820,
+   "x": 2640,
+   "y": 11280
+  },
+  "Escuro-Mobile-Entrar-Sem-Conta.dc.html": {
+   "h": 1030,
+   "is_interactive": true,
+   "page": "escuro-onb",
+   "title": "Mobile · E-mail sem conta (oferece criar)",
+   "w": 393,
+   "x": 3540,
+   "y": 11280
+  },
+  "Escuro-Desktop-Entrar-Sem-Internet.dc.html": {
+   "h": 1440,
+   "is_interactive": true,
+   "page": "escuro-onb",
+   "title": "Desktop · Sem internet",
+   "w": 2560,
+   "x": 0,
+   "y": 13160
+  },
+  "Escuro-Tablet-Entrar-Sem-Internet.dc.html": {
+   "h": 1180,
+   "is_interactive": true,
+   "page": "escuro-onb",
+   "title": "Tablet · Sem internet",
+   "w": 820,
+   "x": 2640,
+   "y": 13160
+  },
+  "Escuro-Mobile-Entrar-Sem-Internet.dc.html": {
+   "h": 960,
+   "is_interactive": true,
+   "page": "escuro-onb",
+   "title": "Mobile · Sem internet",
+   "w": 393,
+   "x": 3540,
+   "y": 13160
+  },
+  "Escuro-Desktop-Agentes-Avisos-Permissao.dc.html": {
+   "h": 1440,
+   "is_interactive": true,
+   "page": "escuro-onb",
+   "title": "Desktop · Etapa 3 · notificações bloqueadas no navegador",
+   "w": 2560,
+   "x": 0,
+   "y": 20680
+  },
+  "Escuro-Tablet-Agentes-Avisos-Permissao.dc.html": {
+   "h": 1420,
+   "is_interactive": true,
+   "page": "escuro-onb",
+   "title": "Tablet · Etapa 3 · notificações bloqueadas no aparelho",
+   "w": 820,
+   "x": 2640,
+   "y": 20680
+  },
+  "Escuro-Mobile-Agentes-Avisos-Permissao.dc.html": {
+   "h": 1680,
+   "is_interactive": true,
+   "page": "escuro-onb",
+   "title": "Mobile · Etapa 3 · notificações bloqueadas no aparelho",
+   "w": 393,
+   "x": 3540,
+   "y": 20680
   }
  },
  "createdOnFiles": {
@@ -2305,7 +3574,7 @@
    "text": "Detalhe do ativo · PETR4 (dados da Brapi)",
    "w": 240,
    "x": 0,
-   "y": 25870
+   "y": 26100
   },
   "escuro-app-ativo-bitcoin": {
    "kind": "title1",
@@ -2314,7 +3583,7 @@
    "text": "Detalhe do ativo · Bitcoin",
    "w": 240,
    "x": 0,
-   "y": 47660
+   "y": 47890
   },
   "escuro-app-ativo-bova11": {
    "kind": "title1",
@@ -2323,7 +3592,7 @@
    "text": "Detalhe do ativo · BOVA11",
    "w": 240,
    "x": 0,
-   "y": 38950
+   "y": 39180
   },
   "escuro-app-ativo-cdb": {
    "kind": "title1",
@@ -2332,7 +3601,7 @@
    "text": "Detalhe do ativo · CDB 110% CDI",
    "w": 240,
    "x": 0,
-   "y": 34760
+   "y": 34990
   },
   "escuro-app-ativo-hglg11": {
    "kind": "title1",
@@ -2341,7 +3610,7 @@
    "text": "Detalhe do ativo · HGLG11",
    "w": 240,
    "x": 0,
-   "y": 43120
+   "y": 43350
   },
   "escuro-app-ativo-tesouro-selic": {
    "kind": "title1",
@@ -2350,7 +3619,7 @@
    "text": "Detalhe do ativo · Tesouro Selic 2029",
    "w": 240,
    "x": 0,
-   "y": 30630
+   "y": 30860
   },
   "escuro-app-conta": {
    "kind": "title1",
@@ -2359,7 +3628,7 @@
    "text": "Meu perfil e configurações",
    "w": 240,
    "x": 0,
-   "y": 66550
+   "y": 66850
   },
   "escuro-app-conversas": {
    "kind": "title1",
@@ -2404,7 +3673,7 @@
    "text": "Adicionar investimento (cadastro manual)",
    "w": 240,
    "x": 0,
-   "y": 51840
+   "y": 52070
   },
   "escuro-app-novo-teto": {
    "kind": "title1",
@@ -2440,7 +3709,7 @@
    "text": "Simulador · Aposentadoria",
    "w": 240,
    "x": 0,
-   "y": 53910
+   "y": 54210
   },
   "escuro-app-simulador-corte": {
    "kind": "title1",
@@ -2449,7 +3718,7 @@
    "text": "Simulador · Cortar um gasto",
    "w": 240,
    "x": 0,
-   "y": 62430
+   "y": 62730
   },
   "escuro-app-simulador-objetivo": {
    "kind": "title1",
@@ -2458,7 +3727,7 @@
    "text": "Simulador · Juntar para um objetivo",
    "w": 240,
    "x": 0,
-   "y": 58290
+   "y": 58590
   },
   "escuro-onb-onb1": {
    "kind": "title1",
@@ -2476,7 +3745,7 @@
    "text": "Onboarding 1 · Conectar bancos (Open Finance)",
    "w": 240,
    "x": 0,
-   "y": 1580
+   "y": 14740
   },
   "escuro-onb-onb3": {
    "kind": "title1",
@@ -2485,7 +3754,7 @@
    "text": "Onboarding 2 · Perfil de investidor",
    "w": 240,
    "x": 0,
-   "y": 3460
+   "y": 16620
   },
   "escuro-onb-onb4": {
    "kind": "title1",
@@ -2494,7 +3763,7 @@
    "text": "Onboarding 3 · Assistentes e avisos",
    "w": 240,
    "x": 0,
-   "y": 5340
+   "y": 18500
   },
   "escuro-app-nv-perfil-refazer": {
    "kind": "title1",
@@ -2503,7 +3772,7 @@
    "text": "Refazer perfil de investidor · Refazer perfil · pergunta 1",
    "w": 240,
    "x": 0,
-   "y": 69790
+   "y": 70090
   },
   "escuro-app-nv-perfil-refazer-resultado": {
    "kind": "title1",
@@ -2512,7 +3781,7 @@
    "text": "Refazer perfil de investidor · Refazer perfil · resultado",
    "w": 240,
    "x": 0,
-   "y": 71670
+   "y": 71970
   },
   "escuro-app-nv-planos": {
    "kind": "title1",
@@ -2521,7 +3790,7 @@
    "text": "Planos",
    "w": 240,
    "x": 0,
-   "y": 73830
+   "y": 74530
   },
   "escuro-app-nv-malvo-renovar": {
    "kind": "title1",
@@ -2530,7 +3799,7 @@
    "text": "Renovar autorização do banco · Renovar autorização (Itaú)",
    "w": 240,
    "x": 0,
-   "y": 76330
+   "y": 77030
   },
   "escuro-app-nv-editar-perfil": {
    "kind": "title1",
@@ -2539,7 +3808,7 @@
    "text": "Editar perfil",
    "w": 240,
    "x": 0,
-   "y": 78210
+   "y": 78910
   },
   "escuro-app-nv-editar-perfil-email": {
    "kind": "title1",
@@ -2548,7 +3817,7 @@
    "text": "Editar perfil · confirmar e-mail",
    "w": 240,
    "x": 0,
-   "y": 80090
+   "y": 80790
   },
   "escuro-app-nv-meta-nova": {
    "kind": "title1",
@@ -2557,7 +3826,7 @@
    "text": "Metas · Nova meta (da simulação)",
    "w": 240,
    "x": 0,
-   "y": 81970
+   "y": 82670
   },
   "escuro-app-nv-metas": {
    "kind": "title1",
@@ -2566,7 +3835,7 @@
    "text": "Metas · Suas metas",
    "w": 240,
    "x": 0,
-   "y": 84220
+   "y": 84920
   },
   "escuro-app-nv-meta-detalhe": {
    "kind": "title1",
@@ -2575,7 +3844,7 @@
    "text": "Metas · Detalhe da meta (Reserva)",
    "w": 240,
    "x": 0,
-   "y": 86100
+   "y": 86800
   },
   "escuro-app-nv-metas-estados": {
    "kind": "title1",
@@ -2584,7 +3853,7 @@
    "text": "Metas · Suas metas · vazio e erro",
    "w": 240,
    "x": 0,
-   "y": 88720
+   "y": 89420
   },
   "escuro-app-nv-bem-imovel": {
    "kind": "title1",
@@ -2593,7 +3862,7 @@
    "text": "Bens: imóvel e veículo · Cadastrar imóvel",
    "w": 240,
    "x": 0,
-   "y": 90600
+   "y": 91300
   },
   "escuro-app-nv-bem-veiculo": {
    "kind": "title1",
@@ -2602,7 +3871,7 @@
    "text": "Bens: imóvel e veículo · Cadastrar veículo (FIPE)",
    "w": 240,
    "x": 0,
-   "y": 92790
+   "y": 93490
   },
   "escuro-app-nv-bem-imovel-detalhe": {
    "kind": "title1",
@@ -2611,7 +3880,7 @@
    "text": "Bens: imóvel e veículo · Detalhe do imóvel",
    "w": 240,
    "x": 0,
-   "y": 94770
+   "y": 95470
   },
   "escuro-app-nv-bem-veiculo-detalhe": {
    "kind": "title1",
@@ -2620,7 +3889,7 @@
    "text": "Bens: imóvel e veículo · Detalhe do veículo",
    "w": 240,
    "x": 0,
-   "y": 96650
+   "y": 97350
   },
   "escuro-app-nv-posicoes": {
    "kind": "title1",
@@ -2629,7 +3898,7 @@
    "text": "Listas completas · Todas as posições",
    "w": 240,
    "x": 0,
-   "y": 98530
+   "y": 99230
   },
   "escuro-app-nv-posicoes-estados": {
    "kind": "title1",
@@ -2638,7 +3907,7 @@
    "text": "Listas completas · Posições · busca vazia, vazio e erro",
    "w": 240,
    "x": 0,
-   "y": 100990
+   "y": 101690
   },
   "escuro-app-nv-lancamentos": {
    "kind": "title1",
@@ -2647,7 +3916,7 @@
    "text": "Listas completas · Todos os lançamentos",
    "w": 240,
    "x": 0,
-   "y": 102900
+   "y": 103600
   },
   "escuro-app-nv-lancamentos-estados": {
    "kind": "title1",
@@ -2656,7 +3925,7 @@
    "text": "Listas completas · Lançamentos · filtro vazio, vazio e erro",
    "w": 240,
    "x": 0,
-   "y": 105380
+   "y": 106080
   },
   "escuro-app-nv-lancamentos-categoria": {
    "kind": "title1",
@@ -2665,7 +3934,7 @@
    "text": "Listas completas · Lançamentos de uma categoria",
    "w": 240,
    "x": 0,
-   "y": 107360
+   "y": 108060
   },
   "escuro-app-nv-lancamento-detalhe": {
    "kind": "title1",
@@ -2674,7 +3943,7 @@
    "text": "Listas completas · Detalhe do lançamento",
    "w": 240,
    "x": 0,
-   "y": 109620
+   "y": 110320
   },
   "escuro-app-nv-relatorio-linha-do-tempo": {
    "kind": "title1",
@@ -2683,7 +3952,7 @@
    "text": "Listas completas · Relatório · linha do tempo completa",
    "w": 240,
    "x": 0,
-   "y": 111600
+   "y": 112300
   },
   "escuro-app-nv-simulacoes": {
    "kind": "title1",
@@ -2692,7 +3961,7 @@
    "text": "Simulações salvas",
    "w": 240,
    "x": 0,
-   "y": 114110
+   "y": 114810
   },
   "escuro-app-nv-simulacoes-estados": {
    "kind": "title1",
@@ -2701,7 +3970,7 @@
    "text": "Simulações salvas · estados",
    "w": 240,
    "x": 0,
-   "y": 115990
+   "y": 116690
   },
   "escuro-app-nv-chat-painel": {
    "kind": "title1",
@@ -2710,7 +3979,7 @@
    "text": "Conversa: ações · Chat aberto sobre a tela",
    "w": 240,
    "x": 0,
-   "y": 117870
+   "y": 118570
   },
   "escuro-app-nv-conversa-menu": {
    "kind": "title1",
@@ -2719,7 +3988,7 @@
    "text": "Conversa: ações · Conversa · mais opções",
    "w": 240,
    "x": 0,
-   "y": 119750
+   "y": 120450
   },
   "escuro-app-nv-conversa-apagar": {
    "kind": "title1",
@@ -2728,7 +3997,7 @@
    "text": "Conversa: ações · Conversa · apagar",
    "w": 240,
    "x": 0,
-   "y": 121630
+   "y": 122330
   },
   "escuro-app-nv-conversa-anexar": {
    "kind": "title1",
@@ -2737,7 +4006,7 @@
    "text": "Conversa: ações · Conversa · anexar arquivo",
    "w": 240,
    "x": 0,
-   "y": 123510
+   "y": 124210
   },
   "escuro-app-nv-conversa-anexo-previa": {
    "kind": "title1",
@@ -2746,7 +4015,7 @@
    "text": "Conversa: ações · Conversa · anexo pronto para enviar",
    "w": 240,
    "x": 0,
-   "y": 125390
+   "y": 126090
   },
   "escuro-app-nv-conversa-gravando": {
    "kind": "title1",
@@ -2755,7 +4024,7 @@
    "text": "Conversa: ações · Conversa · gravando voz",
    "w": 240,
    "x": 0,
-   "y": 127270
+   "y": 127970
   },
   "escuro-app-nv-conversa-transcrevendo": {
    "kind": "title1",
@@ -2764,7 +4033,7 @@
    "text": "Conversa: ações · Conversa · transcrevendo",
    "w": 240,
    "x": 0,
-   "y": 129150
+   "y": 129850
   },
   "escuro-app-nv-conversa-limite": {
    "kind": "title1",
@@ -2773,7 +4042,7 @@
    "text": "Conversa: ações · Conversa · limite de perguntas do plano",
    "w": 240,
    "x": 0,
-   "y": 131030
+   "y": 131730
   },
   "escuro-app-nv-ativo-comparar": {
    "kind": "title1",
@@ -2782,7 +4051,7 @@
    "text": "Detalhe do ativo: complementos · Ativo · comparar com (opções)",
    "w": 240,
    "x": 0,
-   "y": 132910
+   "y": 133610
   },
   "escuro-app-nv-ativo-comparar-ibovespa": {
    "kind": "title1",
@@ -2791,7 +4060,7 @@
    "text": "Detalhe do ativo: complementos · Ativo · comparado ao Ibovespa",
    "w": 240,
    "x": 0,
-   "y": 134790
+   "y": 135490
   },
   "escuro-app-nv-ativo-preco-sem-ajuste": {
    "kind": "title1",
@@ -2800,7 +4069,7 @@
    "text": "Detalhe do ativo: complementos · Ativo · preço sem ajuste",
    "w": 240,
    "x": 0,
-   "y": 136670
+   "y": 137370
   },
   "escuro-app-nv-ativo-mais-detalhes": {
    "kind": "title1",
@@ -2809,7 +4078,7 @@
    "text": "Detalhe do ativo: complementos · Ativo · mais detalhes",
    "w": 240,
    "x": 0,
-   "y": 138550
+   "y": 139250
   },
   "escuro-app-nv-ativo-eventos": {
    "kind": "title1",
@@ -2818,7 +4087,7 @@
    "text": "Detalhe do ativo: complementos · Ativo · todos os eventos corporativos",
    "w": 240,
    "x": 0,
-   "y": 140510
+   "y": 141210
   },
   "escuro-app-nv-ativo-risco": {
    "kind": "title1",
@@ -2827,7 +4096,7 @@
    "text": "Detalhe do ativo: complementos · Ajustar risco do ativo",
    "w": 240,
    "x": 0,
-   "y": 142460
+   "y": 143160
   },
   "escuro-app-nv-inicio-novo": {
    "kind": "title1",
@@ -2836,7 +4105,7 @@
    "text": "Usuário novo (sem banco conectado) · Início · usuário novo",
    "w": 240,
    "x": 0,
-   "y": 144750
+   "y": 145450
   },
   "escuro-app-nv-gastos-novo": {
    "kind": "title1",
@@ -2845,7 +4114,7 @@
    "text": "Usuário novo (sem banco conectado) · Gastos · usuário novo",
    "w": 240,
    "x": 0,
-   "y": 146630
+   "y": 147330
   },
   "escuro-app-nv-investimentos-novo": {
    "kind": "title1",
@@ -2854,7 +4123,7 @@
    "text": "Usuário novo (sem banco conectado) · Investimentos · usuário novo",
    "w": 240,
    "x": 0,
-   "y": 148510
+   "y": 149210
   },
   "escuro-app-nv-notificacoes": {
    "kind": "title1",
@@ -2863,7 +4132,7 @@
    "text": "Avisos e notificações · Notificações",
    "w": 240,
    "x": 0,
-   "y": 150390
+   "y": 151090
   },
   "escuro-app-nv-investimentos-duplicidade": {
    "kind": "title1",
@@ -2872,7 +4141,7 @@
    "text": "Investimentos: duplicidade · Investimento duplicado (somar, separar ou excluir)",
    "w": 240,
    "x": 0,
-   "y": 152460
+   "y": 153160
   },
   "escuro-app-nv-banco-desconectar": {
    "kind": "title1",
@@ -2881,7 +4150,7 @@
    "text": "Conta: desconectar banco e excluir conta · Desconectar banco",
    "w": 240,
    "x": 0,
-   "y": 154340
+   "y": 155040
   },
   "escuro-app-nv-excluir-conta": {
    "kind": "title1",
@@ -2890,7 +4159,7 @@
    "text": "Conta: desconectar banco e excluir conta · Excluir conta (LGPD)",
    "w": 240,
    "x": 0,
-   "y": 156220
+   "y": 156920
   },
   "escuro-app-nv-relatorio-exportar": {
    "kind": "title1",
@@ -2899,7 +4168,7 @@
    "text": "Relatório: exportar · Exportar relatório (PDF, Excel, CSV)",
    "w": 240,
    "x": 0,
-   "y": 158100
+   "y": 158800
   },
   "escuro-app-nv-relatorio-exportado": {
    "kind": "title1",
@@ -2908,7 +4177,358 @@
    "text": "Relatório: exportar · Relatório pronto",
    "w": 240,
    "x": 0,
-   "y": 159980
+   "y": 160680
+  },
+  "escuro-app-nv-desbloqueio": {
+   "kind": "title1",
+   "maxW": 3933,
+   "page": "escuro-app",
+   "text": "Desbloqueio e valores ocultos · Desbloqueio com biometria",
+   "w": 240,
+   "x": 0,
+   "y": 162560
+  },
+  "escuro-app-nv-inicio-oculto": {
+   "kind": "title1",
+   "maxW": 3933,
+   "page": "escuro-app",
+   "text": "Desbloqueio e valores ocultos · Início com valores ocultos",
+   "w": 240,
+   "x": 0,
+   "y": 164440
+  },
+  "escuro-app-nv-investimentos-oculto": {
+   "kind": "title1",
+   "maxW": 3933,
+   "page": "escuro-app",
+   "text": "Desbloqueio e valores ocultos · Investimentos com valores ocultos",
+   "w": 240,
+   "x": 0,
+   "y": 167820
+  },
+  "escuro-app-nv-tetos": {
+   "kind": "title1",
+   "maxW": 3933,
+   "page": "escuro-app",
+   "text": "Tetos de gasto · lista",
+   "w": 240,
+   "x": 0,
+   "y": 173510
+  },
+  "escuro-app-nv-teto-detalhe": {
+   "kind": "title1",
+   "maxW": 3933,
+   "page": "escuro-app",
+   "text": "Tetos de gasto · Detalhe do teto (Alimentação)",
+   "w": 240,
+   "x": 0,
+   "y": 175390
+  },
+  "escuro-app-nv-teto-editar": {
+   "kind": "title1",
+   "maxW": 3933,
+   "page": "escuro-app",
+   "text": "Tetos de gasto · Editar teto",
+   "w": 240,
+   "x": 0,
+   "y": 177370
+  },
+  "escuro-app-nv-tetos-vazio": {
+   "kind": "title1",
+   "maxW": 3933,
+   "page": "escuro-app",
+   "text": "Tetos de gasto · vazio",
+   "w": 240,
+   "x": 0,
+   "y": 179690
+  },
+  "escuro-app-nv-teto-excluir": {
+   "kind": "title1",
+   "maxW": 3933,
+   "page": "escuro-app",
+   "text": "Tetos de gasto · Excluir teto (confirmação)",
+   "w": 240,
+   "x": 0,
+   "y": 181570
+  },
+  "escuro-app-nv-alerta-detalhe": {
+   "kind": "title1",
+   "maxW": 3933,
+   "page": "escuro-app",
+   "text": "Alertas de preço: detalhe e estados · Detalhe do alerta (Bitcoin)",
+   "w": 240,
+   "x": 0,
+   "y": 183450
+  },
+  "escuro-app-nv-alerta-editar": {
+   "kind": "title1",
+   "maxW": 3933,
+   "page": "escuro-app",
+   "text": "Alertas de preço: detalhe e estados · Editar alerta de preço",
+   "w": 240,
+   "x": 0,
+   "y": 185520
+  },
+  "escuro-app-nv-alerta-disparado": {
+   "kind": "title1",
+   "maxW": 3933,
+   "page": "escuro-app",
+   "text": "Alertas de preço: detalhe e estados · Alerta disparado (aviso do Caramelo)",
+   "w": 240,
+   "x": 0,
+   "y": 187520
+  },
+  "escuro-app-nv-alertas-vazio": {
+   "kind": "title1",
+   "maxW": 3933,
+   "page": "escuro-app",
+   "text": "Alertas de preço: detalhe e estados · Alertas de preço · vazio",
+   "w": 240,
+   "x": 0,
+   "y": 189630
+  },
+  "escuro-app-nv-alerta-cancelar": {
+   "kind": "title1",
+   "maxW": 3933,
+   "page": "escuro-app",
+   "text": "Alertas de preço: detalhe e estados · Cancelar alerta (confirmação)",
+   "w": 240,
+   "x": 0,
+   "y": 191510
+  },
+  "escuro-app-nv-alocacao": {
+   "kind": "title1",
+   "maxW": 3933,
+   "page": "escuro-app",
+   "text": "Carteira-alvo por perfil · Alocação (carteira × alvo do perfil)",
+   "w": 240,
+   "x": 0,
+   "y": 193390
+  },
+  "escuro-app-nv-alocacao-perfis": {
+   "kind": "title1",
+   "maxW": 3933,
+   "page": "escuro-app",
+   "text": "Carteira-alvo por perfil · Os 4 perfis (carteira-alvo de cada um)",
+   "w": 240,
+   "x": 0,
+   "y": 196400
+  },
+  "escuro-app-nv-assinatura-detalhe": {
+   "kind": "title1",
+   "maxW": 3933,
+   "page": "escuro-app",
+   "text": "Assinaturas: detalhe e calendário · Detalhe da assinatura (Netflix)",
+   "w": 240,
+   "x": 0,
+   "y": 199840
+  },
+  "escuro-app-nv-assinaturas-calendario": {
+   "kind": "title1",
+   "maxW": 3933,
+   "page": "escuro-app",
+   "text": "Assinaturas: detalhe e calendário · Calendário de cobranças do mês",
+   "w": 240,
+   "x": 0,
+   "y": 202500
+  },
+  "escuro-app-nv-inicio-estados": {
+   "kind": "title1",
+   "maxW": 3933,
+   "page": "escuro-app",
+   "text": "Estados das telas principais · Início · estados",
+   "w": 240,
+   "x": 0,
+   "y": 204380
+  },
+  "escuro-app-nv-gastos-estados": {
+   "kind": "title1",
+   "maxW": 3933,
+   "page": "escuro-app",
+   "text": "Estados das telas principais · Gastos · estados",
+   "w": 240,
+   "x": 0,
+   "y": 207310
+  },
+  "escuro-app-nv-investimentos-estados": {
+   "kind": "title1",
+   "maxW": 3933,
+   "page": "escuro-app",
+   "text": "Estados das telas principais · Investimentos · estados",
+   "w": 240,
+   "x": 0,
+   "y": 210330
+  },
+  "escuro-app-nv-ativo-estados": {
+   "kind": "title1",
+   "maxW": 3933,
+   "page": "escuro-app",
+   "text": "Estados das telas principais · PETR4 · estados",
+   "w": 240,
+   "x": 0,
+   "y": 213310
+  },
+  "escuro-app-nv-relatorio-estados": {
+   "kind": "title1",
+   "maxW": 3933,
+   "page": "escuro-app",
+   "text": "Estados das telas principais · Relatório · estados",
+   "w": 240,
+   "x": 0,
+   "y": 216400
+  },
+  "escuro-app-nv-alertas-estados": {
+   "kind": "title1",
+   "maxW": 3933,
+   "page": "escuro-app",
+   "text": "Estados das telas principais · Alertas · estados",
+   "w": 240,
+   "x": 0,
+   "y": 219730
+  },
+  "escuro-app-nv-assinaturas-estados": {
+   "kind": "title1",
+   "maxW": 3933,
+   "page": "escuro-app",
+   "text": "Estados das telas principais · Assinaturas · estados",
+   "w": 240,
+   "x": 0,
+   "y": 223020
+  },
+  "escuro-app-nv-notificacoes-estados": {
+   "kind": "title1",
+   "maxW": 3933,
+   "page": "escuro-app",
+   "text": "Estados das telas principais · Notificações · estados",
+   "w": 240,
+   "x": 0,
+   "y": 226170
+  },
+  "escuro-app-nv-meta-detalhe-estados": {
+   "kind": "title1",
+   "maxW": 3933,
+   "page": "escuro-app",
+   "text": "Estados das telas principais · Reserva de emergência · estados",
+   "w": 240,
+   "x": 0,
+   "y": 229460
+  },
+  "escuro-app-nv-lancamento-detalhe-estados": {
+   "kind": "title1",
+   "maxW": 3933,
+   "page": "escuro-app",
+   "text": "Estados das telas principais · Detalhe do lançamento · estados",
+   "w": 240,
+   "x": 0,
+   "y": 232560
+  },
+  "escuro-app-nv-conversa-nova": {
+   "kind": "title1",
+   "maxW": 3933,
+   "page": "escuro-app",
+   "text": "Chat: estados · Conversa · Conversa nova (boas-vindas da Capivara)",
+   "w": 240,
+   "x": 0,
+   "y": 235200
+  },
+  "escuro-app-nv-conversa-digitando": {
+   "kind": "title1",
+   "maxW": 3933,
+   "page": "escuro-app",
+   "text": "Chat: estados · Conversa · Resposta chegando (digitando)",
+   "w": 240,
+   "x": 0,
+   "y": 237080
+  },
+  "escuro-app-nv-conversa-indisponivel": {
+   "kind": "title1",
+   "maxW": 3933,
+   "page": "escuro-app",
+   "text": "Chat: estados · Conversa · Assistente indisponível",
+   "w": 240,
+   "x": 0,
+   "y": 238960
+  },
+  "escuro-app-nv-conversa-nao-enviada": {
+   "kind": "title1",
+   "maxW": 3933,
+   "page": "escuro-app",
+   "text": "Chat: estados · Conversa · Mensagem não enviada",
+   "w": 240,
+   "x": 0,
+   "y": 240840
+  },
+  "escuro-app-nv-conversa-anexo-falhou": {
+   "kind": "title1",
+   "maxW": 3933,
+   "page": "escuro-app",
+   "text": "Chat: estados · Conversa · Envio do anexo falhou",
+   "w": 240,
+   "x": 0,
+   "y": 242720
+  },
+  "escuro-app-nv-chat-painel-nova": {
+   "kind": "title1",
+   "maxW": 3933,
+   "page": "escuro-app",
+   "text": "Chat: estados · Chat sobre a tela · Conversa nova (boas-vindas da Capivara)",
+   "w": 240,
+   "x": 0,
+   "y": 244600
+  },
+  "escuro-app-nv-chat-painel-digitando": {
+   "kind": "title1",
+   "maxW": 3933,
+   "page": "escuro-app",
+   "text": "Chat: estados · Chat sobre a tela · Resposta chegando (digitando)",
+   "w": 240,
+   "x": 0,
+   "y": 246480
+  },
+  "escuro-app-nv-chat-painel-indisponivel": {
+   "kind": "title1",
+   "maxW": 3933,
+   "page": "escuro-app",
+   "text": "Chat: estados · Chat sobre a tela · Assistente indisponível",
+   "w": 240,
+   "x": 0,
+   "y": 248360
+  },
+  "escuro-app-nv-chat-painel-nao-enviada": {
+   "kind": "title1",
+   "maxW": 3933,
+   "page": "escuro-app",
+   "text": "Chat: estados · Chat sobre a tela · Mensagem não enviada",
+   "w": 240,
+   "x": 0,
+   "y": 250240
+  },
+  "escuro-app-nv-chat-painel-anexo-falhou": {
+   "kind": "title1",
+   "maxW": 3933,
+   "page": "escuro-app",
+   "text": "Chat: estados · Chat sobre a tela · Envio do anexo falhou",
+   "w": 240,
+   "x": 0,
+   "y": 252120
+  },
+  "escuro-app-nv-notificacoes-desligadas": {
+   "kind": "title1",
+   "maxW": 3933,
+   "page": "escuro-app",
+   "text": "Notificações do aparelho desligadas · Notificações · aparelho sem permissão",
+   "w": 240,
+   "x": 0,
+   "y": 254000
+  },
+  "escuro-app-nv-meu-perfil-notificacoes-desligadas": {
+   "kind": "title1",
+   "maxW": 3933,
+   "page": "escuro-app",
+   "text": "Notificações do aparelho desligadas · Meu perfil · aparelho sem permissão",
+   "w": 240,
+   "x": 0,
+   "y": 256440
   },
   "escuro-onb-nv-perfil-investidor-p1": {
    "kind": "title1",
@@ -2917,7 +4537,7 @@
    "text": "Perfil de investidor · pergunta 1",
    "w": 240,
    "x": 0,
-   "y": 7220
+   "y": 22500
   },
   "escuro-onb-nv-perfil-investidor-p2": {
    "kind": "title1",
@@ -2926,7 +4546,7 @@
    "text": "Perfil de investidor · pergunta 2",
    "w": 240,
    "x": 0,
-   "y": 9100
+   "y": 24380
   },
   "escuro-onb-nv-perfil-investidor-p4": {
    "kind": "title1",
@@ -2935,7 +4555,7 @@
    "text": "Perfil de investidor · pergunta 4",
    "w": 240,
    "x": 0,
-   "y": 10980
+   "y": 26260
   },
   "escuro-onb-nv-perfil-investidor-p5": {
    "kind": "title1",
@@ -2944,7 +4564,7 @@
    "text": "Perfil de investidor · pergunta 5",
    "w": 240,
    "x": 0,
-   "y": 12860
+   "y": 28140
   },
   "escuro-onb-nv-perfil-investidor-p6": {
    "kind": "title1",
@@ -2953,7 +4573,7 @@
    "text": "Perfil de investidor · pergunta 6",
    "w": 240,
    "x": 0,
-   "y": 14740
+   "y": 30020
   },
   "escuro-onb-nv-perfil-investidor-resultado": {
    "kind": "title1",
@@ -2962,7 +4582,7 @@
    "text": "Perfil de investidor · resultado",
    "w": 240,
    "x": 0,
-   "y": 16620
+   "y": 31900
   },
   "escuro-onb-nv-malvo-autorizar": {
    "kind": "title1",
@@ -2971,7 +4591,7 @@
    "text": "Conexão com o banco pelo Malvo · Conectar banco · autorização",
    "w": 240,
    "x": 0,
-   "y": 18750
+   "y": 34480
   },
   "escuro-onb-nv-malvo-conectando": {
    "kind": "title1",
@@ -2980,7 +4600,7 @@
    "text": "Conexão com o banco pelo Malvo · Conectar banco · conectando",
    "w": 240,
    "x": 0,
-   "y": 20630
+   "y": 36360
   },
   "escuro-onb-nv-malvo-sucesso": {
    "kind": "title1",
@@ -2989,7 +4609,7 @@
    "text": "Conexão com o banco pelo Malvo · Conectar banco · sucesso",
    "w": 240,
    "x": 0,
-   "y": 22510
+   "y": 38240
   },
   "escuro-onb-nv-malvo-erro": {
    "kind": "title1",
@@ -2998,7 +4618,7 @@
    "text": "Conexão com o banco pelo Malvo · Conectar banco · erro ou cancelado",
    "w": 240,
    "x": 0,
-   "y": 24390
+   "y": 40120
   },
   "escuro-onb-nv-termos": {
    "kind": "title1",
@@ -3007,7 +4627,7 @@
    "text": "Termos e privacidade · Termos de uso",
    "w": 240,
    "x": 0,
-   "y": 26270
+   "y": 42000
   },
   "escuro-onb-nv-privacidade": {
    "kind": "title1",
@@ -3016,7 +4636,79 @@
    "text": "Termos e privacidade · Política de privacidade",
    "w": 240,
    "x": 0,
-   "y": 28320
+   "y": 44050
+  },
+  "escuro-onb-nv-entrar": {
+   "kind": "title1",
+   "maxW": 3933,
+   "page": "escuro-onb",
+   "text": "Entrar com e-mail",
+   "w": 240,
+   "x": 0,
+   "y": 1580
+  },
+  "escuro-onb-nv-codigo": {
+   "kind": "title1",
+   "maxW": 3933,
+   "page": "escuro-onb",
+   "text": "Entrar com e-mail · Código de 6 dígitos (entrar)",
+   "w": 240,
+   "x": 0,
+   "y": 3460
+  },
+  "escuro-onb-nv-codigo-criar": {
+   "kind": "title1",
+   "maxW": 3933,
+   "page": "escuro-onb",
+   "text": "Entrar com e-mail · Código de 6 dígitos (criar conta)",
+   "w": 240,
+   "x": 0,
+   "y": 5340
+  },
+  "escuro-onb-nv-codigo-erro": {
+   "kind": "title1",
+   "maxW": 3933,
+   "page": "escuro-onb",
+   "text": "Entrar com e-mail · Código incorreto",
+   "w": 240,
+   "x": 0,
+   "y": 7220
+  },
+  "escuro-onb-nv-codigo-vencido": {
+   "kind": "title1",
+   "maxW": 3933,
+   "page": "escuro-onb",
+   "text": "Entrar com e-mail · Código vencido",
+   "w": 240,
+   "x": 0,
+   "y": 9100
+  },
+  "escuro-onb-nv-entrar-sem-conta": {
+   "kind": "title1",
+   "maxW": 3933,
+   "page": "escuro-onb",
+   "text": "Entrar com e-mail · E-mail sem conta (oferece criar)",
+   "w": 240,
+   "x": 0,
+   "y": 10980
+  },
+  "escuro-onb-nv-entrar-sem-internet": {
+   "kind": "title1",
+   "maxW": 3933,
+   "page": "escuro-onb",
+   "text": "Entrar com e-mail · Sem internet",
+   "w": 240,
+   "x": 0,
+   "y": 12860
+  },
+  "escuro-onb-nv-agentes-avisos-permissao": {
+   "kind": "title1",
+   "maxW": 3933,
+   "page": "escuro-onb",
+   "text": "Onboarding: avisos com notificações bloqueadas · Etapa 3 · notificações bloqueadas no aparelho",
+   "w": 240,
+   "x": 0,
+   "y": 20380
   }
  },
  "order": [
@@ -3236,6 +4928,123 @@
   "Escuro-Desktop-Relatorio-Exportado.dc.html",
   "Escuro-Tablet-Relatorio-Exportado.dc.html",
   "Escuro-Mobile-Relatorio-Exportado.dc.html",
+  "Escuro-Desktop-Desbloqueio.dc.html",
+  "Escuro-Tablet-Desbloqueio.dc.html",
+  "Escuro-Mobile-Desbloqueio.dc.html",
+  "Escuro-Desktop-Inicio-Oculto.dc.html",
+  "Escuro-Tablet-Inicio-Oculto.dc.html",
+  "Escuro-Mobile-Inicio-Oculto.dc.html",
+  "Escuro-Desktop-Investimentos-Oculto.dc.html",
+  "Escuro-Tablet-Investimentos-Oculto.dc.html",
+  "Escuro-Mobile-Investimentos-Oculto.dc.html",
+  "Escuro-Desktop-Tetos.dc.html",
+  "Escuro-Tablet-Tetos.dc.html",
+  "Escuro-Mobile-Tetos.dc.html",
+  "Escuro-Desktop-Teto-Detalhe.dc.html",
+  "Escuro-Tablet-Teto-Detalhe.dc.html",
+  "Escuro-Mobile-Teto-Detalhe.dc.html",
+  "Escuro-Desktop-Teto-Editar.dc.html",
+  "Escuro-Tablet-Teto-Editar.dc.html",
+  "Escuro-Mobile-Teto-Editar.dc.html",
+  "Escuro-Desktop-Tetos-Vazio.dc.html",
+  "Escuro-Tablet-Tetos-Vazio.dc.html",
+  "Escuro-Mobile-Tetos-Vazio.dc.html",
+  "Escuro-Desktop-Teto-Excluir.dc.html",
+  "Escuro-Tablet-Teto-Excluir.dc.html",
+  "Escuro-Mobile-Teto-Excluir.dc.html",
+  "Escuro-Desktop-Alerta-Detalhe.dc.html",
+  "Escuro-Tablet-Alerta-Detalhe.dc.html",
+  "Escuro-Mobile-Alerta-Detalhe.dc.html",
+  "Escuro-Desktop-Alerta-Editar.dc.html",
+  "Escuro-Tablet-Alerta-Editar.dc.html",
+  "Escuro-Mobile-Alerta-Editar.dc.html",
+  "Escuro-Desktop-Alerta-Disparado.dc.html",
+  "Escuro-Tablet-Alerta-Disparado.dc.html",
+  "Escuro-Mobile-Alerta-Disparado.dc.html",
+  "Escuro-Desktop-Alertas-Vazio.dc.html",
+  "Escuro-Tablet-Alertas-Vazio.dc.html",
+  "Escuro-Mobile-Alertas-Vazio.dc.html",
+  "Escuro-Desktop-Alerta-Cancelar.dc.html",
+  "Escuro-Tablet-Alerta-Cancelar.dc.html",
+  "Escuro-Mobile-Alerta-Cancelar.dc.html",
+  "Escuro-Desktop-Alocacao.dc.html",
+  "Escuro-Tablet-Alocacao.dc.html",
+  "Escuro-Mobile-Alocacao.dc.html",
+  "Escuro-Desktop-Alocacao-Perfis.dc.html",
+  "Escuro-Tablet-Alocacao-Perfis.dc.html",
+  "Escuro-Mobile-Alocacao-Perfis.dc.html",
+  "Escuro-Desktop-Assinatura-Detalhe.dc.html",
+  "Escuro-Tablet-Assinatura-Detalhe.dc.html",
+  "Escuro-Mobile-Assinatura-Detalhe.dc.html",
+  "Escuro-Desktop-Assinaturas-Calendario.dc.html",
+  "Escuro-Tablet-Assinaturas-Calendario.dc.html",
+  "Escuro-Mobile-Assinaturas-Calendario.dc.html",
+  "Escuro-Desktop-Inicio-Estados.dc.html",
+  "Escuro-Tablet-Inicio-Estados.dc.html",
+  "Escuro-Mobile-Inicio-Estados.dc.html",
+  "Escuro-Desktop-Gastos-Estados.dc.html",
+  "Escuro-Tablet-Gastos-Estados.dc.html",
+  "Escuro-Mobile-Gastos-Estados.dc.html",
+  "Escuro-Desktop-Investimentos-Estados.dc.html",
+  "Escuro-Tablet-Investimentos-Estados.dc.html",
+  "Escuro-Mobile-Investimentos-Estados.dc.html",
+  "Escuro-Desktop-Ativo-Estados.dc.html",
+  "Escuro-Tablet-Ativo-Estados.dc.html",
+  "Escuro-Mobile-Ativo-Estados.dc.html",
+  "Escuro-Desktop-Relatorio-Estados.dc.html",
+  "Escuro-Tablet-Relatorio-Estados.dc.html",
+  "Escuro-Mobile-Relatorio-Estados.dc.html",
+  "Escuro-Desktop-Alertas-Estados.dc.html",
+  "Escuro-Tablet-Alertas-Estados.dc.html",
+  "Escuro-Mobile-Alertas-Estados.dc.html",
+  "Escuro-Desktop-Assinaturas-Estados.dc.html",
+  "Escuro-Tablet-Assinaturas-Estados.dc.html",
+  "Escuro-Mobile-Assinaturas-Estados.dc.html",
+  "Escuro-Desktop-Notificacoes-Estados.dc.html",
+  "Escuro-Tablet-Notificacoes-Estados.dc.html",
+  "Escuro-Mobile-Notificacoes-Estados.dc.html",
+  "Escuro-Desktop-Meta-Detalhe-Estados.dc.html",
+  "Escuro-Tablet-Meta-Detalhe-Estados.dc.html",
+  "Escuro-Mobile-Meta-Detalhe-Estados.dc.html",
+  "Escuro-Desktop-Lancamento-Detalhe-Estados.dc.html",
+  "Escuro-Tablet-Lancamento-Detalhe-Estados.dc.html",
+  "Escuro-Mobile-Lancamento-Detalhe-Estados.dc.html",
+  "Escuro-Desktop-Conversa-Nova.dc.html",
+  "Escuro-Tablet-Conversa-Nova.dc.html",
+  "Escuro-Mobile-Conversa-Nova.dc.html",
+  "Escuro-Desktop-Conversa-Digitando.dc.html",
+  "Escuro-Tablet-Conversa-Digitando.dc.html",
+  "Escuro-Mobile-Conversa-Digitando.dc.html",
+  "Escuro-Desktop-Conversa-Indisponivel.dc.html",
+  "Escuro-Tablet-Conversa-Indisponivel.dc.html",
+  "Escuro-Mobile-Conversa-Indisponivel.dc.html",
+  "Escuro-Desktop-Conversa-Nao-Enviada.dc.html",
+  "Escuro-Tablet-Conversa-Nao-Enviada.dc.html",
+  "Escuro-Mobile-Conversa-Nao-Enviada.dc.html",
+  "Escuro-Desktop-Conversa-Anexo-Falhou.dc.html",
+  "Escuro-Tablet-Conversa-Anexo-Falhou.dc.html",
+  "Escuro-Mobile-Conversa-Anexo-Falhou.dc.html",
+  "Escuro-Desktop-Chat-Painel-Nova.dc.html",
+  "Escuro-Tablet-Chat-Painel-Nova.dc.html",
+  "Escuro-Mobile-Chat-Painel-Nova.dc.html",
+  "Escuro-Desktop-Chat-Painel-Digitando.dc.html",
+  "Escuro-Tablet-Chat-Painel-Digitando.dc.html",
+  "Escuro-Mobile-Chat-Painel-Digitando.dc.html",
+  "Escuro-Desktop-Chat-Painel-Indisponivel.dc.html",
+  "Escuro-Tablet-Chat-Painel-Indisponivel.dc.html",
+  "Escuro-Mobile-Chat-Painel-Indisponivel.dc.html",
+  "Escuro-Desktop-Chat-Painel-Nao-Enviada.dc.html",
+  "Escuro-Tablet-Chat-Painel-Nao-Enviada.dc.html",
+  "Escuro-Mobile-Chat-Painel-Nao-Enviada.dc.html",
+  "Escuro-Desktop-Chat-Painel-Anexo-Falhou.dc.html",
+  "Escuro-Tablet-Chat-Painel-Anexo-Falhou.dc.html",
+  "Escuro-Mobile-Chat-Painel-Anexo-Falhou.dc.html",
+  "Escuro-Desktop-Notificacoes-Desligadas.dc.html",
+  "Escuro-Tablet-Notificacoes-Desligadas.dc.html",
+  "Escuro-Mobile-Notificacoes-Desligadas.dc.html",
+  "Escuro-Desktop-Meu-Perfil-Notificacoes-Desligadas.dc.html",
+  "Escuro-Tablet-Meu-Perfil-Notificacoes-Desligadas.dc.html",
+  "Escuro-Mobile-Meu-Perfil-Notificacoes-Desligadas.dc.html",
   "Escuro-Desktop-Perfil-Investidor-P1.dc.html",
   "Escuro-Tablet-Perfil-Investidor-P1.dc.html",
   "Escuro-Mobile-Perfil-Investidor-P1.dc.html",
@@ -3271,7 +5080,31 @@
   "Escuro-Mobile-Termos.dc.html",
   "Escuro-Desktop-Privacidade.dc.html",
   "Escuro-Tablet-Privacidade.dc.html",
-  "Escuro-Mobile-Privacidade.dc.html"
+  "Escuro-Mobile-Privacidade.dc.html",
+  "Escuro-Desktop-Entrar.dc.html",
+  "Escuro-Tablet-Entrar.dc.html",
+  "Escuro-Mobile-Entrar.dc.html",
+  "Escuro-Desktop-Codigo.dc.html",
+  "Escuro-Tablet-Codigo.dc.html",
+  "Escuro-Mobile-Codigo.dc.html",
+  "Escuro-Desktop-Codigo-Criar.dc.html",
+  "Escuro-Tablet-Codigo-Criar.dc.html",
+  "Escuro-Mobile-Codigo-Criar.dc.html",
+  "Escuro-Desktop-Codigo-Erro.dc.html",
+  "Escuro-Tablet-Codigo-Erro.dc.html",
+  "Escuro-Mobile-Codigo-Erro.dc.html",
+  "Escuro-Desktop-Codigo-Vencido.dc.html",
+  "Escuro-Tablet-Codigo-Vencido.dc.html",
+  "Escuro-Mobile-Codigo-Vencido.dc.html",
+  "Escuro-Desktop-Entrar-Sem-Conta.dc.html",
+  "Escuro-Tablet-Entrar-Sem-Conta.dc.html",
+  "Escuro-Mobile-Entrar-Sem-Conta.dc.html",
+  "Escuro-Desktop-Entrar-Sem-Internet.dc.html",
+  "Escuro-Tablet-Entrar-Sem-Internet.dc.html",
+  "Escuro-Mobile-Entrar-Sem-Internet.dc.html",
+  "Escuro-Desktop-Agentes-Avisos-Permissao.dc.html",
+  "Escuro-Tablet-Agentes-Avisos-Permissao.dc.html",
+  "Escuro-Mobile-Agentes-Avisos-Permissao.dc.html"
  ],
  "pages": [
   {
