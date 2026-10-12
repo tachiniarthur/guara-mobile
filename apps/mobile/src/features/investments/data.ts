@@ -2,6 +2,8 @@ import type { Cents } from '@guara/types';
 import { colors } from '@guara/ui-tokens';
 import { cents, sharesOf, sumCents } from '@guara/utils';
 
+import type { SubclassKey } from '@/constants/target-allocations';
+
 export type RiskLevel = 'Baixo' | 'Médio' | 'Alto';
 
 /** Classes of the positions page, in the design's order. */
@@ -30,6 +32,8 @@ export interface Position {
   /** Day change in percent. */
   change: number;
   classKey: PositionClassKey;
+  /** Subclass of the target allocation ("Ações large cap"); the group comes from it. */
+  subclass: SubclassKey;
   className: string;
   instrument: string;
   risk: RiskLevel;
@@ -54,6 +58,7 @@ const POSITION_INPUTS: PositionInput[] = [
     value: cents(1_589_210),
     change: 0.04,
     classKey: 'fixed',
+    subclass: 'postFixed',
     instrument: 'Título público',
     risk: 'Baixo',
     quantity: null,
@@ -69,6 +74,7 @@ const POSITION_INPUTS: PositionInput[] = [
     value: cents(633_000),
     change: 0.04,
     classKey: 'fixed',
+    subclass: 'postFixed',
     instrument: 'CDB',
     risk: 'Baixo',
     quantity: null,
@@ -84,6 +90,7 @@ const POSITION_INPUTS: PositionInput[] = [
     value: cents(756_400),
     change: -1.12,
     classKey: 'variable',
+    subclass: 'largeCaps',
     instrument: 'Ação',
     risk: 'Alto',
     quantity: '200',
@@ -99,6 +106,7 @@ const POSITION_INPUTS: PositionInput[] = [
     value: cents(312_750),
     change: 0.38,
     classKey: 'variable',
+    subclass: 'largeCaps',
     instrument: 'ETF',
     risk: 'Médio',
     quantity: '25',
@@ -114,6 +122,7 @@ const POSITION_INPUTS: PositionInput[] = [
     value: cents(677_460),
     change: 0.21,
     classKey: 'realEstate',
+    subclass: 'reits',
     instrument: 'Fundo imobiliário',
     risk: 'Médio',
     quantity: '42',
@@ -129,6 +138,7 @@ const POSITION_INPUTS: PositionInput[] = [
     value: cents(479_856),
     change: 2.4,
     classKey: 'alternative',
+    subclass: 'bitcoin',
     instrument: 'Criptomoeda',
     risk: 'Alto',
     quantity: '0,0078',
@@ -144,6 +154,7 @@ const POSITION_INPUTS: PositionInput[] = [
     value: cents(140_560),
     change: 0.52,
     classKey: 'international',
+    subclass: 'intlEtfs',
     instrument: 'ETF',
     risk: 'Médio',
     quantity: '4',
@@ -159,6 +170,7 @@ const POSITION_INPUTS: PositionInput[] = [
     value: cents(71_280),
     change: 0.88,
     classKey: 'international',
+    subclass: 'intlStocks',
     instrument: 'BDR',
     risk: 'Alto',
     quantity: '9',
@@ -174,6 +186,7 @@ const POSITION_INPUTS: PositionInput[] = [
     value: cents(59_820),
     change: 0.31,
     classKey: 'international',
+    subclass: 'intlStocks',
     instrument: 'BDR',
     risk: 'Alto',
     quantity: '6',
@@ -189,6 +202,7 @@ const POSITION_INPUTS: PositionInput[] = [
     value: cents(48_690),
     change: -0.74,
     classKey: 'international',
+    subclass: 'intlStocks',
     instrument: 'BDR',
     risk: 'Alto',
     quantity: '15',
@@ -204,6 +218,7 @@ const POSITION_INPUTS: PositionInput[] = [
     value: cents(35_244),
     change: 0.19,
     classKey: 'international',
+    subclass: 'intlStocks',
     instrument: 'BDR',
     risk: 'Alto',
     quantity: '6',
@@ -219,6 +234,7 @@ const POSITION_INPUTS: PositionInput[] = [
     value: cents(26_820),
     change: 0.42,
     classKey: 'international',
+    subclass: 'intlStocks',
     instrument: 'BDR',
     risk: 'Alto',
     quantity: '4',
@@ -296,44 +312,6 @@ export const PERFORMANCE = {
   accessibilityLabel: 'Rentabilidade em 12 meses: carteira +11,1%, CDI +9,9%',
 } as const;
 
-export const ASSET_CLASSES = [
-  {
-    key: 'fixed',
-    label: 'Renda fixa',
-    short: 'R. fixa',
-    color: colors.info.DEFAULT,
-    current: 46,
-  },
-  {
-    key: 'stocks',
-    label: 'Ações',
-    short: 'Ações',
-    color: colors.negative.DEFAULT,
-    current: 22,
-  },
-  {
-    key: 'reits',
-    label: 'FIIs',
-    short: 'FIIs',
-    color: colors.brand.DEFAULT,
-    current: 14,
-  },
-  {
-    key: 'crypto',
-    label: 'Cripto',
-    short: 'Cripto',
-    color: colors.positive.DEFAULT,
-    current: 10,
-  },
-  {
-    key: 'intl',
-    label: 'Internacional',
-    short: 'Intern.',
-    color: colors.foreground.subtle,
-    current: 8,
-  },
-] as const;
-
 /** Where each part of the portfolio is exposed: a country on the globe or the orbit (no country). */
 export const EXPOSURE = [
   {
@@ -401,3 +379,9 @@ export const EXPOSURE_ASSETS: Record<ExposureKey, ExposureAsset[]> = {
   ],
   none: fromPosition('BTC'),
 };
+
+/**
+ * Monthly contribution the Pacu offers to simulate on the Alocação page (design: R$ 1.500 por
+ * mês). Comes from the API with the assistant's suggestion.
+ */
+export const REBALANCE_CONTRIBUTION: Cents = cents(150000);

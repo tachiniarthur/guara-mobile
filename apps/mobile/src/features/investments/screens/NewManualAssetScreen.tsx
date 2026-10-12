@@ -8,11 +8,13 @@ import { View } from 'react-native';
 import { toast } from '@/components/feedback';
 import { FormScreen, ResponsiveGrid } from '@/components/layout';
 import { Icon, InfoNote, Input, MoneyInput, Text } from '@/components/ui';
+import { SUBCLASSES, type SubclassKey } from '@/constants/target-allocations';
 import { useBreakpoint } from '@/hooks/useBreakpoint';
 
-import { useProfileTargets } from '../hooks/useProfileTargets';
 import { ChatEntryTip, InvestmentTypePicker, PositionPreview } from '../components';
-import { ASSET_CLASSES, PORTFOLIO } from '../data';
+import { useAllocation } from '../hooks/useAllocation';
+import { usePositions } from '../hooks/usePositions';
+import { allocationByGroup } from '../lib/allocation';
 import {
   NEW_ASSET_EXAMPLE,
   NEW_ASSET_NOTES,
@@ -67,9 +69,41 @@ export function NewManualAssetScreen() {
   const invested =
     amount && averagePrice !== null ? multiplyCentsByDecimal(averagePrice, amount) : null;
   const worth = amount && quote ? multiplyCentsByDecimal(quote.price, amount) : null;
-  const profile = useProfileTargets();
-  const assetClass = quote ? ASSET_CLASSES.find((item) => item.key === quote.classKey) : undefined;
-  const classValue = assetClass ? (assetClass.current / 100) * PORTFOLIO.total : 0;
+  const allocation = useAllocation();
+  const { positions } = usePositions();
+  // The portfolio as it would be with this purchase (same rules as Alocação).
+  const withPurchase =
+    quote && worth !== null
+      ? allocationByGroup(
+          [
+            ...positions,
+            { name: quote.name, ticker: quote.ticker, value: worth, subclass: quote.subclass },
+          ],
+          allocation.type,
+        )
+      : null;
+
+  const purchaseEffect = (subclass: SubclassKey, ticker: string) => {
+    const group = SUBCLASSES[subclass].group;
+    const before = allocation.groups.find((item) => item.key === group)!;
+    const after = withPurchase!.groups.find((item) => item.key === group)!;
+    const sub = (rows: typeof before) => rows.subclasses.find((item) => item.key === subclass)!;
+    return {
+      label: before.label,
+      ticker,
+      color: before.color,
+      profile: allocation.label,
+      current: before.current,
+      after: after.current,
+      target: before.target,
+      subclass: {
+        label: sub(after).label,
+        current: sub(before).current,
+        after: sub(after).current,
+        target: sub(after).target,
+      },
+    };
+  };
 
   const errors = {
     ticker: quote
@@ -186,20 +220,9 @@ export function NewManualAssetScreen() {
         averagePrice={averagePrice}
         invested={invested}
         worth={worth}
-        portfolio={PORTFOLIO.total}
-        allocation={
-          assetClass && quote && worth !== null
-            ? {
-                label: assetClass.label,
-                ticker: quote.ticker,
-                color: assetClass.color,
-                profile: profile.label,
-                current: assetClass.current,
-                after: ((classValue + worth) / (PORTFOLIO.total + worth)) * 100,
-                target: profile.targets[assetClass.key],
-              }
-            : null
-        }
+        portfolio={allocation.total}
+        allocation={quote && withPurchase ? purchaseEffect(quote.subclass, quote.ticker) : null}
+        onOpenAllocation={() => router.navigate('/investments/allocation')}
         wide={isTablet}
       />
       <ChatEntryTip />

@@ -57,6 +57,8 @@ export const colors = {
     solid: '#F2C230',
     pressed: '#D9AC22',
     muted: '#332A12',
+    /** Outline of the selected card ("Seu perfil" among the 4 profiles). */
+    border: '#6B5A1E',
     foreground: '#0B110E',
   },
   /** Folha — gain, calm month, buy. */

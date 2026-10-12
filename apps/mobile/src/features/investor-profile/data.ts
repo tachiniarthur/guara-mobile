@@ -73,7 +73,7 @@ export const PROFILE_QUESTIONS: readonly ProfileQuestion[] = [
     id: 'experience',
     title: 'Quanto você conhece de investimentos?',
     summary: 'Experiência',
-    why: 'Ajuda a explicar as coisas no nível certo e a não sugerir produtos que você ainda não conhece.',
+    why: 'Ajuda a explicar as coisas no nível certo e a não sugerir produtos que você ainda não conhece. Quem já investe em estruturados e alternativos pode ter o perfil Sofisticado.',
     options: [
       { id: 'a', label: 'Nunca investi', short: 'Nunca investiu' },
       {
@@ -88,8 +88,8 @@ export const PROFILE_QUESTIONS: readonly ProfileQuestion[] = [
       },
       {
         id: 'd',
-        label: 'Invisto há anos em vários tipos, inclusive exterior e cripto',
-        short: 'Vários tipos, inclusive exterior e cripto',
+        label: 'Invisto há anos em vários tipos, inclusive exterior, cripto e estruturados',
+        short: 'Vários tipos, inclusive exterior, cripto e estruturados',
       },
     ],
   },

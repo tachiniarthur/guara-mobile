@@ -5,6 +5,8 @@ import { View } from 'react-native';
 
 import { InfoNote, MoneyText, Span, Text } from '@/components/ui';
 
+import { directionText, OUT_OF_TARGET, shareText } from '../../lib/allocation';
+
 import { ClassShareBar } from './ClassShareBar';
 
 export interface PositionPreviewProps {
@@ -14,7 +16,7 @@ export interface PositionPreviewProps {
   worth: Cents | null;
   /** Portfolio before the purchase. */
   portfolio: Cents;
-  /** Class the asset counts toward (`null`: no allocation effect to show). */
+  /** Group (and subclass) the asset counts toward (`null`: no allocation effect to show). */
   allocation: {
     label: string;
     ticker: string;
@@ -23,15 +25,12 @@ export interface PositionPreviewProps {
     current: number;
     after: number;
     target: number;
+    subclass: { label: string; current: number; after: number; target: number };
   } | null;
+  /** "Ver alocação". */
+  onOpenAllocation?: () => void;
   wide?: boolean;
 }
-
-/** "Ações" → "ações" in the middle of a sentence; acronyms ("FIIs") stay. */
-const inSentence = (label: string) =>
-  label.length > 1 && label[1] === label[1]?.toLowerCase()
-    ? label.charAt(0).toLowerCase() + label.slice(1)
-    : label;
 
 function Line({ label, children }: { label: ReactNode; children: ReactNode }) {
   return (
@@ -56,12 +55,13 @@ export function PositionPreview({
   worth,
   portfolio,
   allocation,
+  onOpenAllocation,
   wide = false,
 }: PositionPreviewProps) {
   const result = invested !== null && worth !== null ? ((worth - invested) as Cents) : null;
   const resultPercent = result !== null && invested ? (result / invested) * 100 : null;
   const after = worth !== null ? ((portfolio + worth) as Cents) : null;
-  const excess = allocation ? Math.round(allocation.after) - allocation.target : 0;
+  const excess = allocation ? Math.round((allocation.after - allocation.target) * 10) / 10 : 0;
   const product =
     averagePrice !== null && quantity ? `${quantity} × ${formatCents(averagePrice)}` : null;
 
@@ -114,7 +114,7 @@ export function PositionPreview({
         <View
           accessible
           accessibilityRole="image"
-          accessibilityLabel={`${allocation.label} passam de ${Math.round(allocation.current)}% para ${Math.round(allocation.after)}% da carteira. Alvo do perfil ${allocation.profile}: ${allocation.target}%.`}
+          accessibilityLabel={`${allocation.label} passa de ${shareText(allocation.current)} para ${shareText(allocation.after)} da carteira. Alvo do perfil ${allocation.profile}: ${shareText(allocation.target)}.`}
           className="gap-2.5"
         >
           <ClassShareBar
@@ -132,17 +132,28 @@ export function PositionPreview({
           <View className="flex-row items-center gap-1.5">
             <View className="h-3 w-0.5 bg-foreground" />
             <Text size={12} tone="subtle">
-              Alvo do perfil {allocation.profile}: {allocation.target}%
+              Alvo do perfil {allocation.profile}: {shareText(allocation.target)}
             </Text>
           </View>
         </View>
       ) : null}
-      {allocation && excess > 0 ? (
+      {allocation && excess > OUT_OF_TARGET ? (
         <InfoNote icon="alertTriangle" tone="warning" size={13}>
-          <Text size={13}>
-            Com esta compra, {inSentence(allocation.label)} ficam{' '}
-            <Span weight="bold">{excess} p.p. acima</Span> do alvo do seu perfil. Você pode salvar
-            mesmo assim ou pedir ao Pacu uma sugestão de rebalanceamento.
+          <Text size={13} leading={1.5}>
+            Com esta compra, {allocation.label} fica{' '}
+            <Span weight="bold">{directionText(excess)}</Span> do alvo do seu perfil. Na subclasse{' '}
+            {allocation.subclass.label}, passa de {shareText(allocation.subclass.current)} para{' '}
+            <Span weight="bold">{shareText(allocation.subclass.after)}</Span> (alvo{' '}
+            {shareText(allocation.subclass.target)}). Você pode salvar mesmo assim ou pedir ao Pacu
+            uma sugestão de rebalanceamento.
+            {onOpenAllocation ? (
+              <>
+                {' '}
+                <Span weight="bold" underline accessibilityRole="link" onPress={onOpenAllocation}>
+                  Ver alocação
+                </Span>
+              </>
+            ) : null}
           </Text>
         </InfoNote>
       ) : null}

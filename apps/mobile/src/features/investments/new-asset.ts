@@ -1,11 +1,9 @@
 import type { Cents } from '@guara/types';
 import { cents } from '@guara/utils';
 
-import type { ASSET_CLASSES } from './data';
+import type { SubclassKey } from '@/constants/target-allocations';
 
 /** "Adicionar investimento" (static until the API exists). */
-
-export type AssetClassKey = (typeof ASSET_CLASSES)[number]['key'];
 
 export const INVESTMENT_TYPES = [
   { key: 'listed', label: 'Ações, FIIs e ETFs' },
@@ -22,16 +20,16 @@ export interface QuotedAsset {
   ticker: string;
   name: string;
   price: Cents;
-  /** Allocation class the asset counts toward. */
-  classKey: AssetClassKey;
+  /** Subclass of the target allocation the asset counts toward. */
+  subclass: SubclassKey;
 }
 
 /** Quotes found by the "Ativo" search (Brapi, via the API). */
 export const QUOTED_ASSETS: QuotedAsset[] = [
-  { ticker: 'PETR4', name: 'Petrobras PN', price: cents(3_782), classKey: 'stocks' },
-  { ticker: 'BOVA11', name: 'iShares Ibovespa', price: cents(12_510), classKey: 'stocks' },
-  { ticker: 'HGLG11', name: 'Pátria Log', price: cents(16_130), classKey: 'reits' },
-  { ticker: 'BTC', name: 'Bitcoin', price: cents(61_520_000), classKey: 'crypto' },
+  { ticker: 'PETR4', name: 'Petrobras PN', price: cents(3_782), subclass: 'largeCaps' },
+  { ticker: 'BOVA11', name: 'iShares Ibovespa', price: cents(12_510), subclass: 'largeCaps' },
+  { ticker: 'HGLG11', name: 'Pátria Log', price: cents(16_130), subclass: 'reits' },
+  { ticker: 'BTC', name: 'Bitcoin', price: cents(61_520_000), subclass: 'bitcoin' },
 ];
 
 export const QUOTE_TIME = '14:30';

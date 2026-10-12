@@ -100,60 +100,6 @@ export function answersSummary(answers: ProfileAnswers) {
   }));
 }
 
-export interface AllocationClass {
-  key: string;
-  label: string;
-  color: string;
-  /** Share of the portfolio today, in percent. */
-  current: number;
-}
-
-export interface AllocationRow extends AllocationClass {
-  target: number;
-  /** current − target, in percentage points. */
-  difference: number;
-}
-
-/** Gaps of 4 p.p. or more are highlighted (below in Arara-azul, above in Urucum). */
-export const NOTABLE_GAP = 4;
-
-/** Target × portfolio of each class, plus the note about the biggest difference. */
-export function compareAllocation(
-  classes: readonly AllocationClass[],
-  targets: Readonly<Record<string, number>>,
-) {
-  const rows: AllocationRow[] = classes.map((item) => ({
-    ...item,
-    target: targets[item.key] ?? 0,
-    difference: item.current - (targets[item.key] ?? 0),
-  }));
-  const scale = Math.max(1, ...rows.flatMap((row) => [row.target, row.current]));
-  const biggest = [...rows].sort((a, b) => Math.abs(b.difference) - Math.abs(a.difference))[0];
-  const close = !biggest || Math.abs(biggest.difference) <= 5;
-  return {
-    rows,
-    /** Bars are drawn relative to the biggest share (it fills the track). */
-    scale,
-    biggest:
-      biggest && Math.abs(biggest.difference) > ON_TARGET
-        ? {
-            label: biggest.label,
-            points: Math.abs(biggest.difference),
-            direction: biggest.difference > 0 ? ('acima' as const) : ('abaixo' as const),
-          }
-        : null,
-    close,
-  };
-}
-
-/** Up to 1 p.p. away counts as on target (design: FIIs 14% × 15% "no alvo"). */
-export const ON_TARGET = 1;
-
-export function differenceText(difference: number): string {
-  if (Math.abs(difference) <= ON_TARGET) return 'no alvo';
-  return `${difference > 0 ? '+' : '−'}${Math.abs(difference)} p.p.`;
-}
-
 export function profileLabel(type: InvestorProfileType): string {
   return PROFILE_LABELS[type];
 }

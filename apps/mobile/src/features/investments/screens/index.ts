@@ -1,3 +1,4 @@
+export * from './AllocationProfilesScreen';
 export * from './AllocationScreen';
 export * from './AssetDetailScreen';
 export * from './AssetEventsScreen';

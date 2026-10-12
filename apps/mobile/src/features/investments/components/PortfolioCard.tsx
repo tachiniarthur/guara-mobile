@@ -8,7 +8,7 @@ import { SectionCard } from '@/components/layout';
 import { Button, Chip, Icon, MoneyText, Text } from '@/components/ui';
 import { useBreakpoint } from '@/hooks/useBreakpoint';
 
-import { useProfileTargets } from '../hooks/useProfileTargets';
+import { useAllocation } from '../hooks/useAllocation';
 import { PERFORMANCE, PORTFOLIO } from '../data';
 import { useProperties } from '../hooks/useProperties';
 
@@ -20,7 +20,7 @@ const PERIODS = [
 
 /** Invested net worth, return against the CDI and the year's numbers. */
 export function PortfolioCard() {
-  const profile = useProfileTargets();
+  const profile = useAllocation();
   const router = useRouter();
   const { isTablet } = useBreakpoint();
   const { netWorth, total: propertiesTotal } = useProperties();

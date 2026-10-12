@@ -1,7 +1,7 @@
 # Design oficial do Guará
 
 Cópia do artefato de design ("Guará · Design do app",
-<https://claude.ai/artifact/JQTwTAjHXMBuJZeTCvBZcc>, versão `1791581958-5fb1`). É a **fonte da
+<https://claude.ai/artifact/JQTwTAjHXMBuJZeTCvBZcc>, versão `1791602096-d5fd`). É a **fonte da
 verdade visual** do app: espaçamentos, tamanhos, textos, estados e comportamento.
 
 ```
@@ -167,6 +167,7 @@ implementada.
 | `Ativo-Comparar`, `-Comparar-Ibovespa`, `-Preco-Sem-Ajuste`, `-Mais-Detalhes`, `-Eventos`, `-Risco` | M T      | estados de `/investments/asset/[ticker]`; `/details`, `/events`                       |
 | `Adicionar-Investimento`                                                                            | M T D    | `/new-manual-asset` (modal)                                                           |
 | `Posicoes`, `Posicoes-Estados`                                                                      | M T      | `/investments/positions`                                                              |
+| `Alocacao`, `Alocacao-Perfis` · carteira × alvo em 5 grupos, os 4 perfis                            | M T D    | `/investments/allocation`, `/investments/allocation/profiles`                         |
 | `Investimentos-Duplicidade` · somar, separar ou excluir                                             | M T      | `/resolve-duplicate/[duplicateId]`                                                    |
 | `Simulador`, `Simulador-Objetivo`, `Simulador-Corte`                                                | M T D    | `/investments/simulator/retirement`, `/goal`, `/cut-expense`                          |
 | `Simulacoes`, `Simulacoes-Estados`                                                                  | M T      | `/investments/simulator/saved`                                                        |

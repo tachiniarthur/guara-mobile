@@ -2,6 +2,8 @@ import { View } from 'react-native';
 
 import { Text } from '@/components/ui';
 
+import { shareText } from '../../lib/allocation';
+
 export interface ClassShareBarProps {
   label: string;
   /** Share of the portfolio, 0–100. */
@@ -14,7 +16,7 @@ export interface ClassShareBarProps {
 /** The bars use a 0–50% scale, so a 20% target sits at 40% of the width. */
 const SCALE = 2;
 
-/** Share of an asset class with the profile target marked on the bar. */
+/** Share of a group with the profile target marked on the bar. */
 export function ClassShareBar({ label, share, target, color }: ClassShareBarProps) {
   return (
     <View className="gap-1">
@@ -23,7 +25,7 @@ export function ClassShareBar({ label, share, target, color }: ClassShareBarProp
           {label}
         </Text>
         <Text size={13} weight="bold" tabular>
-          {Math.round(share)}%
+          {shareText(share)}
         </Text>
       </View>
       <View className="h-2.5 rounded-full bg-surface-muted">

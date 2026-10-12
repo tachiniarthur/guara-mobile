@@ -17,7 +17,7 @@ import {
   PropertiesCard,
   NewUserInvestments,
 } from '../components';
-import { useProfileTargets } from '../hooks/useProfileTargets';
+import { useAllocation } from '../hooks/useAllocation';
 import { usePositions } from '../hooks/usePositions';
 import { PORTFOLIO } from '../data';
 
@@ -26,7 +26,7 @@ export function InvestmentsScreen() {
   const router = useRouter();
   const { isTablet } = useBreakpoint();
   const addInvestment = () => router.navigate('/new-manual-asset');
-  const profile = useProfileTargets();
+  const profile = useAllocation();
   // An empty portfolio shows where to start ("Investimentos · novo").
   const empty = usePositions().status === 'empty';
 

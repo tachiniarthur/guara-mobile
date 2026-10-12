@@ -44,6 +44,7 @@ export function RedoProfileScreen() {
     <ProfileResult
       type={flow.type}
       answers={flow.answers}
+      onCompare={() => router.navigate('/investments/allocation/profiles')}
       note={
         <InfoNote icon="info" size={13} className="rounded-14 px-3.5 py-3">
           <Text size={13} leading={1.5}>

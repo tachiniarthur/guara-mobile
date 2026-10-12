@@ -3,24 +3,18 @@ import { act, fireEvent, render, screen } from '@testing-library/react-native';
 import { toast } from '@/components/feedback';
 
 import { SAVED_PROFILE } from '../data';
-import {
-  answersSummary,
-  compareAllocation,
-  differenceText,
-  estimateProfile,
-  profileDescription,
-  profileScore,
-} from '../lib/profile';
+import { answersSummary, estimateProfile, profileDescription, profileScore } from '../lib/profile';
 import { RedoProfileScreen } from '../screens';
 import { useInvestorProfileStore } from '../store';
 
 const mockBack = jest.fn();
+const mockNavigate = jest.fn();
 jest.mock('expo-router', () => ({
   ...jest.requireActual('expo-router'),
   useRouter: () => ({
     back: mockBack,
     replace: jest.fn(),
-    navigate: jest.fn(),
+    navigate: mockNavigate,
     canGoBack: () => true,
   }),
 }));
@@ -53,24 +47,6 @@ describe('investor profile', () => {
       'Renda fixa, fundos e um pouco de ações',
       '10% a 25%',
       'Uma parte pequena',
-    ]);
-  });
-
-  it('compares the target allocation with the portfolio', () => {
-    const result = compareAllocation(
-      [
-        { key: 'fixed', label: 'Renda fixa', color: '#000', current: 46 },
-        { key: 'crypto', label: 'Cripto', color: '#000', current: 10 },
-      ],
-      { fixed: 50, crypto: 5 },
-    );
-    expect(result.scale).toBe(50);
-    expect(result.biggest).toEqual({ label: 'Cripto', points: 5, direction: 'acima' });
-    expect(result.close).toBe(true);
-    expect([differenceText(-4), differenceText(-1), differenceText(5)]).toEqual([
-      '−4 p.p.',
-      'no alvo',
-      '+5 p.p.',
     ]);
   });
 });
@@ -125,7 +101,7 @@ describe('Refazer perfil', () => {
     }
     expect(screen.getByRole('header', { name: 'Seu perfil é Sofisticado' })).toBeOnTheScreen();
     expect(
-      screen.getByLabelText('Internacional: alvo 47%, sua carteira 8%, −39 p.p.'),
+      screen.getByLabelText('Renda variável internacional: alvo 25%, atual 7,9%, −17,1 p.p.'),
     ).toBeOnTheScreen();
     expect(screen.getByLabelText('Objetivo: Renda extra todo mês')).toBeOnTheScreen();
 
@@ -144,10 +120,23 @@ describe('Refazer perfil', () => {
     expect(
       screen.getByText(/Seu perfil continua o mesmo; ao salvar, a data é atualizada\./),
     ).toBeOnTheScreen();
-    expect(screen.getByLabelText('Cripto: alvo 5%, sua carteira 10%, +5 p.p.')).toBeOnTheScreen();
+    expect(screen.getByLabelText('Cripto: alvo 5%, atual 9,9%, +4,9 p.p.')).toBeOnTheScreen();
     expect(
-      screen.getByLabelText('Renda fixa: alvo 48%, sua carteira 46%, −2 p.p.'),
+      screen.getByLabelText('Renda fixa Brasil: alvo 48%, atual 46%, −2 p.p.'),
     ).toBeOnTheScreen();
-    expect(screen.getByText(/Internacional, 20 p\.p\. abaixo/)).toBeOnTheScreen();
+    expect(
+      screen.getByText(/fora do alvo em 3 de 5 grupos: Renda variável Brasil 17,2 p\.p\. acima/),
+    ).toBeOnTheScreen();
+
+    // The subclasses open on tap.
+    fireEvent.press(screen.getByRole('button', { name: /^Renda variável Brasil:/ }));
+    expect(
+      screen.getByLabelText(
+        'Ações large cap, PETR4 e BOVA11 · R$\u00a010.691,50: alvo 10%, atual 22,1%, +12,1 p.p.',
+      ),
+    ).toBeOnTheScreen();
+
+    fireEvent.press(screen.getByRole('link', { name: 'Comparar os 4 perfis' }));
+    expect(mockNavigate).toHaveBeenCalledWith('/investments/allocation/profiles');
   });
 });

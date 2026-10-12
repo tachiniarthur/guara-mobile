@@ -4,9 +4,13 @@ import { z } from 'zod';
 import { DecimalStringSchema, IsoDateTimeSchema, timestamps } from './common';
 import { BankConnectionIdSchema, PositionIdSchema, TickerSchema } from './ids';
 import { NonNegativeCentsSchema, PositiveCentsSchema } from './money';
+import { AllocationSubclassSchema } from './allocation';
 import { ShareSchema } from './percent';
 
-/** Allocation classes. Properties (real estate, vehicles) are NOT part of the allocation. */
+/**
+ * Classes of the positions list. The target allocation uses the 5 groups and their subclasses
+ * (`allocation.ts`). Properties (real estate, vehicles) are NOT part of the allocation.
+ */
 export const AssetClassSchema = z.enum(['fixed_income', 'equities', 'real_estate', 'alternatives']);
 export type AssetClass = z.infer<typeof AssetClassSchema>;
 
@@ -49,6 +53,8 @@ export type Instrument = z.infer<typeof InstrumentSchema>;
 export const PositionSchema = z.object({
   id: PositionIdSchema,
   class: AssetClassSchema,
+  /** Where the position counts in the target allocation. */
+  subclass: AllocationSubclassSchema,
   instrument: InstrumentSchema,
   risk: RiskLevelSchema,
   /** Units held (shares, quotas, coins). `null` for instruments tracked only by value. */

@@ -76,7 +76,7 @@ export const investmentEndpoints = defineEndpoints({
   'allocation.get': {
     method: 'GET',
     path: '/v1/allocation',
-    summary: 'Current × target allocation per class and rebalancing suggestion',
+    summary: 'Current × target allocation in the 5 groups and their subclasses',
     response: AllocationSchema,
   },
   'exposure.get': {

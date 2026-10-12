@@ -1,25 +1,22 @@
 import type { InvestorProfileType } from '@guara/types';
-import { colors } from '@guara/ui-tokens';
 import type { ReactNode } from 'react';
 import { View } from 'react-native';
 
-import { DonutChart } from '@/components/charts';
 import { SectionCard } from '@/components/layout';
-import { InfoNote, Span, Text } from '@/components/ui';
-import { classTargets } from '@/constants/target-allocations';
-import { ASSET_CLASSES } from '@/features/investments';
+import { LinkButton, Span, Text } from '@/components/ui';
+import {
+  GroupTargetList,
+  OutOfTargetNote,
+  TargetRing,
+  barScale,
+  shareText,
+  useAllocation,
+} from '@/features/investments';
 import { useBreakpoint } from '@/hooks/useBreakpoint';
 import { cn } from '@/lib/cn';
 
 import { PROFILE_LABELS, PROFILE_QUESTIONS, type ProfileAnswers } from '../data';
-import {
-  NOTABLE_GAP,
-  answeredCount,
-  answersSummary,
-  compareAllocation,
-  differenceText,
-  profileDescription,
-} from '../lib/profile';
+import { answeredCount, answersSummary, profileDescription } from '../lib/profile';
 
 const ORDER: InvestorProfileType[] = ['conservative', 'moderate', 'aggressive', 'sophisticated'];
 
@@ -30,7 +27,7 @@ function ProfileScale({ type }: { type: InvestorProfileType }) {
     <View
       accessible
       accessibilityRole="image"
-      accessibilityLabel={`Seu perfil: ${PROFILE_LABELS[type]}, ${index + 1}º de ${ORDER.length}, de Conservador a Sofisticado`}
+      accessibilityLabel={`Seu perfil: ${PROFILE_LABELS[type]}, o ${index + 1}º de ${ORDER.length} níveis: Conservador, Moderado, Arrojado e Sofisticado`}
       className="flex-row gap-1.5"
     >
       {ORDER.map((item) => (
@@ -51,119 +48,63 @@ function ProfileScale({ type }: { type: InvestorProfileType }) {
   );
 }
 
-function TargetAllocationCard({ type }: { type: InvestorProfileType }) {
+function TargetAllocationCard({
+  type,
+  onCompare,
+}: {
+  type: InvestorProfileType;
+  onCompare?: () => void;
+}) {
   const { isTablet } = useBreakpoint();
-  const targets = classTargets(type);
-  const label = PROFILE_LABELS[type];
-  const comparison = compareAllocation(ASSET_CLASSES, targets);
-  const donut = (
-    <DonutChart
-      size={150}
-      segments={comparison.rows.map((row) => ({
-        key: row.key,
-        value: row.target,
-        color: row.color,
-      }))}
-    >
-      <Text size={12} tone="subtle">
-        Alvo
-      </Text>
-      <Text serif weight="bold" size={17}>
-        {label}
-      </Text>
-    </DonutChart>
-  );
-  const rows = (
-    <View>
-      {comparison.rows.map((row, index) => {
-        const notable = Math.abs(row.difference) >= NOTABLE_GAP;
-        return (
-          <View
-            key={row.key}
-            accessible
-            accessibilityLabel={`${row.label}: alvo ${row.target}%, sua carteira ${row.current}%, ${differenceText(row.difference)}`}
-            className={cn(
-              'gap-1.5 py-2.5',
-              index < comparison.rows.length - 1 && 'border-b border-border',
-            )}
-          >
-            <View className="flex-row items-center gap-2.5">
-              <View className="h-2.5 w-2.5 rounded-[3px]" style={{ backgroundColor: row.color }} />
-              <Text weight="semibold" className="flex-1">
-                {row.label}
-              </Text>
-              <Text weight="bold" tabular>
-                {row.target}%
-              </Text>
-            </View>
-            <View className="h-2 rounded-4 bg-surface-muted">
-              <View
-                className="absolute left-0 top-0 h-2 rounded-4"
-                style={{
-                  width: `${(row.target / comparison.scale) * 100}%`,
-                  backgroundColor: row.color,
-                }}
-              />
-              <View
-                className="absolute w-0.5 bg-foreground"
-                style={{
-                  left: `${(row.current / comparison.scale) * 100}%`,
-                  marginLeft: -1,
-                  top: -3,
-                  height: 14,
-                }}
-              />
-            </View>
-            <Text size={12} tone="subtle">
-              {`sua carteira ${row.current}% · `}
-              <Span
-                weight="bold"
-                tone={notable ? (row.difference > 0 ? 'negative' : 'info') : 'subtle'}
-              >
-                {differenceText(row.difference)}
-              </Span>
-            </Text>
-          </View>
-        );
-      })}
+  const { label, groups } = useAllocation(type);
+  const donut = <TargetRing groups={groups} profileLabel={label} size={150} />;
+  const targets = (
+    <View className="min-w-0 flex-1">
+      {groups.map((group) => (
+        <View key={group.key} className="flex-row items-center gap-2 py-1">
+          <View className="h-2.5 w-2.5 rounded-[3px]" style={{ backgroundColor: group.color }} />
+          <Text size={14} className="min-w-0 flex-1">
+            {group.label}
+          </Text>
+          <Text size={14} weight="bold" tabular>
+            {shareText(group.target)}
+          </Text>
+        </View>
+      ))}
     </View>
   );
 
   return (
     <SectionCard
       title="Como o Guará vai dividir as sugestões"
-      description={`Alocação-alvo do perfil ${label} · a marca branca é a sua carteira hoje`}
-      titleSize={18}
-      padding={18}
+      description={`Carteira-alvo do perfil ${label} em 5 grupos · toque num grupo para ver as subclasses · a marca branca é a sua carteira hoje`}
+      titleSize={isTablet ? 20 : 18}
+      padding={isTablet ? 22 : 18}
     >
       {isTablet ? (
         <View className="flex-row items-center gap-6">
           {donut}
-          <View className="min-w-0 flex-1">{rows}</View>
+          {targets}
         </View>
       ) : (
-        <>
-          <View className="items-center">{donut}</View>
-          {rows}
-        </>
+        <View className="items-center">{donut}</View>
       )}
-      <InfoNote icon="info" tone="warning" size={13} iconColor={colors.warning.DEFAULT}>
-        <Text size={13} leading={1.5}>
-          {comparison.close
-            ? 'Sua carteira está perto do alvo.'
-            : 'Sua carteira está longe do alvo.'}
-          {comparison.biggest ? (
-            <>
-              {' A maior diferença é '}
-              <Span weight="bold">
-                {`${comparison.biggest.label}, ${comparison.biggest.points} p.p. ${comparison.biggest.direction}`}
-              </Span>
-              .
-            </>
-          ) : null}{' '}
-          O Pacu pode sugerir como ajustar, mas nada muda sem você.
-        </Text>
-      </InfoNote>
+      <GroupTargetList
+        groups={groups}
+        scale={barScale(
+          groups.flatMap((group) => [group.current, group.target]),
+          40,
+        )}
+      />
+      <OutOfTargetNote
+        groups={groups}
+        suffix="O Pacu pode sugerir como ajustar, mas nada muda sem você."
+      />
+      {onCompare ? (
+        <View className="flex-row justify-end">
+          <LinkButton label="Comparar os 4 perfis" chevron={false} onPress={onCompare} />
+        </View>
+      ) : null}
     </SectionCard>
   );
 }
@@ -198,10 +139,12 @@ export interface ProfileResultProps {
   answers: ProfileAnswers;
   /** Extra note under the scale ("Antes: Moderado… Agora: …"). */
   note?: ReactNode;
+  /** "Comparar os 4 perfis" (inside the app; the onboarding has no Investimentos yet). */
+  onCompare?: () => void;
 }
 
 /** "Seu perfil é Moderado": scale, target allocation against the portfolio and the answers. */
-export function ProfileResult({ type, answers, note }: ProfileResultProps) {
+export function ProfileResult({ type, answers, note, onCompare }: ProfileResultProps) {
   const { isTablet } = useBreakpoint();
   return (
     <>
@@ -225,7 +168,7 @@ export function ProfileResult({ type, answers, note }: ProfileResultProps) {
       </View>
       <ProfileScale type={type} />
       {note}
-      <TargetAllocationCard type={type} />
+      <TargetAllocationCard type={type} onCompare={onCompare} />
       <AnswersCard answers={answers} />
       <Text size={13} leading={1.55} tone="subtle">
         O perfil vale só para Investimentos. Você pode refazer quando quiser em Meu perfil.

@@ -7,7 +7,7 @@ import { View } from 'react-native';
 import { SectionCard } from '@/components/layout';
 import { DataRow, Icon, MoneyText, Text } from '@/components/ui';
 
-import { useProfileTargets } from '../../hooks/useProfileTargets';
+import { useAllocation } from '../../hooks/useAllocation';
 
 import { profileAllocationLabel } from './PropertyCards';
 
@@ -33,7 +33,7 @@ export function PropertyPreview({
   children,
 }: PropertyPreviewProps) {
   const after = addCents(today, value ?? cents(0));
-  const profile = useProfileTargets();
+  const profile = useAllocation();
   return (
     <SectionCard
       title="Prévia no patrimônio"

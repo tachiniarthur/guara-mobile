@@ -1,189 +1,189 @@
-import type { InvestorProfileType } from '@guara/types';
+import type { AllocationGroupKey, AllocationSubclass, InvestorProfileType } from '@guara/types';
+import { colors } from '@guara/ui-tokens';
 
-/** Classes of Investimentos (the design's allocation): renda fixa, ações, FIIs, cripto e internacional. */
-export type AllocationClassKey = 'fixed' | 'stocks' | 'reits' | 'crypto' | 'intl';
+export type { AllocationGroupKey };
+
+export interface AllocationGroup {
+  key: AllocationGroupKey;
+  label: string;
+  /** "RF Brasil", "RV intern." (charts and tight spots). */
+  short: string;
+  /** The same color in donut, bar, legend and list, on every screen. */
+  color: string;
+}
+
+export const ALLOCATION_GROUPS: AllocationGroup[] = [
+  { key: 'brFixed', label: 'Renda fixa Brasil', short: 'RF Brasil', color: colors.info.DEFAULT },
+  {
+    key: 'intlFixed',
+    label: 'Renda fixa internacional',
+    short: 'RF intern.',
+    color: colors.foreground.subtle,
+  },
+  {
+    key: 'brEquity',
+    label: 'Renda variável Brasil',
+    short: 'RV Brasil',
+    color: colors.negative.DEFAULT,
+  },
+  {
+    key: 'intlEquity',
+    label: 'Renda variável internacional',
+    short: 'RV intern.',
+    color: colors.brand.DEFAULT,
+  },
+  { key: 'crypto', label: 'Cripto', short: 'Cripto', color: colors.positive.DEFAULT },
+];
+
+export const allocationGroup = (key: AllocationGroupKey) =>
+  ALLOCATION_GROUPS.find((group) => group.key === key)!;
+
+/** Subclasses: stable keys of the contract; each profile may name them a little differently. */
+export type SubclassKey = AllocationSubclass;
+
+export interface Subclass {
+  group: AllocationGroupKey;
+  label: string;
+  /** What goes in it, shown under the name ("Tesouro Selic, CDB/LCI/LCA pós, fundos DI"). */
+  description?: string;
+  /** Noun for several holdings ("5 BDRs"); default "ativos". */
+  unit?: string;
+}
+
+export const SUBCLASSES: Record<SubclassKey, Subclass> = {
+  postFixed: {
+    group: 'brFixed',
+    label: 'Pós-fixada',
+    description: 'Tesouro Selic, CDB/LCI/LCA pós, fundos DI',
+  },
+  inflation: { group: 'brFixed', label: 'Inflação (IPCA+)' },
+  prefixed: { group: 'brFixed', label: 'Prefixada' },
+  privateCredit: { group: 'brFixed', label: 'Crédito privado' },
+  treasuries: { group: 'intlFixed', label: 'Treasuries' },
+  bonds: { group: 'intlFixed', label: 'Bonds investment grade' },
+  distressedDebt: { group: 'intlFixed', label: 'Dívida estruturada/distressed' },
+  largeCaps: { group: 'brEquity', label: 'Ações large cap' },
+  smallCaps: { group: 'brEquity', label: 'Ações small caps' },
+  reits: { group: 'brEquity', label: 'FIIs' },
+  intlEtfs: { group: 'intlEquity', label: 'ETFs internacionais' },
+  intlStocks: { group: 'intlEquity', label: 'Ações diretas', unit: 'BDRs' },
+  intlFunds: { group: 'intlEquity', label: 'Fundos de ações internacionais' },
+  privateEquity: { group: 'intlEquity', label: 'Private equity/venture capital' },
+  bitcoin: { group: 'crypto', label: 'Bitcoin' },
+  ethereum: { group: 'crypto', label: 'Ethereum' },
+  altcoins: { group: 'crypto', label: 'Altcoins' },
+  stablecoins: { group: 'crypto', label: 'Stablecoins' },
+};
 
 export interface TargetSubclass {
-  label: string;
+  subclass: SubclassKey;
   /** Share of the whole portfolio, in percent. */
   share: number;
-  /** Where it counts in the app's classes. */
-  appClass: AllocationClassKey;
+  /** The name this profile uses ("Ações large cap/blue chips"), when different. */
+  label?: string;
 }
 
-export interface TargetGroup {
-  label: string;
-  subclasses: TargetSubclass[];
-}
-
-const s = (label: string, share: number, appClass: AllocationClassKey): TargetSubclass => ({
-  label,
+const t = (subclass: SubclassKey, share: number, label?: string): TargetSubclass => ({
+  subclass,
   share,
-  appClass,
+  ...(label ? { label } : null),
 });
 
 /**
- * Target allocation of each investor profile (business rule; may change). Groups and subclasses
- * as defined by the product; `appClass` maps each subclass to the 5 classes of the design until
- * the screens show the subclasses.
+ * Target allocation of each investor profile (business rule; may change), in subclasses.
+ * The group shares come from them.
  */
-export const TARGET_ALLOCATIONS: Record<InvestorProfileType, TargetGroup[]> = {
+export const TARGET_ALLOCATIONS: Record<InvestorProfileType, TargetSubclass[]> = {
   conservative: [
-    {
-      label: 'Renda fixa Brasil',
-      subclasses: [
-        s('Pós-fixada (Tesouro Selic, CDB/LCI/LCA pós, fundos DI)', 48, 'fixed'),
-        s('Inflação (IPCA+)', 17, 'fixed'),
-        s('Prefixada', 5, 'fixed'),
-        s('Crédito privado baixo risco (debêntures/CRI/CRA high grade)', 5, 'fixed'),
-      ],
-    },
-    {
-      label: 'Renda fixa internacional',
-      subclasses: [s('Treasuries', 8, 'intl'), s('Bonds investment grade', 5, 'intl')],
-    },
-    {
-      label: 'Renda variável Brasil',
-      subclasses: [
-        s('Ações large cap/blue chips', 4, 'stocks'),
-        s('FIIs (papel, baixo risco)', 2, 'reits'),
-      ],
-    },
-    {
-      label: 'Renda variável internacional',
-      subclasses: [s('ETFs internacionais (S&P500/World)', 4, 'intl')],
-    },
-    { label: 'Cripto', subclasses: [s('Bitcoin', 2, 'crypto')] },
+    t('postFixed', 48),
+    t('inflation', 17),
+    t('prefixed', 5),
+    t('privateCredit', 5, 'Crédito privado baixo risco'),
+    t('treasuries', 8),
+    t('bonds', 5),
+    t('largeCaps', 4, 'Ações large cap/blue chips'),
+    t('reits', 2, 'FIIs (papel, baixo risco)'),
+    t('intlEtfs', 4),
+    t('bitcoin', 2),
   ],
   moderate: [
-    {
-      label: 'Renda fixa Brasil',
-      subclasses: [
-        s('Pós-fixada', 24, 'fixed'),
-        s('Inflação (IPCA+)', 14, 'fixed'),
-        s('Prefixada', 5, 'fixed'),
-        s('Crédito privado', 5, 'fixed'),
-      ],
-    },
-    {
-      label: 'Renda fixa internacional',
-      subclasses: [s('Treasuries', 8, 'intl'), s('Bonds investment grade', 6, 'intl')],
-    },
-    {
-      label: 'Renda variável Brasil',
-      subclasses: [
-        s('Ações large cap', 10, 'stocks'),
-        s('Ações small caps', 3, 'stocks'),
-        s('FIIs', 6, 'reits'),
-      ],
-    },
-    {
-      label: 'Renda variável internacional',
-      subclasses: [s('ETFs internacionais', 9, 'intl'), s('Ações diretas/BDRs', 5, 'intl')],
-    },
-    { label: 'Cripto', subclasses: [s('Bitcoin', 4, 'crypto'), s('Ethereum', 1, 'crypto')] },
+    t('postFixed', 24),
+    t('inflation', 14),
+    t('prefixed', 5),
+    t('privateCredit', 5),
+    t('treasuries', 8),
+    t('bonds', 6),
+    t('largeCaps', 10),
+    t('smallCaps', 3),
+    t('reits', 6),
+    t('intlEtfs', 9),
+    t('intlStocks', 5, 'Ações diretas/BDRs'),
+    t('bitcoin', 4),
+    t('ethereum', 1),
   ],
   aggressive: [
-    {
-      label: 'Renda fixa Brasil',
-      subclasses: [
-        s('Pós-fixada', 9, 'fixed'),
-        s('Inflação (IPCA+)', 7, 'fixed'),
-        s('Prefixada', 4, 'fixed'),
-        s('Crédito privado', 3, 'fixed'),
-      ],
-    },
-    {
-      label: 'Renda fixa internacional',
-      subclasses: [s('Treasuries', 7, 'intl'), s('Bonds (IG + parcela high yield)', 8, 'intl')],
-    },
-    {
-      label: 'Renda variável Brasil',
-      subclasses: [
-        s('Ações large cap', 13, 'stocks'),
-        s('Ações small caps', 8, 'stocks'),
-        s('FIIs', 9, 'reits'),
-      ],
-    },
-    {
-      label: 'Renda variável internacional',
-      subclasses: [
-        s('ETFs internacionais', 9, 'intl'),
-        s('Ações diretas', 7, 'intl'),
-        s('Fundos de ações internacionais', 4, 'intl'),
-      ],
-    },
-    {
-      label: 'Cripto',
-      subclasses: [
-        s('Bitcoin', 7, 'crypto'),
-        s('Ethereum', 3, 'crypto'),
-        s('Altcoins', 2, 'crypto'),
-      ],
-    },
+    t('postFixed', 9),
+    t('inflation', 7),
+    t('prefixed', 4),
+    t('privateCredit', 3),
+    t('treasuries', 7),
+    t('bonds', 8, 'Bonds (IG + parcela high yield)'),
+    t('largeCaps', 13),
+    t('smallCaps', 8),
+    t('reits', 9),
+    t('intlEtfs', 9),
+    t('intlStocks', 7),
+    t('intlFunds', 4),
+    t('bitcoin', 7),
+    t('ethereum', 3),
+    t('altcoins', 2),
   ],
   sophisticated: [
-    {
-      label: 'Renda fixa Brasil',
-      subclasses: [
-        s('Crédito privado estruturado', 7, 'fixed'),
-        s('Pós-fixada/liquidez', 3, 'fixed'),
-        s('Inflação (IPCA+)', 3, 'fixed'),
-      ],
-    },
-    {
-      label: 'Renda fixa internacional',
-      subclasses: [
-        s('Treasuries', 8, 'intl'),
-        s('Bonds (IG + high yield)', 9, 'intl'),
-        s('Dívida estruturada/distressed', 5, 'intl'),
-      ],
-    },
-    {
-      label: 'Renda variável Brasil',
-      subclasses: [
-        s('Ações large cap', 9, 'stocks'),
-        s('Ações small/mid caps', 6, 'stocks'),
-        s('FIIs', 10, 'reits'),
-      ],
-    },
-    {
-      label: 'Renda variável internacional',
-      subclasses: [
-        s('ETFs internacionais', 9, 'intl'),
-        s('Ações diretas', 6, 'intl'),
-        s('Private equity/venture capital', 7, 'intl'),
-        s('Fundos de ações internacionais', 3, 'intl'),
-      ],
-    },
-    {
-      label: 'Cripto',
-      subclasses: [
-        s('Bitcoin', 8, 'crypto'),
-        s('Ethereum', 4, 'crypto'),
-        s('Altcoins', 2, 'crypto'),
-        s('Stablecoins', 1, 'crypto'),
-      ],
-    },
+    t('privateCredit', 7, 'Crédito privado estruturado'),
+    t('postFixed', 3, 'Pós-fixada/liquidez'),
+    t('inflation', 3),
+    t('treasuries', 8),
+    t('bonds', 9, 'Bonds (IG + high yield)'),
+    t('distressedDebt', 5),
+    t('largeCaps', 9),
+    t('smallCaps', 6, 'Ações small/mid caps'),
+    t('reits', 10),
+    t('intlEtfs', 9),
+    t('intlStocks', 6),
+    t('privateEquity', 7),
+    t('intlFunds', 3),
+    t('bitcoin', 8),
+    t('ethereum', 4),
+    t('altcoins', 2),
+    t('stablecoins', 1),
   ],
 };
 
-/** Share of a group ("Renda fixa Brasil: 75%"), from its subclasses. */
-export function groupShare(group: TargetGroup): number {
-  return group.subclasses.reduce((sum, item) => sum + item.share, 0);
+/** "Para quem" each profile is (Os 4 perfis). */
+export const PROFILE_AUDIENCE: Record<InvestorProfileType, string> = {
+  conservative: 'Proteger o que já tem, com pouca oscilação',
+  moderate: 'Equilíbrio entre proteção e crescimento',
+  aggressive: 'Crescer no longo prazo, aceitando quedas no caminho',
+  sophisticated: 'Experiência com estruturados e alternativos',
+};
+
+/** Target share of each group for the profile. */
+export function groupTargets(type: InvestorProfileType): Record<AllocationGroupKey, number> {
+  const targets: Record<AllocationGroupKey, number> = {
+    brFixed: 0,
+    intlFixed: 0,
+    brEquity: 0,
+    intlEquity: 0,
+    crypto: 0,
+  };
+  for (const item of TARGET_ALLOCATIONS[type])
+    targets[SUBCLASSES[item.subclass].group] += item.share;
+  return targets;
 }
 
-/** Targets of the profile in the app's 5 classes (Internacional = renda fixa + variável lá fora). */
-export function classTargets(type: InvestorProfileType): Record<AllocationClassKey, number> {
-  const targets: Record<AllocationClassKey, number> = {
-    fixed: 0,
-    stocks: 0,
-    reits: 0,
-    crypto: 0,
-    intl: 0,
-  };
-  for (const group of TARGET_ALLOCATIONS[type]) {
-    for (const item of group.subclasses) targets[item.appClass] += item.share;
-  }
-  return targets;
+/** Name of a subclass in a profile ("Ações large cap/blue chips" for the Conservador). */
+export function subclassLabel(type: InvestorProfileType, key: SubclassKey): string {
+  return (
+    TARGET_ALLOCATIONS[type].find((item) => item.subclass === key)?.label ?? SUBCLASSES[key].label
+  );
 }
