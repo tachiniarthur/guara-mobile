@@ -7,6 +7,7 @@ import {
   COUNTRY_CENTERS,
   InteractiveGlobe,
   LegendSwatch,
+  MonthCapChart,
   ProjectionChart,
   RangeBar,
   TrendAreaChart,
@@ -225,6 +226,15 @@ export function ChartsSection() {
         ]}
         color={colors.positive.DEFAULT}
         accessibilityLabel="Barras de exemplo"
+      />
+      <MonthCapChart
+        data={[790, 860, 880, 1020, 830, 742].map((value, index) => ({
+          label: ['abr', 'mai', 'jun', 'jul', 'ago', 'set*'][index]!,
+          value,
+        }))}
+        cap={1000}
+        format={(value) => value.toLocaleString('pt-BR')}
+        accessibilityLabel="Meses contra o teto (exemplo)"
       />
       <ProjectionChart
         values={[0, 10, 22, 36, 52, 70]}

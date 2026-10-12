@@ -148,27 +148,11 @@ export interface BudgetWithMilestones {
   milestones: Cents[];
 }
 
+/** A cap of the month in Gastos (the caps themselves live in the budgets feature). */
 export interface CategoryBudget extends BudgetWithMilestones {
+  id: string;
   categoryId: CategoryId;
 }
-
-/** `spent` is the API's figure before the edits made in the app (see `lib/ledger`). */
-export const MONTH_BUDGETS: CategoryBudget[] = [
-  {
-    categoryId: 'food',
-    category: 'Alimentação',
-    spent: cents(74_218),
-    limit: cents(100_000),
-    milestones: [cents(50_000), cents(70_000)],
-  },
-  {
-    categoryId: 'transport',
-    category: 'Transporte',
-    spent: cents(38_640),
-    limit: cents(45_000),
-    milestones: [cents(30_000)],
-  },
-];
 
 export interface SubscriptionSummary {
   id: string;

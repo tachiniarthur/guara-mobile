@@ -84,6 +84,7 @@ export const ICON_PATHS = {
   download: ['M12 4v11M7 10l5 5 5-5M4 20h16'],
   share: ['M12 3v13M7 8l5-5 5 5M5 14v5a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2v-5'],
   tag: ['M3 12V4h8l10 10-8 8zM7.5 8h.01'],
+  star: ['M12 3l2.7 5.6 6.1.9-4.4 4.3 1 6.1L12 17l-5.4 2.9 1-6.1L3.2 9.5l6.1-.9z'],
   filter: ['M4 5h16l-6 8v6l-4-2v-4z'],
   sort: ['M8 4v16M4 8l4-4 4 4M16 20V4M12 16l4 4 4-4'],
   wifiOff: [

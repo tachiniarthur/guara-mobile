@@ -63,7 +63,12 @@ export function CategoryTransactionsScreen() {
   const visibleDays = days.slice(0, DAYS_PER_PAGE);
   const insight = summary ? categoryInsight(summary, ledger.transactions) : null;
   const count = summary?.count ?? days.reduce((sum, day) => sum + day.items.length, 0);
-  const editBudget = () => router.navigate({ pathname: '/new-budget', params: { categoryId } });
+  const cap = ledger.budgets.find((budget) => budget.categoryId === categoryId);
+  const editBudget = () =>
+    router.navigate({
+      pathname: '/new-budget',
+      params: cap ? { budgetId: cap.id } : { categoryId },
+    });
   const openAll = () =>
     router.navigate({ pathname: '/spending/transactions', params: { categoryId } });
   const padding = isTablet ? 28 : 16;

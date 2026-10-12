@@ -1,6 +1,8 @@
 import type { CategoryId, UnusualReason, UnusualStatus } from '@guara/types';
 
 import { useBankConnectionsStore } from '@/features/bank-connections';
+// Straight to the store: the budgets feature reads Gastos back.
+import { useBudgetsStore } from '@/features/budgets/store';
 
 import {
   BANK_SYNC,
@@ -8,7 +10,6 @@ import {
   CATEGORY_TOTALS,
   LEDGER,
   LEDGER_ACCOUNTS,
-  MONTH_BUDGETS,
   SPENDING,
   SPENDING_MONTH,
   TRANSACTION_SUMMARIES,
@@ -21,6 +22,7 @@ import {
   budgetsWithEdits,
   categorySummary,
   categoryTotalsWithEdits,
+  monthBudgets,
 } from '../lib/ledger';
 import { staleBanksMessage } from '../lib/format';
 import { useSpendingStore } from '../store';
@@ -41,6 +43,8 @@ export function useLedger() {
   const edits = useSpendingStore((state) => state.edits);
   const transactions = LEDGER.map((tx) => applyEdits(tx, edits));
   const banks = useBankConnectionsStore((state) => state.connections.length);
+  const caps = useBudgetsStore((state) => state.budgets);
+  const budgets = monthBudgets(caps, CATEGORY_TOTALS);
   const status: LedgerStatus = BANK_SYNC.length === 0 || banks === 0 ? 'empty' : 'ready';
 
   const unusualOf = (id: string): UnusualInfo | null => {
@@ -56,14 +60,14 @@ export function useLedger() {
     accounts: LEDGER_ACCOUNTS,
     edits,
     unusualOf,
-    budgets: budgetsWithEdits(MONTH_BUDGETS, LEDGER, edits),
+    budgets: budgetsWithEdits(budgets, LEDGER, edits),
     categoryTotals: categoryTotalsWithEdits(CATEGORY_TOTALS, LEDGER, edits),
     summaryFor: (bank: SpendingBankId) => adjustSummary(TRANSACTION_SUMMARIES[bank], LEDGER, edits),
     categorySummary: (categoryId: CategoryId) =>
       categorySummary(categoryId, {
         month: SPENDING_MONTH,
         totals: CATEGORY_TOTALS,
-        budgets: MONTH_BUDGETS,
+        budgets,
         details: CATEGORY_DETAILS,
         totalOut: SPENDING.totalOut,
         ledger: LEDGER,

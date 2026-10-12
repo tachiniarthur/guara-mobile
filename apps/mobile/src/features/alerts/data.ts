@@ -1,31 +1,6 @@
 import type { AssistantId } from '@guara/types';
-import { cents } from '@guara/utils';
-
-import type { BudgetWithMilestones } from '@/features/spending';
 
 /** Alertas as shown in the design (static until the API exists). */
-export const ALERTS_SUBTITLE = '3 tetos e 3 alertas de preço';
-
-export const ALERT_BUDGETS: BudgetWithMilestones[] = [
-  {
-    category: 'Alimentação',
-    spent: cents(74_218),
-    limit: cents(100_000),
-    milestones: [cents(50_000), cents(70_000)],
-  },
-  {
-    category: 'Transporte',
-    spent: cents(38_640),
-    limit: cents(45_000),
-    milestones: [cents(30_000)],
-  },
-  {
-    category: 'Lazer',
-    spent: cents(12_000),
-    limit: cents(40_000),
-    milestones: [cents(20_000), cents(30_000)],
-  },
-];
 
 export interface PriceAlertSummary {
   id: string;

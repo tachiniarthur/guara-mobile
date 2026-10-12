@@ -1,11 +1,12 @@
 import { cents } from '@guara/utils';
 
+import { BUDGETS } from '@/features/budgets/data';
+
 import {
   CATEGORY_DETAILS,
   CATEGORY_TOTALS,
   LEDGER,
   LEDGER_ACCOUNTS,
-  MONTH_BUDGETS,
   SPENDING,
   SPENDING_TODAY,
   TRANSACTION_SUMMARIES,
@@ -31,6 +32,7 @@ import {
   categorySummary,
   filterLedger,
   groupByDay,
+  monthBudgets,
   type LedgerEdits,
   type LedgerFilters,
 } from '../ledger';
@@ -44,6 +46,8 @@ const ALL: LedgerFilters = {
 };
 
 const byId = (id: string) => LEDGER.find((tx) => tx.id === id)!;
+// Gastos shows the caps of categories with spending this month (Lazer has none yet).
+const MONTH_BUDGETS = monthBudgets(BUDGETS, CATEGORY_TOTALS);
 
 function summaryOf(edits: LedgerEdits = NO_EDITS) {
   return categorySummary('food', {

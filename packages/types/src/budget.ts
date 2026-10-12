@@ -2,40 +2,60 @@
 import { z } from 'zod';
 
 import { CategoryIdSchema } from './category';
-import { YearMonthSchema, timestamps } from './common';
+import { IsoDateTimeSchema, YearMonthSchema, timestamps } from './common';
 import { BudgetIdSchema } from './ids';
 import { NonNegativeCentsSchema, PositiveCentsSchema } from './money';
+import { NotificationChannelSchema } from './notification';
 import { PercentSchema } from './percent';
 
 /**
- * Intermediate warnings as percentages of the cap, ascending and below 100
- * (e.g. `[50, 80]`). Reaching 100% always notifies, so it is not listed.
+ * Warnings before the cap, in reais, ascending and below the cap (e.g. R$ 500 and R$ 700 on a
+ * R$ 1.000 cap). Reaching the cap always notifies, so it is not listed.
  */
-export const WarningThresholdsSchema = z
-  .array(z.int().min(1).max(99))
+export const BudgetWarningsSchema = z
+  .array(PositiveCentsSchema)
   .max(3)
   .refine((values) => values.every((value, index) => index === 0 || value > values[index - 1]!), {
-    message: 'Thresholds must be strictly ascending',
+    message: 'Warnings must be strictly ascending',
   });
 
-/** `ok` below the first warning, `warning` from the first warning, `exceeded` from 100%. */
+/** `ok` below 70% of the cap, `warning` from 70%, `exceeded` from 100%. */
 export const BudgetStatusSchema = z.enum(['ok', 'warning', 'exceeded']);
 export type BudgetStatus = z.infer<typeof BudgetStatusSchema>;
+
+/** Where the warnings go (at least one). */
+export const BudgetChannelsSchema = z
+  .array(NotificationChannelSchema)
+  .min(1)
+  .refine((values) => new Set(values).size === values.length, {
+    message: 'Channels must not repeat',
+  });
+
+/** A warning already sent this month (the cap itself included). */
+export const BudgetNoticeSchema = z.object({
+  amount: PositiveCentsSchema,
+  sentAt: IsoDateTimeSchema,
+  channels: z.array(NotificationChannelSchema).min(1),
+});
+export type BudgetNotice = z.infer<typeof BudgetNoticeSchema>;
 
 export const BudgetSchema = z.object({
   id: BudgetIdSchema,
   categoryId: CategoryIdSchema,
-  /** Month the `spent` figures refer to. */
+  /** Month the `spent` figures refer to; the cap starts over on day 1. */
   month: YearMonthSchema,
   limit: PositiveCentsSchema,
-  warningThresholds: WarningThresholdsSchema,
-  /** Sum of the month's outgoing transactions in the category. */
+  warnings: BudgetWarningsSchema,
+  channels: BudgetChannelsSchema,
+  /** Sum of the month's outgoing transactions in the category (credit and debit). */
   spent: NonNegativeCentsSchema,
   /** `spent / limit` in percentage points (may pass 100). */
   usedPercent: PercentSchema,
   status: BudgetStatusSchema,
-  /** Thresholds already notified this month (100 = cap reached). */
-  triggeredWarnings: z.array(z.int().min(1).max(100)),
+  /** Spending at the end of the month at the current pace; `null` without enough history. */
+  projectedSpent: NonNegativeCentsSchema.nullable(),
+  /** Warnings already sent this month, oldest first. */
+  notices: z.array(BudgetNoticeSchema),
   ...timestamps,
 });
 export type Budget = z.infer<typeof BudgetSchema>;
@@ -51,6 +71,7 @@ export type BudgetList = z.infer<typeof BudgetListSchema>;
 export const BudgetMonthSchema = z.object({
   month: YearMonthSchema,
   spent: NonNegativeCentsSchema,
+  /** Cap of that month; `null` when the category had no cap. */
   limit: PositiveCentsSchema.nullable(),
 });
 export type BudgetMonth = z.infer<typeof BudgetMonthSchema>;
@@ -84,12 +105,14 @@ export type BudgetPreview = z.infer<typeof BudgetPreviewSchema>;
 export const CreateBudgetBodySchema = z.object({
   categoryId: CategoryIdSchema,
   limit: PositiveCentsSchema,
-  warningThresholds: WarningThresholdsSchema,
+  warnings: BudgetWarningsSchema,
+  channels: BudgetChannelsSchema,
 });
 export type CreateBudgetBody = z.infer<typeof CreateBudgetBodySchema>;
 
 export const UpdateBudgetBodySchema = z.object({
   limit: PositiveCentsSchema.optional(),
-  warningThresholds: WarningThresholdsSchema.optional(),
+  warnings: BudgetWarningsSchema.optional(),
+  channels: BudgetChannelsSchema.optional(),
 });
 export type UpdateBudgetBody = z.infer<typeof UpdateBudgetBodySchema>;

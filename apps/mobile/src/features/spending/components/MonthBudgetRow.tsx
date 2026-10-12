@@ -1,19 +1,39 @@
-import { View } from 'react-native';
+import { Pressable, View } from 'react-native';
 
 import { budgetStateLabel, budgetTone, MoneyText, Text } from '@/components/ui';
-import { BudgetMilestoneBar } from '@/features/budgets';
+// Straight to the file: the budgets feature imports Gastos back.
+import { BudgetMilestoneBar } from '@/features/budgets/components/BudgetMilestoneBar';
 
 import type { BudgetWithMilestones } from '../data';
 
 const TONE = { positive: 'subtle', warning: 'warning', negative: 'negative' } as const;
 
 /** Cap of a category with its warning marks and month state ("74% · atenção"). */
-export function MonthBudgetRow({ category, spent, limit, milestones }: BudgetWithMilestones) {
+export function MonthBudgetRow({
+  category,
+  spent,
+  limit,
+  milestones,
+  onPress,
+}: BudgetWithMilestones & {
+  /** Opens the cap (Teto de Alimentação). */
+  onPress?: () => void;
+}) {
   const percent = Math.round((spent / limit) * 100);
   const tone = budgetTone(percent);
   const key = tone === 'warning' || tone === 'negative' ? tone : 'positive';
+  const Container = onPress ? Pressable : View;
   return (
-    <View className="gap-2.5">
+    <Container
+      {...(onPress
+        ? {
+            accessibilityRole: 'link' as const,
+            accessibilityHint: 'Abre o teto',
+            onPress,
+          }
+        : null)}
+      className={onPress ? 'gap-2.5 active:opacity-80' : 'gap-2.5'}
+    >
       <View className="flex-row items-baseline justify-between gap-2">
         <Text size={15} weight="bold">
           {category}
@@ -27,6 +47,6 @@ export function MonthBudgetRow({ category, spent, limit, milestones }: BudgetWit
       <Text size={12} weight={key === 'positive' ? 'medium' : 'bold'} tone={TONE[key]}>
         {percent}% · {budgetStateLabel(percent)}
       </Text>
-    </View>
+    </Container>
   );
 }

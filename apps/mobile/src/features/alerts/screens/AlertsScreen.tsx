@@ -2,35 +2,54 @@ import { useRouter } from 'expo-router';
 import { View } from 'react-native';
 
 import { PageHeader, ResponsiveGrid, Screen, SectionCard, TopBar } from '@/components/layout';
-import { Button } from '@/components/ui';
+import { Button, Text } from '@/components/ui';
+import { routeTo } from '@/constants/routes';
+// Straight to the hook: the budgets index pulls in screens that open the chat.
+import { useBudgets } from '@/features/budgets/hooks/useBudgets';
 import { MonthBudgetRow } from '@/features/spending';
 import { useBreakpoint } from '@/hooks/useBreakpoint';
 import { ChatFab } from '@/navigation';
 
 import { NoticeHistoryRow, PriceAlertRow } from '../components';
-import { ALERT_BUDGETS, ALERTS_SUBTITLE, NOTICE_HISTORY, PRICE_ALERTS } from '../data';
+import { NOTICE_HISTORY, PRICE_ALERTS } from '../data';
 
 /** Alertas: spending caps, price alerts and the notices already sent. */
 export function AlertsScreen() {
   const router = useRouter();
   const { isTablet } = useBreakpoint();
+  const { budgets } = useBudgets();
   const newBudget = () => router.navigate('/new-budget');
+  const subtitle = `${budgets.length} ${budgets.length === 1 ? 'teto' : 'tetos'} e ${PRICE_ALERTS.length} ${PRICE_ALERTS.length === 1 ? 'alerta' : 'alertas'} de preço`;
   const newPriceAlert = () => router.navigate('/new-price-alert');
 
   const budgetsCard = (
     <SectionCard
       title="Tetos do mês"
       description="Cada aviso chega uma vez por mês, somando crédito e débito"
+      onTitlePress={() => router.navigate('/budgets')}
       titleSize={isTablet ? 20 : 18}
       padding={isTablet ? 20 : 16}
       gap={isTablet ? 20 : 14}
       className="flex-1"
     >
-      <View className="gap-5.5">
-        {ALERT_BUDGETS.map((budget) => (
-          <MonthBudgetRow key={budget.category} {...budget} />
-        ))}
-      </View>
+      {budgets.length ? (
+        <View className="gap-5.5">
+          {budgets.map((budget) => (
+            <MonthBudgetRow
+              key={budget.id}
+              category={budget.label}
+              spent={budget.spent}
+              limit={budget.limit}
+              milestones={budget.warnings}
+              onPress={() => router.navigate(routeTo.budget(budget.id))}
+            />
+          ))}
+        </View>
+      ) : (
+        <Text size={14} tone="muted" leading={1.55}>
+          Nenhum teto ainda. Um teto avisa antes de você passar do limite de uma categoria.
+        </Text>
+      )}
     </SectionCard>
   );
 
@@ -85,7 +104,7 @@ export function AlertsScreen() {
       >
         {isTablet ? (
           <>
-            <PageHeader title="Alertas" subtitle={ALERTS_SUBTITLE} />
+            <PageHeader title="Alertas" subtitle={subtitle} />
             <View className="flex-row gap-2.5">
               <Button
                 variant="secondary"

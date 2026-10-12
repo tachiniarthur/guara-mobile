@@ -160,7 +160,8 @@ implementada.
 | `Relatorio-Linha-do-Tempo`                                                                          | M T      | `/reports/timeline`                                                                   |
 | `Relatorio-Exportar`, `Relatorio-Exportado`                                                         | M T      | folha "Exportar" de `/reports` (também em Lançamentos e na Linha do tempo)            |
 | `Alertas`                                                                                           | M T D    | `/alerts`                                                                             |
-| `Novo-Teto`                                                                                         | M T D    | `/new-budget` (modal)                                                                 |
+| `Novo-Teto`, `Teto-Editar`                                                                          | M T D    | `/new-budget` (modal), `?budgetId=` para editar                                       |
+| `Tetos`, `Tetos-Vazio`, `Teto-Detalhe`, `Teto-Excluir`                                              | M T      | `/budgets`, `/budgets/[budgetId]` (excluir no detalhe)                                |
 | `Novo-Alerta-Preco`                                                                                 | M T D    | `/new-price-alert` (modal)                                                            |
 | `Investimentos`                                                                                     | M T D    | `/investments`                                                                        |
 | `Ativo`, `Ativo-Tesouro-Selic`, `-CDB`, `-BOVA11`, `-HGLG11`, `-Bitcoin`                            | M T D    | `/investments/asset/[ticker]`                                                         |

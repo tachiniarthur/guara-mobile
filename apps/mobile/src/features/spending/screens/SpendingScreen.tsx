@@ -267,6 +267,7 @@ export function SpendingScreen() {
       <SectionCard
         title="Tetos do mês"
         description="Cada aviso chega uma vez por mês, somando crédito e débito"
+        onTitlePress={() => router.navigate('/budgets')}
         padding={isTablet ? 20 : 16}
         gap={20}
         className="flex-1"
@@ -283,7 +284,11 @@ export function SpendingScreen() {
         }
       >
         {ledger.budgets.map((budget) => (
-          <MonthBudgetRow key={budget.category} {...budget} />
+          <MonthBudgetRow
+            key={budget.id}
+            {...budget}
+            onPress={() => router.navigate(routeTo.budget(budget.id))}
+          />
         ))}
       </SectionCard>
     </View>

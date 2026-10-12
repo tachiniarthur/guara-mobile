@@ -189,6 +189,30 @@ function withDelta(value: Cents, delta: number): Cents {
   return cents(Math.max(0, value + delta));
 }
 
+/**
+ * Caps shown in Gastos: the user's caps on categories with spending this month, `spent` from
+ * the month totals (before the edits).
+ */
+export function monthBudgets(
+  caps: readonly { id: string; categoryId: CategoryId; limit: Cents; warnings: readonly Cents[] }[],
+  totals: readonly CategoryTotal[],
+): CategoryBudget[] {
+  return caps.flatMap((cap) => {
+    const total = totals.find((item) => item.id === cap.categoryId);
+    if (!total) return [];
+    return [
+      {
+        id: cap.id,
+        categoryId: cap.categoryId,
+        category: total.name,
+        spent: total.total,
+        limit: cap.limit,
+        milestones: [...cap.warnings],
+      },
+    ];
+  });
+}
+
 export function budgetsWithEdits(
   budgets: readonly CategoryBudget[],
   ledger: readonly LedgerTransaction[],

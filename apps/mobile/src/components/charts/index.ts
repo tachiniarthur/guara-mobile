@@ -9,6 +9,7 @@ export * from './PaceChart';
 export * from './BalanceLineChart';
 export * from './GroupedBarChart';
 export * from './CapBarChart';
+export * from './MonthCapChart';
 export * from './PriceLineChart';
 export * from './ReturnChart';
 export * from './TargetBarChart';

@@ -122,7 +122,7 @@ describe('Lançamentos de uma categoria', () => {
     fireEvent.press(screen.getByRole('button', { name: 'Editar teto de Alimentação' }));
     expect(mockNavigate).toHaveBeenCalledWith({
       pathname: '/new-budget',
-      params: { categoryId: 'food' },
+      params: { budgetId: 'budget-food' },
     });
   });
 

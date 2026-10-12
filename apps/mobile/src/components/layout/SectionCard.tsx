@@ -1,5 +1,5 @@
 import type { ReactNode } from 'react';
-import { View } from 'react-native';
+import { Pressable, View } from 'react-native';
 
 import { Text } from '@/components/ui/Text';
 import { cn } from '@/lib/cn';
@@ -16,6 +16,8 @@ export interface SectionCardProps {
   action?: ReactNode;
   /** Element before the title (icon tile, portrait). */
   leading?: ReactNode;
+  /** Makes the title an underlined link ("Tetos do mês" → Tetos de gasto). */
+  onTitlePress?: () => void;
   /** Title size (design: 17 on list pages, 18 or 20). */
   titleSize?: 17 | 18 | 19 | 20;
   /** Padding in dp (design: 16, 18, 20 or 24). */
@@ -35,6 +37,7 @@ export function SectionCard({
   descriptionTone = 'subtle',
   action,
   leading,
+  onTitlePress,
   titleSize = 20,
   padding = 20,
   gap = 14,
@@ -57,16 +60,36 @@ export function SectionCard({
           <View className="min-w-0 flex-1 flex-row items-start gap-3">
             {leading}
             <View className="min-w-0 flex-1 gap-0.5">
-              <Text
-                serif
-                weight="bold"
-                size={titleSize}
-                leading={1.25}
-                tracking={titleSize === 20 ? -0.01 : 0}
-                accessibilityRole="header"
-              >
-                {title}
-              </Text>
+              {onTitlePress ? (
+                <Pressable
+                  accessibilityRole="link"
+                  onPress={onTitlePress}
+                  hitSlop={8}
+                  className="self-start"
+                >
+                  <Text
+                    serif
+                    weight="bold"
+                    size={titleSize}
+                    leading={1.25}
+                    tracking={titleSize === 20 ? -0.01 : 0}
+                    underline
+                  >
+                    {title}
+                  </Text>
+                </Pressable>
+              ) : (
+                <Text
+                  serif
+                  weight="bold"
+                  size={titleSize}
+                  leading={1.25}
+                  tracking={titleSize === 20 ? -0.01 : 0}
+                  accessibilityRole="header"
+                >
+                  {title}
+                </Text>
+              )}
               {description ? (
                 <Text variant="caption" tone={descriptionTone}>
                   {description}

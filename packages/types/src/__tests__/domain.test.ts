@@ -1,11 +1,12 @@
 import {
+  BudgetChannelsSchema,
+  BudgetWarningsSchema,
   ChatStreamEventSchema,
   InvestorProfileAnswersSchema,
   PropertySchema,
   ResolveDuplicateBodySchema,
   RunSimulationBodySchema,
   TransactionSchema,
-  WarningThresholdsSchema,
 } from '../index';
 
 const transaction = {
@@ -66,10 +67,13 @@ describe('domain schemas', () => {
     ).toBe(true);
   });
 
-  it('warning thresholds are ascending and below 100', () => {
-    expect(WarningThresholdsSchema.safeParse([50, 80]).success).toBe(true);
-    expect(WarningThresholdsSchema.safeParse([80, 50]).success).toBe(false);
-    expect(WarningThresholdsSchema.safeParse([100]).success).toBe(false);
+  it('budget warnings are ascending amounts and channels do not repeat', () => {
+    expect(BudgetWarningsSchema.safeParse([50_000, 70_000]).success).toBe(true);
+    expect(BudgetWarningsSchema.safeParse([70_000, 50_000]).success).toBe(false);
+    expect(BudgetWarningsSchema.safeParse([0]).success).toBe(false);
+    expect(BudgetChannelsSchema.safeParse(['push', 'email']).success).toBe(true);
+    expect(BudgetChannelsSchema.safeParse([]).success).toBe(false);
+    expect(BudgetChannelsSchema.safeParse(['push', 'push']).success).toBe(false);
   });
 
   it('the investor questionnaire has six distinct answers', () => {
