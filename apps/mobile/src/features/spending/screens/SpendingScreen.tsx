@@ -1,4 +1,5 @@
 import { colors } from '@guara/ui-tokens';
+import { formatCents, formatDate } from '@guara/utils';
 import { useRouter } from 'expo-router';
 import { useRef, useState, type ReactNode } from 'react';
 import { Pressable, ScrollView, View } from 'react-native';
@@ -16,6 +17,9 @@ import {
   Text,
 } from '@/components/ui';
 import { useBankConnectionsStore } from '@/features/bank-connections';
+// Straight to the files: the subscriptions index pulls in screens that import Gastos.
+import { useSubscriptions } from '@/features/subscriptions/hooks/useSubscriptions';
+import { nextCharge } from '@/features/subscriptions/lib/subscriptions';
 import { useBreakpoint } from '@/hooks/useBreakpoint';
 import { routeTo } from '@/constants/routes';
 import { AccountMenuButton, ChatFab } from '@/navigation';
@@ -29,14 +33,12 @@ import {
   NewUserSpending,
 } from '../components';
 import {
-  ACTIVE_SUBSCRIPTIONS,
   MONTHLY_TOTALS,
   PACE,
   RECENT_SUBSCRIPTION_ROW,
   RECENT_TRANSACTION_IDS,
   SPENDING,
   SPENDING_TODAY,
-  SUBSCRIPTIONS_SUMMARY,
   WEEKDAY_AVERAGES,
   type SpendingBankId,
 } from '../data';
@@ -93,6 +95,7 @@ export function SpendingScreen() {
     scrollRef.current?.scrollTo({ y: Math.max(0, (offsets[key] ?? 0) - 8), animated: true });
 
   const ledger = useLedger();
+  const subscriptions = useSubscriptions();
   const totalOut = ledger.summaryFor('all')?.totalOut ?? SPENDING.totalOut;
   const recent = [
     ...RECENT_TRANSACTION_IDS.flatMap((id) => {
@@ -298,7 +301,7 @@ export function SpendingScreen() {
     <View {...track('subscriptions')} className="flex-1">
       <SectionCard
         title="Assinaturas ativas"
-        description={SUBSCRIPTIONS_SUMMARY}
+        description={`${subscriptions.items.length} detectadas automaticamente · ${formatCents(subscriptions.total)}/mês`}
         padding={isTablet ? 20 : 16}
         gap={16}
         className="flex-1"
@@ -311,8 +314,19 @@ export function SpendingScreen() {
         }
       >
         <View className="gap-1.5">
-          {ACTIVE_SUBSCRIPTIONS.map((item) => (
-            <SubscriptionRow key={item.id} {...item} />
+          {subscriptions.items.slice(0, 3).map((item) => (
+            <SubscriptionRow
+              key={item.id}
+              name={item.name}
+              next={`próxima em ${formatDate(nextCharge(item, subscriptions.today), 'dd/MMM').replace('.', '')}`}
+              amount={item.amount}
+              onPress={() =>
+                router.navigate({
+                  pathname: '/spending/subscriptions/[subscriptionId]',
+                  params: { subscriptionId: item.id },
+                })
+              }
+            />
           ))}
         </View>
       </SectionCard>

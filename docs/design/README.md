@@ -156,6 +156,7 @@ implementada.
 | `Lancamento-Detalhe` · detalhe do lançamento                                                        | M T      | `/spending/[transactionId]`                                                           |
 | `Lancamentos-Estados` · filtro vazio, vazio e erro                                                  | M T      | estados de `/spending/transactions`                                                   |
 | `Assinaturas`                                                                                       | M T D    | `/spending/subscriptions`                                                             |
+| `Assinatura-Detalhe`, `Assinaturas-Calendario`                                                      | M T      | `/spending/subscriptions/[subscriptionId]`, `/spending/subscriptions/calendar`        |
 | `Relatorio` (T em paisagem)                                                                         | M T D    | `/reports`                                                                            |
 | `Relatorio-Linha-do-Tempo`                                                                          | M T      | `/reports/timeline`                                                                   |
 | `Relatorio-Exportar`, `Relatorio-Exportado`                                                         | M T      | folha "Exportar" de `/reports` (também em Lançamentos e na Linha do tempo)            |

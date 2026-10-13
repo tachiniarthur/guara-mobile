@@ -154,21 +154,6 @@ export interface CategoryBudget extends BudgetWithMilestones {
   categoryId: CategoryId;
 }
 
-export interface SubscriptionSummary {
-  id: string;
-  name: string;
-  next: string;
-  amount: Cents;
-}
-
-export const ACTIVE_SUBSCRIPTIONS: SubscriptionSummary[] = [
-  { id: 'spotify', name: 'Spotify', next: 'próxima em 02/out', amount: cents(2_190) },
-  { id: 'netflix', name: 'Netflix', next: 'próxima em 08/out', amount: cents(4_490) },
-  { id: 'prime', name: 'Amazon Prime', next: 'próxima em 12/out', amount: cents(1_990) },
-];
-
-export const SUBSCRIPTIONS_SUMMARY = '4 detectadas automaticamente · R$ 101,60/mês';
-
 // --- Lançamentos ------------------------------------------------------------------------------
 
 /** "Today" of the design snapshot: day labels ("Hoje", "Ontem") are relative to it. */

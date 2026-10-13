@@ -33,7 +33,7 @@ const APP_ROUTES: RouteCase[] = [
   ['/spending/tx-1', 'Lançamento', null],
   ['/spending/subscriptions', 'Assinaturas', null],
   ['/spending/subscriptions/calendar', 'Calendário de cobranças', null],
-  ['/spending/subscriptions/sub-1', 'Assinatura', 'sub-1'],
+  ['/spending/subscriptions/netflix', 'Netflix', null],
   ['/investments', 'Investimentos', null],
   ['/investments/positions', 'Posições', null],
   ['/investments/allocation', 'Alocação', null],
