@@ -1,7 +1,8 @@
 import { colors } from '@guara/ui-tokens';
-import { Pressable, View } from 'react-native';
+import { ActivityIndicator, Pressable, View } from 'react-native';
 
 import { Icon, IconButton, Sheet, Text, type IconName } from '@/components/ui';
+import { cn } from '@/lib/cn';
 import { haptics } from '@/lib/haptics';
 
 import type { ChatFile } from '../data';
@@ -72,30 +73,75 @@ export function AttachSheet({
   );
 }
 
-/** The file waiting to be sent, above the field. */
-export function AttachmentChip({ file, onRemove }: { file: ChatFile; onRemove?: () => void }) {
+/** Upload of the file waiting to be sent: going, or stopped at some percent. */
+export type AttachmentUpload =
+  { state: 'sending'; percent: number } | { state: 'failed'; percent: number };
+
+/** The file waiting to be sent, above the field (sending, or failed with retry). */
+export function AttachmentChip({
+  file,
+  onRemove,
+  upload,
+  onRetry,
+}: {
+  file: ChatFile;
+  onRemove?: () => void;
+  upload?: AttachmentUpload | null;
+  onRetry?: () => void;
+}) {
+  const failed = upload?.state === 'failed';
+  const caption = failed
+    ? `Não deu para enviar · a conexão caiu em ${upload.percent}%`
+    : upload?.state === 'sending'
+      ? `Enviando… ${upload.percent}%`
+      : onRemove
+        ? `${fileCaption(file)} · pronto para enviar`
+        : fileCaption(file);
   return (
     <View
-      accessible={!onRemove}
-      accessibilityLabel={`Anexo ${file.name}, ${fileCaption(file)}`}
-      className="flex-row items-center gap-3 rounded-16 border border-border-strong bg-surface-muted px-3 py-2.5"
+      accessible={!onRemove && !failed}
+      accessibilityRole={failed ? 'alert' : undefined}
+      accessibilityLabel={`Anexo ${file.name}, ${caption}`}
+      className={cn(
+        'flex-row items-center gap-3 rounded-16 border px-3 py-2.5',
+        failed
+          ? 'border-negative-border bg-negative-muted'
+          : 'border-border-strong bg-surface-muted',
+      )}
     >
-      <View className="h-10 w-10 items-center justify-center rounded-12 bg-positive-muted">
+      <View
+        className={cn(
+          'h-10 w-10 items-center justify-center rounded-12',
+          failed ? 'bg-negative-muted' : 'bg-positive-muted',
+        )}
+      >
         <Icon
-          name={file.kind === 'pdf' ? 'document' : 'image'}
+          name={failed ? 'alertTriangle' : file.kind === 'pdf' ? 'document' : 'image'}
           size={20}
-          color={colors.positive.DEFAULT}
+          color={failed ? colors.negative.DEFAULT : colors.positive.DEFAULT}
         />
       </View>
       <View className="min-w-0 flex-1">
         <Text size={14} weight="bold" numberOfLines={1} leading={1.3}>
           {file.name}
         </Text>
-        <Text size={12} tone="subtle" leading={1.3}>
-          {onRemove ? `${fileCaption(file)} · pronto para enviar` : fileCaption(file)}
+        <Text size={12} tone={failed ? 'muted' : 'subtle'} leading={1.3}>
+          {caption}
         </Text>
       </View>
-      {onRemove ? (
+      {failed && onRetry ? (
+        <Pressable
+          accessibilityRole="button"
+          accessibilityLabel="Tentar enviar de novo"
+          onPress={onRetry}
+          className="h-10 w-10 items-center justify-center rounded-full border border-border-strong bg-surface active:bg-surface-pressed"
+        >
+          <Icon name="retry" size={18} color={colors.foreground.DEFAULT} />
+        </Pressable>
+      ) : null}
+      {upload?.state === 'sending' ? (
+        <ActivityIndicator size="small" color={colors.brand.DEFAULT} />
+      ) : onRemove ? (
         <IconButton icon="close" accessibilityLabel="Remover anexo" onPress={onRemove} />
       ) : null}
     </View>

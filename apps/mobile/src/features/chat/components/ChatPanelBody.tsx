@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react';
+import { useRef, useState } from 'react';
 import { ScrollView, View } from 'react-native';
 
 import { AiDisclaimer } from '@/components/feedback';
@@ -10,7 +10,7 @@ import { useChatStore } from '../store';
 import { AssistantAvatar } from './AssistantAvatar';
 import { AssistantPickerSheet } from './AssistantPickerSheet';
 import { ChatComposer } from './ChatComposer';
-import { ChatMessageView } from './MessageBubbles';
+import { ChatThread } from './ChatThread';
 
 /**
  * Messages, composer and the AI notice of the chat opened over a page (docked panel, tablet
@@ -27,16 +27,13 @@ export function ChatPanelBody({
 }) {
   const scrollRef = useRef<ScrollView>(null);
   const context = useChatStore((state) => state.context);
-  const messages = useChatStore((state) => state.messages);
+  const isNew = useChatStore((state) => state.messages.length === 0);
   const send = useChatStore((state) => state.send);
+  const stop = useChatStore((state) => state.stop);
+  const streaming = useChatStore((state) => state.streaming);
   const addressee = useChatStore((state) => state.addressee);
   const setAddressee = useChatStore((state) => state.setAddressee);
   const [pickerOpen, setPickerOpen] = useState(false);
-
-  const count = messages.length;
-  useEffect(() => {
-    requestAnimationFrame(() => scrollRef.current?.scrollToEnd({ animated: true }));
-  }, [count]);
 
   const placeholder =
     context?.placeholder ??
@@ -47,8 +44,10 @@ export function ChatPanelBody({
       <ScrollView
         ref={scrollRef}
         className="flex-1"
-        contentContainerStyle={{ padding: 16, gap: 16 }}
+        contentContainerStyle={{ padding: 16, gap: 16, flexGrow: 1 }}
         keyboardShouldPersistTaps="handled"
+        // New messages and the answer being written scroll into view.
+        onContentSizeChange={() => scrollRef.current?.scrollToEnd({ animated: true })}
       >
         {context ? (
           <View className="gap-4">
@@ -91,7 +90,7 @@ export function ChatPanelBody({
             </View>
           </View>
         ) : (
-          messages.map((message) => <ChatMessageView key={message.id} message={message} />)
+          <ChatThread compact />
         )}
       </ScrollView>
       <View
@@ -101,8 +100,10 @@ export function ChatPanelBody({
         <ChatComposer
           onSend={send}
           onPickAssistant={() => setPickerOpen(true)}
-          suggestions={context ? undefined : suggestions}
+          suggestions={context || isNew ? undefined : suggestions}
           placeholder={placeholder}
+          streaming={streaming}
+          onStop={stop}
         />
         <AiDisclaimer />
       </View>

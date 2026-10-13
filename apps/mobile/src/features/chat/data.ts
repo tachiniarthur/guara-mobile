@@ -24,13 +24,34 @@ export interface ChatFile {
 }
 
 export type ChatMessage =
-  | { id: string; role: 'user'; text: string; attachment?: ChatFile }
+  | {
+      id: string;
+      role: 'user';
+      text: string;
+      attachment?: ChatFile;
+      /** `failed`: not sent (no connection); it stays until "Tentar de novo" or "Apagar". */
+      status?: 'failed';
+    }
   | {
       id: string;
       role: 'assistant';
       assistant: AssistantId;
       area: string;
       blocks: AssistantBlock[];
+      /** `streaming` while it is written; `stopped` when "Parar a resposta" cut it. */
+      status?: 'streaming' | 'stopped';
+      /** The Capivara called this assistant ("A Capivara chamou o Pacu"). */
+      routedBy?: AssistantId;
+    }
+  | {
+      id: string;
+      /** The assistant did not answer; the question waits to be asked again. */
+      role: 'unavailable';
+      assistant: AssistantId;
+      area: string;
+      /** The user message it answers. */
+      questionId: string;
+      routedBy?: AssistantId;
     };
 
 export interface Conversation {
@@ -96,6 +117,56 @@ export const CONVERSATION: Conversation = {
 };
 
 export const SUGGESTIONS = ['Cancelar o Amazon Prime', 'Resumo da semana', 'Como está meu saldo?'];
+
+/** "Comece por aqui" of a new conversation: a question for each assistant. */
+export const STARTERS: { assistant: AssistantId; question: string }[] = [
+  { assistant: 'tamandua', question: 'Quanto gastei com comida em setembro?' },
+  { assistant: 'pacu', question: 'Minha carteira está no meu perfil?' },
+  { assistant: 'caramelo', question: 'Me avisa se o Bitcoin passar de R$ 650.000' },
+  { assistant: 'onca', question: 'Quanto falta para a reserva de emergência?' },
+];
+
+/** An answer the design shows in full, by question (stand-in for the chat API). */
+export interface ScriptedReply {
+  questions: readonly string[];
+  assistant: AssistantId;
+  area: string;
+  blocks: AssistantBlock[];
+}
+
+const FOOD_ANSWER = CONVERSATION.messages[1] as Extract<ChatMessage, { role: 'assistant' }>;
+const SUBSCRIPTIONS_ANSWER = CONVERSATION.messages[3] as Extract<
+  ChatMessage,
+  { role: 'assistant' }
+>;
+
+export const SCRIPTED_REPLIES: ScriptedReply[] = [
+  {
+    questions: ['quanto gastei com comida esse mês?', 'Quanto gastei com comida em setembro?'],
+    assistant: FOOD_ANSWER.assistant,
+    area: FOOD_ANSWER.area,
+    blocks: FOOD_ANSWER.blocks,
+  },
+  {
+    questions: ['e assinaturas?'],
+    assistant: SUBSCRIPTIONS_ANSWER.assistant,
+    area: SUBSCRIPTIONS_ANSWER.area,
+    blocks: SUBSCRIPTIONS_ANSWER.blocks,
+  },
+  {
+    questions: ['consegue ler meu extrato do Itaú?'],
+    assistant: 'capivara',
+    area: 'Coordena a turma',
+    blocks: [
+      {
+        type: 'text',
+        content: [
+          'Consigo, sim. Mande o PDF, a foto ou a imagem do extrato (até 10 MB) e eu passo para o Tamanduá.',
+        ],
+      },
+    ],
+  },
+];
 
 export interface ConversationSummary {
   id: string;

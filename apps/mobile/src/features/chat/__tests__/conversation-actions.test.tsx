@@ -89,12 +89,16 @@ describe('Compositor', () => {
     expect(screen.getByText('PDF · 184 KB · pronto para enviar')).toBeOnTheScreen();
     fireEvent.changeText(screen.getByLabelText('Mensagem'), 'o que tem neste extrato?');
     fireEvent.press(screen.getByRole('button', { name: 'Enviar mensagem' }));
-    expect(onSend).toHaveBeenCalledWith('o que tem neste extrato?', {
-      uri: 'file:///extrato.pdf',
-      name: 'extrato-itau-setembro.pdf',
-      kind: 'pdf',
-      sizeBytes: 188_416,
-    });
+    // The file goes first ("Enviando… 40%"), then the question.
+    expect(await screen.findByText(/^Enviando… \d+%$/)).toBeOnTheScreen();
+    await waitFor(() =>
+      expect(onSend).toHaveBeenCalledWith('o que tem neste extrato?', {
+        uri: 'file:///extrato.pdf',
+        name: 'extrato-itau-setembro.pdf',
+        kind: 'pdf',
+        sizeBytes: 188_416,
+      }),
+    );
   });
 
   it('refuses files over 10 MB', async () => {

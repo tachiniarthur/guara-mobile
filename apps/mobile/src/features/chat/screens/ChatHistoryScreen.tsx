@@ -24,7 +24,12 @@ export function ChatHistoryScreen() {
   const { groups, count } = useConversationHistory(query);
   const currentId = useChatStore((state) => state.currentId);
 
-  const startNew = () => router.navigate(conversationHref());
+  const begin = useChatStore((state) => state.startNew);
+  // "Nova conversa" opens an empty conversation with the Capivara's hello.
+  const startNew = () => {
+    begin();
+    router.navigate(conversationHref());
+  };
 
   // Wide tablets: history and conversation side by side (the history column has the panel width).
   if (docked) return <ConversationScreen />;

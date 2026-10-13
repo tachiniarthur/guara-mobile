@@ -1,4 +1,4 @@
-import { act, fireEvent, render, screen } from '@testing-library/react-native';
+import { act, fireEvent, render, screen, waitFor } from '@testing-library/react-native';
 
 import { useSubscriptionStore } from '@/stores';
 
@@ -19,11 +19,14 @@ beforeEach(() => {
   act(() => useSubscriptionStore.getState().reset());
 });
 
+// No answer keeps being written after a test.
+afterEach(() => act(() => useChatStore.getState().stop()));
+
 describe('questions of the plan', () => {
-  it('each question counts toward the month', () => {
+  it('each question counts toward the month', async () => {
     const before = useSubscriptionStore.getState().questionsUsed;
     act(() => useChatStore.getState().send('quanto gastei com mercado?'));
-    expect(useSubscriptionStore.getState().questionsUsed).toBe(before + 1);
+    await waitFor(() => expect(useSubscriptionStore.getState().questionsUsed).toBe(before + 1));
   });
 
   it('replaces the composer when the questions ran out', () => {

@@ -15,7 +15,14 @@ import type { ChatFile } from '../data';
 import { useQuestionLimit } from '../hooks/useQuestionLimit';
 
 import { ChatLimitNotice } from './ChatLimitNotice';
-import { AttachSheet, AttachmentChip, MAX_ATTACHMENT_BYTES } from './ComposerAttachments';
+import { UploadError, uploadAttachment } from '../api/upload';
+
+import {
+  AttachSheet,
+  AttachmentChip,
+  MAX_ATTACHMENT_BYTES,
+  type AttachmentUpload,
+} from './ComposerAttachments';
 
 export interface ChatComposerProps {
   onSend: (text: string, attachment?: ChatFile) => void;
@@ -24,6 +31,9 @@ export interface ChatComposerProps {
   placeholder?: string;
   /** Tablet: 40-tall suggestions. */
   large?: boolean;
+  /** An answer is being written: send becomes "Parar a resposta". */
+  streaming?: boolean;
+  onStop?: () => void;
 }
 
 /** Bars of the waveform while recording (newest on the right). */
@@ -65,9 +75,12 @@ export function ChatComposer({
   suggestions = [],
   placeholder = 'Pergunte qualquer coisa',
   large = false,
+  streaming = false,
+  onStop,
 }: ChatComposerProps) {
   const [text, setText] = useState('');
   const [attachment, setAttachment] = useState<ChatFile | null>(null);
+  const [upload, setUpload] = useState<AttachmentUpload | null>(null);
   const [attachOpen, setAttachOpen] = useState(false);
   const [mode, setMode] = useState<Mode>('idle');
   const [recorded, setRecorded] = useState(0);
@@ -81,14 +94,29 @@ export function ChatComposer({
   // Each metering sample becomes a bar of the waveform.
   const levels = voice.levels.map(barHeight);
 
-  const send = (value = text) => {
+  const send = async (value = text) => {
     const message = value.trim();
     if (!message && !attachment) return;
+    if (streaming || upload?.state === 'sending') return;
     if (limit.reached) {
       setLimitDismissed(false);
       return;
     }
     haptics.impact();
+    // The file goes first; if the connection drops, it stays here to try again.
+    if (attachment) {
+      setUpload({ state: 'sending', percent: 0 });
+      try {
+        await uploadAttachment(attachment, (percent) => setUpload({ state: 'sending', percent }));
+      } catch (error) {
+        setUpload({
+          state: 'failed',
+          percent: error instanceof UploadError ? error.progress : 0,
+        });
+        return;
+      }
+      setUpload(null);
+    }
     onSend(message, attachment ?? undefined);
     setText('');
     setAttachment(null);
@@ -166,7 +194,7 @@ export function ChatComposer({
             <Pressable
               key={suggestion}
               accessibilityRole="button"
-              onPress={() => send(suggestion)}
+              onPress={() => void send(suggestion)}
               className={cn(
                 'justify-center rounded-full border border-border-strong px-4 active:bg-surface-pressed',
                 large ? 'h-10' : 'h-9',
@@ -179,7 +207,15 @@ export function ChatComposer({
       ) : null}
       {showLimit ? <ChatLimitNotice onDismiss={() => setLimitDismissed(true)} /> : null}
       {attachment && mode === 'idle' && !showLimit ? (
-        <AttachmentChip file={attachment} onRemove={() => setAttachment(null)} />
+        <AttachmentChip
+          file={attachment}
+          upload={upload}
+          onRetry={() => void send()}
+          onRemove={() => {
+            setUpload(null);
+            setAttachment(null);
+          }}
+        />
       ) : null}
       {showLimit ? null : mode === 'idle' ? (
         <View className="min-h-14 flex-row items-center gap-0.5 rounded-full border border-border-strong bg-surface-input p-1.5">
@@ -202,17 +238,31 @@ export function ChatComposer({
             cursorColor={colors.brand.DEFAULT}
             accessibilityLabel="Mensagem"
             returnKeyType="send"
-            onSubmitEditing={() => send()}
+            onSubmitEditing={() => void send()}
             className="h-11 min-w-0 flex-1 pl-1 text-foreground"
             style={{ fontFamily: fontFamily.regular, fontSize: 15 }}
           />
           <IconButton icon="mic" accessibilityLabel="Falar" onPress={startRecording} />
-          <IconButton
-            icon="arrowRight"
-            variant="primary"
-            accessibilityLabel="Enviar mensagem"
-            onPress={() => send()}
-          />
+          {streaming ? (
+            <Pressable
+              accessibilityRole="button"
+              accessibilityLabel="Parar a resposta"
+              onPress={() => {
+                haptics.selection();
+                onStop?.();
+              }}
+              className="h-11 w-11 items-center justify-center rounded-full border border-border-strong bg-surface-muted active:bg-surface-pressed"
+            >
+              <Icon name="stop" size={18} color={colors.foreground.DEFAULT} />
+            </Pressable>
+          ) : (
+            <IconButton
+              icon="arrowRight"
+              variant="primary"
+              accessibilityLabel="Enviar mensagem"
+              onPress={() => void send()}
+            />
+          )}
         </View>
       ) : (
         <View className="gap-1.5">

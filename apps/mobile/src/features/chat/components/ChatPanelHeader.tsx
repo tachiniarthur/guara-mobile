@@ -2,19 +2,17 @@ import { View } from 'react-native';
 
 import { IconButton, Text } from '@/components/ui';
 
-import { assistantWith } from '../assistants';
-import { CONVERSATION } from '../data';
+import { conversationCaption } from '../lib/conversation';
 import { useChatStore } from '../store';
 
-/** "Hoje, 14:32 · com o Tamanduá": when it was updated and who answered last. */
+/**
+ * "Hoje, 14:32 · com o Tamanduá", "· aguardando o Pacu" or "Ainda sem mensagens": when it
+ * started and who answered last.
+ */
 export function useConversationCaption(): string {
-  const currentId = useChatStore((state) => state.currentId);
   const messages = useChatStore((state) => state.messages);
-  const updated = currentId === CONVERSATION.id ? CONVERSATION.updatedLabel : 'Agora';
-  const last = messages.findLast((message) => message.role === 'assistant');
-  return last?.role === 'assistant'
-    ? `${updated} · ${assistantWith('com', last.assistant)}`
-    : updated;
+  const startedLabel = useChatStore((state) => state.startedLabel);
+  return conversationCaption(messages, startedLabel || 'Agora');
 }
 
 /**

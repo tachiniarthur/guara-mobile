@@ -19,6 +19,7 @@ describe('chat side panel', () => {
   beforeEach(() => {
     act(() => useChatStore.setState({ panelOpen: true, panelView: 'history', context: null }));
   });
+  afterEach(() => act(() => useChatStore.getState().stop()));
 
   it('has the same width with the history and with the conversation open', () => {
     render(<ChatPanel />);
@@ -32,7 +33,7 @@ describe('chat side panel', () => {
     expect(widthOf('Conversas')).toBe(navigationSize.chatPanelWidth);
   });
 
-  it('shows a page context and gives way to the conversation once the user writes', () => {
+  it('shows a page context and gives way to the conversation once the user writes', async () => {
     act(() =>
       useChatStore.getState().setContext({
         assistant: 'tamandua',
@@ -49,6 +50,8 @@ describe('chat side panel', () => {
     expect(useChatStore.getState().context).toBeNull();
     expect(screen.getByText('Compare com agosto')).toBeOnTheScreen();
     expect(widthOf('Conversa')).toBe(navigationSize.chatPanelWidth);
+    // No assistant answers it yet: the question waits to be asked again.
+    expect(await screen.findByText('A Capivara não está respondendo agora')).toBeOnTheScreen();
   });
 
   it('closes and reopens', () => {

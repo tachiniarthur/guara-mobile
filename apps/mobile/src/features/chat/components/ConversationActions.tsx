@@ -26,6 +26,9 @@ const plain = (content: RichText) =>
 /** Text of a message ("Você: …", "Tamanduá: …"). */
 function messageText(message: ChatMessage): string {
   if (message.role === 'user') return `Você: ${message.text}`;
+  if (message.role === 'unavailable') {
+    return `${ASSISTANTS[message.assistant].name}: não respondeu.`;
+  }
   const text = message.blocks
     .map((block) => (block.type === 'text' ? plain(block.content) : block.label))
     .join(' ');

@@ -15,12 +15,13 @@ import {
   AssistantPickerSheet,
   ChatComposer,
   ChatHistoryPanel,
-  ChatMessageView,
   ChatSideColumn,
+  ChatThread,
   ConversationActions,
   NewConversationButton,
+  useConversationCaption,
 } from '../components';
-import { CONVERSATION, SUGGESTIONS } from '../data';
+import { SUGGESTIONS } from '../data';
 import { useChatNavigation } from '../hooks/useChatNavigation';
 import { useChatStore } from '../store';
 
@@ -33,15 +34,16 @@ export function ConversationScreen() {
   const chat = useChatNavigation();
   // The same conversation as the side panel of wide tablets.
   const {
-    messages,
     send,
+    stop,
+    streaming,
     startNew,
     addressee: assistant,
     setAddressee: setAssistant,
     title,
     currentId,
   } = useChatStore();
-  const updatedLabel = currentId === CONVERSATION.id ? CONVERSATION.updatedLabel : 'Agora';
+  const updatedLabel = useConversationCaption();
   const { ask, assistant: askedAssistant } = useLocalSearchParams<{
     ask?: string;
     assistant?: string;
@@ -57,14 +59,6 @@ export function ConversationScreen() {
     if (askedAssistant && isAssistantId(askedAssistant)) setAssistant(askedAssistant);
     if (ask) send(ask);
   }, [request, ask, askedAssistant, send, setAssistant]);
-
-  // New messages scroll into view.
-  const count = messages.length;
-  useEffect(() => {
-    if (count > CONVERSATION.messages.length) {
-      requestAnimationFrame(() => scrollRef.current?.scrollToEnd({ animated: true }));
-    }
-  }, [count]);
 
   const openHistory = () => router.navigate('/chat');
   const placeholder = assistant
@@ -152,12 +146,12 @@ export function ConversationScreen() {
         <ScrollView
           ref={scrollRef}
           className="flex-1"
-          contentContainerClassName={isTablet ? 'gap-5 p-7' : 'gap-4 p-4'}
+          contentContainerClassName={isTablet ? 'flex-grow gap-5 p-7' : 'flex-grow gap-4 p-4'}
           keyboardShouldPersistTaps="handled"
+          // New messages and the answer being written scroll into view.
+          onContentSizeChange={() => scrollRef.current?.scrollToEnd({ animated: true })}
         >
-          {messages.map((message) => (
-            <ChatMessageView key={message.id} message={message} />
-          ))}
+          <ChatThread />
         </ScrollView>
         <SafeAreaView
           edges={['bottom']}
@@ -170,9 +164,11 @@ export function ConversationScreen() {
           <ChatComposer
             onSend={send}
             onPickAssistant={() => setPickerOpen(true)}
-            suggestions={SUGGESTIONS}
+            suggestions={currentId === null && !streaming ? undefined : SUGGESTIONS}
             placeholder={placeholder}
             large={isTablet}
+            streaming={streaming}
+            onStop={stop}
           />
           <AiDisclaimer />
         </SafeAreaView>
