@@ -10,9 +10,10 @@ import { devSession } from '@/providers/AuthProvider';
 type RouteCase = [url: string, title: string, param: string | null];
 
 const AUTH_ROUTES: RouteCase[] = [
-  ['/sign-in', 'Bem-vindo ao Guará', null],
-  ['/sign-up', 'Criar conta', null],
-  ['/forgot-password', 'Recuperar senha', null],
+  ['/welcome', 'Bem-vindo ao Guará', null],
+  ['/sign-in', 'Entrar no Guará', null],
+  // Without a code on its way, the code screen goes back to the start.
+  ['/verify-code', 'Bem-vindo ao Guará', null],
   ['/terms', 'Termos de uso', null],
   ['/privacy', 'Política de privacidade', null],
 ];
@@ -126,7 +127,7 @@ describe('routes', () => {
     });
     it.each(APP_ROUTES)('%s → %s', expectRoute);
     it('does not expose auth screens', async () => {
-      await expectRoute('/sign-in', 'Boa tarde, Arthur.', null);
+      await expectRoute('/welcome', 'Boa tarde, Arthur.', null);
     });
     it('shows not-found for unknown URLs', async () => {
       await expectRoute('/does-not-exist', 'Página não encontrada', null);

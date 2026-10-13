@@ -1,3 +1,3 @@
-export * from './ForgotPasswordScreen';
-export * from './SignUpScreen';
+export * from './SignInScreen';
+export * from './VerifyCodeScreen';
 export * from './WelcomeScreen';

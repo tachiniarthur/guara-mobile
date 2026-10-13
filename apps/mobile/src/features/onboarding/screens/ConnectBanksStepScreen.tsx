@@ -18,7 +18,7 @@ export function ConnectBanksStepScreen() {
 
   return (
     <OnboardingFrame
-      topBar={{ leading: 'back', fallbackHref: '/sign-in' }}
+      topBar={{ leading: 'back', fallbackHref: '/welcome' }}
       footer={
         <>
           <Button variant="ghost" onPress={next}>

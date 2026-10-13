@@ -2,9 +2,9 @@ import type { Href } from 'expo-router';
 
 /** Named routes. Group segments like (app) or (tabs) do not appear in URLs. */
 export const ROUTES = {
+  welcome: '/welcome',
   signIn: '/sign-in',
-  signUp: '/sign-up',
-  forgotPassword: '/forgot-password',
+  verifyCode: '/verify-code',
   onboarding: {
     connectBanks: '/connect-banks',
     investorProfile: '/investor-profile',
