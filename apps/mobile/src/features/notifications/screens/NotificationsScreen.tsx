@@ -2,7 +2,7 @@ import { useRouter } from 'expo-router';
 import { useState } from 'react';
 import { ScrollView, View } from 'react-native';
 
-import { EmptyState, toast } from '@/components/feedback';
+import { EmptyState, NotificationsOffNotice, toast } from '@/components/feedback';
 import { PageHeader, Screen, SectionCard, TopBar } from '@/components/layout';
 import { Button, Chip, DataRow, IconButton, LinkButton, Text } from '@/components/ui';
 import { NOTICE_KINDS } from '@/features/account';
@@ -135,6 +135,7 @@ export function NotificationsScreen() {
               </Button>
             }
           />
+          <NotificationsOffNotice />
           <View className="flex-row flex-wrap gap-2">{chips}</View>
           {list}
           {delivery}
@@ -163,6 +164,7 @@ export function NotificationsScreen() {
       }
       contentClassName="gap-4 pt-1"
     >
+      <NotificationsOffNotice />
       <ScrollView
         horizontal
         showsHorizontalScrollIndicator={false}

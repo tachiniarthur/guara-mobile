@@ -2,6 +2,7 @@ import { useRouter } from 'expo-router';
 import { useState } from 'react';
 import { View } from 'react-native';
 
+import { NotificationsOffNotice } from '@/components/feedback';
 import { ResponsiveGrid, StepIntro } from '@/components/layout';
 import { Button, Checkbox, Text } from '@/components/ui';
 import { ASSISTANTS, AssistantAvatar, ONBOARDING_ASSISTANT_ORDER } from '@/features/chat';
@@ -66,6 +67,11 @@ export function AssistantsStepScreen() {
         <Text size={16} weight="bold" className="mb-1.5">
           Como quer ser avisado?
         </Text>
+        {push ? (
+          <View className="mb-2">
+            <NotificationsOffNotice variant="onboarding" onEmailOnly={() => setPush(false)} />
+          </View>
+        ) : null}
         <Checkbox
           checked={push}
           onChange={setPush}

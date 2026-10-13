@@ -4,7 +4,7 @@ import { useRouter } from 'expo-router';
 import { useState, type ReactNode } from 'react';
 import { Pressable, View } from 'react-native';
 
-import { toast } from '@/components/feedback';
+import { NotificationsOffNotice, toast } from '@/components/feedback';
 import { MataSurface } from '@/components/illustrations';
 import { PageHeader, ResponsiveGrid, Screen, SectionCard, TopBar } from '@/components/layout';
 import {
@@ -192,6 +192,7 @@ export function AccountScreen() {
 
   const notifications = (
     <SettingsCard title="Notificações" gap={10}>
+      <NotificationsOffNotice />
       <View accessibilityLabel="Canais por tipo de aviso">
         <View className="flex-row">
           {['Aviso', 'Celular', 'E-mail'].map((header, index) => (

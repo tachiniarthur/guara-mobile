@@ -171,6 +171,7 @@ implementada.
 | `Alerta-Detalhe`, `Alerta-Disparado`, `Alerta-Cancelar`, `Alertas-Vazio`                             | M T      | `/price-alerts/[alertId]` (cancelar no detalhe), `/price-alerts`                      |
 | `Investimentos`                                                                                      | M T D    | `/investments`                                                                        |
 | `Inicio-Oculto`, `Investimentos-Oculto` · valores ocultos                                            | M T      | `/`, `/investments` com Ocultar valores (`HideValuesButton`, `MoneyText`)             |
+| `Notificacoes-Desligadas`, `Meu-Perfil-Notificacoes-Desligadas`, `Agentes-Avisos-Permissao`          | M T      | `/notifications`, `/account`, `/assistants` (onboarding) com `NotificationsOffNotice` |
 | `Ativo`, `Ativo-Tesouro-Selic`, `-CDB`, `-BOVA11`, `-HGLG11`, `-Bitcoin`                             | M T D    | `/investments/asset/[ticker]`                                                         |
 | `Ativo-Comparar`, `-Comparar-Ibovespa`, `-Preco-Sem-Ajuste`, `-Mais-Detalhes`, `-Eventos`, `-Risco`  | M T      | estados de `/investments/asset/[ticker]`; `/details`, `/events`                       |
 | `Adicionar-Investimento`                                                                             | M T D    | `/new-manual-asset` (modal)                                                           |

@@ -7,12 +7,18 @@
  * does not trigger its warnings.
  */
 import * as Device from 'expo-device';
-import { Platform } from 'react-native';
+import type * as NotificationsTypes from 'expo-notifications';
+import { Linking, Platform } from 'react-native';
 
 import { logger } from './logger';
 import { isExpoGo } from './runtime';
 
-const loadNotifications = () => import('expo-notifications');
+type NotificationsModule = typeof NotificationsTypes;
+
+// `require` keeps the lazy load and also works in Jest (a dynamic `import()` does not).
+const loadNotifications = async (): Promise<NotificationsModule> =>
+  // eslint-disable-next-line @typescript-eslint/no-require-imports
+  require('expo-notifications');
 
 export function isRemotePushAvailable(): boolean {
   return !isExpoGo() && Device.isDevice;
@@ -35,6 +41,25 @@ export async function configureNotifications(): Promise<void> {
       importance: Notifications.AndroidImportance.DEFAULT,
     });
   }
+}
+
+/** `denied`: turned off for the app (only the system settings turn it back on). */
+export type NotificationPermission = 'granted' | 'denied' | 'undetermined';
+
+export async function getNotificationPermission(): Promise<NotificationPermission> {
+  try {
+    const Notifications = await loadNotifications();
+    const { granted, canAskAgain, status } = await Notifications.getPermissionsAsync();
+    if (granted) return 'granted';
+    return status === 'denied' && !canAskAgain ? 'denied' : 'undetermined';
+  } catch {
+    return 'undetermined';
+  }
+}
+
+/** "Abrir ajustes": the app's page in the system settings. */
+export async function openNotificationSettings(): Promise<void> {
+  await Linking.openSettings();
 }
 
 export async function requestNotificationPermission(): Promise<boolean> {

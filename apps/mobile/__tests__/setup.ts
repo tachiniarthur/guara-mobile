@@ -137,6 +137,21 @@ jest.mock('expo-sharing', () => ({
   shareAsync: jest.fn(async () => undefined),
 }));
 
+// Notifications allowed on this device (tests can switch to denied).
+jest.mock('expo-notifications', () => ({
+  getPermissionsAsync: jest.fn(async () => ({
+    granted: true,
+    canAskAgain: true,
+    status: 'granted',
+  })),
+  requestPermissionsAsync: jest.fn(async () => ({ granted: true })),
+  setNotificationHandler: jest.fn(),
+  setNotificationChannelAsync: jest.fn(async () => undefined),
+  scheduleNotificationAsync: jest.fn(async () => 'local-1'),
+  AndroidImportance: { DEFAULT: 3 },
+  SchedulableTriggerInputTypes: { TIME_INTERVAL: 'timeInterval' },
+}));
+
 // A device with Face ID that unlocks on the first try.
 jest.mock('expo-local-authentication', () => ({
   AuthenticationType: { FINGERPRINT: 1, FACIAL_RECOGNITION: 2, IRIS: 3 },

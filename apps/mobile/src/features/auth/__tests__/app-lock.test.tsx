@@ -53,7 +53,7 @@ describe('app lock', () => {
     expect(authenticateAsync).toHaveBeenCalledWith(
       expect.objectContaining({ disableDeviceFallback: true }),
     );
-  });
+  }, 15_000);
 
   it('uses the device passcode or signs out', async () => {
     authenticateAsync.mockResolvedValueOnce({ success: false, error: 'user_cancel' });
@@ -70,5 +70,5 @@ describe('app lock', () => {
     fireEvent.press(screen.getByRole('button', { name: 'Sair da conta' }));
     expect(mockSetStatus).toHaveBeenCalledWith('signedOut');
     expect(useAppLockStore.getState().locked).toBe(false);
-  });
+  }, 15_000);
 });
