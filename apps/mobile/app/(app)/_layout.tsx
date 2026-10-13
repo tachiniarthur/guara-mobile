@@ -1,6 +1,7 @@
 import { Stack, usePathname } from 'expo-router';
 import { View } from 'react-native';
 
+import { AppLock } from '@/features/auth';
 import { ChatPanel, useChatStore } from '@/features/chat';
 import { useBreakpoint } from '@/hooks/useBreakpoint';
 import { useChatDocked } from '@/hooks/useChatDocked';
@@ -45,13 +46,22 @@ export default function AppLayout() {
     </Stack>
   );
 
-  if (!isTablet) return stack;
+  // Desbloqueio covers everything when "Entrar com biometria" is on.
+  if (!isTablet) {
+    return (
+      <View className="flex-1">
+        {stack}
+        <AppLock />
+      </View>
+    );
+  }
 
   return (
     <View className="flex-1 flex-row bg-background">
       <SideRail />
       <View className="flex-1">{stack}</View>
       {showPanel ? <ChatPanel /> : null}
+      <AppLock />
     </View>
   );
 }

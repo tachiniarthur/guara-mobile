@@ -137,6 +137,15 @@ jest.mock('expo-sharing', () => ({
   shareAsync: jest.fn(async () => undefined),
 }));
 
+// A device with Face ID that unlocks on the first try.
+jest.mock('expo-local-authentication', () => ({
+  AuthenticationType: { FINGERPRINT: 1, FACIAL_RECOGNITION: 2, IRIS: 3 },
+  hasHardwareAsync: jest.fn(async () => true),
+  isEnrolledAsync: jest.fn(async () => true),
+  supportedAuthenticationTypesAsync: jest.fn(async () => [2]),
+  authenticateAsync: jest.fn(async () => ({ success: true })),
+}));
+
 jest.mock('expo-document-picker', () => ({
   getDocumentAsync: jest.fn(async () => ({ canceled: true, assets: null })),
 }));

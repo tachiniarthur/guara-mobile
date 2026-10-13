@@ -82,6 +82,8 @@ tela → rota no `README.md`.
 | Armazenamento      | `expo-sqlite/kv-store` (cache/preferências) e `expo-secure-store` (sessão), atrás de `src/lib/storage.ts`           |
 | Login Google       | OAuth do Supabase no navegador (`expo-web-browser` + `expo-auth-session`)                                           |
 | Login Apple        | `expo-apple-authentication` (só iOS)                                                                                |
+| Login por e-mail   | Código de 6 dígitos (Supabase OTP, sem senha) em `src/lib/auth-email.ts`; sem Supabase, simulado só em dev          |
+| Bloqueio do app    | `expo-local-authentication` (rosto, digital ou senha do aparelho) em `src/lib/biometrics.ts`                        |
 | Datas              | date-fns + date-fns-tz                                                                                              |
 | Ícones             | `Icon` (`src/components/ui/Icon.tsx`): traços 24×24 copiados do design, sobre `react-native-svg`                    |
 | Markdown no chat   | react-native-marked (JS puro)                                                                                       |
@@ -129,8 +131,8 @@ packages/
   Depois acrescente a URL em `apps/mobile/__tests__/routes.test.tsx` (o teste abre todas as rotas).
 - **Infra isolada:** features **não** importam `expo-sqlite`, `expo-secure-store`,
   `@supabase/supabase-js`, `expo-auth-session`, `expo-apple-authentication`, `expo-web-browser`,
-  `expo-notifications`, `expo-image-picker`, `expo-document-picker`, `expo-audio`, `expo-print` nem
-  `expo-sharing` — o ESLint bloqueia (`no-restricted-imports`). Use `src/lib/*` (`media`, `share`,
+  `expo-notifications`, `expo-image-picker`, `expo-document-picker`, `expo-audio`, `expo-print`,
+  `expo-sharing` nem `expo-local-authentication` — o ESLint bloqueia (`no-restricted-imports`). Use `src/lib/*` (`media`, `share`,
   `voice`, `transcription`).
 - **Dados das telas:** hoje vêm de `src/features/<x>/data.ts`, fiéis ao artefato de design. Valores
   derivados (totais, percentuais, simulações) são **calculados** a partir deles, nunca copiados.

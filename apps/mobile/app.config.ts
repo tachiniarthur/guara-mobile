@@ -103,6 +103,10 @@ export default ({ config }: ConfigContext): ExpoConfig => {
         },
       ],
       [
+        'expo-local-authentication',
+        { faceIDPermission: 'Permitir que o Guará use o Face ID para desbloquear o app.' },
+      ],
+      [
         'expo-notifications',
         {
           color: '#D9622B',

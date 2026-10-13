@@ -134,6 +134,7 @@ implementada.
 | `Boas-Vindas` · boas-vindas e criação de conta                                           | M T D    | `(auth)/welcome`                                                  |
 | `Entrar`, `-Sem-Conta`, `-Sem-Internet` · entrar com Google, Apple ou código no e-mail   | M T D    | `(auth)/sign-in`                                                  |
 | `Codigo`, `Codigo-Criar`, `-Erro`, `-Vencido` · código de 6 dígitos                      | M T D    | `(auth)/verify-code`                                              |
+| `Desbloqueio` · rosto, digital ou senha do aparelho                                      | M T D    | `AppLock` sobre `(app)` (Meu perfil › Entrar com biometria)       |
 | `Conectar-Bancos` · onboarding 1                                                         | M T D    | `(onboarding)/connect-banks`; fora do onboarding `/connect-bank`  |
 | `Perfil-Investidor` · onboarding 2                                                       | M T D    | `(onboarding)/investor-profile`; fora `/account/investor-profile` |
 | `Agentes-Avisos` · onboarding 3                                                          | M T D    | `(onboarding)/assistants`                                         |

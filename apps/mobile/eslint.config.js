@@ -21,6 +21,7 @@ const INFRA_ONLY_PACKAGES = [
   'expo-audio',
   'expo-print',
   'expo-sharing',
+  'expo-local-authentication',
 ].map((name) => ({ name, message: 'Use the wrappers in src/lib/ instead.' }));
 
 module.exports = defineConfig([

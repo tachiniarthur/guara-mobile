@@ -20,6 +20,7 @@ import {
   UserAvatar,
 } from '@/components/ui';
 import { useBreakpoint } from '@/hooks/useBreakpoint';
+import { authenticate, biometricKind } from '@/lib/biometrics';
 import { cn } from '@/lib/cn';
 import { ChatFab } from '@/navigation';
 import { usePlan, useUiPreferences, useUserStore, type TextSize } from '@/stores';
@@ -229,13 +230,31 @@ export function AccountScreen() {
     </SettingsCard>
   );
 
+  // Turning the lock on needs a face or fingerprint enrolled, confirmed once.
+  const toggleBiometrics = async (on: boolean) => {
+    if (!on) {
+      preferences.set({ biometrics: false });
+      return;
+    }
+    if ((await biometricKind()) === 'none') {
+      toast.error(
+        'Cadastre o rosto ou a digital nos ajustes do aparelho para usar o bloqueio do Guará.',
+      );
+      return;
+    }
+    if ((await authenticate({ passcode: false })) === 'success') {
+      preferences.set({ biometrics: true });
+      toast.success('O Guará vai pedir o rosto ou a digital ao abrir.');
+    }
+  };
+
   const security = (
     <SettingsCard title="Segurança e privacidade" gap={10} grow>
       <Switch
         label="Entrar com biometria"
         description="Face ID ou digital"
         value={preferences.biometrics}
-        onValueChange={(biometrics) => preferences.set({ biometrics })}
+        onValueChange={(biometrics) => void toggleBiometrics(biometrics)}
       />
       <View className="gap-1.5">
         <Text size={12} weight="bold" tracking={0.06} tone="subtle">

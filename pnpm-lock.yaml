@@ -283,6 +283,9 @@ importers:
       expo-linking:
         specifier: ~57.0.11
         version: 57.0.11(expo@57.0.26)(react-native@0.86.3(@babel/core@7.29.7(supports-color@8.1.1))(@react-native/jest-preset@0.86.3(@babel/core@7.29.7(supports-color@8.1.1))(react@19.2.3)(supports-color@8.1.1))(@react-native/metro-config@0.86.3(@babel/core@7.29.7(supports-color@8.1.1))(supports-color@8.1.1))(@types/react@19.2.18)(react@19.2.3)(supports-color@8.1.1))(react@19.2.3)(supports-color@8.1.1)
+      expo-local-authentication:
+        specifier: ~57.0.3
+        version: 57.0.3(expo@57.0.26)
       expo-localization:
         specifier: ~57.0.2
         version: 57.0.2(expo@57.0.26)(react@19.2.3)
@@ -3524,6 +3527,11 @@ packages:
     peerDependencies:
       react: '*'
       react-native: '*'
+
+  expo-local-authentication@57.0.3:
+    resolution: {integrity: sha512-1oQCBKz8JOpai+Zp+Z2RkBFIi2CHHWLSJk/pjvT9VEyf8nPFslo4kt1ZlQvtJ4rupbKNCmxqKfYr8Mlo8nJEug==}
+    peerDependencies:
+      expo: '*'
 
   expo-localization@57.0.2:
     resolution: {integrity: sha512-sIKYH3Ivddoge568WY6j+Kp2MAAZzWWqEnY2bokLkJFwX366tGL1mEnoY2WUi/qHatFFPop2yqDdurzbhnnimQ==}
@@ -10061,6 +10069,11 @@ snapshots:
     transitivePeerDependencies:
       - expo
       - supports-color
+
+  expo-local-authentication@57.0.3(expo@57.0.26):
+    dependencies:
+      expo: 57.0.26(cb206749c1e8ae62416a56fbe47f7301)
+      invariant: 2.2.4
 
   expo-localization@57.0.2(expo@57.0.26)(react@19.2.3):
     dependencies:
