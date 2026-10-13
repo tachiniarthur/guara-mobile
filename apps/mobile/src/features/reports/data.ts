@@ -6,6 +6,8 @@ import type { IconName } from '@/components/ui';
 
 /** Relatório as shown in the design (static until the API exists). */
 export const REPORT = {
+  /** Last sync with the banks (shown while offline). */
+  syncedAt: '2026-09-23T17:30:00.000Z',
   title: 'O que aconteceu com seu dinheiro',
   periodLabel: '1 a 23 de setembro',
   scopeLabel: '1 a 23 de setembro · todos os bancos',

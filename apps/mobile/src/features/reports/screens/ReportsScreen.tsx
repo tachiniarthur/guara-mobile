@@ -4,13 +4,20 @@ import { useEffect, useState } from 'react';
 import { View } from 'react-native';
 
 import { BalanceLineChart, GroupedBarChart, LegendSwatch } from '@/components/charts';
-import { toast } from '@/components/feedback';
+import {
+  EmptyState,
+  ScreenStates,
+  lastUpdateLabel,
+  toast,
+  useScreenStatus,
+} from '@/components/feedback';
 import { PageHeader, ResponsiveGrid, Screen, SectionCard, TopBar } from '@/components/layout';
 import { IconButton, LinkButton, MoneyText, Span, Text } from '@/components/ui';
 import { useChatStore, type ChatContext } from '@/features/chat';
 import { useBreakpoint } from '@/hooks/useBreakpoint';
 import { useChatDocked } from '@/hooks/useChatDocked';
 import { ChatFab, conversationHref } from '@/navigation';
+import { useScreenPreview } from '@/stores/screen-preview';
 
 import {
   ExportMenu,
@@ -52,6 +59,9 @@ export function ReportsScreen() {
   const { isTablet } = useBreakpoint();
   const docked = useChatDocked();
   const [period, setPeriod] = useState<ReportPeriod>('month');
+  // Static data today: the API adds loading, error and periods without movements.
+  const status = useScreenStatus('ready');
+  const setPreview = useScreenPreview((state) => state.setPreview);
   const panelOpen = useChatStore((state) => state.panelOpen);
   const setContext = useChatStore((state) => state.setContext);
 
@@ -275,29 +285,56 @@ export function ReportsScreen() {
           <ExportMenu fullWidth />
         </>
       )}
-      <ReportSummaryCard />
-      <SectionCard
-        title="Como o saldo andou"
-        description={REPORT.scopeLabel}
-        padding={isTablet ? 20 : 16}
-        gap={16}
+      <ScreenStates
+        status={status}
+        errorTitle="Não deu para carregar o relatório"
+        onRetry={() => undefined}
+        empty={
+          <SectionCard padding={16}>
+            <EmptyState
+              icon="calendar"
+              title="Sem movimentos no período"
+              description="Não há entradas nem saídas nesse período nos bancos conectados. Escolha outro período para ver o relatório."
+              action={{
+                label: 'Mudar período',
+                variant: 'secondary',
+                onPress: () => {
+                  setPreview('auto');
+                  setPeriod('month');
+                },
+              }}
+            />
+          </SectionCard>
+        }
+        offline={{
+          since: lastUpdateLabel(REPORT.syncedAt),
+          paused: 'Exportar em PDF, Excel ou CSV volta quando a conexão voltar.',
+        }}
       >
-        <ResponsiveGrid columns={{ phone: 1, tablet: 1 }}>
-          {balancePanel}
-          {weeksPanel}
-        </ResponsiveGrid>
-      </SectionCard>
-      {isTablet ? (
-        <ResponsiveGrid columns={{ tablet: 2 }}>
-          {timelineCard}
-          {comparisonCard}
-        </ResponsiveGrid>
-      ) : (
-        <>
-          {timelineCard}
-          {comparisonCard}
-        </>
-      )}
+        <ReportSummaryCard />
+        <SectionCard
+          title="Como o saldo andou"
+          description={REPORT.scopeLabel}
+          padding={isTablet ? 20 : 16}
+          gap={16}
+        >
+          <ResponsiveGrid columns={{ phone: 1, tablet: 1 }}>
+            {balancePanel}
+            {weeksPanel}
+          </ResponsiveGrid>
+        </SectionCard>
+        {isTablet ? (
+          <ResponsiveGrid columns={{ tablet: 2 }}>
+            {timelineCard}
+            {comparisonCard}
+          </ResponsiveGrid>
+        ) : (
+          <>
+            {timelineCard}
+            {comparisonCard}
+          </>
+        )}
+      </ScreenStates>
     </Screen>
   );
 

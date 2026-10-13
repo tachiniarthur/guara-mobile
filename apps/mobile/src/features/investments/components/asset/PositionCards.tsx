@@ -1,9 +1,10 @@
 import { colors } from '@guara/ui-tokens';
+import { EMPTY } from '@guara/utils';
 import { useRouter } from 'expo-router';
 import { Pressable, View } from 'react-native';
 
 import { SectionCard } from '@/components/layout';
-import { DataRow, Icon, Text } from '@/components/ui';
+import { Button, DataRow, Icon, Text } from '@/components/ui';
 
 import type { FundAsset, StockAsset } from '../../assets';
 
@@ -91,6 +92,46 @@ export function FundPositionCard({ asset }: { asset: FundAsset }) {
       <Text size={13} tone="muted">
         {position.note}
       </Text>
+    </SectionCard>
+  );
+}
+
+/** "Você ainda não tem PETR4": the quote stays; the position fields wait with "—". */
+export function NotHeldPositionCard({ ticker, wide = false }: { ticker: string; wide?: boolean }) {
+  const router = useRouter();
+  return (
+    <SectionCard title="Sua posição" padding={wide ? 20 : 18} gap={14}>
+      <View className="gap-1.5">
+        <Text size={16} weight="bold">
+          {`Você ainda não tem ${ticker}`}
+        </Text>
+        <Text size={14} tone="muted" leading={1.55}>
+          A cotação e os dados da empresa continuam aqui. Os campos da sua posição ficam com “—” até
+          você adicionar o ativo.
+        </Text>
+      </View>
+      <View className="flex-row flex-wrap gap-2">
+        <Button
+          size="md"
+          className="h-10 px-4.5"
+          onPress={() => router.navigate({ pathname: '/new-manual-asset', params: { ticker } })}
+        >
+          Adicionar à carteira
+        </Button>
+        <Button
+          variant="secondary"
+          size="md"
+          className="h-10 px-4.5"
+          onPress={() => router.navigate({ pathname: '/new-price-alert', params: { ticker } })}
+        >
+          Criar alerta de preço
+        </Button>
+      </View>
+      <View>
+        {['Quantidade', 'Preço médio', 'Resultado', 'Proventos recebidos'].map((label) => (
+          <DataRow key={label} label={label} value={EMPTY} density="compact" />
+        ))}
+      </View>
     </SectionCard>
   );
 }

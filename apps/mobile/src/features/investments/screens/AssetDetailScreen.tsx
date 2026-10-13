@@ -2,7 +2,7 @@ import { formatCents } from '@guara/utils';
 import { useLocalSearchParams, useRouter } from 'expo-router';
 import { View } from 'react-native';
 
-import { EmptyState } from '@/components/feedback';
+import { EmptyState, ScreenStates, lastUpdateLabel, useScreenStatus } from '@/components/feedback';
 import { Breadcrumb, ResponsiveGrid, Screen, TopBar } from '@/components/layout';
 import { Text } from '@/components/ui';
 import { AskAssistantCard } from '@/features/chat';
@@ -20,12 +20,15 @@ import {
   FundChartCard,
   FundPositionCard,
   MetricsCard,
+  NotHeldPositionCard,
   QuoteCard,
   RangeCard,
   RowsCard,
   StockPositionCard,
   StockQuoteHeadline,
 } from '../components';
+import { PORTFOLIO } from '../data';
+import { usePositions } from '../hooks/usePositions';
 
 function Footnote({ children }: { children: string }) {
   return (
@@ -42,7 +45,7 @@ function useOpenEvents() {
     router.navigate({ pathname: '/investments/asset/[ticker]/events', params: { ticker } });
 }
 
-function StockDetail({ asset, wide }: { asset: StockAsset; wide: boolean }) {
+function StockDetail({ asset, wide, held }: { asset: StockAsset; wide: boolean; held: boolean }) {
   const openEvents = useOpenEvents();
   const current = formatCents(asset.price);
   const today = (
@@ -88,7 +91,11 @@ function StockDetail({ asset, wide }: { asset: StockAsset; wide: boolean }) {
       </View>
       {wide ? null : <AssetActions asset={asset} layout="grid" />}
       <QuoteCard asset={asset} wide={wide} />
-      <StockPositionCard asset={asset} wide={wide} />
+      {held ? (
+        <StockPositionCard asset={asset} wide={wide} />
+      ) : (
+        <NotHeldPositionCard ticker={asset.header.ticker} wide={wide} />
+      )}
       {wide ? (
         <>
           <ResponsiveGrid columns={{ tablet: 2 }} gap={16} stretch>
@@ -122,8 +129,13 @@ function StockDetail({ asset, wide }: { asset: StockAsset; wide: boolean }) {
   );
 }
 
-function FundDetail({ asset, wide }: { asset: FundAsset; wide: boolean }) {
+function FundDetail({ asset, wide, held }: { asset: FundAsset; wide: boolean; held: boolean }) {
   const openEvents = useOpenEvents();
+  const position = held ? (
+    <FundPositionCard asset={asset} />
+  ) : (
+    <NotHeldPositionCard ticker={asset.header.ticker} wide={wide} />
+  );
   return (
     <>
       {wide ? (
@@ -141,11 +153,11 @@ function FundDetail({ asset, wide }: { asset: FundAsset; wide: boolean }) {
       {wide ? (
         <ResponsiveGrid columns={{ tablet: 2 }} gap={16} stretch>
           <AssetDetailsCard asset={asset} />
-          <FundPositionCard asset={asset} />
+          {position}
         </ResponsiveGrid>
       ) : (
         <>
-          <FundPositionCard asset={asset} />
+          {position}
           <AssetDetailsCard asset={asset} />
         </>
       )}
@@ -168,6 +180,10 @@ export function AssetDetailScreen() {
   const { ticker } = useLocalSearchParams<{ ticker: string }>();
   const { isTablet } = useBreakpoint();
   const asset = ticker ? ASSETS[ticker] : undefined;
+  const { positions } = usePositions();
+  // Static data today: the API adds loading and error. "Empty": an asset not in the portfolio.
+  const status = useScreenStatus('ready');
+  const held = status !== 'empty' && positions.some((item) => item.ticker === ticker);
 
   return (
     <View className="flex-1">
@@ -193,10 +209,22 @@ export function AssetDetailScreen() {
             title="Ativo não encontrado"
             description="Ele pode ter sido removido da sua carteira."
           />
-        ) : asset.kind === 'stock' ? (
-          <StockDetail asset={asset} wide={isTablet} />
         ) : (
-          <FundDetail asset={asset} wide={isTablet} />
+          <ScreenStates
+            status={status === 'empty' ? 'ready' : status}
+            errorTitle={`Não deu para carregar os dados do ${asset.header.ticker}`}
+            onRetry={() => undefined}
+            offline={{
+              since: lastUpdateLabel(PORTFOLIO.quotedAt),
+              paused: 'O gráfico e os indicadores voltam a atualizar quando a conexão voltar.',
+            }}
+          >
+            {asset.kind === 'stock' ? (
+              <StockDetail asset={asset} wide={isTablet} held={held} />
+            ) : (
+              <FundDetail asset={asset} wide={isTablet} held={held} />
+            )}
+          </ScreenStates>
         )}
       </Screen>
       {isTablet ? <ChatFab /> : null}

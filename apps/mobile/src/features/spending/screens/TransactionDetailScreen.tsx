@@ -5,7 +5,13 @@ import { useLocalSearchParams, useRouter } from 'expo-router';
 import { useState, type ReactNode } from 'react';
 import { Pressable, Share, View } from 'react-native';
 
-import { EmptyState, toast } from '@/components/feedback';
+import {
+  EmptyState,
+  ScreenStates,
+  lastUpdateLabel,
+  toast,
+  useScreenStatus,
+} from '@/components/feedback';
 import { FillColumn, PageHeader, Screen, SectionCard, TopBar } from '@/components/layout';
 import {
   Badge,
@@ -35,7 +41,7 @@ import {
   INCOME_CATEGORIES,
   QUICK_CATEGORIES,
 } from '../categories';
-import { LEDGER } from '../data';
+import { LEDGER, SPENDING } from '../data';
 import { useLedger } from '../hooks/useLedger';
 import { accountLabel, bankLabel, budgetNote, detailRows, unusualMessage } from '../lib/format';
 import { displayName, merchantKey, signedAmount } from '../lib/ledger';
@@ -99,16 +105,18 @@ export function TransactionDetailScreen() {
   const [noteOpen, setNoteOpen] = useState(false);
   const [noteDraft, setNoteDraft] = useState('');
 
+  // Static data today: the API adds loading and error. "Empty": the bank dropped the purchase.
+  const status = useScreenStatus('ready');
   const base = LEDGER.find((item) => item.id === transactionId);
   const tx = ledger.transactions.find((item) => item.id === transactionId);
 
-  if (!base || !tx) {
+  if (!base || !tx || status === 'empty') {
     return (
       <Screen header={<TopBar title="Lançamento" fallbackHref="/spending/transactions" />}>
         <EmptyState
           icon="search"
           title="Lançamento não encontrado"
-          description="Ele pode ter sido removido pelo banco. Volte para a lista de lançamentos."
+          description="O banco pode ter cancelado esta compra ou juntado com outra. Os outros lançamentos continuam iguais."
           action={{
             label: 'Ver lançamentos',
             onPress: () => router.replace('/spending/transactions'),
@@ -423,7 +431,17 @@ export function TransactionDetailScreen() {
         }
         contentClassName={isTablet ? 'pb-32' : 'pb-10'}
       >
-        {body}
+        <ScreenStates
+          status={status}
+          errorTitle="Não deu para carregar o lançamento"
+          onRetry={ledger.refetch}
+          offline={{
+            since: lastUpdateLabel(SPENDING.syncedAt),
+            paused: 'Mudar a categoria volta quando a conexão voltar.',
+          }}
+        >
+          {body}
+        </ScreenStates>
       </Screen>
       {isTablet ? <ChatFab /> : null}
       <OptionSheet

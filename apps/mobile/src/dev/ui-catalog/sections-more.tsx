@@ -12,7 +12,7 @@ import {
   RangeBar,
   TrendAreaChart,
 } from '@/components/charts';
-import { EmptyState, ErrorState, toast } from '@/components/feedback';
+import { EmptyState, ErrorState, OfflineNote, toast } from '@/components/feedback';
 import { ResponsiveGrid, SectionCard } from '@/components/layout';
 import {
   AVATAR_COLORS,
@@ -45,6 +45,7 @@ import {
 } from '@/components/ui';
 
 import { CatalogSection, Example } from './CatalogSection';
+import { useScreenPreview } from '@/stores/screen-preview';
 
 export function SelectionSection() {
   const [chip, setChip] = useState('Mês');
@@ -259,6 +260,33 @@ export function ChartsSection() {
   );
 }
 
+/** Forces a state on every screen (loading, error, empty) to compare with the designs. */
+function ScreenPreviewPicker() {
+  const { preview, setPreview } = useScreenPreview();
+  return (
+    <View className="gap-2">
+      <Text size={14} weight="bold">
+        Estados das telas
+      </Text>
+      <SegmentedControl
+        accessibilityLabel="Estado das telas"
+        value={preview}
+        onChange={setPreview}
+        options={[
+          { value: 'auto', label: 'Real' },
+          { value: 'loading', label: 'Carregando' },
+          { value: 'error', label: 'Erro' },
+          { value: 'empty', label: 'Vazio' },
+        ]}
+      />
+      <Text size={12} tone="subtle">
+        Vale para Início, Gastos, Investimentos, Ativo, Relatório, Alertas, Assinaturas,
+        Notificações, Meta e Lançamento. Para “sem internet”, desligue a rede do aparelho.
+      </Text>
+    </View>
+  );
+}
+
 export function FeedbackSection() {
   const [sheet, setSheet] = useState(false);
   const [dialog, setDialog] = useState(false);
@@ -288,6 +316,8 @@ export function FeedbackSection() {
         action={{ label: 'Conectar banco', variant: 'primary', onPress: () => undefined }}
       />
       <ErrorState onRetry={() => toast.info('Tentando de novo')} />
+      <OfflineNote since="hoje, 14:30" paused="Exportar volta quando a conexão voltar." />
+      <ScreenPreviewPicker />
       <Sheet open={sheet} onClose={() => setSheet(false)} title="Sheet">
         <Text>Conteúdo do sheet.</Text>
       </Sheet>

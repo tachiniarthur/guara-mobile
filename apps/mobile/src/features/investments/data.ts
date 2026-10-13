@@ -277,6 +277,8 @@ export const QUOTES: { time: string; fallbackTime: string | null } = {
 
 /** Investimentos as shown in the design (static until the API exists). */
 export const PORTFOLIO = {
+  /** Time of the quotes (shown while offline). */
+  quotedAt: '2026-09-23T17:30:00.000Z',
   quotesLabel: `Cotações atualizadas às ${QUOTES.time}`,
   sourcesLabel: `Cotações atualizadas às ${QUOTES.time} · posições dos bancos conectados e cadastradas por você`,
   total: sumCents(POSITIONS.map((position) => position.value)),

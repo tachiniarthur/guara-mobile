@@ -12,6 +12,8 @@ export const HOME = {
   monthLong: 'Setembro 2026',
   monthName: 'setembro',
   updatedLabel: 'Atualizado há 5 min · 2 de 3 bancos',
+  /** Last sync with the banks (shown while offline). */
+  syncedAt: '2026-09-23T17:30:00.000Z',
   balance: {
     label: 'Saldo em 2 bancos',
     value: cents(1_248_032),

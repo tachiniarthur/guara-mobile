@@ -2,7 +2,14 @@ import { useRouter } from 'expo-router';
 import { useState } from 'react';
 import { ScrollView, View } from 'react-native';
 
-import { EmptyState, NotificationsOffNotice, toast } from '@/components/feedback';
+import {
+  EmptyState,
+  NotificationsOffNotice,
+  ScreenStates,
+  lastUpdateLabel,
+  toast,
+  useScreenStatus,
+} from '@/components/feedback';
 import { PageHeader, Screen, SectionCard, TopBar } from '@/components/layout';
 import { Button, Chip, DataRow, IconButton, LinkButton, Text } from '@/components/ui';
 import { NOTICE_KINDS } from '@/features/account';
@@ -16,12 +23,21 @@ import { useNotifications } from '../hooks';
 import { channelsLabel } from '../lib/labels';
 import { useNotificationsStore } from '../store';
 
+const EMPTY_TITLE: Record<NotificationArea, string> = {
+  spending: 'Nenhuma notificação de gastos',
+  investments: 'Nenhuma notificação de investimentos',
+  account: 'Nenhuma notificação da conta',
+};
+
 const EMPTY_TEXT: Record<NotificationArea | 'all', string> = {
-  all: 'Avisos de tetos, preços, compras fora do padrão e bancos aparecem aqui.',
+  all: 'Você não tem notificações. Avisos de tetos, preços e compras fora do padrão aparecem aqui.',
   spending: 'Avisos de tetos, assinaturas e compras fora do padrão aparecem aqui.',
   investments: 'Os alertas de preço aparecem aqui quando um ativo chegar no valor escolhido.',
   account: 'Avisos sobre bancos conectados e o seu plano aparecem aqui.',
 };
+
+/** Last time the list came from the API (shown while offline). */
+const NOTIFICATIONS_CHECKED_AT = '2026-09-23T17:30:00.000Z';
 
 function SectionLabel({ children, first = false }: { children: string; first?: boolean }) {
   return (
@@ -43,6 +59,8 @@ export function NotificationsScreen() {
   const router = useRouter();
   const { isTablet } = useBreakpoint();
   const { items, unread } = useNotifications();
+  // Static data today: the API adds loading and error ("Tudo em dia" is the list's own empty).
+  const status = useScreenStatus('ready');
   const markAllRead = useNotificationsStore((state) => state.markAllRead);
   const notices = useUiPreferences((state) => state.notices);
   const [filter, setFilter] = useState<NotificationArea | 'all'>('all');
@@ -89,11 +107,33 @@ export function NotificationsScreen() {
           </View>
         </>
       ) : null}
-      {visible.length ? null : (
-        <EmptyState icon="bell" title="Nenhum aviso por aqui" description={EMPTY_TEXT[filter]} />
+      {visible.length ? null : filter === 'all' ? (
+        <EmptyState icon="check" title="Tudo em dia" description={EMPTY_TEXT.all} />
+      ) : (
+        <EmptyState
+          icon="bell"
+          title={EMPTY_TITLE[filter]}
+          description={EMPTY_TEXT[filter]}
+          action={{
+            label: 'Limpar filtros',
+            variant: 'secondary',
+            onPress: () => setFilter('all'),
+          }}
+        />
       )}
     </>
   );
+
+  const states = {
+    status: status === 'empty' ? ('ready' as const) : status,
+    errorTitle: 'Não deu para carregar suas notificações',
+    onRetry: () => undefined,
+    offline: {
+      since: lastUpdateLabel(NOTIFICATIONS_CHECKED_AT),
+      paused:
+        'Novos avisos aparecem quando a conexão voltar. Os que chegarem por e-mail não se perdem.',
+    },
+  };
 
   const delivery = (
     <SectionCard
@@ -136,8 +176,10 @@ export function NotificationsScreen() {
             }
           />
           <NotificationsOffNotice />
-          <View className="flex-row flex-wrap gap-2">{chips}</View>
-          {list}
+          <ScreenStates {...states}>
+            <View className="flex-row flex-wrap gap-2">{chips}</View>
+            {list}
+          </ScreenStates>
           {delivery}
         </Screen>
         <ChatFab />
@@ -165,16 +207,18 @@ export function NotificationsScreen() {
       contentClassName="gap-4 pt-1"
     >
       <NotificationsOffNotice />
-      <ScrollView
-        horizontal
-        showsHorizontalScrollIndicator={false}
-        accessibilityLabel="Filtrar notificações"
-        className="-mr-4"
-        contentContainerClassName="gap-2 pr-4"
-      >
-        {chips}
-      </ScrollView>
-      {list}
+      <ScreenStates {...states}>
+        <ScrollView
+          horizontal
+          showsHorizontalScrollIndicator={false}
+          accessibilityLabel="Filtrar notificações"
+          className="-mr-4"
+          contentContainerClassName="gap-2 pr-4"
+        >
+          {chips}
+        </ScrollView>
+        {list}
+      </ScreenStates>
       {delivery}
     </Screen>
   );

@@ -1,8 +1,10 @@
 import { useRouter } from 'expo-router';
-import { View } from 'react-native';
+import { useState } from 'react';
+import { ScrollView, View } from 'react-native';
 
+import { EmptyState, ScreenStates, lastUpdateLabel, useScreenStatus } from '@/components/feedback';
 import { PageHeader, ResponsiveGrid, Screen, SectionCard, TopBar } from '@/components/layout';
-import { Button, Text } from '@/components/ui';
+import { Button, Chip, Text } from '@/components/ui';
 import { routeTo } from '@/constants/routes';
 // Straight to the hook: the budgets index pulls in screens that open the chat.
 import { useBudgets } from '@/features/budgets/hooks/useBudgets';
@@ -16,6 +18,18 @@ import { ChatFab } from '@/navigation';
 import { NoticeHistoryRow } from '../components';
 import { NOTICE_HISTORY } from '../data';
 
+type AlertFilter = 'all' | 'budgets' | 'price' | 'paused';
+
+const ALERT_FILTERS: { value: AlertFilter; label: string }[] = [
+  { value: 'all', label: 'Todos' },
+  { value: 'budgets', label: 'Tetos' },
+  { value: 'price', label: 'Preço' },
+  { value: 'paused', label: 'Pausados' },
+];
+
+/** When the caps and prices were last checked (shown while offline). */
+const ALERTS_CHECKED_AT = '2026-09-23T17:30:00.000Z';
+
 /** Alertas: spending caps, price alerts and the notices already sent. */
 export function AlertsScreen() {
   const router = useRouter();
@@ -25,6 +39,12 @@ export function AlertsScreen() {
   const newBudget = () => router.navigate('/new-budget');
   const subtitle = `${budgets.length} ${budgets.length === 1 ? 'teto' : 'tetos'} e ${alerts.length} ${alerts.length === 1 ? 'alerta' : 'alertas'} de preço`;
   const newPriceAlert = () => router.navigate('/new-price-alert');
+  const [filter, setFilter] = useState<AlertFilter>('all');
+  // "Pausados": price alerts paused by the user or after they fired.
+  const shownAlerts =
+    filter === 'paused' ? alerts.filter((alert) => alert.status !== 'active') : alerts;
+  // Static data today: the API adds loading and error.
+  const status = useScreenStatus(budgets.length + alerts.length === 0 ? 'empty' : 'ready');
 
   const budgetsCard = (
     <SectionCard
@@ -78,13 +98,13 @@ export function AlertsScreen() {
         </Button>
       }
     >
-      {alerts.length ? (
+      {shownAlerts.length ? (
         <View>
-          {alerts.map((alert, index) => (
+          {shownAlerts.map((alert, index) => (
             <PriceAlertRow
               key={alert.id}
               alert={alert}
-              last={index === alerts.length - 1}
+              last={index === shownAlerts.length - 1}
               onPress={() => router.navigate(routeTo.priceAlert(alert.id))}
             />
           ))}
@@ -141,38 +161,104 @@ export function AlertsScreen() {
                 Novo alerta de preço
               </Button>
             </View>
+          </>
+        ) : (
+          <View className="flex-row gap-2">
+            <Button
+              variant="secondary"
+              size="md"
+              leftIcon="plus"
+              className="flex-1"
+              onPress={newBudget}
+            >
+              Novo teto
+            </Button>
+            <Button
+              variant="secondary"
+              size="md"
+              leftIcon="plus"
+              className="flex-1"
+              onPress={newPriceAlert}
+            >
+              Alerta de preço
+            </Button>
+          </View>
+        )}
+        <ScreenStates
+          status={status}
+          errorTitle="Não deu para carregar seus alertas"
+          onRetry={() => undefined}
+          empty={
+            <SectionCard padding={16}>
+              <EmptyState
+                icon="bell"
+                title="Nenhum alerta ainda"
+                description="Crie um teto para uma categoria de gasto ou um alerta de preço para uma ação, FII, ETF ou cripto."
+                actions={
+                  <>
+                    <Button size="md" onPress={newBudget}>
+                      Novo teto
+                    </Button>
+                    <Button variant="secondary" size="md" onPress={newPriceAlert}>
+                      Novo alerta de preço
+                    </Button>
+                  </>
+                }
+              />
+            </SectionCard>
+          }
+          offline={{
+            since: lastUpdateLabel(ALERTS_CHECKED_AT),
+            paused:
+              'Os tetos e os preços continuam sendo conferidos no servidor. Os avisos chegam assim que a conexão voltar.',
+          }}
+        >
+          <ScrollView
+            horizontal
+            showsHorizontalScrollIndicator={false}
+            accessibilityLabel="Filtrar alertas"
+            contentContainerClassName="gap-2"
+          >
+            {ALERT_FILTERS.map((item) => (
+              <Chip
+                key={item.value}
+                label={item.label}
+                textSize={14}
+                selected={filter === item.value}
+                onPress={() => setFilter(item.value)}
+              />
+            ))}
+          </ScrollView>
+          {filter === 'paused' && shownAlerts.length === 0 ? (
+            <SectionCard padding={16}>
+              <EmptyState
+                icon="pause"
+                title="Nenhum alerta pausado"
+                description="Alertas de preço pausam depois de avisar. Todos os seus estão ativos."
+                action={{
+                  label: 'Limpar filtros',
+                  variant: 'secondary',
+                  onPress: () => setFilter('all'),
+                }}
+              />
+            </SectionCard>
+          ) : filter === 'budgets' ? (
+            budgetsCard
+          ) : filter === 'all' && isTablet ? (
             <ResponsiveGrid columns={{ tablet: 2 }}>
               {budgetsCard}
               {priceCard}
             </ResponsiveGrid>
-          </>
-        ) : (
-          <>
-            <View className="flex-row gap-2">
-              <Button
-                variant="secondary"
-                size="md"
-                leftIcon="plus"
-                className="flex-1"
-                onPress={newBudget}
-              >
-                Novo teto
-              </Button>
-              <Button
-                variant="secondary"
-                size="md"
-                leftIcon="plus"
-                className="flex-1"
-                onPress={newPriceAlert}
-              >
-                Alerta de preço
-              </Button>
-            </View>
-            {budgetsCard}
-            {priceCard}
-          </>
-        )}
-        {historyCard}
+          ) : filter === 'all' ? (
+            <>
+              {budgetsCard}
+              {priceCard}
+            </>
+          ) : (
+            priceCard
+          )}
+          {filter === 'all' ? historyCard : null}
+        </ScreenStates>
       </Screen>
       {isTablet ? <ChatFab /> : null}
     </View>

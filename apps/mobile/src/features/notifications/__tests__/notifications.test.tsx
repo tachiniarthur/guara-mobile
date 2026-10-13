@@ -60,7 +60,11 @@ describe('Notificações', () => {
     expect(screen.getByText('Itaú: a autorização termina em 26 de outubro')).toBeOnTheScreen();
     expect(screen.queryByText('Netflix subiu R$ 5,00')).toBeNull();
     fireEvent.press(screen.getByRole('button', { name: 'Investimentos' }));
-    expect(screen.getByRole('header', { name: 'Nenhum aviso por aqui' })).toBeOnTheScreen();
+    expect(
+      screen.getByRole('header', { name: 'Nenhuma notificação de investimentos' }),
+    ).toBeOnTheScreen();
+    fireEvent.press(screen.getByRole('button', { name: 'Limpar filtros' }));
+    expect(screen.getByText('Netflix subiu R$ 5,00')).toBeOnTheScreen();
   });
 
   it('shows how each kind is delivered, from Meu perfil', () => {

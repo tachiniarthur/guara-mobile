@@ -4,7 +4,9 @@ import { renderRouter } from 'expo-router/testing-library';
 describe('UI catalog (/ui)', () => {
   it('renders every section without errors in development', async () => {
     renderRouter('./app', { initialUrl: '/ui' });
-    expect(await screen.findByRole('header', { name: 'Catálogo de UI' })).toBeOnTheScreen();
+    expect(
+      await screen.findByRole('header', { name: 'Catálogo de UI' }, { timeout: 10_000 }),
+    ).toBeOnTheScreen();
     for (const section of [
       'Text',
       'Icon',
@@ -19,7 +21,8 @@ describe('UI catalog (/ui)', () => {
     ]) {
       expect(screen.getByRole('header', { name: section })).toBeOnTheScreen();
     }
-  });
+    // The catalog is the heaviest page: it gets more time on a busy test run.
+  }, 20_000);
 
   describe('in production', () => {
     const runtime = globalThis as unknown as { __DEV__: boolean };

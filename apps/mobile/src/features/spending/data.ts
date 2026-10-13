@@ -18,6 +18,8 @@ import { cents } from '@guara/utils';
 
 /** Gastos as shown in the design (static until the API exists). */
 export const SPENDING = {
+  /** Last sync with the banks (shown while offline). */
+  syncedAt: '2026-09-23T17:30:00.000Z',
   monthShort: 'Set 2026',
   subtitle: 'Setembro · 118 lançamentos',
   transactionsCount: 118,
