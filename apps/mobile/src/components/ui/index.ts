@@ -14,6 +14,7 @@ export * from './Disclosure';
 export * from './Divider';
 export * from './EmptyValue';
 export * from './FormField';
+export * from './HideValuesButton';
 export * from './Icon';
 export * from './IconButton';
 export * from './InfoNote';

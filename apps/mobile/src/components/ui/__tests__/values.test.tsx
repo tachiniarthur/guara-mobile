@@ -75,7 +75,7 @@ describe('MoneyText', () => {
     );
     expect(screen.getByTestId('c')).toHaveTextContent(brl('R$ 1,2 mil'));
     expect(screen.getByTestId('c').props.accessibilityLabel).toBe('1.234 reais e 56 centavos');
-    expect(screen.getByTestId('h')).toHaveTextContent('R$ ••••');
+    expect(screen.getByTestId('h')).toHaveTextContent('R$ •••');
     expect(screen.getByTestId('h').props.accessibilityLabel).toBe('valor oculto');
   });
 });

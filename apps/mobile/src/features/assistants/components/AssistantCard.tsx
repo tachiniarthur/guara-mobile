@@ -4,7 +4,16 @@ import { useRouter } from 'expo-router';
 import { StyleSheet, View } from 'react-native';
 
 import { AllocationBar } from '@/components/charts';
-import { Badge, IconButton, LinkButton, MoneyText, ProgressBar, Span, Text } from '@/components/ui';
+import {
+  Badge,
+  IconButton,
+  LinkButton,
+  MoneyText,
+  ProgressBar,
+  Span,
+  Text,
+  useMoneyFormat,
+} from '@/components/ui';
 import { ASSISTANTS } from '@/features/chat';
 import { cn } from '@/lib/cn';
 import { conversationHref } from '@/navigation';
@@ -23,6 +32,7 @@ export function AssistantCard({ card, imageHeight = 160, className }: AssistantC
   const router = useRouter();
   const meta = ASSISTANTS[card.assistant];
   const { highlight } = card;
+  const { mask } = useMoneyFormat();
 
   return (
     <View
@@ -134,7 +144,7 @@ export function AssistantCard({ card, imageHeight = 160, className }: AssistantC
           </View>
         ) : null}
         <Text size={14} leading={1.4} tone="muted" italic>
-          {card.quote}
+          {mask(card.quote)}
         </Text>
         <View className="mt-auto flex-row items-center justify-between gap-2">
           <LinkButton

@@ -6,6 +6,14 @@ import { useUiPreferences } from '@/stores/ui-preferences';
 import { useAppLockStore } from '../lock';
 import { UnlockScreen } from '../screens/UnlockScreen';
 
+/** The lock on opening runs once, even if this component mounts again. */
+let openingChecked = false;
+
+/** Tests start a new "session". */
+export function resetOpeningLock() {
+  openingChecked = false;
+}
+
 /**
  * Covers the app with Desbloqueio when "Entrar com biometria" is on: when it opens and after
  * more than a minute in the background.
@@ -14,9 +22,11 @@ export function AppLock() {
   const enabled = useUiPreferences((state) => state.biometrics);
   const locked = useAppLockStore((state) => state.locked);
 
-  // Opening the app: lock once the saved preferences are read.
+  // Opening the app: lock once the saved preferences are read (once per session).
   useEffect(() => {
     const lockIfEnabled = () => {
+      if (openingChecked) return;
+      openingChecked = true;
       if (useUiPreferences.getState().biometrics) useAppLockStore.getState().lock();
     };
     if (useUiPreferences.persist.hasHydrated()) {

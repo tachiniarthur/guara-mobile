@@ -3,7 +3,7 @@ import { useRouter } from 'expo-router';
 import { Pressable, View } from 'react-native';
 
 import { SectionCard } from '@/components/layout';
-import { Icon, LinkButton, MoneyText, Text } from '@/components/ui';
+import { Icon, LinkButton, MoneyText, Text, useMoneyFormat } from '@/components/ui';
 import { useBreakpoint } from '@/hooks/useBreakpoint';
 
 import { useProperties } from '../hooks/useProperties';
@@ -11,6 +11,7 @@ import { propertyDetail, propertySource, propertyValue, wholeReais } from '../li
 
 /** "Imóveis e outros bens": real estate and vehicles in the net worth. */
 export function PropertiesCard() {
+  const { mask } = useMoneyFormat();
   const router = useRouter();
   const { isTablet } = useBreakpoint();
   const { properties, total } = useProperties();
@@ -18,7 +19,9 @@ export function PropertiesCard() {
     <SectionCard
       title={isTablet ? 'Imóveis, veículos e outros bens' : 'Imóveis e outros bens'}
       description={
-        properties.length > 0 ? `Somam ${wholeReais(total)} no patrimônio` : 'Nenhum bem cadastrado'
+        properties.length > 0
+          ? mask(`Somam ${wholeReais(total)} no patrimônio`)
+          : 'Nenhum bem cadastrado'
       }
       titleSize={isTablet ? 20 : 18}
       padding={isTablet ? 20 : 16}
@@ -37,7 +40,7 @@ export function PropertiesCard() {
           <Pressable
             key={item.id}
             accessibilityRole="link"
-            accessibilityLabel={`${item.name}, ${propertyDetail(item)}`}
+            accessibilityLabel={`${item.name}, ${mask(propertyDetail(item))}`}
             onPress={() =>
               router.navigate({
                 pathname: '/investments/properties/[propertyId]',
@@ -61,7 +64,7 @@ export function PropertiesCard() {
                 <MoneyText value={propertyValue(item)} wholeUnits size={15} weight="bold" />
               </View>
               <Text size={13} tone="muted" leading={1.35}>
-                {propertyDetail(item)}
+                {mask(propertyDetail(item))}
               </Text>
               <Text size={12} tone="subtle" leading={1.35}>
                 {propertySource(item)}

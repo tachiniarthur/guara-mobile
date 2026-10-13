@@ -4,6 +4,8 @@ import { formatCents } from '@guara/utils';
 import { View } from 'react-native';
 import Svg, { Line, Path, Polygon, Rect, Text as SvgText } from 'react-native-svg';
 
+import { HIDDEN_MONEY } from '@/components/ui/MoneyText';
+
 export interface CashflowChartProps {
   /** Cumulative money in for each day so far (index 0 = day 1). */
   inflow: readonly Cents[];
@@ -21,6 +23,8 @@ export interface CashflowChartProps {
    * series totals written on the right.
    */
   variant?: 'compact' | 'wide';
+  /** "Ocultar valores": the balance bubble hides its amount. */
+  masked?: boolean;
   accessibilityLabel: string;
 }
 
@@ -46,6 +50,7 @@ export function CashflowChart({
   maxValue,
   dayTicks = [1, 10, 20],
   variant = 'compact',
+  masked = false,
   accessibilityLabel,
 }: CashflowChartProps) {
   const layout = LAYOUT[variant];
@@ -192,7 +197,7 @@ export function CashflowChart({
           fill={colors.foreground.inverse}
           fontFamily={text('extrabold')}
         >
-          {`Sobrou ${reais(balance)}`}
+          {`Sobrou ${masked ? HIDDEN_MONEY : reais(balance)}`}
         </SvgText>
         <Line
           x1={PLOT_LEFT}

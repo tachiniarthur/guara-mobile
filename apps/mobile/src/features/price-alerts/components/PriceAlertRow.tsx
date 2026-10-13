@@ -1,6 +1,6 @@
 import { Pressable, View } from 'react-native';
 
-import { Badge, Text } from '@/components/ui';
+import { Badge, Text, useMoneyFormat } from '@/components/ui';
 import { cn } from '@/lib/cn';
 
 import type { PriceAlertView } from '../hooks/usePriceAlerts';
@@ -19,7 +19,8 @@ export function PriceAlertRow({
   const sell = alert.side === 'sell';
   const paused = alert.status !== 'active';
   const remaining = remainingText(alert.side, alert.quote.price, alert.targetPrice);
-  const condition = conditionText(alert, alert.quote);
+  const { mask } = useMoneyFormat();
+  const condition = mask(conditionText(alert, alert.quote));
   return (
     <Pressable
       accessibilityRole="link"

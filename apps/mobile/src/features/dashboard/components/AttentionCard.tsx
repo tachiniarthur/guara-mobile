@@ -2,7 +2,7 @@ import { useRouter, type Href } from 'expo-router';
 import { View } from 'react-native';
 
 import { CardHeader } from '@/components/layout';
-import { Button, Card, CountBadge, Text } from '@/components/ui';
+import { Button, Card, CountBadge, Text, useMoneyFormat } from '@/components/ui';
 import { RingedPortrait } from '@/features/chat';
 import { useBreakpoint } from '@/hooks/useBreakpoint';
 import { cn } from '@/lib/cn';
@@ -18,6 +18,7 @@ const ITEM_HREF: Record<string, Href> = {
 function AttentionItem({ item }: { item: AttentionItemData }) {
   const router = useRouter();
   const { isTablet } = useBreakpoint();
+  const { mask } = useMoneyFormat();
   return (
     <View
       className={cn(
@@ -28,10 +29,10 @@ function AttentionItem({ item }: { item: AttentionItemData }) {
       <RingedPortrait assistant={item.assistant} />
       <View className="min-w-0 flex-1">
         <Text size={15} weight="bold" leading={1.3} numberOfLines={isTablet ? 1 : undefined}>
-          {item.title}
+          {mask(item.title)}
         </Text>
         <Text size={13} tone="muted" leading={1.3} numberOfLines={isTablet ? 1 : undefined}>
-          {item.detail}
+          {mask(item.detail)}
         </Text>
         <Text size={12} weight="bold" tone={item.urgent ? 'negative' : 'subtle'} leading={1.3}>
           {item.source}
@@ -42,7 +43,7 @@ function AttentionItem({ item }: { item: AttentionItemData }) {
         variant={item.urgent ? 'primary' : 'outline'}
         className={isTablet ? 'px-5' : undefined}
         onPress={() => router.navigate(ITEM_HREF[item.id] ?? '/alerts')}
-        accessibilityLabel={`${item.action}: ${item.title}`}
+        accessibilityLabel={`${item.action}: ${mask(item.title)}`}
       >
         {item.action}
       </Button>

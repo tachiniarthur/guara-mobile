@@ -3,7 +3,15 @@ import { useRouter } from 'expo-router';
 import { Pressable, View } from 'react-native';
 
 import { PageHeader, ResponsiveGrid, Screen, SectionCard, TopBar } from '@/components/layout';
-import { Button, Icon, IconButton, LinkButton, Span, Text } from '@/components/ui';
+import {
+  Button,
+  HideValuesButton,
+  Icon,
+  IconButton,
+  LinkButton,
+  Span,
+  Text,
+} from '@/components/ui';
 import { routeTo } from '@/constants/routes';
 // Straight to the files: the price-alerts index pulls in screens that open the chat.
 import { PriceAlertRow } from '@/features/price-alerts/components/PriceAlertRow';
@@ -72,6 +80,7 @@ export function InvestmentsScreen() {
               leading="none"
               actions={
                 <>
+                  <HideValuesButton />
                   <IconButton
                     icon="plus"
                     accessibilityLabel="Adicionar investimento"
@@ -96,17 +105,20 @@ export function InvestmentsScreen() {
               title="Investimentos"
               subtitle={PORTFOLIO.quotesLabel}
               actions={
-                <Pressable
-                  accessibilityRole="link"
-                  accessibilityLabel={`Perfil de investidor: ${profile.label}`}
-                  onPress={() => router.navigate('/account/investor-profile')}
-                  className="h-11 flex-row items-center gap-2 rounded-full border border-border-strong bg-surface px-3.5"
-                >
-                  <Icon name="shield" size={18} color={colors.foreground.DEFAULT} />
-                  <Text size={14}>
-                    Perfil <Span weight="bold">{profile.label}</Span>
-                  </Text>
-                </Pressable>
+                <View className="flex-row items-center gap-2">
+                  <HideValuesButton variant="outline" />
+                  <Pressable
+                    accessibilityRole="link"
+                    accessibilityLabel={`Perfil de investidor: ${profile.label}`}
+                    onPress={() => router.navigate('/account/investor-profile')}
+                    className="h-11 flex-row items-center gap-2 rounded-full border border-border-strong bg-surface px-3.5"
+                  >
+                    <Icon name="shield" size={18} color={colors.foreground.DEFAULT} />
+                    <Text size={14}>
+                      Perfil <Span weight="bold">{profile.label}</Span>
+                    </Text>
+                  </Pressable>
+                </View>
               }
             />
             <View className="flex-row gap-2.5">

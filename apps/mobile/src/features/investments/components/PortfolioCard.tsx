@@ -5,7 +5,7 @@ import { Pressable, View } from 'react-native';
 
 import { DashedLine, ReturnChart } from '@/components/charts';
 import { SectionCard } from '@/components/layout';
-import { Button, Chip, Icon, MoneyText, Text } from '@/components/ui';
+import { Button, Chip, Icon, MoneyText, Text, useMoneyFormat } from '@/components/ui';
 import { useBreakpoint } from '@/hooks/useBreakpoint';
 
 import { useAllocation } from '../hooks/useAllocation';
@@ -20,6 +20,7 @@ const PERIODS = [
 
 /** Invested net worth, return against the CDI and the year's numbers. */
 export function PortfolioCard() {
+  const { mask } = useMoneyFormat();
   const profile = useAllocation();
   const router = useRouter();
   const { isTablet } = useBreakpoint();
@@ -63,7 +64,7 @@ export function PortfolioCard() {
         tracking={-0.01}
       />
       <Text size={14} weight="bold" tone="positive">
-        {PORTFOLIO.monthGain}
+        {mask(PORTFOLIO.monthGain)}
       </Text>
       <View accessibilityLabel="Período do gráfico" className="mt-2 flex-row gap-1.5">
         {PERIODS.map((item) => (
@@ -116,11 +117,11 @@ export function PortfolioCard() {
                 {stat.label}
               </Text>
               <Text size={12} tone="subtle" leading={1.35}>
-                {stat.caption}
+                {mask(stat.caption)}
               </Text>
             </View>
             <Text size={16} weight="bold" tabular tone={stat.tone}>
-              {stat.value}
+              {mask(stat.value)}
             </Text>
           </View>
         ))}

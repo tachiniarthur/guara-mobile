@@ -5,6 +5,7 @@ import { ScrollView, View } from 'react-native';
 import { AppLogo } from '@/components/brand';
 import { PageHeader, ResponsiveGrid, Screen, Section, TopBar } from '@/components/layout';
 import {
+  HideValuesButton,
   IconButton,
   LinkButton,
   OptionSheet,
@@ -95,6 +96,7 @@ export function DashboardScreen() {
               start={<AppLogo />}
               actions={
                 <>
+                  <HideValuesButton />
                   <IconButton
                     icon="bell"
                     accessibilityLabel={bellLabel(unread)}
@@ -118,6 +120,7 @@ export function DashboardScreen() {
                 <>
                   {bankToggle}
                   {monthPicker}
+                  <HideValuesButton variant="outline" size={48} />
                   <IconButton
                     icon="bell"
                     variant="outline"

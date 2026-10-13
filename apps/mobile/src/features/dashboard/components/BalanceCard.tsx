@@ -5,7 +5,14 @@ import { View } from 'react-native';
 import { CashflowChart, LegendSwatch } from '@/components/charts';
 import { Contours } from '@/components/illustrations';
 import { CardHeader } from '@/components/layout';
-import { Icon, IconButton, MoneyText, SegmentedControl, Text } from '@/components/ui';
+import {
+  HideValuesButton,
+  Icon,
+  MoneyText,
+  SegmentedControl,
+  Text,
+  maskMoneyIn,
+} from '@/components/ui';
 import { useBreakpoint } from '@/hooks/useBreakpoint';
 import { cn } from '@/lib/cn';
 import { useUiPreferences } from '@/stores';
@@ -45,7 +52,7 @@ function FlowRow({ label, value, delta, marker, masked }: FlowRowProps) {
       <View className="items-end">
         <MoneyText value={value} masked={masked} size={17} weight="bold" leading={1.25} />
         <Text size={12} weight="bold" tone="positive" leading={1.25}>
-          {delta}
+          {masked ? maskMoneyIn(delta) : delta}
         </Text>
       </View>
     </View>
@@ -56,7 +63,6 @@ function FlowRow({ label, value, delta, marker, masked }: FlowRowProps) {
 export function BalanceCard() {
   const { isTablet } = useBreakpoint();
   const masked = useUiPreferences((state) => state.hideBalances);
-  const toggleMasked = useUiPreferences((state) => state.toggleHideBalances);
   const [period, setPeriod] = useState<ChartPeriod>('month');
   const { balance } = HOME;
 
@@ -77,13 +83,7 @@ export function BalanceCard() {
               </Text>
               <MoneyText value={balance.value} masked={masked} variant="hero" numberOfLines={1} />
             </View>
-            <IconButton
-              icon="eye"
-              variant="outline"
-              accessibilityLabel={masked ? 'Mostrar valores' : 'Ocultar valores'}
-              accessibilityState={{ selected: masked }}
-              onPress={toggleMasked}
-            />
+            <HideValuesButton variant="outline" />
           </View>
           <View className="gap-1">
             <FlowRow
@@ -133,7 +133,10 @@ export function BalanceCard() {
             outflowForecast={CASHFLOW.outflowForecast}
             daysInMonth={CASHFLOW.daysInMonth}
             maxValue={CASHFLOW.maxValue}
-            accessibilityLabel={CASHFLOW.accessibilityLabel}
+            masked={masked}
+            accessibilityLabel={
+              masked ? maskMoneyIn(CASHFLOW.accessibilityLabel) : CASHFLOW.accessibilityLabel
+            }
           />
           {isTablet ? null : (
             <View className="flex-row flex-wrap gap-x-3.5 gap-y-1.5">

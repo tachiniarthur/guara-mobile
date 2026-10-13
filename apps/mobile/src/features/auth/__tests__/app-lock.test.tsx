@@ -2,7 +2,7 @@ import { act, fireEvent, render, screen, waitFor } from '@testing-library/react-
 
 import { useUiPreferences } from '@/stores/ui-preferences';
 
-import { AppLock } from '../components';
+import { AppLock, resetOpeningLock } from '../components';
 import { LOCK_AFTER_MS, useAppLockStore } from '../lock';
 
 // The native module is mocked in __tests__/setup.ts.
@@ -19,8 +19,10 @@ jest.mock('@/providers', () => ({
   useAuth: () => ({ status: 'signedIn', setStatus: mockSetStatus }),
 }));
 
-beforeEach(() => {
+beforeEach(async () => {
   jest.clearAllMocks();
+  await useUiPreferences.persist.rehydrate();
+  resetOpeningLock();
   act(() => {
     useAppLockStore.setState({ locked: false, backgroundAt: null });
     useUiPreferences.getState().set({ biometrics: true });
