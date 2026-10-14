@@ -1,5 +1,8 @@
 import { colors } from '@guara/ui-tokens';
+import { View } from 'react-native';
 import Svg, { Path } from 'react-native-svg';
+
+import { useSkeleton } from './SkeletonScope';
 
 /**
  * Stroke icons of the design (24×24 grid, round caps and joins). Paths copied from the
@@ -112,6 +115,7 @@ export const ICON_PATHS = {
   minimize: ['M4 14h6v6M20 10h-6V4M14 10l7-7M3 21l7-7'],
   flag: ['M5 21V4M5 4h11l-2 4 2 4H5'],
   target: ['M12 21a9 9 0 1 0 0-18 9 9 0 0 0 0 18zM12 16a4 4 0 1 0 0-8 4 4 0 0 0 0 8zM12 12h.01'],
+  sliders: ['M4 6h10M18 6h2M4 12h4M12 12h8M4 18h12M20 18h0M14 4v4M8 10v4M16 16v4'],
   scissors: [
     'M6 9a3 3 0 1 0 0-6 3 3 0 0 0 0 6zM6 21a3 3 0 1 0 0-6 3 3 0 0 0 0 6zM20 4 8.1 15.9M14.5 14.5 20 20M8.1 8.1 12 12',
   ],
@@ -136,6 +140,9 @@ export function Icon({
   color = colors.foreground.muted,
   strokeWidth = 1.6,
 }: IconProps) {
+  const skeleton = useSkeleton();
+  // Loading keeps the room of the icon but hides it (design: `visibility: hidden`).
+  if (skeleton) return <View style={{ width: size, height: size }} />;
   return (
     <Svg
       width={size}

@@ -1,8 +1,12 @@
+import { colors } from '@guara/ui-tokens';
 import { cva } from 'class-variance-authority';
 import type { ReactNode } from 'react';
 import { Pressable, View, type ViewProps } from 'react-native';
 
+import { useScreenState } from '@/components/feedback/ScreenStates';
 import { cn } from '@/lib/cn';
+
+import { SkeletonScope } from './SkeletonScope';
 
 /**
  * - `default`: Folha escura with a Musgo border, radius 24 (cards and panels).
@@ -31,26 +35,49 @@ export interface CardProps extends Omit<ViewProps, 'children'> {
   /** Makes the card pressable (role "button"). */
   onPress?: () => void;
   className?: string;
+  /**
+   * Inside `ScreenStates`, drawn as blocks while loading (default true). The body follows
+   * the other states through `StateSlot`.
+   */
+  followsState?: boolean;
 }
 
 /** Standard surface. With `onPress` it becomes a pressable card. */
-export function Card({ children, variant, padding, onPress, className, ...props }: CardProps) {
+export function Card({
+  children,
+  variant,
+  padding,
+  onPress,
+  className,
+  followsState = true,
+  style,
+  ...props
+}: CardProps) {
+  const loading = useScreenState().status === 'loading' && followsState;
   const classes = cn(cardVariants({ variant, padding }), className);
+  const loadingStyle = loading
+    ? { backgroundColor: colors.skeleton.surface, borderColor: colors.skeleton.border }
+    : null;
   if (onPress) {
     return (
-      <Pressable
-        accessibilityRole="button"
-        onPress={onPress}
-        className={cn(classes, 'active:bg-surface-pressed')}
-        {...props}
-      >
-        {children}
-      </Pressable>
+      <SkeletonScope active={loading}>
+        <Pressable
+          accessibilityRole="button"
+          onPress={onPress}
+          className={cn(classes, 'active:bg-surface-pressed')}
+          style={[style, loadingStyle]}
+          {...props}
+        >
+          {children}
+        </Pressable>
+      </SkeletonScope>
     );
   }
   return (
-    <View className={classes} {...props}>
-      {children}
-    </View>
+    <SkeletonScope active={loading}>
+      <View className={classes} style={[style, loadingStyle]} {...props}>
+        {children}
+      </View>
+    </SkeletonScope>
   );
 }

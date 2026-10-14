@@ -3,7 +3,7 @@ import { useState } from 'react';
 import { ScrollView, View } from 'react-native';
 
 import { AppLogo } from '@/components/brand';
-import { ScreenStates, lastUpdateLabel, useScreenStatus } from '@/components/feedback';
+import { ScreenStates, useScreenStatus } from '@/components/feedback';
 import { PageHeader, ResponsiveGrid, Screen, Section, TopBar } from '@/components/layout';
 import {
   HideValuesButton,
@@ -54,7 +54,7 @@ export function DashboardScreen() {
   // Without a connected bank, Início shows the first steps ("Início · novo").
   const newUser = useBankConnectionsStore((state) => state.connections.length === 0);
   // Static data today: the API adds loading and error.
-  const status = useScreenStatus(newUser ? 'empty' : 'ready');
+  const status = useScreenStatus('ready');
   const greeting = `Boa tarde, ${name}.`;
 
   const subtitle = (
@@ -152,74 +152,75 @@ export function DashboardScreen() {
           </View>
         )}
 
-        <ScreenStates
-          status={status}
-          errorTitle="Não deu para carregar o seu resumo"
-          onRetry={() => undefined}
-          empty={<NewUserHome />}
-          offline={{
-            since: lastUpdateLabel(HOME.syncedAt),
-            paused: 'Conversar com os assistentes volta quando a conexão voltar.',
-          }}
-        >
-          <Section
-            title="Resumo de setembro"
-            description="Como está o seu mês"
-            aside={HOME.updatedLabel}
-          >
-            <View className="gap-4">
-              <BalanceCard />
-              <AttentionCard />
-            </View>
-          </Section>
+        {newUser ? (
+          <NewUserHome />
+        ) : (
+          <ScreenStates status={status} onRetry={() => undefined} since={HOME.syncedAt}>
+            <Section
+              title="Resumo de setembro"
+              description="Como está o seu mês"
+              aside={HOME.updatedLabel}
+            >
+              <View className="gap-4">
+                <BalanceCard />
+                <AttentionCard />
+              </View>
+            </Section>
 
-          <Section
-            title="Seus assistentes"
-            description="Cada um cuida de uma parte do seu dinheiro"
-            aside={
-              <LinkButton label="Ver assistentes" onPress={() => router.navigate('/assistants')} />
-            }
-          >
-            {isTablet ? (
-              <ResponsiveGrid columns={{ tablet: 2 }}>
-                {teamCards.map((card) => (
-                  <AssistantCard
-                    key={card.assistant}
-                    card={card}
-                    imageHeight={184}
-                    className="flex-1"
-                  />
-                ))}
-              </ResponsiveGrid>
-            ) : (
-              <ScrollView
-                horizontal
-                showsHorizontalScrollIndicator={false}
-                snapToInterval={276 + 12}
-                decelerationRate="fast"
-                className="-mx-4"
-                contentContainerClassName="gap-3 px-4 pb-1"
-              >
-                {teamCards.map((card) => (
-                  <AssistantCard key={card.assistant} card={card} className="w-[276px]" />
-                ))}
-              </ScrollView>
-            )}
-          </Section>
+            <Section
+              title="Seus assistentes"
+              description="Cada um cuida de uma parte do seu dinheiro"
+              aside={
+                <LinkButton
+                  label="Ver assistentes"
+                  onPress={() => router.navigate('/assistants')}
+                />
+              }
+            >
+              {isTablet ? (
+                <ResponsiveGrid columns={{ tablet: 2 }}>
+                  {teamCards.map((card) => (
+                    <AssistantCard
+                      key={card.assistant}
+                      card={card}
+                      imageHeight={184}
+                      className="flex-1"
+                    />
+                  ))}
+                </ResponsiveGrid>
+              ) : (
+                <ScrollView
+                  horizontal
+                  showsHorizontalScrollIndicator={false}
+                  snapToInterval={276 + 12}
+                  decelerationRate="fast"
+                  className="-mx-4"
+                  contentContainerClassName="gap-3 px-4 pb-1"
+                >
+                  {teamCards.map((card) => (
+                    <AssistantCard key={card.assistant} card={card} className="w-[276px]" />
+                  ))}
+                </ScrollView>
+              )}
+            </Section>
 
-          <Section
-            title="Detalhes de setembro"
-            description="Para onde foi o dinheiro"
-            aside={
-              <LinkButton label="Relatório completo" onPress={() => router.navigate('/reports')} />
-            }
-          >
-            <View className="gap-4">
-              <CategoryBudgetsCard />
-              <RecentTransactionsCard />
-            </View>
-          </Section>
-        </ScreenStates>
+            <Section
+              title="Detalhes de setembro"
+              description="Para onde foi o dinheiro"
+              aside={
+                <LinkButton
+                  label="Relatório completo"
+                  onPress={() => router.navigate('/reports')}
+                />
+              }
+            >
+              <View className="gap-4">
+                <CategoryBudgetsCard />
+                <RecentTransactionsCard />
+              </View>
+            </Section>
+          </ScreenStates>
+        )}
       </Screen>
       {isTablet ? <ChatFab /> : null}
       <OptionSheet

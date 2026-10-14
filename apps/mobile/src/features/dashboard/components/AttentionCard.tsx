@@ -1,6 +1,7 @@
 import { useRouter, type Href } from 'expo-router';
 import { View } from 'react-native';
 
+import { StateSlot } from '@/components/feedback';
 import { CardHeader } from '@/components/layout';
 import { Button, Card, CountBadge, Text, useMoneyFormat } from '@/components/ui';
 import { RingedPortrait } from '@/features/chat';
@@ -66,11 +67,13 @@ export function AttentionCard() {
           />
         }
       />
-      <View className="gap-2">
-        {ATTENTION_ITEMS.map((item) => (
-          <AttentionItem key={item.id} item={item} />
-        ))}
-      </View>
+      <StateSlot>
+        <View className="gap-2">
+          {ATTENTION_ITEMS.map((item) => (
+            <AttentionItem key={item.id} item={item} />
+          ))}
+        </View>
+      </StateSlot>
     </Card>
   );
 }

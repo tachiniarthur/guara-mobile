@@ -5,6 +5,8 @@ import { Text as RNText, type TextProps as RNTextProps } from 'react-native';
 import { cn } from '@/lib/cn';
 import { TEXT_SCALE, useUiPreferences } from '@/stores/ui-preferences';
 
+import { SKELETON_TEXT, useSkeleton } from './SkeletonScope';
+
 /** Tone classes (Tailwind only compiles classes written in full). */
 export const textVariants = cva('', {
   variants: {
@@ -70,8 +72,10 @@ export function Text({
   className,
   style,
   maxFontSizeMultiplier,
+  children,
   ...props
 }: TextProps) {
+  const skeleton = useSkeleton();
   const base = typography[variant];
   const scale = useUiPreferences((state) => TEXT_SCALE[state.textSize]);
   const fontSize = (size ?? base.fontSize) * scale;
@@ -91,10 +95,14 @@ export function Text({
         tabular && { fontVariant: ['tabular-nums'] },
         underline && { textDecorationLine: 'underline' },
         style,
+        skeleton && { color: SKELETON_TEXT.color, textDecorationLine: 'none' },
       ]}
       maxFontSizeMultiplier={maxFontSizeMultiplier ?? base.maxFontSizeMultiplier}
       {...props}
-    />
+    >
+      {/* Loading: the nested run paints a block only behind the glyphs, like the design. */}
+      {skeleton ? <RNText style={SKELETON_TEXT}>{children}</RNText> : children}
+    </RNText>
   );
 }
 
@@ -122,6 +130,7 @@ export function Span({
   style,
   ...props
 }: SpanProps) {
+  const skeleton = useSkeleton();
   return (
     <RNText
       className={cn(tone ? textVariants({ tone }) : undefined, className)}
@@ -132,6 +141,7 @@ export function Span({
         tabular && { fontVariant: ['tabular-nums'] },
         underline && { textDecorationLine: 'underline' },
         style,
+        skeleton && { color: SKELETON_TEXT.color, textDecorationLine: 'none' },
       ]}
       {...props}
     />

@@ -4,7 +4,7 @@ import { View } from 'react-native';
 
 import { BarChart, RangeBar } from '@/components/charts';
 import { SectionCard } from '@/components/layout';
-import { DataRow, EmptyValue, Text } from '@/components/ui';
+import { DataRow, EmptyValue, SkeletonBlock, Text } from '@/components/ui';
 
 import type { InfoRow, StockAsset } from '../../assets';
 import { formatChartMoney } from '../../lib/chart-periods';
@@ -18,6 +18,8 @@ interface RowsCardProps {
   header?: ReactNode;
   /** Content below the rows (about the company). */
   children?: ReactNode;
+  /** Empty screen: `null` keeps the rows (static info like "Sobre a empresa"). */
+  empty?: ReactNode;
 }
 
 /** Card with a definition list of the stock page ("Indicadores", "Sobre a empresa"). */
@@ -28,6 +30,7 @@ export function RowsCard({
   wide = false,
   header,
   children,
+  empty,
 }: RowsCardProps) {
   return (
     <SectionCard
@@ -36,6 +39,7 @@ export function RowsCard({
       padding={wide ? 20 : 18}
       gap={16}
       className="flex-1"
+      empty={empty}
     >
       {header}
       <View>
@@ -71,12 +75,14 @@ export function RangeCard({
       rows={range.rows}
       wide={wide}
       header={
-        <RangeBar
-          position={range.position}
-          minLabel={range.min}
-          maxLabel={range.max}
-          accessibilityLabel={`Faixa ${title === 'Hoje' ? 'do dia' : 'de 52 semanas'}: mínima ${min}, máxima ${max}, agora ${current}`}
-        />
+        <SkeletonBlock>
+          <RangeBar
+            position={range.position}
+            minLabel={range.min}
+            maxLabel={range.max}
+            accessibilityLabel={`Faixa ${title === 'Hoje' ? 'do dia' : 'de 52 semanas'}: mínima ${min}, máxima ${max}, agora ${current}`}
+          />
+        </SkeletonBlock>
       }
     />
   );

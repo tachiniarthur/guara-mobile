@@ -55,15 +55,15 @@ describe('Posições', () => {
     expect(screen.getByRole('link', { name: /^HGLG11/ })).toBeOnTheScreen();
   });
 
-  it('offers to register an asset the search did not find', () => {
+  it('explains a search without results and clears it', () => {
     render(<PositionsScreen />);
     fireEvent.changeText(screen.getByLabelText('Buscar por nome ou código (ex.: HGLG11)'), 'itsa4');
-    expect(screen.getByRole('header', { name: 'Nenhuma posição com “ITSA4”' })).toBeOnTheScreen();
-    fireEvent.press(screen.getByRole('button', { name: 'Adicionar ITSA4' }));
-    expect(mockNavigate).toHaveBeenCalledWith({
-      pathname: '/new-manual-asset',
-      params: { ticker: 'ITSA4' },
-    });
+    expect(screen.getByRole('header', { name: 'Nada com esse filtro' })).toBeOnTheScreen();
+    expect(
+      screen.getByText('Nenhuma posição com “ITSA4”. Tente outro nome ou ticker.'),
+    ).toBeOnTheScreen();
+    fireEvent.press(screen.getByRole('button', { name: 'Limpar filtros' }));
+    expect(screen.queryByText('Nada com esse filtro')).toBeNull();
   });
 
   it('sorts and lists without classes', () => {

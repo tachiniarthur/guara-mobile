@@ -258,13 +258,7 @@ export function noResultsMessage(filters: LedgerFilters): string {
   if (filters.categoryId !== 'all') parts.push(`em ${CATEGORY_LABELS[filters.categoryId]}`);
   if (filters.bank !== 'all') parts.push(`no ${bankLabel(filters.bank)}`);
   parts.push(`em ${monthName(filters.month)}.`);
-  const hint =
-    filters.bank !== 'all'
-      ? 'Tente outro período ou todos os bancos.'
-      : query
-        ? 'Tente outra busca ou outro período.'
-        : 'Tente outro período ou outro filtro.';
-  return `${parts.join(' ')} ${hint}`;
+  return parts.join(' ');
 }
 
 /** "O Itaú não atualizou desde 10:05. Os lançamentos do Nubank estão em dia." */

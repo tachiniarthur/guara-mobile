@@ -2,6 +2,8 @@ import type { ReactNode } from 'react';
 import { View } from 'react-native';
 import Svg, { Circle } from 'react-native-svg';
 
+import { SkeletonBlock } from '@/components/ui/SkeletonScope';
+
 export interface DonutSegment {
   key: string;
   value: number;
@@ -22,7 +24,7 @@ export interface DonutChartProps {
 }
 
 /** Ring chart starting at 12 o'clock, with small gaps between segments. */
-export function DonutChart({
+function DonutChartDrawing({
   segments,
   size = 180,
   strokeWidth = 22,
@@ -77,5 +79,14 @@ export function DonutChart({
         {children}
       </View>
     </View>
+  );
+}
+
+/** DonutChart as a flat area while loading (`SkeletonBlock`). */
+export function DonutChart(props: DonutChartProps) {
+  return (
+    <SkeletonBlock>
+      <DonutChartDrawing {...props} />
+    </SkeletonBlock>
   );
 }

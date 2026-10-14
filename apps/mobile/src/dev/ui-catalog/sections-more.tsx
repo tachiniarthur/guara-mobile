@@ -12,7 +12,16 @@ import {
   RangeBar,
   TrendAreaChart,
 } from '@/components/charts';
-import { EmptyState, ErrorState, OfflineNote, toast } from '@/components/feedback';
+import {
+  ContainerEmpty,
+  ContainerError,
+  EmptyState,
+  ErrorState,
+  FilterEmpty,
+  OfflineNote,
+  StateNotice,
+  toast,
+} from '@/components/feedback';
 import { ResponsiveGrid, SectionCard } from '@/components/layout';
 import {
   AVATAR_COLORS,
@@ -36,6 +45,7 @@ import {
   SelectField,
   Sheet,
   Skeleton,
+  SkeletonScope,
   Slider,
   Spinner,
   Switch,
@@ -281,7 +291,8 @@ function ScreenPreviewPicker() {
       />
       <Text size={12} tone="subtle">
         Vale para Início, Gastos, Investimentos, Ativo, Relatório, Alertas, Assinaturas,
-        Notificações, Meta e Lançamento. Para “sem internet”, desligue a rede do aparelho.
+        Notificações, Meta, Lançamento, Lançamentos, Metas, Posições e Simulações. Para “sem
+        internet”, desligue a rede do aparelho.
       </Text>
     </View>
   );
@@ -293,7 +304,7 @@ export function FeedbackSection() {
   return (
     <CatalogSection
       title="Feedback"
-      note="Toast, Sheet, ConfirmDialog, Skeleton, Spinner, EmptyState e ErrorState."
+      note="Toast, Sheet, ConfirmDialog, Skeleton, Spinner, EmptyState, ErrorState e os estados por container (StateNotice, ContainerError, ContainerEmpty, FilterEmpty, SkeletonScope)."
     >
       <View className="flex-row flex-wrap gap-2">
         <Button size="sm" variant="secondary" onPress={() => toast.success('Salvo')}>
@@ -317,6 +328,31 @@ export function FeedbackSection() {
       />
       <ErrorState onRetry={() => toast.info('Tentando de novo')} />
       <OfflineNote since="hoje, 14:30" paused="Exportar volta quando a conexão voltar." />
+      <StateNotice kind="error" since="hoje, 14:30" />
+      <StateNotice kind="offline" since="hoje, 14:30" />
+      <SectionCard title="Erro no container" description="Cada card mostra o próprio erro">
+        <ContainerError />
+      </SectionCard>
+      <SectionCard compactState>
+        <ContainerError compact />
+      </SectionCard>
+      <SectionCard title="Container vazio">
+        <ContainerEmpty />
+      </SectionCard>
+      <SectionCard title="Filtro sem resultado">
+        <FilterEmpty
+          description="Nenhum lançamento com “academia” no Nubank em setembro."
+          onClear={() => toast.info('Filtros limpos')}
+        />
+      </SectionCard>
+      <SkeletonScope active>
+        <SectionCard title="Carregando" description="O próprio layout vira blocos">
+          <Text>R$ 1.234,56 em setembro</Text>
+          <Button size="sm" variant="secondary" onPress={() => undefined}>
+            Ação
+          </Button>
+        </SectionCard>
+      </SkeletonScope>
       <ScreenPreviewPicker />
       <Sheet open={sheet} onClose={() => setSheet(false)} title="Sheet">
         <Text>Conteúdo do sheet.</Text>

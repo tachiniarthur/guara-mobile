@@ -7,6 +7,8 @@ import { OfflineBanner } from '@/components/feedback/OfflineBanner';
 import { useBreakpoint } from '@/hooks/useBreakpoint';
 import { cn } from '@/lib/cn';
 
+import { ScreenOverlayHost } from './ScreenOverlay';
+
 export interface ScreenProps {
   children: ReactNode;
   /** Fixed above the content (phone `TopBar`, app header). */
@@ -69,30 +71,32 @@ export function Screen({
   return (
     <SafeAreaView edges={edges} style={{ flex: 1, backgroundColor: colors.background.DEFAULT }}>
       {header}
-      {scroll ? (
-        <ScrollView
-          ref={scrollRef}
-          keyboardShouldPersistTaps="handled"
-          keyboardDismissMode="on-drag"
-          contentInsetAdjustmentBehavior="automatic"
-          contentContainerStyle={centered ? { flexGrow: 1 } : undefined}
-          refreshControl={
-            onRefresh ? (
-              <RefreshControl
-                refreshing={refreshing}
-                onRefresh={onRefresh}
-                tintColor={colors.brand.DEFAULT}
-                colors={[colors.brand.DEFAULT]}
-                progressBackgroundColor={colors.surface.DEFAULT}
-              />
-            ) : undefined
-          }
-        >
-          {content}
-        </ScrollView>
-      ) : (
-        <View className="flex-1">{content}</View>
-      )}
+      <ScreenOverlayHost>
+        {scroll ? (
+          <ScrollView
+            ref={scrollRef}
+            keyboardShouldPersistTaps="handled"
+            keyboardDismissMode="on-drag"
+            contentInsetAdjustmentBehavior="automatic"
+            contentContainerStyle={centered ? { flexGrow: 1 } : undefined}
+            refreshControl={
+              onRefresh ? (
+                <RefreshControl
+                  refreshing={refreshing}
+                  onRefresh={onRefresh}
+                  tintColor={colors.brand.DEFAULT}
+                  colors={[colors.brand.DEFAULT]}
+                  progressBackgroundColor={colors.surface.DEFAULT}
+                />
+              ) : undefined
+            }
+          >
+            {content}
+          </ScrollView>
+        ) : (
+          <View className="flex-1">{content}</View>
+        )}
+      </ScreenOverlayHost>
       {footer}
     </SafeAreaView>
   );

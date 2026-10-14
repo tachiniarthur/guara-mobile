@@ -1,6 +1,7 @@
 import { colors } from '@guara/ui-tokens';
 import { View } from 'react-native';
 
+import { useHasOverlay } from '@/components/layout/ScreenOverlay';
 import { Icon } from '@/components/ui/Icon';
 import { Text } from '@/components/ui/Text';
 import { FEEDBACK_COPY } from '@/constants/copy';
@@ -16,7 +17,9 @@ export interface OfflineBannerProps {
 /** Shown only while the device is offline. */
 export function OfflineBanner({ visible, className }: OfflineBannerProps) {
   const online = useOnline();
-  if (!(visible ?? !online)) return null;
+  // A screen state notification ("Sem internet") already says it.
+  const covered = useHasOverlay();
+  if (!(visible ?? (!online && !covered))) return null;
 
   return (
     <View

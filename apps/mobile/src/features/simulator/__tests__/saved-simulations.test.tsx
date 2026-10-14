@@ -62,7 +62,7 @@ describe('Simulações salvas', () => {
     fireEvent.press(screen.getByRole('button', { name: 'Excluir simulação Aposentadoria aos 60' }));
     expect(screen.getByText('“Aposentadoria aos 60” excluída')).toBeOnTheScreen();
     expect(cards()).toHaveLength(3);
-    fireEvent.press(screen.getByRole('link', { name: 'Desfazer' }));
+    fireEvent.press(screen.getByRole('button', { name: 'Desfazer' }));
     expect(cards()).toHaveLength(4);
     expect(screen.queryByText('“Aposentadoria aos 60” excluída')).toBeNull();
   });

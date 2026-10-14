@@ -4,15 +4,9 @@ import { useEffect, useState } from 'react';
 import { View } from 'react-native';
 
 import { BalanceLineChart, GroupedBarChart, LegendSwatch } from '@/components/charts';
-import {
-  EmptyState,
-  ScreenStates,
-  lastUpdateLabel,
-  toast,
-  useScreenStatus,
-} from '@/components/feedback';
+import { ScreenStates, StateMessage, toast, useScreenStatus } from '@/components/feedback';
 import { PageHeader, ResponsiveGrid, Screen, SectionCard, TopBar } from '@/components/layout';
-import { IconButton, LinkButton, MoneyText, Span, Text } from '@/components/ui';
+import { Button, IconButton, LinkButton, MoneyText, Span, Text } from '@/components/ui';
 import { useChatStore, type ChatContext } from '@/features/chat';
 import { useBreakpoint } from '@/hooks/useBreakpoint';
 import { useChatDocked } from '@/hooks/useChatDocked';
@@ -285,38 +279,32 @@ export function ReportsScreen() {
           <ExportMenu fullWidth />
         </>
       )}
-      <ScreenStates
-        status={status}
-        errorTitle="Não deu para carregar o relatório"
-        onRetry={() => undefined}
-        empty={
-          <SectionCard padding={16}>
-            <EmptyState
-              icon="calendar"
-              title="Sem movimentos no período"
-              description="Não há entradas nem saídas nesse período nos bancos conectados. Escolha outro período para ver o relatório."
-              action={{
-                label: 'Mudar período',
-                variant: 'secondary',
-                onPress: () => {
-                  setPreview('auto');
-                  setPeriod('month');
-                },
-              }}
-            />
-          </SectionCard>
-        }
-        offline={{
-          since: lastUpdateLabel(REPORT.syncedAt),
-          paused: 'Exportar em PDF, Excel ou CSV volta quando a conexão voltar.',
-        }}
-      >
+      <ScreenStates status={status} onRetry={() => undefined} since={REPORT.syncedAt}>
         <ReportSummaryCard />
         <SectionCard
           title="Como o saldo andou"
           description={REPORT.scopeLabel}
           padding={isTablet ? 20 : 16}
           gap={16}
+          empty={
+            <StateMessage
+              icon="document"
+              title="Sem movimentos no período"
+              description="Não há entradas nem saídas nesse período nos bancos conectados. Escolha outro período."
+              action={
+                <Button
+                  variant="secondary"
+                  size="md"
+                  onPress={() => {
+                    setPreview('auto');
+                    setPeriod('month');
+                  }}
+                >
+                  Mudar período
+                </Button>
+              }
+            />
+          }
         >
           <ResponsiveGrid columns={{ phone: 1, tablet: 1 }}>
             {balancePanel}

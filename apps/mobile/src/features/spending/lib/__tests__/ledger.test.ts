@@ -223,7 +223,7 @@ describe('ledger texts', () => {
 
   it('explains empty results and stale banks', () => {
     expect(noResultsMessage({ ...ALL, query: 'academia', bank: 'nubank' })).toBe(
-      'Nenhum lançamento com “academia” no Nubank em setembro. Tente outro período ou todos os bancos.',
+      'Nenhum lançamento com “academia” no Nubank em setembro.',
     );
     expect(
       staleBanksMessage([

@@ -1,6 +1,9 @@
+import { colors } from '@guara/ui-tokens';
 import type { ReactNode } from 'react';
 import { Pressable, View } from 'react-native';
 
+import { StateSlot, useScreenState } from '@/components/feedback/ScreenStates';
+import { SkeletonScope } from '@/components/ui/SkeletonScope';
 import { Text } from '@/components/ui/Text';
 import { cn } from '@/lib/cn';
 
@@ -26,6 +29,15 @@ export interface SectionCardProps {
   gap?: number;
   children: ReactNode;
   className?: string;
+  /**
+   * Inside `ScreenStates`: the message of this card when the screen is empty ("Nenhum alerta
+   * ainda"); `null` keeps the content (static info). Default: "—".
+   */
+  empty?: ReactNode;
+  /** Small card: compact error and "—". */
+  compactState?: boolean;
+  /** Ignore the screen state (cards of actions or notices). Default true. */
+  followsState?: boolean;
 }
 
 const PADDING = { 16: 'p-4', 18: 'p-4.5', 20: 'p-5', 22: 'p-[22px]', 24: 'p-6' } as const;
@@ -43,64 +55,90 @@ export function SectionCard({
   gap = 14,
   children,
   className,
+  empty,
+  compactState = false,
+  followsState = true,
 }: SectionCardProps) {
   const fill = useFillsGridCell();
+  const state = useScreenState();
+  const loading = followsState && state.status === 'loading';
+  // Offline: every container says the data is from the last update.
+  const caption = followsState && state.offline ? state.offlineCaption : description;
   return (
-    <View
-      style={{ gap }}
-      className={cn(
-        'min-w-0 rounded-24 border border-border bg-surface',
-        fill && 'flex-grow',
-        PADDING[padding],
-        className,
-      )}
-    >
-      {title ? (
-        <View className="flex-row items-start justify-between gap-3">
-          <View className="min-w-0 flex-1 flex-row items-start gap-3">
-            {leading}
-            <View className="min-w-0 flex-1 gap-0.5">
-              {onTitlePress ? (
-                <Pressable
-                  accessibilityRole="link"
-                  onPress={onTitlePress}
-                  hitSlop={8}
-                  className="self-start"
-                >
+    <SkeletonScope active={loading}>
+      <View
+        style={[
+          { gap },
+          loading && {
+            backgroundColor: colors.skeleton.surface,
+            borderColor: colors.skeleton.border,
+          },
+        ]}
+        className={cn(
+          'min-w-0 rounded-24 border border-border bg-surface',
+          fill && 'flex-grow',
+          PADDING[padding],
+          className,
+        )}
+      >
+        {title ? (
+          <View className="flex-row items-start justify-between gap-3">
+            <View className="min-w-0 flex-1 flex-row items-start gap-3">
+              {leading}
+              <View className="min-w-0 flex-1 gap-0.5">
+                {onTitlePress ? (
+                  <Pressable
+                    accessibilityRole="link"
+                    onPress={onTitlePress}
+                    hitSlop={8}
+                    className="self-start"
+                  >
+                    <Text
+                      serif
+                      weight="bold"
+                      size={titleSize}
+                      leading={1.25}
+                      tracking={titleSize === 20 ? -0.01 : 0}
+                      underline
+                    >
+                      {title}
+                    </Text>
+                  </Pressable>
+                ) : (
                   <Text
                     serif
                     weight="bold"
                     size={titleSize}
                     leading={1.25}
                     tracking={titleSize === 20 ? -0.01 : 0}
-                    underline
+                    accessibilityRole="header"
                   >
                     {title}
                   </Text>
-                </Pressable>
-              ) : (
-                <Text
-                  serif
-                  weight="bold"
-                  size={titleSize}
-                  leading={1.25}
-                  tracking={titleSize === 20 ? -0.01 : 0}
-                  accessibilityRole="header"
-                >
-                  {title}
-                </Text>
-              )}
-              {description ? (
-                <Text variant="caption" tone={descriptionTone}>
-                  {description}
-                </Text>
-              ) : null}
+                )}
+                {caption ? (
+                  <Text
+                    variant="caption"
+                    tone={caption === description ? descriptionTone : 'brand'}
+                  >
+                    {caption}
+                  </Text>
+                ) : null}
+              </View>
             </View>
+            {action}
           </View>
-          {action}
-        </View>
-      ) : null}
-      <GridCellReset>{children}</GridCellReset>
-    </View>
+        ) : null}
+        <GridCellReset>
+          {followsState ? (
+            <StateSlot empty={empty} compact={compactState}>
+              {children}
+            </StateSlot>
+          ) : (
+            children
+          )}
+        </GridCellReset>
+      </View>
+    </SkeletonScope>
   );
 }

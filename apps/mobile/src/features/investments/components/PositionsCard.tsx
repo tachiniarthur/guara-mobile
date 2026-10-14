@@ -4,6 +4,8 @@ import { Pressable, View } from 'react-native';
 
 import { useRouter } from 'expo-router';
 
+import { StateMessage } from '@/components/feedback';
+import { MataButton } from '@/components/illustrations';
 import { ResponsiveGrid, SectionCard } from '@/components/layout';
 import { Icon, LinkButton, MoneyText, SegmentedControl, Text } from '@/components/ui';
 import { useBreakpoint } from '@/hooks/useBreakpoint';
@@ -57,6 +59,20 @@ export function PositionsCard() {
       titleSize={isTablet ? 20 : 18}
       padding={isTablet ? 20 : 16}
       gap={12}
+      empty={
+        <StateMessage
+          icon="trendingUp"
+          title="Nenhum investimento ainda"
+          description="Conecte o banco ou a corretora pela Malvo, ou cadastre à mão. A carteira é comparada com o seu perfil."
+          action={
+            <MataButton
+              label="Adicionar investimento"
+              size={44}
+              onPress={() => router.navigate('/new-manual-asset')}
+            />
+          }
+        />
+      }
       action={
         <LinkButton
           label={`Ver as ${data.positions.length}`}

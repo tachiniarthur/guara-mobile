@@ -1,8 +1,9 @@
 import { colors } from '@guara/ui-tokens';
+import { EMPTY } from '@guara/utils';
 import { useRouter } from 'expo-router';
 import { Pressable, View } from 'react-native';
 
-import { ScreenStates, lastUpdateLabel, useScreenStatus } from '@/components/feedback';
+import { ScreenStates, useScreenStatus } from '@/components/feedback';
 import { PageHeader, ResponsiveGrid, Screen, SectionCard, TopBar } from '@/components/layout';
 import {
   Button,
@@ -42,7 +43,7 @@ export function InvestmentsScreen() {
   // An empty portfolio shows where to start ("Investimentos · novo").
   const empty = usePositions().status === 'empty';
   // Static data today: the API adds loading and error.
-  const status = useScreenStatus(empty ? 'empty' : 'ready');
+  const status = useScreenStatus('ready');
   const { alerts } = usePriceAlerts();
 
   const alertsCard = (
@@ -121,59 +122,54 @@ export function InvestmentsScreen() {
             }
           />
         ) : null}
-        <ScreenStates
-          status={status}
-          errorTitle="Não deu para carregar seus investimentos"
-          onRetry={() => undefined}
-          empty={<NewUserInvestments />}
-          offline={{
-            since: lastUpdateLabel(PORTFOLIO.quotedAt),
-            paused: 'Os preços ficam parados até a conexão voltar.',
-          }}
-        >
-          {isTablet ? (
-            <>
-              <View className="flex-row gap-2.5">
-                <Button size="md" leftIcon="plus" className="px-4.5" onPress={addInvestment}>
-                  Adicionar investimento
-                </Button>
-                <Button
-                  variant="secondary"
-                  size="md"
-                  leftIcon="sprout"
-                  className="px-4.5"
-                  onPress={() => router.navigate('/investments/simulator')}
-                >
-                  Simular cenário
-                </Button>
-              </View>
-              <DuplicateNotice />
-              <ResponsiveGrid columns={{ tablet: 2 }}>
+        {empty ? (
+          <NewUserInvestments />
+        ) : (
+          <ScreenStates status={status} onRetry={() => undefined} since={PORTFOLIO.quotedAt}>
+            {isTablet ? (
+              <>
+                <View className="flex-row gap-2.5">
+                  <Button size="md" leftIcon="plus" className="px-4.5" onPress={addInvestment}>
+                    Adicionar investimento
+                  </Button>
+                  <Button
+                    variant="secondary"
+                    size="md"
+                    leftIcon="sprout"
+                    className="px-4.5"
+                    onPress={() => router.navigate('/investments/simulator')}
+                  >
+                    Simular cenário
+                  </Button>
+                </View>
+                <DuplicateNotice />
+                <ResponsiveGrid columns={{ tablet: 2 }}>
+                  <PortfolioCard />
+                  <AllocationCard />
+                </ResponsiveGrid>
+                <ExposureCard />
+                <ResponsiveGrid columns={{ tablet: 2 }}>
+                  <PropertiesCard />
+                  {alertsCard}
+                </ResponsiveGrid>
+                <PositionsCard />
+              </>
+            ) : (
+              <>
+                <Text variant="caption" tone="subtle">
+                  {status === 'error' || status === 'empty' ? EMPTY : PORTFOLIO.sourcesLabel}
+                </Text>
                 <PortfolioCard />
+                <DuplicateNotice />
                 <AllocationCard />
-              </ResponsiveGrid>
-              <ExposureCard />
-              <ResponsiveGrid columns={{ tablet: 2 }}>
+                <ExposureCard />
                 <PropertiesCard />
                 {alertsCard}
-              </ResponsiveGrid>
-              <PositionsCard />
-            </>
-          ) : (
-            <>
-              <Text variant="caption" tone="subtle">
-                {PORTFOLIO.sourcesLabel}
-              </Text>
-              <PortfolioCard />
-              <DuplicateNotice />
-              <AllocationCard />
-              <ExposureCard />
-              <PropertiesCard />
-              {alertsCard}
-              <PositionsCard />
-            </>
-          )}
-        </ScreenStates>
+                <PositionsCard />
+              </>
+            )}
+          </ScreenStates>
+        )}
       </Screen>
       {isTablet ? <ChatFab /> : null}
     </View>

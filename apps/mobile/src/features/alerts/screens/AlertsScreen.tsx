@@ -2,7 +2,8 @@ import { useRouter } from 'expo-router';
 import { useState } from 'react';
 import { ScrollView, View } from 'react-native';
 
-import { EmptyState, ScreenStates, lastUpdateLabel, useScreenStatus } from '@/components/feedback';
+import { FilterEmpty, ScreenStates, StateMessage, useScreenStatus } from '@/components/feedback';
+import { MataButton } from '@/components/illustrations';
 import { PageHeader, ResponsiveGrid, Screen, SectionCard, TopBar } from '@/components/layout';
 import { Button, Chip, Text } from '@/components/ui';
 import { routeTo } from '@/constants/routes';
@@ -86,6 +87,14 @@ export function AlertsScreen() {
       padding={isTablet ? 20 : 16}
       gap={4}
       className="flex-1"
+      empty={
+        <StateMessage
+          icon="alertTriangle"
+          title="Nenhum alerta ainda"
+          description="Crie um teto para uma categoria ou um alerta de preço para uma ação, FII, ETF ou cripto."
+          action={<MataButton label="Novo teto" size={44} onPress={newBudget} />}
+        />
+      }
       action={
         <Button
           variant="secondary"
@@ -109,6 +118,11 @@ export function AlertsScreen() {
             />
           ))}
         </View>
+      ) : filter === 'paused' ? (
+        <FilterEmpty
+          description="Nenhum alerta de preço pausado. Todos os seus estão ativos."
+          onClear={() => setFilter('all')}
+        />
       ) : (
         <Text size={14} tone="muted" leading={1.55}>
           Nenhum alerta de preço. Avisamos uma única vez quando o preço chegar ao valor escolhido.
@@ -184,35 +198,7 @@ export function AlertsScreen() {
             </Button>
           </View>
         )}
-        <ScreenStates
-          status={status}
-          errorTitle="Não deu para carregar seus alertas"
-          onRetry={() => undefined}
-          empty={
-            <SectionCard padding={16}>
-              <EmptyState
-                icon="bell"
-                title="Nenhum alerta ainda"
-                description="Crie um teto para uma categoria de gasto ou um alerta de preço para uma ação, FII, ETF ou cripto."
-                actions={
-                  <>
-                    <Button size="md" onPress={newBudget}>
-                      Novo teto
-                    </Button>
-                    <Button variant="secondary" size="md" onPress={newPriceAlert}>
-                      Novo alerta de preço
-                    </Button>
-                  </>
-                }
-              />
-            </SectionCard>
-          }
-          offline={{
-            since: lastUpdateLabel(ALERTS_CHECKED_AT),
-            paused:
-              'Os tetos e os preços continuam sendo conferidos no servidor. Os avisos chegam assim que a conexão voltar.',
-          }}
-        >
+        <ScreenStates status={status} onRetry={() => undefined} since={ALERTS_CHECKED_AT}>
           <ScrollView
             horizontal
             showsHorizontalScrollIndicator={false}
@@ -229,20 +215,7 @@ export function AlertsScreen() {
               />
             ))}
           </ScrollView>
-          {filter === 'paused' && shownAlerts.length === 0 ? (
-            <SectionCard padding={16}>
-              <EmptyState
-                icon="pause"
-                title="Nenhum alerta pausado"
-                description="Alertas de preço pausam depois de avisar. Todos os seus estão ativos."
-                action={{
-                  label: 'Limpar filtros',
-                  variant: 'secondary',
-                  onPress: () => setFilter('all'),
-                }}
-              />
-            </SectionCard>
-          ) : filter === 'budgets' ? (
+          {filter === 'budgets' ? (
             budgetsCard
           ) : filter === 'all' && isTablet ? (
             <ResponsiveGrid columns={{ tablet: 2 }}>

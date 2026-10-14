@@ -11,6 +11,8 @@ interface SimulationsState {
   save: (name: string, input: SavedSimulationInput) => string;
   remove: (id: string) => void;
   undoRemove: () => void;
+  /** The undo window closed ("Dá para desfazer por 10 segundos"). */
+  forgetRemoved: () => void;
   reset: () => void;
 }
 
@@ -44,5 +46,6 @@ export const useSimulationsStore = create<SimulationsState>()((set) => ({
       next.splice(removed.index, 0, removed.simulation);
       return { saved: next, removed: null };
     }),
+  forgetRemoved: () => set({ removed: null }),
   reset: () => set({ saved: SAVED_SIMULATIONS, removed: null }),
 }));

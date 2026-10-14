@@ -8,7 +8,7 @@ import { View } from 'react-native';
 import {
   EmptyState,
   ScreenStates,
-  lastUpdateLabel,
+  StateMessage,
   toast,
   useScreenStatus,
 } from '@/components/feedback';
@@ -32,7 +32,7 @@ import { cn } from '@/lib/cn';
 import { ChatFab } from '@/navigation';
 
 import { GoalBalanceChart, GoalBar, GoalHero, HeroCaption, HeroStrong } from '../components';
-import { GOAL_EXTRAS, GOALS_TODAY } from '../data';
+import { GOAL_EXTRAS, GOALS_SYNCED_AT, GOALS_TODAY } from '../data';
 import {
   firstWords,
   heroCaption,
@@ -112,9 +112,6 @@ function Line({
   );
 }
 
-/** Last sync of the goals (shown while offline). */
-const GOALS_SYNCED_AT = '2026-09-23T17:30:00.000Z';
-
 /** Page of a goal: progress, the Onça's suggestion, history, milestones, movements, settings. */
 export function GoalDetailScreen() {
   const router = useRouter();
@@ -128,7 +125,11 @@ export function GoalDetailScreen() {
   const [depositValue, setDepositValue] = useState<Cents | null>(null);
   const [deleteOpen, setDeleteOpen] = useState(false);
   // Static data today: the API adds loading and error. "Empty": a goal without deposits yet.
-  const status = useScreenStatus('ready');
+  const depositsCount =
+    (extraDeposits?.length ?? 0) + (goal ? (GOAL_EXTRAS[goal.id]?.movements.length ?? 0) : 0);
+  const status = useScreenStatus(
+    goal && goal.saved === 0 && depositsCount === 0 ? 'empty' : 'ready',
+  );
 
   if (!goal) {
     return (
@@ -148,7 +149,7 @@ export function GoalDetailScreen() {
   const caption = heroCaption(goal);
   const paused = goal.status === 'paused';
   const movements = [...(extraDeposits ?? []), ...(extras?.movements ?? [])];
-  const noDeposits = status === 'empty' || (goal.saved === 0 && movements.length === 0);
+  const noDeposits = status === 'empty';
   const milestones = extras?.milestones ?? [];
   const name = firstWords(goal).toLocaleLowerCase('pt-BR');
   const edit = () => router.navigate({ pathname: '/new-goal', params: { goalId: goal.id } });
@@ -270,7 +271,23 @@ export function GoalDetailScreen() {
   ) : null;
 
   const movementsCard = (
-    <SectionCard title="Depósitos e rendimentos" titleSize={17} padding={18}>
+    <SectionCard
+      title="Depósitos e rendimentos"
+      titleSize={17}
+      padding={18}
+      empty={
+        <StateMessage
+          icon="target"
+          title="Ainda sem depósitos"
+          description="A meta começa a contar no primeiro depósito. Até lá, o guardado e a previsão ficam com “—”."
+          action={
+            <Button variant="secondary" size="md" onPress={edit}>
+              Ajustar a meta
+            </Button>
+          }
+        />
+      }
+    >
       {movements.length === 0 ? (
         <Text size={14} tone="muted">
           Os depósitos aparecem aqui a partir do primeiro.
@@ -299,7 +316,7 @@ export function GoalDetailScreen() {
   );
 
   const settings = (
-    <SectionCard title="Ajustes" titleSize={17} padding={18}>
+    <SectionCard title="Ajustes" titleSize={17} padding={18} empty={null}>
       <View>
         <Row label="Onde está guardado" value={goal.storage?.label ?? '—'} />
         <Row
@@ -365,16 +382,6 @@ export function GoalDetailScreen() {
     </SectionCard>
   );
 
-  const emptyNotice = noDeposits ? (
-    <SectionCard padding={16}>
-      <EmptyState
-        icon="target"
-        title={`${goal.name} ainda sem depósitos`}
-        description="A meta começa a contar quando o primeiro valor for guardado na carteira de investimentos. Até lá, o guardado e a previsão ficam com “—”."
-      />
-    </SectionCard>
-  ) : null;
-
   const body = isTablet ? (
     <>
       <PageHeader
@@ -382,7 +389,6 @@ export function GoalDetailScreen() {
         subtitle={`${goal.watched ? 'Acompanhada pela Onça · ' : ''}criada em ${shortMonth(goal.createdOn)}`}
         breadcrumb={{ parents: [{ label: 'Suas metas', href: '/goals' }], current: goal.name }}
       />
-      {emptyNotice}
       {hero}
       <View className="flex-row gap-4">
         <View className="min-w-0 flex-1 gap-4">
@@ -398,7 +404,6 @@ export function GoalDetailScreen() {
     </>
   ) : (
     <>
-      {emptyNotice}
       {hero}
       {suggestion}
       {history}
@@ -428,15 +433,7 @@ export function GoalDetailScreen() {
         }
         contentClassName={isTablet ? 'pb-32' : undefined}
       >
-        <ScreenStates
-          status={status === 'empty' ? 'ready' : status}
-          errorTitle="Não deu para carregar a meta"
-          onRetry={() => undefined}
-          offline={{
-            since: lastUpdateLabel(GOALS_SYNCED_AT),
-            paused: 'Editar a meta volta quando a conexão voltar.',
-          }}
-        >
+        <ScreenStates status={status} onRetry={() => undefined} since={GOALS_SYNCED_AT}>
           {body}
         </ScreenStates>
       </Screen>

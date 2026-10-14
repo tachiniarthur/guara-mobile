@@ -3,6 +3,7 @@ import type { ReactNode } from 'react';
 import { View } from 'react-native';
 import Svg, { Line, Text as SvgText } from 'react-native-svg';
 
+import { SkeletonBlock } from '@/components/ui/SkeletonScope';
 import { Text } from '@/components/ui/Text';
 
 export const CHART_FONT = {
@@ -28,29 +29,31 @@ export function ChartFrame({
   children,
 }: ChartFrameProps) {
   return (
-    <View
-      accessible
-      accessibilityRole="image"
-      accessibilityLabel={accessibilityLabel}
-      style={{ width: '100%', aspectRatio: width / height }}
-    >
-      <Svg width="100%" height="100%" viewBox={`0 0 ${width} ${height}`}>
-        {children}
-      </Svg>
-      {tooltip ? (
-        <View
-          pointerEvents="none"
-          className="absolute left-0 right-0 top-0 items-center"
-          accessibilityLiveRegion="polite"
-        >
-          <View className="rounded-full border border-border-strong bg-surface-input px-3 py-1">
-            <Text size={12} weight="bold">
-              {tooltip}
-            </Text>
+    <SkeletonBlock>
+      <View
+        accessible
+        accessibilityRole="image"
+        accessibilityLabel={accessibilityLabel}
+        style={{ width: '100%', aspectRatio: width / height }}
+      >
+        <Svg width="100%" height="100%" viewBox={`0 0 ${width} ${height}`}>
+          {children}
+        </Svg>
+        {tooltip ? (
+          <View
+            pointerEvents="none"
+            className="absolute left-0 right-0 top-0 items-center"
+            accessibilityLiveRegion="polite"
+          >
+            <View className="rounded-full border border-border-strong bg-surface-input px-3 py-1">
+              <Text size={12} weight="bold">
+                {tooltip}
+              </Text>
+            </View>
           </View>
-        </View>
-      ) : null}
-    </View>
+        ) : null}
+      </View>
+    </SkeletonBlock>
   );
 }
 

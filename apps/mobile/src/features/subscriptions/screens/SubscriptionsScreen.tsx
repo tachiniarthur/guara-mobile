@@ -6,13 +6,14 @@ import { View } from 'react-native';
 
 import { PageHeader, ResponsiveGrid, Screen, SectionCard, TopBar } from '@/components/layout';
 import {
-  EmptyState,
+  FilterEmpty,
   ScreenStates,
-  lastUpdateLabel,
+  StateMessage,
+  StateSlot,
   toast,
   useScreenStatus,
 } from '@/components/feedback';
-import { Button, ConfirmDialog, MoneyText, SearchInput, Span, Text } from '@/components/ui';
+import { Button, Card, ConfirmDialog, MoneyText, SearchInput, Span, Text } from '@/components/ui';
 import { AssistantAvatar } from '@/features/chat';
 import { useBreakpoint } from '@/hooks/useBreakpoint';
 import { ChatFab, conversationHref } from '@/navigation';
@@ -58,7 +59,7 @@ export function SubscriptionsScreen() {
     });
 
   const totalCard = (
-    <SectionCard gap={16} className="flex-1">
+    <SectionCard gap={16} className="flex-1" compactState>
       <View className="gap-1">
         <Text size={14} tone="muted">
           Total em assinaturas
@@ -91,26 +92,30 @@ export function SubscriptionsScreen() {
   );
 
   const insight = tip ? (
-    <View className="flex-1 flex-row gap-3 rounded-20 bg-surface-muted p-4">
-      <AssistantAvatar assistant="tamandua" size={32} />
-      <View className="min-w-0 flex-1 gap-2">
-        <Text size={14} leading={1.55}>
-          {tip.savingTip} <MoneyText value={yearly(tip.amount)} size={14} weight="bold" />
-          <Span weight="bold"> por ano</Span>.
-        </Text>
-        <View className="flex-row">
-          <Button
-            variant="secondary"
-            size="md"
-            leftIcon="message"
-            className="h-10 px-4.5"
-            onPress={() => router.navigate(conversationHref())}
-          >
-            Perguntar ao Tamanduá
-          </Button>
+    <Card variant="muted" padding="sm" className="flex-1 p-4">
+      <StateSlot compact>
+        <View className="flex-row gap-3">
+          <AssistantAvatar assistant="tamandua" size={32} />
+          <View className="min-w-0 flex-1 gap-2">
+            <Text size={14} leading={1.55}>
+              {tip.savingTip} <MoneyText value={yearly(tip.amount)} size={14} weight="bold" />
+              <Span weight="bold"> por ano</Span>.
+            </Text>
+            <View className="flex-row">
+              <Button
+                variant="secondary"
+                size="md"
+                leftIcon="message"
+                className="h-10 px-4.5"
+                onPress={() => router.navigate(conversationHref())}
+              >
+                Perguntar ao Tamanduá
+              </Button>
+            </View>
+          </View>
         </View>
-      </View>
-    </View>
+      </StateSlot>
+    </Card>
   ) : null;
 
   return (
@@ -120,24 +125,7 @@ export function SubscriptionsScreen() {
         contentClassName={isTablet ? 'pb-32' : undefined}
       >
         {isTablet ? <PageHeader title="Assinaturas" subtitle="Detectadas automaticamente" /> : null}
-        <ScreenStates
-          status={status}
-          errorTitle="Não deu para carregar suas assinaturas"
-          onRetry={() => undefined}
-          empty={
-            <SectionCard padding={16}>
-              <EmptyState
-                icon="repeat"
-                title="Nenhuma assinatura encontrada"
-                description="Procuramos cobranças da mesma empresa, com o mesmo valor, todo mês. Com 2 ou 3 meses de lançamentos já dá para reconhecer."
-              />
-            </SectionCard>
-          }
-          offline={{
-            since: lastUpdateLabel(SUBSCRIPTIONS_SYNCED_AT),
-            paused: 'Marcar “não é assinatura” volta quando a conexão voltar.',
-          }}
-        >
+        <ScreenStates status={status} onRetry={() => undefined} since={SUBSCRIPTIONS_SYNCED_AT}>
           {isTablet ? (
             <>
               <ResponsiveGrid columns={{ tablet: 2 }}>
@@ -155,6 +143,22 @@ export function SubscriptionsScreen() {
             title="Ativas"
             description="Detectadas por valor e empresa que se repetem"
             gap={6}
+            empty={
+              <StateMessage
+                icon="repeat"
+                title="Nenhuma assinatura encontrada"
+                description="Procuramos cobranças da mesma empresa, com o mesmo valor, todo mês. Com 2 ou 3 meses de lançamentos já dá para reconhecer."
+                action={
+                  <Button
+                    variant="secondary"
+                    size="md"
+                    onPress={() => router.navigate('/spending/transactions')}
+                  >
+                    Ver lançamentos
+                  </Button>
+                }
+              />
+            }
           >
             <SearchInput
               value={query}
@@ -162,16 +166,10 @@ export function SubscriptionsScreen() {
               placeholder="Buscar assinatura"
               accessibilityLabel="Buscar assinatura"
             />
-            {found.length === 0 ? (
-              <EmptyState
-                icon="search"
-                title={`Nenhuma assinatura com “${query.trim()}”`}
-                description={`Suas ${items.length} assinaturas são ${joinList(items.map((item) => item.name))}.`}
-                action={{
-                  label: 'Limpar filtros',
-                  variant: 'secondary',
-                  onPress: () => setQuery(''),
-                }}
+            {found.length === 0 && items.length > 0 ? (
+              <FilterEmpty
+                description={`Nenhuma assinatura com “${query.trim()}”. As suas são ${joinList(items.map((item) => item.name))}.`}
+                onClear={() => setQuery('')}
               />
             ) : null}
             <View>

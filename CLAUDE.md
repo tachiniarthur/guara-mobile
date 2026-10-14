@@ -189,6 +189,13 @@ subtitle/body/lead/label/caption/micro`, ou `size`/`weight`/`serif` explícitos)
   controle; `haptics` (`src/lib/haptics.ts`) em ações principais e seleção.
 - **Feedback:** `toast.success/error/info()` funciona de qualquer lugar; `Sheet` e `ConfirmDialog`
   são controlados por `open`.
+- **Estados das telas** (`<Tela>-Estado-*` no design): envolva o conteúdo em `ScreenStates`
+  (`status` de `useScreenStatus`, `onRetry`, `since`). Cada container segue o estado sozinho:
+  `SectionCard` e `Card` viram blocos ao carregar (`SkeletonScope`), e o corpo passa por
+  `StateSlot` (erro com "Tentar de novo", "—" no vazio; `empty` dá a mensagem do container
+  principal, `empty={null}` mantém informação fixa, `compactState`/`compact` em cards pequenos).
+  O aviso do topo (erro/sem internet) flutua pelo `ScreenOverlayHost` do `Screen`. Listas: uma
+  mensagem só no lugar da lista; filtro sem resultado é `FilterEmpty`.
 
 ### Armadilhas conhecidas
 

@@ -7,6 +7,7 @@ import { cn } from '@/lib/cn';
 import { haptics } from '@/lib/haptics';
 
 import { Icon, type IconName } from './Icon';
+import { useSkeleton } from './SkeletonScope';
 import { Spinner } from './Spinner';
 import { Text } from './Text';
 import { hitSlopFor } from './touch';
@@ -87,8 +88,10 @@ export function Button({
   className,
   onPress,
   accessibilityLabel,
+  style,
   ...props
 }: ButtonProps) {
+  const skeleton = useSkeleton();
   const isDisabled = disabled || loading;
   const contentColor = isDisabled ? colors.disabled.foreground : CONTENT_COLOR[variant];
 
@@ -112,6 +115,11 @@ export function Button({
         className,
       )}
       {...props}
+      style={
+        skeleton
+          ? { backgroundColor: colors.skeleton.surface, borderColor: colors.skeleton.border }
+          : style
+      }
     >
       {loading ? (
         <Spinner color={contentColor} />

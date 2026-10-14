@@ -65,11 +65,9 @@ describe('Todos os lançamentos', () => {
 
     fireEvent.changeText(screen.getByLabelText('Buscar lançamento'), 'academia');
     fireEvent.press(screen.getByRole('button', { name: 'Nubank' }));
-    expect(screen.getByRole('header', { name: 'Nada encontrado' })).toBeOnTheScreen();
+    expect(screen.getByRole('header', { name: 'Nada com esse filtro' })).toBeOnTheScreen();
     expect(
-      screen.getByText(
-        'Nenhum lançamento com “academia” no Nubank em setembro. Tente outro período ou todos os bancos.',
-      ),
+      screen.getByText('Nenhum lançamento com “academia” no Nubank em setembro.'),
     ).toBeOnTheScreen();
     fireEvent.press(screen.getByRole('button', { name: 'Limpar filtros' }));
     expect(screen.getByText('Loja de eletrônicos online')).toBeOnTheScreen();

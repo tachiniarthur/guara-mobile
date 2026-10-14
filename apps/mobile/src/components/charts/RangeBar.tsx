@@ -2,6 +2,7 @@ import { colors } from '@guara/ui-tokens';
 import { View } from 'react-native';
 import Svg, { Defs, LinearGradient, Rect, Stop } from 'react-native-svg';
 
+import { SkeletonBlock } from '@/components/ui/SkeletonScope';
 import { Text } from '@/components/ui/Text';
 
 export interface RangeBarProps {
@@ -13,7 +14,7 @@ export interface RangeBarProps {
 }
 
 /** Low–high band (Urucum → Tucano → Folha) with a marker on the current price. */
-export function RangeBar({ position, minLabel, maxLabel, accessibilityLabel }: RangeBarProps) {
+function RangeBarDrawing({ position, minLabel, maxLabel, accessibilityLabel }: RangeBarProps) {
   const left = Math.min(100, Math.max(0, position));
 
   return (
@@ -48,5 +49,14 @@ export function RangeBar({ position, minLabel, maxLabel, accessibilityLabel }: R
         </Text>
       </View>
     </View>
+  );
+}
+
+/** RangeBar as a flat area while loading (`SkeletonBlock`). */
+export function RangeBar(props: RangeBarProps) {
+  return (
+    <SkeletonBlock>
+      <RangeBarDrawing {...props} />
+    </SkeletonBlock>
   );
 }

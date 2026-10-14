@@ -2,6 +2,7 @@ import { formatDate } from '@guara/utils';
 import { useRouter } from 'expo-router';
 import { View } from 'react-native';
 
+import { StateSlot } from '@/components/feedback';
 import { Button, Text } from '@/components/ui';
 import { useBreakpoint } from '@/hooks/useBreakpoint';
 
@@ -67,29 +68,31 @@ export function DuplicateNotice() {
       accessibilityLabel="Possível duplicidade"
       className="gap-2.5 rounded-20 border border-brand bg-brand-muted px-4 py-4"
     >
-      <Text size={15} weight="bold">
-        {isTablet ? 'Este investimento pode estar duplicado' : 'Possível duplicidade'}
-      </Text>
-      <Text size={14} tone="muted">
-        {isTablet
-          ? `“${position.name}” chegou pelo ${duplicate.bank} e também foi cadastrado por você em ${formatDate(duplicate.manual.registeredOn, 'MMMM')}. Como prefere tratar?`
-          : `“${position.name}” veio do ${duplicate.bank} e também está no seu cadastro manual.`}
-      </Text>
-      {isTablet ? (
-        <View className="flex-row flex-wrap gap-2">
-          {merge}
-          {keep}
-          {remove}
-        </View>
-      ) : (
-        <View className="gap-2">
-          {merge}
-          <View className="flex-row gap-2">
+      <StateSlot skeleton={false}>
+        <Text size={15} weight="bold">
+          {isTablet ? 'Este investimento pode estar duplicado' : 'Possível duplicidade'}
+        </Text>
+        <Text size={14} tone="muted">
+          {isTablet
+            ? `“${position.name}” chegou pelo ${duplicate.bank} e também foi cadastrado por você em ${formatDate(duplicate.manual.registeredOn, 'MMMM')}. Como prefere tratar?`
+            : `“${position.name}” veio do ${duplicate.bank} e também está no seu cadastro manual.`}
+        </Text>
+        {isTablet ? (
+          <View className="flex-row flex-wrap gap-2">
+            {merge}
             {keep}
             {remove}
           </View>
-        </View>
-      )}
+        ) : (
+          <View className="gap-2">
+            {merge}
+            <View className="flex-row gap-2">
+              {keep}
+              {remove}
+            </View>
+          </View>
+        )}
+      </StateSlot>
     </View>
   );
 }

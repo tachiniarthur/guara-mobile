@@ -34,6 +34,7 @@ export * from './SelectField';
 export * from './SelectPill';
 export * from './Sheet';
 export * from './Skeleton';
+export * from './SkeletonScope';
 export * from './Slider';
 export * from './Spinner';
 export * from './Switch';

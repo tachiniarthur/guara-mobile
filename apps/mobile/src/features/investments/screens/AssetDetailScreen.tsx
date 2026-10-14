@@ -2,7 +2,7 @@ import { formatCents } from '@guara/utils';
 import { useLocalSearchParams, useRouter } from 'expo-router';
 import { View } from 'react-native';
 
-import { EmptyState, ScreenStates, lastUpdateLabel, useScreenStatus } from '@/components/feedback';
+import { EmptyState, ScreenStates, useScreenStatus } from '@/components/feedback';
 import { Breadcrumb, ResponsiveGrid, Screen, TopBar } from '@/components/layout';
 import { Text } from '@/components/ui';
 import { AskAssistantCard } from '@/features/chat';
@@ -75,7 +75,7 @@ function StockDetail({ asset, wide, held }: { asset: StockAsset; wide: boolean; 
     />
   );
   const company = (
-    <RowsCard title="Sobre a empresa" rows={asset.company.rows} wide={wide}>
+    <RowsCard title="Sobre a empresa" rows={asset.company.rows} wide={wide} empty={null}>
       <Text size={14} leading={1.6} tone="muted">
         {asset.company.about}
       </Text>
@@ -120,6 +120,7 @@ function StockDetail({ asset, wide, held }: { asset: StockAsset; wide: boolean; 
       <MetricsCard metrics={asset.metrics} wide={wide} />
       <EventsCard
         kind="list"
+        ticker={asset.header.ticker}
         wide={wide}
         {...asset.events}
         onSeeAll={() => openEvents(asset.header.ticker)}
@@ -163,7 +164,12 @@ function FundDetail({ asset, wide, held }: { asset: FundAsset; wide: boolean; he
       )}
       <FeesCard asset={asset} />
       <MetricsCard metrics={asset.metrics} wide={wide} />
-      <EventsCard wide={wide} {...asset.events} onSeeAll={() => openEvents(asset.header.ticker)} />
+      <EventsCard
+        ticker={asset.header.ticker}
+        wide={wide}
+        {...asset.events}
+        onSeeAll={() => openEvents(asset.header.ticker)}
+      />
       <AskAssistantCard
         assistant="pacu"
         subject="sobre este ativo"
@@ -181,9 +187,9 @@ export function AssetDetailScreen() {
   const { isTablet } = useBreakpoint();
   const asset = ticker ? ASSETS[ticker] : undefined;
   const { positions } = usePositions();
-  // Static data today: the API adds loading and error. "Empty": an asset not in the portfolio.
+  // Static data today: the API adds loading and error. "Empty": Brapi has no data of the asset.
   const status = useScreenStatus('ready');
-  const held = status !== 'empty' && positions.some((item) => item.ticker === ticker);
+  const held = positions.some((item) => item.ticker === ticker);
 
   return (
     <View className="flex-1">
@@ -210,15 +216,7 @@ export function AssetDetailScreen() {
             description="Ele pode ter sido removido da sua carteira."
           />
         ) : (
-          <ScreenStates
-            status={status === 'empty' ? 'ready' : status}
-            errorTitle={`Não deu para carregar os dados do ${asset.header.ticker}`}
-            onRetry={() => undefined}
-            offline={{
-              since: lastUpdateLabel(PORTFOLIO.quotedAt),
-              paused: 'O gráfico e os indicadores voltam a atualizar quando a conexão voltar.',
-            }}
-          >
+          <ScreenStates status={status} onRetry={() => undefined} since={PORTFOLIO.quotedAt}>
             {asset.kind === 'stock' ? (
               <StockDetail asset={asset} wide={isTablet} held={held} />
             ) : (

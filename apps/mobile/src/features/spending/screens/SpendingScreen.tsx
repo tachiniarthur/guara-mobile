@@ -5,7 +5,8 @@ import { useRef, useState, type ReactNode } from 'react';
 import { Pressable, ScrollView, View } from 'react-native';
 
 import { BarChart, LegendSwatch, PaceChart } from '@/components/charts';
-import { ScreenStates, lastUpdateLabel, useScreenStatus } from '@/components/feedback';
+import { ScreenStates, StateMessage, useScreenStatus } from '@/components/feedback';
+import { MataButton } from '@/components/illustrations';
 import { PageHeader, ResponsiveGrid, Screen, SectionCard, TopBar } from '@/components/layout';
 import {
   Button,
@@ -97,7 +98,7 @@ export function SpendingScreen() {
 
   const ledger = useLedger();
   // Static data today: the API adds loading and error.
-  const status = useScreenStatus(newUser ? 'empty' : 'ready');
+  const status = useScreenStatus('ready');
   const subscriptions = useSubscriptions();
   const totalOut = ledger.summaryFor('all')?.totalOut ?? SPENDING.totalOut;
   const recent = [
@@ -255,6 +256,20 @@ export function SpendingScreen() {
         }
         padding={isTablet ? 20 : 16}
         gap={isTablet ? 16 : 8}
+        empty={
+          <StateMessage
+            icon="wallet"
+            title="Ainda sem gastos"
+            description="Conecte um banco para ver seus gastos por categoria, por dia da semana e mês a mês."
+            action={
+              <MataButton
+                label="Conectar banco"
+                size={44}
+                onPress={() => router.navigate('/connect-bank')}
+              />
+            }
+          />
+        }
       >
         <CategoryBreakdown
           items={ledger.categoryTotals}
@@ -410,68 +425,63 @@ export function SpendingScreen() {
             actions={newUser ? undefined : monthPicker}
           />
         ) : null}
-        <ScreenStates
-          status={status}
-          errorTitle="Não deu para carregar seus gastos"
-          onRetry={ledger.refetch}
-          empty={<NewUserSpending />}
-          offline={{
-            since: lastUpdateLabel(SPENDING.syncedAt),
-            paused: 'Corrigir categorias volta quando a conexão voltar.',
-          }}
-        >
-          {isTablet ? (
-            <>
-              <View className="flex-row flex-wrap items-center justify-between gap-3">
-                <BankFilter value={bank} onChange={setBank} wrap />
-                <View className="w-[260px]">{viewToggle}</View>
-              </View>
-              {paceCard}
-              <ResponsiveGrid columns={{ tablet: 2 }}>
+        {newUser ? (
+          <NewUserSpending />
+        ) : (
+          <ScreenStates status={status} onRetry={ledger.refetch} since={SPENDING.syncedAt}>
+            {isTablet ? (
+              <>
+                <View className="flex-row flex-wrap items-center justify-between gap-3">
+                  <BankFilter value={bank} onChange={setBank} wrap />
+                  <View className="w-[260px]">{viewToggle}</View>
+                </View>
+                {paceCard}
+                <ResponsiveGrid columns={{ tablet: 2 }}>
+                  {monthsCard}
+                  {weekdayCard}
+                </ResponsiveGrid>
+                {categoriesCard}
+                {transactionsCard}
+                <ResponsiveGrid columns={{ tablet: 2 }}>
+                  {budgetsCard}
+                  {subscriptionsCard}
+                </ResponsiveGrid>
+              </>
+            ) : (
+              <>
+                <BankFilter value={bank} onChange={setBank} />
+                {viewToggle}
+                <ScrollView
+                  horizontal
+                  showsHorizontalScrollIndicator={false}
+                  accessibilityLabel="Ir para"
+                  className="-mr-4"
+                  contentContainerClassName="gap-1.5 pr-4"
+                >
+                  {JUMPS.map((item) => (
+                    <Pressable
+                      key={item.key}
+                      accessibilityRole="link"
+                      onPress={() => jump(item.key)}
+                      className="h-[34px] justify-center rounded-full border border-border-strong px-3 active:bg-surface-pressed"
+                    >
+                      <Text size={13} weight="bold" tone="muted">
+                        {item.label}
+                      </Text>
+                    </Pressable>
+                  ))}
+                </ScrollView>
+                {paceCard}
                 {monthsCard}
                 {weekdayCard}
-              </ResponsiveGrid>
-              {categoriesCard}
-              {transactionsCard}
-              <ResponsiveGrid columns={{ tablet: 2 }}>
+                {categoriesCard}
                 {budgetsCard}
                 {subscriptionsCard}
-              </ResponsiveGrid>
-            </>
-          ) : (
-            <>
-              <BankFilter value={bank} onChange={setBank} />
-              {viewToggle}
-              <ScrollView
-                horizontal
-                showsHorizontalScrollIndicator={false}
-                accessibilityLabel="Ir para"
-                className="-mr-4"
-                contentContainerClassName="gap-1.5 pr-4"
-              >
-                {JUMPS.map((item) => (
-                  <Pressable
-                    key={item.key}
-                    accessibilityRole="link"
-                    onPress={() => jump(item.key)}
-                    className="h-[34px] justify-center rounded-full border border-border-strong px-3 active:bg-surface-pressed"
-                  >
-                    <Text size={13} weight="bold" tone="muted">
-                      {item.label}
-                    </Text>
-                  </Pressable>
-                ))}
-              </ScrollView>
-              {paceCard}
-              {monthsCard}
-              {weekdayCard}
-              {categoriesCard}
-              {budgetsCard}
-              {subscriptionsCard}
-              {transactionsCard}
-            </>
-          )}
-        </ScreenStates>
+                {transactionsCard}
+              </>
+            )}
+          </ScreenStates>
+        )}
       </Screen>
       {isTablet ? <ChatFab /> : null}
       <OptionSheet

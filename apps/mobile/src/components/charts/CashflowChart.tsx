@@ -4,6 +4,7 @@ import { formatCents } from '@guara/utils';
 import { View } from 'react-native';
 import Svg, { Line, Path, Polygon, Rect, Text as SvgText } from 'react-native-svg';
 
+import { SkeletonBlock } from '@/components/ui/SkeletonScope';
 import { HIDDEN_MONEY } from '@/components/ui/MoneyText';
 
 export interface CashflowChartProps {
@@ -42,7 +43,7 @@ const reais = (value: Cents) => formatCents(value, { wholeUnits: true });
 const thousands = (value: number) => `${Math.floor(value / 100_000)} mil`;
 
 /** Step chart of cumulative money in and out this month, with the end-of-month forecast. */
-export function CashflowChart({
+function CashflowChartDrawing({
   inflow,
   outflow,
   outflowForecast,
@@ -224,5 +225,14 @@ export function CashflowChart({
         })}
       </Svg>
     </View>
+  );
+}
+
+/** CashflowChart as a flat area while loading (`SkeletonBlock`). */
+export function CashflowChart(props: CashflowChartProps) {
+  return (
+    <SkeletonBlock>
+      <CashflowChartDrawing {...props} />
+    </SkeletonBlock>
   );
 }

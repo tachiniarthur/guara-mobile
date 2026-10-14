@@ -3,16 +3,18 @@ import { useState } from 'react';
 import { ScrollView, View } from 'react-native';
 
 import {
-  EmptyState,
+  FilterEmpty,
   NotificationsOffNotice,
   ScreenStates,
-  lastUpdateLabel,
+  StateMessage,
   toast,
   useScreenStatus,
 } from '@/components/feedback';
 import { PageHeader, Screen, SectionCard, TopBar } from '@/components/layout';
-import { Button, Chip, DataRow, IconButton, LinkButton, Text } from '@/components/ui';
+import { Button, Card, Chip, DataRow, IconButton, LinkButton, Text } from '@/components/ui';
 import { NOTICE_KINDS } from '@/features/account';
+// Straight to the hook: the price-alerts index pulls in screens that open the chat.
+import { usePriceAlerts } from '@/features/price-alerts/hooks/usePriceAlerts';
 import { useBreakpoint } from '@/hooks/useBreakpoint';
 import { ChatFab } from '@/navigation';
 import { useUiPreferences } from '@/stores';
@@ -23,18 +25,22 @@ import { useNotifications } from '../hooks';
 import { channelsLabel } from '../lib/labels';
 import { useNotificationsStore } from '../store';
 
-const EMPTY_TITLE: Record<NotificationArea, string> = {
-  spending: 'Nenhuma notificação de gastos',
-  investments: 'Nenhuma notificação de investimentos',
-  account: 'Nenhuma notificação da conta',
-};
+const EMPTY_TEXT =
+  'Você não tem notificações. Avisos de tetos, preços e compras fora do padrão aparecem aqui.';
 
-const EMPTY_TEXT: Record<NotificationArea | 'all', string> = {
-  all: 'Você não tem notificações. Avisos de tetos, preços e compras fora do padrão aparecem aqui.',
-  spending: 'Avisos de tetos, assinaturas e compras fora do padrão aparecem aqui.',
-  investments: 'Os alertas de preço aparecem aqui quando um ativo chegar no valor escolhido.',
-  account: 'Avisos sobre bancos conectados e o seu plano aparecem aqui.',
-};
+/** "Nada com esse filtro" of each area (`activeAlerts`: price alerts still waiting). */
+function filterEmptyText(area: NotificationArea, activeAlerts: number): string {
+  const label = NOTIFICATION_FILTERS.find((option) => option.value === area)?.label ?? '';
+  const hint = {
+    spending: 'Avisos de tetos, assinaturas e compras fora do padrão aparecem aqui.',
+    investments:
+      activeAlerts > 0
+        ? `${activeAlerts === 1 ? 'Seu alerta' : `Seus ${activeAlerts} alertas`} de preço ainda não ${activeAlerts === 1 ? 'disparou' : 'dispararam'}.`
+        : 'Os alertas de preço aparecem aqui quando um ativo chegar no valor escolhido.',
+    account: 'Avisos sobre bancos conectados e o seu plano aparecem aqui.',
+  }[area];
+  return `Nenhuma notificação de ${label}. ${hint}`;
+}
 
 /** Last time the list came from the API (shown while offline). */
 const NOTIFICATIONS_CHECKED_AT = '2026-09-23T17:30:00.000Z';
@@ -64,6 +70,7 @@ export function NotificationsScreen() {
   const markAllRead = useNotificationsStore((state) => state.markAllRead);
   const notices = useUiPreferences((state) => state.notices);
   const [filter, setFilter] = useState<NotificationArea | 'all'>('all');
+  const activeAlerts = usePriceAlerts().alerts.filter((alert) => alert.status === 'active').length;
 
   const visible = items.filter((item) => filter === 'all' || item.area === filter);
   const fresh = visible.filter((item) => !item.read);
@@ -84,6 +91,22 @@ export function NotificationsScreen() {
       textSize={14}
     />
   ));
+
+  // "Tudo em dia": one message in place of the list (also the screen's empty state).
+  const allDone = (
+    <Card padding="sm" className="p-4">
+      <StateMessage
+        icon="check"
+        title="Tudo em dia"
+        description={EMPTY_TEXT}
+        action={
+          <Button variant="secondary" size="md" onPress={() => router.navigate('/account')}>
+            Escolher como receber
+          </Button>
+        }
+      />
+    </Card>
+  );
 
   const list = (
     <>
@@ -108,32 +131,24 @@ export function NotificationsScreen() {
         </>
       ) : null}
       {visible.length ? null : filter === 'all' ? (
-        <EmptyState icon="check" title="Tudo em dia" description={EMPTY_TEXT.all} />
+        allDone
       ) : (
-        <EmptyState
-          icon="bell"
-          title={EMPTY_TITLE[filter]}
-          description={EMPTY_TEXT[filter]}
-          action={{
-            label: 'Limpar filtros',
-            variant: 'secondary',
-            onPress: () => setFilter('all'),
-          }}
-        />
+        <Card padding="sm" className="p-4">
+          <FilterEmpty
+            description={filterEmptyText(filter, activeAlerts)}
+            onClear={() => setFilter('all')}
+          />
+        </Card>
       )}
     </>
   );
 
   const states = {
-    status: status === 'empty' ? ('ready' as const) : status,
-    errorTitle: 'Não deu para carregar suas notificações',
+    status,
     onRetry: () => undefined,
-    offline: {
-      since: lastUpdateLabel(NOTIFICATIONS_CHECKED_AT),
-      paused:
-        'Novos avisos aparecem quando a conexão voltar. Os que chegarem por e-mail não se perdem.',
-    },
+    since: NOTIFICATIONS_CHECKED_AT,
   };
+  const content = status === 'empty' ? allDone : list;
 
   const delivery = (
     <SectionCard
@@ -141,6 +156,7 @@ export function NotificationsScreen() {
       description="Cada aviso de teto chega uma vez por mês"
       titleSize={18}
       padding={22}
+      empty={null}
     >
       <View>
         {NOTICE_KINDS.map((kind, index) => (
@@ -178,9 +194,9 @@ export function NotificationsScreen() {
           <NotificationsOffNotice />
           <ScreenStates {...states}>
             <View className="flex-row flex-wrap gap-2">{chips}</View>
-            {list}
+            {content}
+            {delivery}
           </ScreenStates>
-          {delivery}
         </Screen>
         <ChatFab />
       </View>
@@ -217,9 +233,9 @@ export function NotificationsScreen() {
         >
           {chips}
         </ScrollView>
-        {list}
+        {content}
+        {delivery}
       </ScreenStates>
-      {delivery}
     </Screen>
   );
 }

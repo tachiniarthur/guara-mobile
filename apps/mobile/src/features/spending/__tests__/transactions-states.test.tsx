@@ -35,15 +35,15 @@ describe('Lançamentos: estados', () => {
     expect(mockNavigate).toHaveBeenCalledWith('/connect-bank');
   });
 
-  it('on error, says which bank is late and retries', () => {
+  it('on error, shows it under each day and retries', () => {
     mockStatus = 'error';
     mockStale = 'O Itaú não atualizou desde 10:05. Os lançamentos do Nubank estão em dia.';
     render(<TransactionsScreen />);
-    expect(screen.getByText(mockStale)).toBeOnTheScreen();
-    expect(
-      screen.getByRole('header', { name: 'Não deu para carregar os lançamentos' }),
-    ).toBeOnTheScreen();
-    fireEvent.press(screen.getByRole('button', { name: 'Tentar de novo' }));
+    expect(screen.getByText('Não deu para atualizar agora')).toBeOnTheScreen();
+    expect(screen.getAllByText('Não deu para carregar').length).toBeGreaterThan(1);
+    // The rows are not shown, only the day headers.
+    expect(screen.queryByText('Loja de eletrônicos online')).toBeNull();
+    fireEvent.press(screen.getAllByRole('button', { name: 'Tentar de novo' })[0]!);
     expect(mockRefetch).toHaveBeenCalled();
   });
 });

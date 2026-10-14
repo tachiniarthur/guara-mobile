@@ -1,7 +1,8 @@
 import { useRouter } from 'expo-router';
 import { View } from 'react-native';
 
-import { Button } from '@/components/ui';
+import { useScreenState } from '@/components/feedback';
+import { Button, EmptyValue } from '@/components/ui';
 import { conversationHref } from '@/navigation';
 
 import type { Asset } from '../../assets';
@@ -18,9 +19,13 @@ export interface AssetActionsProps {
 /** Create a price alert, edit the position and ask Pacu about the asset. */
 export function AssetActions({ asset, layout }: AssetActionsProps) {
   const router = useRouter();
+  const { status } = useScreenState();
   const { ticker, canAlert } = asset.header;
   const withIcons = layout !== 'grid';
   const fullWidth = layout !== 'row';
+
+  // Without the asset data (error, empty) there is nothing to act on.
+  if (status === 'error' || status === 'empty') return <EmptyValue />;
 
   const alert = canAlert ? (
     <Button

@@ -1,9 +1,11 @@
+import { colors } from '@guara/ui-tokens';
 import { Image, type ImageSource } from 'expo-image';
 import { useState } from 'react';
 import { View } from 'react-native';
 
 import { cn } from '@/lib/cn';
 
+import { useSkeleton } from './SkeletonScope';
 import { Text } from './Text';
 
 export interface AvatarProps {
@@ -45,7 +47,8 @@ export function Avatar({
   className,
 }: AvatarProps) {
   const [failed, setFailed] = useState(false);
-  const showImage = source != null && !failed;
+  const skeleton = useSkeleton();
+  const showImage = source != null && !failed && !skeleton;
 
   return (
     <View
@@ -57,6 +60,7 @@ export function Avatar({
         width: size,
         height: size,
         ...(background ? { backgroundColor: background } : null),
+        ...(skeleton ? { backgroundColor: colors.skeleton.surface } : null),
       }}
       className={cn(
         'items-center justify-center overflow-hidden rounded-full',

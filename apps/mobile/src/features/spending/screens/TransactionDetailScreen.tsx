@@ -8,7 +8,8 @@ import { Pressable, Share, View } from 'react-native';
 import {
   EmptyState,
   ScreenStates,
-  lastUpdateLabel,
+  StateMessage,
+  StateSlot,
   toast,
   useScreenStatus,
 } from '@/components/feedback';
@@ -16,6 +17,7 @@ import { FillColumn, PageHeader, Screen, SectionCard, TopBar } from '@/component
 import {
   Badge,
   Button,
+  Card,
   Checkbox,
   Chip,
   ConfirmDialog,
@@ -172,40 +174,42 @@ export function TransactionDetailScreen() {
   };
 
   const hero = (
-    <View className="items-center gap-2 pb-1 pt-1.5">
-      <View
-        className={cn(
-          'h-13 w-13 items-center justify-center rounded-12',
-          pending ? 'bg-negative-muted' : 'bg-surface-muted',
+    <StateSlot compact>
+      <View className="items-center gap-2 pb-1 pt-1.5">
+        <View
+          className={cn(
+            'h-13 w-13 items-center justify-center rounded-12',
+            pending ? 'bg-negative-muted' : 'bg-surface-muted',
+          )}
+        >
+          <Icon
+            name="tag"
+            size={24}
+            color={pending ? colors.negative.DEFAULT : colors.foreground.muted}
+          />
+        </View>
+        {isTablet ? null : (
+          <Text size={15} tone="muted" align="center">
+            {name}
+          </Text>
         )}
-      >
-        <Icon
-          name="tag"
-          size={24}
-          color={pending ? colors.negative.DEFAULT : colors.foreground.muted}
+        <MoneyText
+          value={signedAmount(tx)}
+          showSign
+          serif
+          weight="extrabold"
+          size={34}
+          leading={1.1}
+          tracking={-0.01}
+          tone={tx.markedDuplicate ? 'subtle' : tx.direction === 'in' ? 'positive' : 'default'}
         />
+        <View className="flex-row gap-1.5">
+          {pending ? <Badge label="Fora do padrão" tone="negative" icon="alertTriangle" /> : null}
+          {tx.markedDuplicate ? <Badge label="Duplicado" icon="copy" /> : null}
+          {tx.hiddenFromReports ? <Badge label="Fora dos relatórios" icon="eye" /> : null}
+        </View>
       </View>
-      {isTablet ? null : (
-        <Text size={15} tone="muted" align="center">
-          {name}
-        </Text>
-      )}
-      <MoneyText
-        value={signedAmount(tx)}
-        showSign
-        serif
-        weight="extrabold"
-        size={34}
-        leading={1.1}
-        tracking={-0.01}
-        tone={tx.markedDuplicate ? 'subtle' : tx.direction === 'in' ? 'positive' : 'default'}
-      />
-      <View className="flex-row gap-1.5">
-        {pending ? <Badge label="Fora do padrão" tone="negative" icon="alertTriangle" /> : null}
-        {tx.markedDuplicate ? <Badge label="Duplicado" icon="copy" /> : null}
-        {tx.hiddenFromReports ? <Badge label="Fora dos relatórios" icon="eye" /> : null}
-      </View>
-    </View>
+    </StateSlot>
   );
 
   const quero = unusual ? (
@@ -246,29 +250,43 @@ export function TransactionDetailScreen() {
   ) : null;
 
   const fields = (
-    <View
-      className={cn(
-        'rounded-24 border border-border bg-surface px-4.5 py-2',
-        isTablet && 'flex-grow',
-      )}
-    >
-      {detailRows(tx, account).map((row) => (
-        <View
-          key={row.label}
-          accessible
-          accessibilityLabel={`${row.label}: ${row.value}`}
-          className="flex-row justify-between gap-3 border-b border-border py-[11px]"
-        >
-          <Text size={14} tone="muted" style={{ flexShrink: 0 }}>
-            {row.label}
-          </Text>
-          <Text size={14} weight="semibold" align="right" style={{ flex: 1, minWidth: 0 }}>
-            {/* Statement codes ("LOJAELETRON*ONLINE SP") may break after "*" instead of mid-word. */}
-            {row.value.replace(/\*/g, '*\u200B')}
-          </Text>
-        </View>
-      ))}
-    </View>
+    <Card padding="none" className={cn('px-4.5 py-2', isTablet && 'flex-grow')}>
+      <StateSlot
+        empty={
+          <StateMessage
+            icon="search"
+            title="Lançamento não encontrado"
+            description="O banco pode ter cancelado esta compra ou juntado com outra. Os outros lançamentos continuam iguais."
+            action={
+              <Button
+                variant="secondary"
+                size="md"
+                onPress={() => router.navigate('/spending/transactions')}
+              >
+                Ver lançamentos
+              </Button>
+            }
+          />
+        }
+      >
+        {detailRows(tx, account).map((row) => (
+          <View
+            key={row.label}
+            accessible
+            accessibilityLabel={`${row.label}: ${row.value}`}
+            className="flex-row justify-between gap-3 border-b border-border py-[11px]"
+          >
+            <Text size={14} tone="muted" style={{ flexShrink: 0 }}>
+              {row.label}
+            </Text>
+            <Text size={14} weight="semibold" align="right" style={{ flex: 1, minWidth: 0 }}>
+              {/* Statement codes ("LOJAELETRON*ONLINE SP") may break after "*" instead of mid-word. */}
+              {row.value.replace(/\*/g, '*\u200B')}
+            </Text>
+          </View>
+        ))}
+      </StateSlot>
+    </Card>
   );
 
   const categories = (
@@ -316,7 +334,7 @@ export function TransactionDetailScreen() {
   ) : null;
 
   const actions = (
-    <SectionCard title="Mais ações" titleSize={17} padding={18} gap={6}>
+    <SectionCard title="Mais ações" titleSize={17} padding={18} gap={6} empty={null}>
       <View>
         <ActionRow
           icon="copy"
@@ -431,15 +449,7 @@ export function TransactionDetailScreen() {
         }
         contentClassName={isTablet ? 'pb-32' : 'pb-10'}
       >
-        <ScreenStates
-          status={status}
-          errorTitle="Não deu para carregar o lançamento"
-          onRetry={ledger.refetch}
-          offline={{
-            since: lastUpdateLabel(SPENDING.syncedAt),
-            paused: 'Mudar a categoria volta quando a conexão voltar.',
-          }}
-        >
+        <ScreenStates status={status} onRetry={ledger.refetch} since={SPENDING.syncedAt}>
           {body}
         </ScreenStates>
       </Screen>

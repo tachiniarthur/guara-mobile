@@ -1,14 +1,22 @@
 import { CategoryIdSchema, type CategoryId, type YearMonth } from '@guara/types';
 import { colors } from '@guara/ui-tokens';
-import { formatDate, orEmpty } from '@guara/utils';
+import { EMPTY, formatDate, orEmpty } from '@guara/utils';
 import { useLocalSearchParams, useRouter } from 'expo-router';
-import { useState, type ReactNode } from 'react';
+import { useState } from 'react';
 import { View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
-import { EmptyState, ErrorState } from '@/components/feedback';
+import {
+  ContainerError,
+  FilterEmpty,
+  ScreenStates,
+  StateMessage,
+  useScreenStatus,
+} from '@/components/feedback';
+import { MataButton } from '@/components/illustrations';
 import { PageHeader, TopBar } from '@/components/layout';
-import { Button, InfoNote, Text } from '@/components/ui';
+import { ScreenOverlayHost } from '@/components/layout/ScreenOverlay';
+import { Button, Card, InfoNote, SkeletonScope, Text } from '@/components/ui';
 import { routeTo } from '@/constants/routes';
 // Straight to the file: the Relatórios index imports Gastos back.
 import { ExportMenu } from '@/features/reports/components/ExportMenu';
@@ -16,7 +24,7 @@ import { useBreakpoint } from '@/hooks/useBreakpoint';
 import { ChatFab } from '@/navigation';
 
 import { LedgerFeed, LedgerFilterBar, SummaryTiles, TransactionRow } from '../components';
-import { BANK_SYNC, SPENDING_TODAY } from '../data';
+import { BANK_SYNC, SPENDING, SPENDING_TODAY } from '../data';
 import { useLedger, type Ledger } from '../hooks/useLedger';
 import { bankLabel, dayLabel, noResultsMessage, rowDetail } from '../lib/format';
 import {
@@ -62,6 +70,8 @@ export function TransactionsScreen() {
     month: ledger.month,
   });
   const [pages, setPages] = useState(1);
+  // The ledger knows when it is empty; the API adds loading and error.
+  const status = useScreenStatus(ledger.status);
 
   const monthTransactions = ledger.transactions.filter((tx) => tx.date.startsWith(filters.month));
   const months = [...new Set(ledger.transactions.map((tx) => tx.date.slice(0, 7)))];
@@ -83,48 +93,35 @@ export function TransactionsScreen() {
     />
   ) : null;
 
-  let content: ReactNode;
-  if (ledger.status !== 'ready') {
-    content = (
-      <View style={{ paddingHorizontal: padding, gap: isTablet ? 20 : 16 }}>
-        {header}
-        <View className="gap-3.5 rounded-24 border border-border bg-surface p-4">
-          {ledger.staleMessage ? (
-            <InfoNote icon="alertTriangle" tone="warning" size={13}>
-              {ledger.staleMessage}
-            </InfoNote>
-          ) : null}
-          {ledger.status === 'empty' ? (
-            <EmptyState
-              icon="wallet"
-              title="Ainda sem lançamentos"
-              description="Assim que um banco for conectado, seus gastos e entradas aparecem aqui, organizados por dia."
-              action={{
-                label: 'Conectar banco',
-                variant: 'primary',
-                onPress: () => router.navigate('/connect-bank'),
-              }}
-            />
-          ) : (
-            <ErrorState
-              title="Não deu para carregar os lançamentos"
-              description="Seus dados continuam salvos. Tente de novo em instantes."
-              onRetry={ledger.refetch}
-            />
-          )}
-        </View>
-      </View>
-    );
-  } else {
-    content = (
-      <LedgerFeed
-        framed={isTablet}
-        gap={isTablet ? 14 : 16}
-        padding={padding}
-        bottomInset={isTablet ? 110 : 32}
-        days={visibleDays}
-        dayLabel={(day) => dayLabel(day.date, SPENDING_TODAY)}
-        renderRow={(tx) => (
+  const clearFilters = () => {
+    setFilters({
+      query: '',
+      bank: 'all',
+      categoryId: 'all',
+      direction: 'all',
+      month: ledger.month,
+    });
+    setPages(1);
+  };
+
+  const content = (
+    <LedgerFeed
+      framed={isTablet}
+      gap={isTablet ? 14 : 16}
+      padding={padding}
+      bottomInset={isTablet ? 110 : 32}
+      // The list itself: one message in place of the days when there is nothing to show.
+      days={status === 'empty' ? [] : visibleDays}
+      dayLabel={(day) => dayLabel(day.date, SPENDING_TODAY)}
+      dayBody={
+        status === 'error' ? (
+          <Card variant="muted" padding="sm">
+            <ContainerError compact />
+          </Card>
+        ) : undefined
+      }
+      renderRow={(tx) => (
+        <SkeletonScope active={status === 'loading'}>
           <TransactionRow
             name={displayName(tx)}
             detail={rowDetail(tx, ledger.accounts[tx.accountId], {
@@ -136,63 +133,61 @@ export function TransactionsScreen() {
             duplicate={tx.markedDuplicate}
             onPress={() => router.navigate(routeTo.transaction(tx.id))}
           />
-        )}
-        top={
-          header ?? (
+        </SkeletonScope>
+      )}
+      top={
+        header ?? (
+          <SkeletonScope active={status === 'loading'}>
             <Text size={14} tone="muted">
-              {subtitle}
+              {status === 'error' ? EMPTY : subtitle}
             </Text>
-          )
-        }
-        cardTop={
-          <>
-            {ledger.staleMessage ? (
-              <InfoNote icon="alertTriangle" tone="warning" size={13}>
-                {ledger.staleMessage}
-              </InfoNote>
-            ) : null}
-            <LedgerFilterBar
-              filters={filters}
-              onChange={(next) => {
-                setFilters(next);
-                setPages(1);
-              }}
-              months={months}
-              categories={categories}
-              wrap={isTablet}
-            />
-            <SummaryTiles summary={summaryOf(ledger, filters)} />
-          </>
-        }
-        cardBottom={
-          days.length === 0 ? (
-            <EmptyState
-              icon="search"
-              title="Nada encontrado"
-              description={noResultsMessage(filters)}
-              action={{
-                label: 'Limpar filtros',
-                onPress: () => {
-                  setFilters({
-                    query: '',
-                    bank: 'all',
-                    categoryId: 'all',
-                    direction: 'all',
-                    month: ledger.month,
-                  });
-                  setPages(1);
-                },
-              }}
-            />
-          ) : days.length > visibleDays.length ? (
-            <Button variant="secondary" size="md" fullWidth onPress={() => setPages(pages + 1)}>
-              Carregar dias anteriores
-            </Button>
-          ) : null
-        }
-      />
-    );
-  }
+          </SkeletonScope>
+        )
+      }
+      cardTop={
+        <SkeletonScope active={status === 'loading'}>
+          {ledger.staleMessage && status === 'ready' ? (
+            <InfoNote icon="alertTriangle" tone="warning" size={13}>
+              {ledger.staleMessage}
+            </InfoNote>
+          ) : null}
+          <LedgerFilterBar
+            filters={filters}
+            onChange={(next) => {
+              setFilters(next);
+              setPages(1);
+            }}
+            months={months}
+            categories={categories}
+            wrap={isTablet}
+          />
+          <SummaryTiles summary={status === 'error' ? null : summaryOf(ledger, filters)} />
+        </SkeletonScope>
+      }
+      cardBottom={
+        status === 'empty' ? (
+          <StateMessage
+            icon="wallet"
+            title="Ainda sem lançamentos"
+            description="Assim que um banco for conectado, seus gastos e entradas aparecem aqui, organizados por dia."
+            action={
+              <MataButton
+                label="Conectar banco"
+                size={44}
+                onPress={() => router.navigate('/connect-bank')}
+              />
+            }
+          />
+        ) : status !== 'ready' ? null : days.length === 0 ? (
+          <FilterEmpty description={noResultsMessage(filters)} onClear={clearFilters} />
+        ) : days.length > visibleDays.length ? (
+          <Button variant="secondary" size="md" fullWidth onPress={() => setPages(pages + 1)}>
+            Carregar dias anteriores
+          </Button>
+        ) : null
+      }
+    />
+  );
 
   return (
     <View className="flex-1 bg-background">
@@ -209,7 +204,11 @@ export function TransactionsScreen() {
             actions={<ExportMenu variant="icon" accessibilityLabel="Exportar lançamentos" />}
           />
         )}
-        {content}
+        <ScreenOverlayHost>
+          <ScreenStates status={status} onRetry={ledger.refetch} since={SPENDING.syncedAt}>
+            {content}
+          </ScreenStates>
+        </ScreenOverlayHost>
       </SafeAreaView>
       {isTablet ? <ChatFab /> : null}
     </View>

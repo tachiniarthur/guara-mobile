@@ -1,8 +1,10 @@
+import { colors } from '@guara/ui-tokens';
 import { Pressable, View } from 'react-native';
 
 import { cn } from '@/lib/cn';
 import { haptics } from '@/lib/haptics';
 
+import { useSkeleton } from './SkeletonScope';
 import { Text } from './Text';
 
 export interface SegmentOption<V extends string> {
@@ -47,6 +49,7 @@ export function SegmentedControl<V extends string>({
   className,
 }: SegmentedControlProps<V>) {
   const raised = appearance === 'raised';
+  const skeleton = useSkeleton();
   return (
     <View
       accessibilityRole="tablist"
@@ -78,6 +81,7 @@ export function SegmentedControl<V extends string>({
               fill && 'flex-1',
               selected ? (raised ? 'bg-surface' : 'bg-foreground') : 'active:bg-surface-pressed',
             )}
+            style={selected && skeleton ? { backgroundColor: colors.skeleton.surface } : undefined}
           >
             <Text
               size={textSize ?? (size === 'md' ? 14 : 13)}

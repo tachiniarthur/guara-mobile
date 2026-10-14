@@ -31,6 +31,8 @@ export interface LedgerFeedProps {
   padding: number;
   /** Extra space at the end (tab bar / chat button). */
   bottomInset?: number;
+  /** Shown under each day instead of its rows (connection error of the screen). */
+  dayBody?: ReactNode;
 }
 
 type Edge = 'top' | 'middle' | 'bottom';
@@ -57,10 +59,11 @@ export function LedgerFeed({
   gap = 16,
   padding,
   bottomInset = 32,
+  dayBody,
 }: LedgerFeedProps) {
   const items: FeedItem[] = days.flatMap((day) => [
     { kind: 'day' as const, key: `day-${day.date}`, day },
-    ...day.items.map((tx, index) => ({
+    ...(dayBody ? day.items.slice(0, 1) : day.items).map((tx, index) => ({
       kind: 'tx' as const,
       key: tx.id,
       tx,
@@ -108,7 +111,7 @@ export function LedgerFeed({
             )
           : slice(
               <View style={item.first ? { paddingTop: gap } : undefined}>
-                {renderRow(item.tx)}
+                {dayBody ?? renderRow(item.tx)}
               </View>,
             )
       }

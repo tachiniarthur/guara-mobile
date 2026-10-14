@@ -4,6 +4,8 @@ import { useState, type ReactNode } from 'react';
 import { StyleSheet, View, type ViewProps } from 'react-native';
 import Svg, { Defs, LinearGradient, Rect, Stop } from 'react-native-svg';
 
+import { useSkeleton } from '@/components/ui/SkeletonScope';
+
 const MATA = require('@assets/images/textures/mata.jpg');
 
 export interface MataSurfaceProps extends ViewProps {
@@ -28,6 +30,21 @@ export function MataSurface({
   // Explicit size: percentages in react-native-svg keep the first layout, so a card that grows
   // later (wrapped buttons) would show the photo without the veil at the bottom.
   const [size, setSize] = useState({ width: 0, height: 0 });
+  const skeleton = useSkeleton();
+  if (skeleton) {
+    return (
+      <View
+        className={className}
+        style={[
+          style,
+          { backgroundColor: colors.skeleton.surface, borderColor: colors.skeleton.border },
+        ]}
+        {...props}
+      >
+        {children}
+      </View>
+    );
+  }
   return (
     <View
       className={className}

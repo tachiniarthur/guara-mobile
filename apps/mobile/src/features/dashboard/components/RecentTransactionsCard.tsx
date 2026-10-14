@@ -1,6 +1,7 @@
 import { useRouter } from 'expo-router';
 import { Pressable, View } from 'react-native';
 
+import { StateSlot } from '@/components/feedback';
 import { CardHeader } from '@/components/layout';
 import { Card, LinkButton, MoneyText, Text } from '@/components/ui';
 import { routeTo } from '@/constants/routes';
@@ -72,15 +73,17 @@ export function RecentTransactionsCard() {
           />
         }
       />
-      <View>
-        {RECENT_TRANSACTIONS.map((tx) => (
-          <RecentRow
-            key={tx.id}
-            tx={tx}
-            onPress={() => router.navigate(routeTo.transaction(tx.id))}
-          />
-        ))}
-      </View>
+      <StateSlot>
+        <View>
+          {RECENT_TRANSACTIONS.map((tx) => (
+            <RecentRow
+              key={tx.id}
+              tx={tx}
+              onPress={() => router.navigate(routeTo.transaction(tx.id))}
+            />
+          ))}
+        </View>
+      </StateSlot>
     </Card>
   );
 }

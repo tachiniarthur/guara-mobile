@@ -1,8 +1,10 @@
 import { colors } from '@guara/ui-tokens';
+import { useRouter } from 'expo-router';
 import { Pressable, View } from 'react-native';
 
+import { StateMessage } from '@/components/feedback';
 import { SectionCard } from '@/components/layout';
-import { DataTable, EmptyValue, Icon, MoneyText, Text } from '@/components/ui';
+import { Button, DataTable, EmptyValue, Icon, MoneyText, Text } from '@/components/ui';
 
 import type { EventItem, EventList } from '../../assets';
 
@@ -10,6 +12,8 @@ import type { EventItem, EventList } from '../../assets';
 const VISIBLE = { phone: 6, tablet: 8 } as const;
 
 export type EventsCardProps = {
+  /** Ticker named in the empty state ("Sem dados deste ativo"). */
+  ticker: string;
   subtitle: string;
   wide?: boolean;
   /** "Ver todos (N)": opens the full history. */
@@ -74,6 +78,7 @@ function PhoneEvent({ item }: { item: EventItem }) {
 
 /** Dividends and other payments: a note when the asset pays none, a list (table on tablets) otherwise. */
 export function EventsCard(props: EventsCardProps) {
+  const router = useRouter();
   const { subtitle, wide = false } = props;
   const visible = VISIBLE[wide ? 'tablet' : 'phone'];
   const items = props.kind === 'list' ? props.items.slice(0, visible) : [];
@@ -87,6 +92,18 @@ export function EventsCard(props: EventsCardProps) {
       titleSize={wide ? 20 : 18}
       padding={wide ? 20 : 16}
       gap={14}
+      empty={
+        <StateMessage
+          icon="trendingUp"
+          title="Sem dados deste ativo"
+          description={`A Brapi ainda não tem dados de ${props.ticker} para mostrar. Os campos ficam com “—” até a próxima atualização.`}
+          action={
+            <Button variant="secondary" size="md" onPress={() => router.navigate('/investments')}>
+              Voltar para Investimentos
+            </Button>
+          }
+        />
+      }
     >
       {props.kind === 'note' ? (
         <View className="flex-row gap-3 rounded-16 bg-surface-input p-4">

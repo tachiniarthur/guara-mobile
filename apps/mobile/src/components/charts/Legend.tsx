@@ -2,6 +2,7 @@ import { colors } from '@guara/ui-tokens';
 import { View } from 'react-native';
 import Svg, { Line } from 'react-native-svg';
 
+import { useSkeleton } from '@/components/ui/SkeletonScope';
 import { Text } from '@/components/ui/Text';
 
 export interface LegendSwatchProps {
@@ -26,14 +27,16 @@ export function LegendSwatch({
   width = 14,
   size = 12,
 }: LegendSwatchProps) {
+  // Loading: the swatch keeps its room in the loading color.
+  const swatch = useSkeleton() ? colors.skeleton.surface : color;
   return (
     <View className={size === 13 ? 'flex-row items-center gap-2' : 'flex-row items-center gap-1.5'}>
       {shape === 'dot' ? (
-        <View className="h-2.5 w-2.5 rounded-[3px]" style={{ backgroundColor: color }} />
+        <View className="h-2.5 w-2.5 rounded-[3px]" style={{ backgroundColor: swatch }} />
       ) : dashed ? (
-        <DashedLine width={width} color={color} />
+        <DashedLine width={width} color={swatch} />
       ) : (
-        <View className="h-[3px] rounded-2" style={{ width, backgroundColor: color }} />
+        <View className="h-[3px] rounded-2" style={{ width, backgroundColor: swatch }} />
       )}
       <Text size={size} tone="muted">
         {label}

@@ -149,7 +149,14 @@ export const colors = {
   /** Drop shadows of floating menus. */
   shadow: '#000000',
   /** Skeleton placeholder base. */
-  skeleton: '#1A241F',
+  skeleton: {
+    DEFAULT: '#1A241F',
+    /** "Carregando": cards and controls drawn over the screen's own layout. */
+    surface: '#16201B',
+    border: '#1E2A23',
+    /** Text turned into blocks. */
+    text: '#25322B',
+  },
   /** Thin ring drawn inside avatars. */
   avatarRing: 'rgba(242, 239, 230, 0.35)',
   /** Chart series. Entradas use info, Saídas use `chart.out`. */

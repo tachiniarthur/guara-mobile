@@ -1,5 +1,7 @@
 import { View } from 'react-native';
 
+import { SkeletonBlock } from '@/components/ui/SkeletonScope';
+
 export interface AllocationSegment {
   label: string;
   /** Share in percent (the segments should add up to 100). */
@@ -17,7 +19,7 @@ export interface AllocationBarProps {
 }
 
 /** Stacked horizontal bar of a portfolio allocation. */
-export function AllocationBar({
+function AllocationBarDrawing({
   segments,
   height = 8,
   gap = 2,
@@ -41,5 +43,14 @@ export function AllocationBar({
         />
       ))}
     </View>
+  );
+}
+
+/** AllocationBar as a flat area while loading (`SkeletonBlock`). */
+export function AllocationBar(props: AllocationBarProps) {
+  return (
+    <SkeletonBlock>
+      <AllocationBarDrawing {...props} />
+    </SkeletonBlock>
   );
 }

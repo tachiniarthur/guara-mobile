@@ -13,6 +13,10 @@ import type { IconName } from '@/components/ui/Icon';
 
 /** "Today" of the design snapshot (balances go up to September 2026). */
 export const GOALS_TODAY: IsoDate = '2026-09-23';
+
+/** Last sync of the goals (shown while offline). */
+export const GOALS_SYNCED_AT = '2026-09-23T17:30:00.000Z';
+
 export const GOALS_MONTH: YearMonth = '2026-09';
 
 /** Day the salary arrives: deposits are suggested for it. */

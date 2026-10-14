@@ -2,17 +2,17 @@ import { formatCents, cents, sumCents } from '@guara/utils';
 import { useRouter } from 'expo-router';
 import { View } from 'react-native';
 
-import { EmptyState, ErrorState } from '@/components/feedback';
+import { ScreenStates, StateMessage, useScreenStatus } from '@/components/feedback';
 import { MataButton } from '@/components/illustrations';
 import { PageHeader, ResponsiveGrid, Screen, TopBar } from '@/components/layout';
-import { Button, IconButton, LinkButton, MoneyText } from '@/components/ui';
+import { Button, Card, EmptyValue, IconButton, LinkButton, MoneyText } from '@/components/ui';
 import { AssistantNote } from '@/features/chat';
 import { HOUSEHOLD } from '@/features/simulator';
 import { useBreakpoint } from '@/hooks/useBreakpoint';
 import { ChatFab, conversationHref } from '@/navigation';
 
 import { GoalCard, GoalHero, HeroCaption, HeroStrong } from '../components';
-import { GOALS_TODAY } from '../data';
+import { GOALS_SYNCED_AT, GOALS_TODAY } from '../data';
 import { useGoals } from '../hooks/useGoals';
 import { listNote, plannedDeposits } from '../lib/goals';
 
@@ -22,7 +22,12 @@ const whole = (value: number) => formatCents(value, { wholeUnits: true });
 export function GoalsScreen() {
   const router = useRouter();
   const { isTablet } = useBreakpoint();
-  const { status, goals, refetch } = useGoals();
+  const goalsData = useGoals();
+  const { goals, refetch } = goalsData;
+  // The API adds loading; no goals is the list's empty state.
+  const status = useScreenStatus(
+    goalsData.status === 'ready' && goals.length === 0 ? 'empty' : goalsData.status,
+  );
   const newGoal = () => router.navigate('/new-goal');
   const openGoal = (goalId: string) =>
     router.navigate({ pathname: '/goals/[goalId]', params: { goalId } });
@@ -31,7 +36,7 @@ export function GoalsScreen() {
     <PageHeader
       title="Suas metas"
       subtitle={
-        status === 'ready' && goals.length > 0
+        goalsData.status === 'ready' && goals.length > 0
           ? `Acompanhadas pela Onça · ${goals.length} ${goals.length === 1 ? 'meta' : 'metas'}`
           : undefined
       }
@@ -42,37 +47,17 @@ export function GoalsScreen() {
   ) : null;
 
   let content;
-  if (status === 'error') {
+  if (status === 'empty') {
+    // One message in place of the whole list.
     content = (
-      <View className="rounded-24 border border-border bg-surface p-3">
-        <ErrorState
-          title="Não conseguimos carregar suas metas"
-          description="Suas metas estão salvas. É a conexão que falhou agora. Tente de novo em instantes."
-          onRetry={refetch}
-        />
-      </View>
-    );
-  } else if (goals.length === 0) {
-    content = (
-      <View className="rounded-24 border border-border bg-surface p-3">
-        <EmptyState
+      <Card padding="sm" className="p-4">
+        <StateMessage
           icon="target"
           title="Nenhuma meta ainda"
-          description="Uma meta junta dinheiro para algo que você quer, com depósito mensal e prazo. A Onça acompanha o ritmo com você."
-          actions={
-            <>
-              <MataButton label="Criar primeira meta" size={44} onPress={newGoal} />
-              <Button
-                variant="secondary"
-                size="md"
-                onPress={() => router.navigate('/investments/simulator/goal')}
-              >
-                Usar o simulador
-              </Button>
-            </>
-          }
+          description="Crie uma meta, como reserva de emergência ou viagem, e acompanhe o ritmo dos depósitos."
+          action={<MataButton label="Criar primeira meta" size={44} onPress={newGoal} />}
         />
-      </View>
+      </Card>
     );
   } else {
     const saved = sumCents(goals.map((goal) => goal.saved));
@@ -136,12 +121,18 @@ export function GoalsScreen() {
           </>
         )}
         {isTablet ? <ResponsiveGrid columns={{ tablet: 2 }}>{cards}</ResponsiveGrid> : cards}
-        {isTablet ? null : <MataButton label="Nova meta" fullWidth onPress={newGoal} />}
-        <LinkButton
-          label="Ver simulações salvas"
-          onPress={() => router.navigate('/investments/simulator/saved')}
-          className="self-start"
-        />
+        {status === 'error' ? (
+          <EmptyValue />
+        ) : (
+          <>
+            {isTablet ? null : <MataButton label="Nova meta" fullWidth onPress={newGoal} />}
+            <LinkButton
+              label="Ver simulações salvas"
+              onPress={() => router.navigate('/investments/simulator/saved')}
+              className="self-start"
+            />
+          </>
+        )}
       </>
     );
   }
@@ -161,7 +152,9 @@ export function GoalsScreen() {
         contentClassName={isTablet ? 'pb-32' : undefined}
       >
         {header}
-        {content}
+        <ScreenStates status={status} onRetry={refetch} since={GOALS_SYNCED_AT}>
+          {content}
+        </ScreenStates>
       </Screen>
       {isTablet ? <ChatFab /> : null}
     </View>
