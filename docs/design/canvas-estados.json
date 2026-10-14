@@ -1,0 +1,2196 @@
+{
+  "v": 3,
+  "createdOnFiles": {
+    "v": 1,
+    "at": "2026-10-13T12:39:51Z"
+  },
+  "title": "Guará · Estados das telas",
+  "launch": {
+    "view": "canvas"
+  },
+  "pages": [],
+  "boards": {
+    "Main.dc.html": {
+      "x": 0,
+      "y": 300,
+      "w": 2560,
+      "h": 1440,
+      "title": "Desktop · Início · original",
+      "is_interactive": true
+    },
+    "Escuro-Desktop-Inicio-Estado-Carregando.dc.html": {
+      "x": 2760,
+      "y": 300,
+      "w": 2560,
+      "h": 1440,
+      "title": "Desktop · Início · carregando",
+      "is_interactive": true
+    },
+    "Escuro-Desktop-Inicio-Estado-Erro.dc.html": {
+      "x": 5520,
+      "y": 300,
+      "w": 2560,
+      "h": 1440,
+      "title": "Desktop · Início · erro de conexão",
+      "is_interactive": true
+    },
+    "Escuro-Desktop-Inicio-Estado-Sem-Internet.dc.html": {
+      "x": 8280,
+      "y": 300,
+      "w": 2560,
+      "h": 1440,
+      "title": "Desktop · Início · sem internet",
+      "is_interactive": true
+    },
+    "Escuro-Desktop-Inicio-Estado-Vazio.dc.html": {
+      "x": 11040,
+      "y": 300,
+      "w": 2560,
+      "h": 1440,
+      "title": "Desktop · Início · vazio",
+      "is_interactive": true
+    },
+    "Escuro-Tablet-Painel.dc.html": {
+      "x": 0,
+      "y": 1860,
+      "w": 820,
+      "h": 2940,
+      "title": "Tablet · Início · original",
+      "is_interactive": true
+    },
+    "Escuro-Tablet-Inicio-Estado-Carregando.dc.html": {
+      "x": 940,
+      "y": 1860,
+      "w": 820,
+      "h": 2940,
+      "title": "Tablet · Início · carregando",
+      "is_interactive": true
+    },
+    "Escuro-Tablet-Inicio-Estado-Erro.dc.html": {
+      "x": 1880,
+      "y": 1860,
+      "w": 820,
+      "h": 2940,
+      "title": "Tablet · Início · erro de conexão",
+      "is_interactive": true
+    },
+    "Escuro-Tablet-Inicio-Estado-Sem-Internet.dc.html": {
+      "x": 2820,
+      "y": 1860,
+      "w": 820,
+      "h": 2940,
+      "title": "Tablet · Início · sem internet",
+      "is_interactive": true
+    },
+    "Escuro-Tablet-Inicio-Estado-Vazio.dc.html": {
+      "x": 3760,
+      "y": 1860,
+      "w": 820,
+      "h": 2940,
+      "title": "Tablet · Início · vazio",
+      "is_interactive": true
+    },
+    "Escuro-Mobile-Inicio.dc.html": {
+      "x": 0,
+      "y": 4920,
+      "w": 393,
+      "h": 2720,
+      "title": "Mobile · Início · original",
+      "is_interactive": true
+    },
+    "Escuro-Mobile-Inicio-Estado-Carregando.dc.html": {
+      "x": 473,
+      "y": 4920,
+      "w": 393,
+      "h": 2720,
+      "title": "Mobile · Início · carregando",
+      "is_interactive": true
+    },
+    "Escuro-Mobile-Inicio-Estado-Erro.dc.html": {
+      "x": 946,
+      "y": 4920,
+      "w": 393,
+      "h": 2720,
+      "title": "Mobile · Início · erro de conexão",
+      "is_interactive": true
+    },
+    "Escuro-Mobile-Inicio-Estado-Sem-Internet.dc.html": {
+      "x": 1419,
+      "y": 4920,
+      "w": 393,
+      "h": 2720,
+      "title": "Mobile · Início · sem internet",
+      "is_interactive": true
+    },
+    "Escuro-Mobile-Inicio-Estado-Vazio.dc.html": {
+      "x": 1892,
+      "y": 4920,
+      "w": 393,
+      "h": 2720,
+      "title": "Mobile · Início · vazio",
+      "is_interactive": true
+    },
+    "Escuro-Desktop-Gastos.dc.html": {
+      "x": 0,
+      "y": 8360,
+      "w": 2560,
+      "h": 1670,
+      "title": "Desktop · Gastos · original",
+      "is_interactive": true
+    },
+    "Escuro-Desktop-Gastos-Estado-Carregando.dc.html": {
+      "x": 2760,
+      "y": 8360,
+      "w": 2560,
+      "h": 1670,
+      "title": "Desktop · Gastos · carregando",
+      "is_interactive": true
+    },
+    "Escuro-Desktop-Gastos-Estado-Erro.dc.html": {
+      "x": 5520,
+      "y": 8360,
+      "w": 2560,
+      "h": 1670,
+      "title": "Desktop · Gastos · erro de conexão",
+      "is_interactive": true
+    },
+    "Escuro-Desktop-Gastos-Estado-Sem-Internet.dc.html": {
+      "x": 8280,
+      "y": 8360,
+      "w": 2560,
+      "h": 1670,
+      "title": "Desktop · Gastos · sem internet",
+      "is_interactive": true
+    },
+    "Escuro-Desktop-Gastos-Estado-Vazio.dc.html": {
+      "x": 11040,
+      "y": 8360,
+      "w": 2560,
+      "h": 1670,
+      "title": "Desktop · Gastos · vazio",
+      "is_interactive": true
+    },
+    "Escuro-Tablet-Gastos.dc.html": {
+      "x": 0,
+      "y": 10150,
+      "w": 820,
+      "h": 2470,
+      "title": "Tablet · Gastos · original",
+      "is_interactive": true
+    },
+    "Escuro-Tablet-Gastos-Estado-Carregando.dc.html": {
+      "x": 940,
+      "y": 10150,
+      "w": 820,
+      "h": 2470,
+      "title": "Tablet · Gastos · carregando",
+      "is_interactive": true
+    },
+    "Escuro-Tablet-Gastos-Estado-Erro.dc.html": {
+      "x": 1880,
+      "y": 10150,
+      "w": 820,
+      "h": 2470,
+      "title": "Tablet · Gastos · erro de conexão",
+      "is_interactive": true
+    },
+    "Escuro-Tablet-Gastos-Estado-Sem-Internet.dc.html": {
+      "x": 2820,
+      "y": 10150,
+      "w": 820,
+      "h": 2470,
+      "title": "Tablet · Gastos · sem internet",
+      "is_interactive": true
+    },
+    "Escuro-Tablet-Gastos-Estado-Vazio.dc.html": {
+      "x": 3760,
+      "y": 10150,
+      "w": 820,
+      "h": 2470,
+      "title": "Tablet · Gastos · vazio",
+      "is_interactive": true
+    },
+    "Escuro-Mobile-Gastos.dc.html": {
+      "x": 0,
+      "y": 12740,
+      "w": 393,
+      "h": 3190,
+      "title": "Mobile · Gastos · original",
+      "is_interactive": true
+    },
+    "Escuro-Mobile-Gastos-Estado-Carregando.dc.html": {
+      "x": 473,
+      "y": 12740,
+      "w": 393,
+      "h": 3190,
+      "title": "Mobile · Gastos · carregando",
+      "is_interactive": true
+    },
+    "Escuro-Mobile-Gastos-Estado-Erro.dc.html": {
+      "x": 946,
+      "y": 12740,
+      "w": 393,
+      "h": 3190,
+      "title": "Mobile · Gastos · erro de conexão",
+      "is_interactive": true
+    },
+    "Escuro-Mobile-Gastos-Estado-Sem-Internet.dc.html": {
+      "x": 1419,
+      "y": 12740,
+      "w": 393,
+      "h": 3190,
+      "title": "Mobile · Gastos · sem internet",
+      "is_interactive": true
+    },
+    "Escuro-Mobile-Gastos-Estado-Vazio.dc.html": {
+      "x": 1892,
+      "y": 12740,
+      "w": 393,
+      "h": 3190,
+      "title": "Mobile · Gastos · vazio",
+      "is_interactive": true
+    },
+    "Escuro-Desktop-Investimentos.dc.html": {
+      "x": 0,
+      "y": 16650,
+      "w": 2560,
+      "h": 2600,
+      "title": "Desktop · Investimentos · original",
+      "is_interactive": true
+    },
+    "Escuro-Desktop-Investimentos-Estado-Carregando.dc.html": {
+      "x": 2760,
+      "y": 16650,
+      "w": 2560,
+      "h": 2600,
+      "title": "Desktop · Investimentos · carregando",
+      "is_interactive": true
+    },
+    "Escuro-Desktop-Investimentos-Estado-Erro.dc.html": {
+      "x": 5520,
+      "y": 16650,
+      "w": 2560,
+      "h": 2600,
+      "title": "Desktop · Investimentos · erro de conexão",
+      "is_interactive": true
+    },
+    "Escuro-Desktop-Investimentos-Estado-Sem-Internet.dc.html": {
+      "x": 8280,
+      "y": 16650,
+      "w": 2560,
+      "h": 2600,
+      "title": "Desktop · Investimentos · sem internet",
+      "is_interactive": true
+    },
+    "Escuro-Desktop-Investimentos-Estado-Vazio.dc.html": {
+      "x": 11040,
+      "y": 16650,
+      "w": 2560,
+      "h": 2600,
+      "title": "Desktop · Investimentos · vazio",
+      "is_interactive": true
+    },
+    "Escuro-Tablet-Investimentos.dc.html": {
+      "x": 0,
+      "y": 19370,
+      "w": 820,
+      "h": 3680,
+      "title": "Tablet · Investimentos · original",
+      "is_interactive": true
+    },
+    "Escuro-Tablet-Investimentos-Estado-Carregando.dc.html": {
+      "x": 940,
+      "y": 19370,
+      "w": 820,
+      "h": 3680,
+      "title": "Tablet · Investimentos · carregando",
+      "is_interactive": true
+    },
+    "Escuro-Tablet-Investimentos-Estado-Erro.dc.html": {
+      "x": 1880,
+      "y": 19370,
+      "w": 820,
+      "h": 3680,
+      "title": "Tablet · Investimentos · erro de conexão",
+      "is_interactive": true
+    },
+    "Escuro-Tablet-Investimentos-Estado-Sem-Internet.dc.html": {
+      "x": 2820,
+      "y": 19370,
+      "w": 820,
+      "h": 3680,
+      "title": "Tablet · Investimentos · sem internet",
+      "is_interactive": true
+    },
+    "Escuro-Tablet-Investimentos-Estado-Vazio.dc.html": {
+      "x": 3760,
+      "y": 19370,
+      "w": 820,
+      "h": 3680,
+      "title": "Tablet · Investimentos · vazio",
+      "is_interactive": true
+    },
+    "Escuro-Mobile-Investimentos.dc.html": {
+      "x": 0,
+      "y": 23170,
+      "w": 393,
+      "h": 5250,
+      "title": "Mobile · Investimentos · original",
+      "is_interactive": true
+    },
+    "Escuro-Mobile-Investimentos-Estado-Carregando.dc.html": {
+      "x": 473,
+      "y": 23170,
+      "w": 393,
+      "h": 5250,
+      "title": "Mobile · Investimentos · carregando",
+      "is_interactive": true
+    },
+    "Escuro-Mobile-Investimentos-Estado-Erro.dc.html": {
+      "x": 946,
+      "y": 23170,
+      "w": 393,
+      "h": 5250,
+      "title": "Mobile · Investimentos · erro de conexão",
+      "is_interactive": true
+    },
+    "Escuro-Mobile-Investimentos-Estado-Sem-Internet.dc.html": {
+      "x": 1419,
+      "y": 23170,
+      "w": 393,
+      "h": 5250,
+      "title": "Mobile · Investimentos · sem internet",
+      "is_interactive": true
+    },
+    "Escuro-Mobile-Investimentos-Estado-Vazio.dc.html": {
+      "x": 1892,
+      "y": 23170,
+      "w": 393,
+      "h": 5250,
+      "title": "Mobile · Investimentos · vazio",
+      "is_interactive": true
+    },
+    "Escuro-Desktop-Ativo.dc.html": {
+      "x": 0,
+      "y": 29140,
+      "w": 2560,
+      "h": 2650,
+      "title": "Desktop · Detalhe do ativo (PETR4) · original",
+      "is_interactive": true
+    },
+    "Escuro-Desktop-Ativo-Estado-Carregando.dc.html": {
+      "x": 2760,
+      "y": 29140,
+      "w": 2560,
+      "h": 2650,
+      "title": "Desktop · Detalhe do ativo (PETR4) · carregando",
+      "is_interactive": true
+    },
+    "Escuro-Desktop-Ativo-Estado-Erro.dc.html": {
+      "x": 5520,
+      "y": 29140,
+      "w": 2560,
+      "h": 2650,
+      "title": "Desktop · Detalhe do ativo (PETR4) · erro de conexão",
+      "is_interactive": true
+    },
+    "Escuro-Desktop-Ativo-Estado-Sem-Internet.dc.html": {
+      "x": 8280,
+      "y": 29140,
+      "w": 2560,
+      "h": 2650,
+      "title": "Desktop · Detalhe do ativo (PETR4) · sem internet",
+      "is_interactive": true
+    },
+    "Escuro-Desktop-Ativo-Estado-Vazio.dc.html": {
+      "x": 11040,
+      "y": 29140,
+      "w": 2560,
+      "h": 2650,
+      "title": "Desktop · Detalhe do ativo (PETR4) · vazio",
+      "is_interactive": true
+    },
+    "Escuro-Tablet-Ativo.dc.html": {
+      "x": 0,
+      "y": 31910,
+      "w": 820,
+      "h": 3810,
+      "title": "Tablet · Detalhe do ativo (PETR4) · original",
+      "is_interactive": true
+    },
+    "Escuro-Tablet-Ativo-Estado-Carregando.dc.html": {
+      "x": 940,
+      "y": 31910,
+      "w": 820,
+      "h": 3810,
+      "title": "Tablet · Detalhe do ativo (PETR4) · carregando",
+      "is_interactive": true
+    },
+    "Escuro-Tablet-Ativo-Estado-Erro.dc.html": {
+      "x": 1880,
+      "y": 31910,
+      "w": 820,
+      "h": 3810,
+      "title": "Tablet · Detalhe do ativo (PETR4) · erro de conexão",
+      "is_interactive": true
+    },
+    "Escuro-Tablet-Ativo-Estado-Sem-Internet.dc.html": {
+      "x": 2820,
+      "y": 31910,
+      "w": 820,
+      "h": 3810,
+      "title": "Tablet · Detalhe do ativo (PETR4) · sem internet",
+      "is_interactive": true
+    },
+    "Escuro-Tablet-Ativo-Estado-Vazio.dc.html": {
+      "x": 3760,
+      "y": 31910,
+      "w": 820,
+      "h": 3810,
+      "title": "Tablet · Detalhe do ativo (PETR4) · vazio",
+      "is_interactive": true
+    },
+    "Escuro-Mobile-Ativo.dc.html": {
+      "x": 0,
+      "y": 35840,
+      "w": 393,
+      "h": 4320,
+      "title": "Mobile · Detalhe do ativo (PETR4) · original",
+      "is_interactive": true
+    },
+    "Escuro-Mobile-Ativo-Estado-Carregando.dc.html": {
+      "x": 473,
+      "y": 35840,
+      "w": 393,
+      "h": 4320,
+      "title": "Mobile · Detalhe do ativo (PETR4) · carregando",
+      "is_interactive": true
+    },
+    "Escuro-Mobile-Ativo-Estado-Erro.dc.html": {
+      "x": 946,
+      "y": 35840,
+      "w": 393,
+      "h": 4320,
+      "title": "Mobile · Detalhe do ativo (PETR4) · erro de conexão",
+      "is_interactive": true
+    },
+    "Escuro-Mobile-Ativo-Estado-Sem-Internet.dc.html": {
+      "x": 1419,
+      "y": 35840,
+      "w": 393,
+      "h": 4320,
+      "title": "Mobile · Detalhe do ativo (PETR4) · sem internet",
+      "is_interactive": true
+    },
+    "Escuro-Mobile-Ativo-Estado-Vazio.dc.html": {
+      "x": 1892,
+      "y": 35840,
+      "w": 393,
+      "h": 4320,
+      "title": "Mobile · Detalhe do ativo (PETR4) · vazio",
+      "is_interactive": true
+    },
+    "Escuro-Desktop-Relatorio.dc.html": {
+      "x": 0,
+      "y": 40880,
+      "w": 2560,
+      "h": 1680,
+      "title": "Desktop · Relatório · original",
+      "is_interactive": true
+    },
+    "Escuro-Desktop-Relatorio-Estado-Carregando.dc.html": {
+      "x": 2760,
+      "y": 40880,
+      "w": 2560,
+      "h": 1680,
+      "title": "Desktop · Relatório · carregando",
+      "is_interactive": true
+    },
+    "Escuro-Desktop-Relatorio-Estado-Erro.dc.html": {
+      "x": 5520,
+      "y": 40880,
+      "w": 2560,
+      "h": 1680,
+      "title": "Desktop · Relatório · erro de conexão",
+      "is_interactive": true
+    },
+    "Escuro-Desktop-Relatorio-Estado-Sem-Internet.dc.html": {
+      "x": 8280,
+      "y": 40880,
+      "w": 2560,
+      "h": 1680,
+      "title": "Desktop · Relatório · sem internet",
+      "is_interactive": true
+    },
+    "Escuro-Desktop-Relatorio-Estado-Vazio.dc.html": {
+      "x": 11040,
+      "y": 40880,
+      "w": 2560,
+      "h": 1680,
+      "title": "Desktop · Relatório · vazio",
+      "is_interactive": true
+    },
+    "Escuro-Desktop-Relatorio-Estado-Vazio-Filtro.dc.html": {
+      "x": 13800,
+      "y": 40880,
+      "w": 2560,
+      "h": 1680,
+      "title": "Desktop · Relatório · vazio por filtro",
+      "is_interactive": true
+    },
+    "Escuro-Tablet-Relatorio.dc.html": {
+      "x": 0,
+      "y": 42680,
+      "w": 1180,
+      "h": 2460,
+      "title": "Tablet · Relatório · original",
+      "is_interactive": true
+    },
+    "Escuro-Tablet-Relatorio-Estado-Carregando.dc.html": {
+      "x": 1300,
+      "y": 42680,
+      "w": 1180,
+      "h": 2460,
+      "title": "Tablet · Relatório · carregando",
+      "is_interactive": true
+    },
+    "Escuro-Tablet-Relatorio-Estado-Erro.dc.html": {
+      "x": 2600,
+      "y": 42680,
+      "w": 1180,
+      "h": 2460,
+      "title": "Tablet · Relatório · erro de conexão",
+      "is_interactive": true
+    },
+    "Escuro-Tablet-Relatorio-Estado-Sem-Internet.dc.html": {
+      "x": 3900,
+      "y": 42680,
+      "w": 1180,
+      "h": 2460,
+      "title": "Tablet · Relatório · sem internet",
+      "is_interactive": true
+    },
+    "Escuro-Tablet-Relatorio-Estado-Vazio.dc.html": {
+      "x": 5200,
+      "y": 42680,
+      "w": 1180,
+      "h": 2460,
+      "title": "Tablet · Relatório · vazio",
+      "is_interactive": true
+    },
+    "Escuro-Tablet-Relatorio-Estado-Vazio-Filtro.dc.html": {
+      "x": 6500,
+      "y": 42680,
+      "w": 1180,
+      "h": 2460,
+      "title": "Tablet · Relatório · vazio por filtro",
+      "is_interactive": true
+    },
+    "Escuro-Mobile-Relatorio.dc.html": {
+      "x": 0,
+      "y": 45260,
+      "w": 393,
+      "h": 3040,
+      "title": "Mobile · Relatório · original",
+      "is_interactive": true
+    },
+    "Escuro-Mobile-Relatorio-Estado-Carregando.dc.html": {
+      "x": 473,
+      "y": 45260,
+      "w": 393,
+      "h": 3040,
+      "title": "Mobile · Relatório · carregando",
+      "is_interactive": true
+    },
+    "Escuro-Mobile-Relatorio-Estado-Erro.dc.html": {
+      "x": 946,
+      "y": 45260,
+      "w": 393,
+      "h": 3040,
+      "title": "Mobile · Relatório · erro de conexão",
+      "is_interactive": true
+    },
+    "Escuro-Mobile-Relatorio-Estado-Sem-Internet.dc.html": {
+      "x": 1419,
+      "y": 45260,
+      "w": 393,
+      "h": 3040,
+      "title": "Mobile · Relatório · sem internet",
+      "is_interactive": true
+    },
+    "Escuro-Mobile-Relatorio-Estado-Vazio.dc.html": {
+      "x": 1892,
+      "y": 45260,
+      "w": 393,
+      "h": 3040,
+      "title": "Mobile · Relatório · vazio",
+      "is_interactive": true
+    },
+    "Escuro-Mobile-Relatorio-Estado-Vazio-Filtro.dc.html": {
+      "x": 2365,
+      "y": 45260,
+      "w": 393,
+      "h": 3040,
+      "title": "Mobile · Relatório · vazio por filtro",
+      "is_interactive": true
+    },
+    "Escuro-Desktop-Alertas.dc.html": {
+      "x": 0,
+      "y": 49020,
+      "w": 2560,
+      "h": 1440,
+      "title": "Desktop · Alertas · original",
+      "is_interactive": true
+    },
+    "Escuro-Desktop-Alertas-Estado-Carregando.dc.html": {
+      "x": 2760,
+      "y": 49020,
+      "w": 2560,
+      "h": 1440,
+      "title": "Desktop · Alertas · carregando",
+      "is_interactive": true
+    },
+    "Escuro-Desktop-Alertas-Estado-Erro.dc.html": {
+      "x": 5520,
+      "y": 49020,
+      "w": 2560,
+      "h": 1440,
+      "title": "Desktop · Alertas · erro de conexão",
+      "is_interactive": true
+    },
+    "Escuro-Desktop-Alertas-Estado-Sem-Internet.dc.html": {
+      "x": 8280,
+      "y": 49020,
+      "w": 2560,
+      "h": 1440,
+      "title": "Desktop · Alertas · sem internet",
+      "is_interactive": true
+    },
+    "Escuro-Desktop-Alertas-Estado-Vazio.dc.html": {
+      "x": 11040,
+      "y": 49020,
+      "w": 2560,
+      "h": 1440,
+      "title": "Desktop · Alertas · vazio",
+      "is_interactive": true
+    },
+    "Escuro-Desktop-Alertas-Estado-Vazio-Filtro.dc.html": {
+      "x": 13800,
+      "y": 49020,
+      "w": 2560,
+      "h": 1440,
+      "title": "Desktop · Alertas · vazio por filtro",
+      "is_interactive": true
+    },
+    "Escuro-Tablet-Alertas.dc.html": {
+      "x": 0,
+      "y": 50580,
+      "w": 820,
+      "h": 1190,
+      "title": "Tablet · Alertas · original",
+      "is_interactive": true
+    },
+    "Escuro-Tablet-Alertas-Estado-Carregando.dc.html": {
+      "x": 940,
+      "y": 50580,
+      "w": 820,
+      "h": 1190,
+      "title": "Tablet · Alertas · carregando",
+      "is_interactive": true
+    },
+    "Escuro-Tablet-Alertas-Estado-Erro.dc.html": {
+      "x": 1880,
+      "y": 50580,
+      "w": 820,
+      "h": 1190,
+      "title": "Tablet · Alertas · erro de conexão",
+      "is_interactive": true
+    },
+    "Escuro-Tablet-Alertas-Estado-Sem-Internet.dc.html": {
+      "x": 2820,
+      "y": 50580,
+      "w": 820,
+      "h": 1190,
+      "title": "Tablet · Alertas · sem internet",
+      "is_interactive": true
+    },
+    "Escuro-Tablet-Alertas-Estado-Vazio.dc.html": {
+      "x": 3760,
+      "y": 50580,
+      "w": 820,
+      "h": 1190,
+      "title": "Tablet · Alertas · vazio",
+      "is_interactive": true
+    },
+    "Escuro-Tablet-Alertas-Estado-Vazio-Filtro.dc.html": {
+      "x": 4700,
+      "y": 50580,
+      "w": 820,
+      "h": 1190,
+      "title": "Tablet · Alertas · vazio por filtro",
+      "is_interactive": true
+    },
+    "Escuro-Mobile-Alertas.dc.html": {
+      "x": 0,
+      "y": 51890,
+      "w": 393,
+      "h": 1540,
+      "title": "Mobile · Alertas · original",
+      "is_interactive": true
+    },
+    "Escuro-Mobile-Alertas-Estado-Carregando.dc.html": {
+      "x": 473,
+      "y": 51890,
+      "w": 393,
+      "h": 1540,
+      "title": "Mobile · Alertas · carregando",
+      "is_interactive": true
+    },
+    "Escuro-Mobile-Alertas-Estado-Erro.dc.html": {
+      "x": 946,
+      "y": 51890,
+      "w": 393,
+      "h": 1540,
+      "title": "Mobile · Alertas · erro de conexão",
+      "is_interactive": true
+    },
+    "Escuro-Mobile-Alertas-Estado-Sem-Internet.dc.html": {
+      "x": 1419,
+      "y": 51890,
+      "w": 393,
+      "h": 1540,
+      "title": "Mobile · Alertas · sem internet",
+      "is_interactive": true
+    },
+    "Escuro-Mobile-Alertas-Estado-Vazio.dc.html": {
+      "x": 1892,
+      "y": 51890,
+      "w": 393,
+      "h": 1540,
+      "title": "Mobile · Alertas · vazio",
+      "is_interactive": true
+    },
+    "Escuro-Mobile-Alertas-Estado-Vazio-Filtro.dc.html": {
+      "x": 2365,
+      "y": 51890,
+      "w": 393,
+      "h": 1540,
+      "title": "Mobile · Alertas · vazio por filtro",
+      "is_interactive": true
+    },
+    "Escuro-Desktop-Assinaturas.dc.html": {
+      "x": 0,
+      "y": 54150,
+      "w": 2560,
+      "h": 1440,
+      "title": "Desktop · Assinaturas · original",
+      "is_interactive": true
+    },
+    "Escuro-Desktop-Assinaturas-Estado-Carregando.dc.html": {
+      "x": 2760,
+      "y": 54150,
+      "w": 2560,
+      "h": 1440,
+      "title": "Desktop · Assinaturas · carregando",
+      "is_interactive": true
+    },
+    "Escuro-Desktop-Assinaturas-Estado-Erro.dc.html": {
+      "x": 5520,
+      "y": 54150,
+      "w": 2560,
+      "h": 1440,
+      "title": "Desktop · Assinaturas · erro de conexão",
+      "is_interactive": true
+    },
+    "Escuro-Desktop-Assinaturas-Estado-Sem-Internet.dc.html": {
+      "x": 8280,
+      "y": 54150,
+      "w": 2560,
+      "h": 1440,
+      "title": "Desktop · Assinaturas · sem internet",
+      "is_interactive": true
+    },
+    "Escuro-Desktop-Assinaturas-Estado-Vazio.dc.html": {
+      "x": 11040,
+      "y": 54150,
+      "w": 2560,
+      "h": 1440,
+      "title": "Desktop · Assinaturas · vazio",
+      "is_interactive": true
+    },
+    "Escuro-Desktop-Assinaturas-Estado-Vazio-Filtro.dc.html": {
+      "x": 13800,
+      "y": 54150,
+      "w": 2560,
+      "h": 1440,
+      "title": "Desktop · Assinaturas · vazio por filtro",
+      "is_interactive": true
+    },
+    "Escuro-Tablet-Assinaturas.dc.html": {
+      "x": 0,
+      "y": 55710,
+      "w": 820,
+      "h": 1250,
+      "title": "Tablet · Assinaturas · original",
+      "is_interactive": true
+    },
+    "Escuro-Tablet-Assinaturas-Estado-Carregando.dc.html": {
+      "x": 940,
+      "y": 55710,
+      "w": 820,
+      "h": 1250,
+      "title": "Tablet · Assinaturas · carregando",
+      "is_interactive": true
+    },
+    "Escuro-Tablet-Assinaturas-Estado-Erro.dc.html": {
+      "x": 1880,
+      "y": 55710,
+      "w": 820,
+      "h": 1250,
+      "title": "Tablet · Assinaturas · erro de conexão",
+      "is_interactive": true
+    },
+    "Escuro-Tablet-Assinaturas-Estado-Sem-Internet.dc.html": {
+      "x": 2820,
+      "y": 55710,
+      "w": 820,
+      "h": 1250,
+      "title": "Tablet · Assinaturas · sem internet",
+      "is_interactive": true
+    },
+    "Escuro-Tablet-Assinaturas-Estado-Vazio.dc.html": {
+      "x": 3760,
+      "y": 55710,
+      "w": 820,
+      "h": 1250,
+      "title": "Tablet · Assinaturas · vazio",
+      "is_interactive": true
+    },
+    "Escuro-Tablet-Assinaturas-Estado-Vazio-Filtro.dc.html": {
+      "x": 4700,
+      "y": 55710,
+      "w": 820,
+      "h": 1250,
+      "title": "Tablet · Assinaturas · vazio por filtro",
+      "is_interactive": true
+    },
+    "Escuro-Mobile-Assinaturas.dc.html": {
+      "x": 0,
+      "y": 57080,
+      "w": 393,
+      "h": 1540,
+      "title": "Mobile · Assinaturas · original",
+      "is_interactive": true
+    },
+    "Escuro-Mobile-Assinaturas-Estado-Carregando.dc.html": {
+      "x": 473,
+      "y": 57080,
+      "w": 393,
+      "h": 1540,
+      "title": "Mobile · Assinaturas · carregando",
+      "is_interactive": true
+    },
+    "Escuro-Mobile-Assinaturas-Estado-Erro.dc.html": {
+      "x": 946,
+      "y": 57080,
+      "w": 393,
+      "h": 1540,
+      "title": "Mobile · Assinaturas · erro de conexão",
+      "is_interactive": true
+    },
+    "Escuro-Mobile-Assinaturas-Estado-Sem-Internet.dc.html": {
+      "x": 1419,
+      "y": 57080,
+      "w": 393,
+      "h": 1540,
+      "title": "Mobile · Assinaturas · sem internet",
+      "is_interactive": true
+    },
+    "Escuro-Mobile-Assinaturas-Estado-Vazio.dc.html": {
+      "x": 1892,
+      "y": 57080,
+      "w": 393,
+      "h": 1540,
+      "title": "Mobile · Assinaturas · vazio",
+      "is_interactive": true
+    },
+    "Escuro-Mobile-Assinaturas-Estado-Vazio-Filtro.dc.html": {
+      "x": 2365,
+      "y": 57080,
+      "w": 393,
+      "h": 1540,
+      "title": "Mobile · Assinaturas · vazio por filtro",
+      "is_interactive": true
+    },
+    "Escuro-Desktop-Notificacoes.dc.html": {
+      "x": 0,
+      "y": 59340,
+      "w": 2560,
+      "h": 1440,
+      "title": "Desktop · Notificações · original",
+      "is_interactive": true
+    },
+    "Escuro-Desktop-Notificacoes-Estado-Carregando.dc.html": {
+      "x": 2760,
+      "y": 59340,
+      "w": 2560,
+      "h": 1440,
+      "title": "Desktop · Notificações · carregando",
+      "is_interactive": true
+    },
+    "Escuro-Desktop-Notificacoes-Estado-Erro.dc.html": {
+      "x": 5520,
+      "y": 59340,
+      "w": 2560,
+      "h": 1440,
+      "title": "Desktop · Notificações · erro de conexão",
+      "is_interactive": true
+    },
+    "Escuro-Desktop-Notificacoes-Estado-Sem-Internet.dc.html": {
+      "x": 8280,
+      "y": 59340,
+      "w": 2560,
+      "h": 1440,
+      "title": "Desktop · Notificações · sem internet",
+      "is_interactive": true
+    },
+    "Escuro-Desktop-Notificacoes-Estado-Vazio.dc.html": {
+      "x": 11040,
+      "y": 59340,
+      "w": 2560,
+      "h": 1440,
+      "title": "Desktop · Notificações · vazio",
+      "is_interactive": true
+    },
+    "Escuro-Desktop-Notificacoes-Estado-Vazio-Filtro.dc.html": {
+      "x": 13800,
+      "y": 59340,
+      "w": 2560,
+      "h": 1440,
+      "title": "Desktop · Notificações · vazio por filtro",
+      "is_interactive": true
+    },
+    "Escuro-Tablet-Notificacoes.dc.html": {
+      "x": 0,
+      "y": 60900,
+      "w": 820,
+      "h": 1360,
+      "title": "Tablet · Notificações · original",
+      "is_interactive": true
+    },
+    "Escuro-Tablet-Notificacoes-Estado-Carregando.dc.html": {
+      "x": 940,
+      "y": 60900,
+      "w": 820,
+      "h": 1360,
+      "title": "Tablet · Notificações · carregando",
+      "is_interactive": true
+    },
+    "Escuro-Tablet-Notificacoes-Estado-Erro.dc.html": {
+      "x": 1880,
+      "y": 60900,
+      "w": 820,
+      "h": 1360,
+      "title": "Tablet · Notificações · erro de conexão",
+      "is_interactive": true
+    },
+    "Escuro-Tablet-Notificacoes-Estado-Sem-Internet.dc.html": {
+      "x": 2820,
+      "y": 60900,
+      "w": 820,
+      "h": 1360,
+      "title": "Tablet · Notificações · sem internet",
+      "is_interactive": true
+    },
+    "Escuro-Tablet-Notificacoes-Estado-Vazio.dc.html": {
+      "x": 3760,
+      "y": 60900,
+      "w": 820,
+      "h": 1360,
+      "title": "Tablet · Notificações · vazio",
+      "is_interactive": true
+    },
+    "Escuro-Tablet-Notificacoes-Estado-Vazio-Filtro.dc.html": {
+      "x": 4700,
+      "y": 60900,
+      "w": 820,
+      "h": 1360,
+      "title": "Tablet · Notificações · vazio por filtro",
+      "is_interactive": true
+    },
+    "Escuro-Mobile-Notificacoes.dc.html": {
+      "x": 0,
+      "y": 62380,
+      "w": 393,
+      "h": 1630,
+      "title": "Mobile · Notificações · original",
+      "is_interactive": true
+    },
+    "Escuro-Mobile-Notificacoes-Estado-Carregando.dc.html": {
+      "x": 473,
+      "y": 62380,
+      "w": 393,
+      "h": 1630,
+      "title": "Mobile · Notificações · carregando",
+      "is_interactive": true
+    },
+    "Escuro-Mobile-Notificacoes-Estado-Erro.dc.html": {
+      "x": 946,
+      "y": 62380,
+      "w": 393,
+      "h": 1630,
+      "title": "Mobile · Notificações · erro de conexão",
+      "is_interactive": true
+    },
+    "Escuro-Mobile-Notificacoes-Estado-Sem-Internet.dc.html": {
+      "x": 1419,
+      "y": 62380,
+      "w": 393,
+      "h": 1630,
+      "title": "Mobile · Notificações · sem internet",
+      "is_interactive": true
+    },
+    "Escuro-Mobile-Notificacoes-Estado-Vazio.dc.html": {
+      "x": 1892,
+      "y": 62380,
+      "w": 393,
+      "h": 1630,
+      "title": "Mobile · Notificações · vazio",
+      "is_interactive": true
+    },
+    "Escuro-Mobile-Notificacoes-Estado-Vazio-Filtro.dc.html": {
+      "x": 2365,
+      "y": 62380,
+      "w": 393,
+      "h": 1630,
+      "title": "Mobile · Notificações · vazio por filtro",
+      "is_interactive": true
+    },
+    "Escuro-Desktop-Meta-Detalhe.dc.html": {
+      "x": 0,
+      "y": 64730,
+      "w": 2560,
+      "h": 1440,
+      "title": "Desktop · Detalhe da meta · original",
+      "is_interactive": true
+    },
+    "Escuro-Desktop-Meta-Detalhe-Estado-Carregando.dc.html": {
+      "x": 2760,
+      "y": 64730,
+      "w": 2560,
+      "h": 1440,
+      "title": "Desktop · Detalhe da meta · carregando",
+      "is_interactive": true
+    },
+    "Escuro-Desktop-Meta-Detalhe-Estado-Erro.dc.html": {
+      "x": 5520,
+      "y": 64730,
+      "w": 2560,
+      "h": 1440,
+      "title": "Desktop · Detalhe da meta · erro de conexão",
+      "is_interactive": true
+    },
+    "Escuro-Desktop-Meta-Detalhe-Estado-Sem-Internet.dc.html": {
+      "x": 8280,
+      "y": 64730,
+      "w": 2560,
+      "h": 1440,
+      "title": "Desktop · Detalhe da meta · sem internet",
+      "is_interactive": true
+    },
+    "Escuro-Desktop-Meta-Detalhe-Estado-Vazio.dc.html": {
+      "x": 11040,
+      "y": 64730,
+      "w": 2560,
+      "h": 1440,
+      "title": "Desktop · Detalhe da meta · vazio",
+      "is_interactive": true
+    },
+    "Escuro-Tablet-Meta-Detalhe.dc.html": {
+      "x": 0,
+      "y": 66290,
+      "w": 820,
+      "h": 1670,
+      "title": "Tablet · Detalhe da meta · original",
+      "is_interactive": true
+    },
+    "Escuro-Tablet-Meta-Detalhe-Estado-Carregando.dc.html": {
+      "x": 940,
+      "y": 66290,
+      "w": 820,
+      "h": 1670,
+      "title": "Tablet · Detalhe da meta · carregando",
+      "is_interactive": true
+    },
+    "Escuro-Tablet-Meta-Detalhe-Estado-Erro.dc.html": {
+      "x": 1880,
+      "y": 66290,
+      "w": 820,
+      "h": 1670,
+      "title": "Tablet · Detalhe da meta · erro de conexão",
+      "is_interactive": true
+    },
+    "Escuro-Tablet-Meta-Detalhe-Estado-Sem-Internet.dc.html": {
+      "x": 2820,
+      "y": 66290,
+      "w": 820,
+      "h": 1670,
+      "title": "Tablet · Detalhe da meta · sem internet",
+      "is_interactive": true
+    },
+    "Escuro-Tablet-Meta-Detalhe-Estado-Vazio.dc.html": {
+      "x": 3760,
+      "y": 66290,
+      "w": 820,
+      "h": 1670,
+      "title": "Tablet · Detalhe da meta · vazio",
+      "is_interactive": true
+    },
+    "Escuro-Mobile-Meta-Detalhe.dc.html": {
+      "x": 0,
+      "y": 68080,
+      "w": 393,
+      "h": 2180,
+      "title": "Mobile · Detalhe da meta · original",
+      "is_interactive": true
+    },
+    "Escuro-Mobile-Meta-Detalhe-Estado-Carregando.dc.html": {
+      "x": 473,
+      "y": 68080,
+      "w": 393,
+      "h": 2180,
+      "title": "Mobile · Detalhe da meta · carregando",
+      "is_interactive": true
+    },
+    "Escuro-Mobile-Meta-Detalhe-Estado-Erro.dc.html": {
+      "x": 946,
+      "y": 68080,
+      "w": 393,
+      "h": 2180,
+      "title": "Mobile · Detalhe da meta · erro de conexão",
+      "is_interactive": true
+    },
+    "Escuro-Mobile-Meta-Detalhe-Estado-Sem-Internet.dc.html": {
+      "x": 1419,
+      "y": 68080,
+      "w": 393,
+      "h": 2180,
+      "title": "Mobile · Detalhe da meta · sem internet",
+      "is_interactive": true
+    },
+    "Escuro-Mobile-Meta-Detalhe-Estado-Vazio.dc.html": {
+      "x": 1892,
+      "y": 68080,
+      "w": 393,
+      "h": 2180,
+      "title": "Mobile · Detalhe da meta · vazio",
+      "is_interactive": true
+    },
+    "Escuro-Desktop-Lancamento-Detalhe.dc.html": {
+      "x": 0,
+      "y": 70980,
+      "w": 2560,
+      "h": 1440,
+      "title": "Desktop · Detalhe do lançamento · original",
+      "is_interactive": true
+    },
+    "Escuro-Desktop-Lancamento-Detalhe-Estado-Carregando.dc.html": {
+      "x": 2760,
+      "y": 70980,
+      "w": 2560,
+      "h": 1440,
+      "title": "Desktop · Detalhe do lançamento · carregando",
+      "is_interactive": true
+    },
+    "Escuro-Desktop-Lancamento-Detalhe-Estado-Erro.dc.html": {
+      "x": 5520,
+      "y": 70980,
+      "w": 2560,
+      "h": 1440,
+      "title": "Desktop · Detalhe do lançamento · erro de conexão",
+      "is_interactive": true
+    },
+    "Escuro-Desktop-Lancamento-Detalhe-Estado-Sem-Internet.dc.html": {
+      "x": 8280,
+      "y": 70980,
+      "w": 2560,
+      "h": 1440,
+      "title": "Desktop · Detalhe do lançamento · sem internet",
+      "is_interactive": true
+    },
+    "Escuro-Desktop-Lancamento-Detalhe-Estado-Vazio.dc.html": {
+      "x": 11040,
+      "y": 70980,
+      "w": 2560,
+      "h": 1440,
+      "title": "Desktop · Detalhe do lançamento · vazio",
+      "is_interactive": true
+    },
+    "Escuro-Tablet-Lancamento-Detalhe.dc.html": {
+      "x": 0,
+      "y": 72540,
+      "w": 820,
+      "h": 1180,
+      "title": "Tablet · Detalhe do lançamento · original",
+      "is_interactive": true
+    },
+    "Escuro-Tablet-Lancamento-Detalhe-Estado-Carregando.dc.html": {
+      "x": 940,
+      "y": 72540,
+      "w": 820,
+      "h": 1180,
+      "title": "Tablet · Detalhe do lançamento · carregando",
+      "is_interactive": true
+    },
+    "Escuro-Tablet-Lancamento-Detalhe-Estado-Erro.dc.html": {
+      "x": 1880,
+      "y": 72540,
+      "w": 820,
+      "h": 1180,
+      "title": "Tablet · Detalhe do lançamento · erro de conexão",
+      "is_interactive": true
+    },
+    "Escuro-Tablet-Lancamento-Detalhe-Estado-Sem-Internet.dc.html": {
+      "x": 2820,
+      "y": 72540,
+      "w": 820,
+      "h": 1180,
+      "title": "Tablet · Detalhe do lançamento · sem internet",
+      "is_interactive": true
+    },
+    "Escuro-Tablet-Lancamento-Detalhe-Estado-Vazio.dc.html": {
+      "x": 3760,
+      "y": 72540,
+      "w": 820,
+      "h": 1180,
+      "title": "Tablet · Detalhe do lançamento · vazio",
+      "is_interactive": true
+    },
+    "Escuro-Mobile-Lancamento-Detalhe.dc.html": {
+      "x": 0,
+      "y": 73840,
+      "w": 393,
+      "h": 1540,
+      "title": "Mobile · Detalhe do lançamento · original",
+      "is_interactive": true
+    },
+    "Escuro-Mobile-Lancamento-Detalhe-Estado-Carregando.dc.html": {
+      "x": 473,
+      "y": 73840,
+      "w": 393,
+      "h": 1540,
+      "title": "Mobile · Detalhe do lançamento · carregando",
+      "is_interactive": true
+    },
+    "Escuro-Mobile-Lancamento-Detalhe-Estado-Erro.dc.html": {
+      "x": 946,
+      "y": 73840,
+      "w": 393,
+      "h": 1540,
+      "title": "Mobile · Detalhe do lançamento · erro de conexão",
+      "is_interactive": true
+    },
+    "Escuro-Mobile-Lancamento-Detalhe-Estado-Sem-Internet.dc.html": {
+      "x": 1419,
+      "y": 73840,
+      "w": 393,
+      "h": 1540,
+      "title": "Mobile · Detalhe do lançamento · sem internet",
+      "is_interactive": true
+    },
+    "Escuro-Mobile-Lancamento-Detalhe-Estado-Vazio.dc.html": {
+      "x": 1892,
+      "y": 73840,
+      "w": 393,
+      "h": 1540,
+      "title": "Mobile · Detalhe do lançamento · vazio",
+      "is_interactive": true
+    },
+    "Escuro-Desktop-Lancamentos.dc.html": {
+      "x": 0,
+      "y": 76100,
+      "w": 2560,
+      "h": 1440,
+      "title": "Desktop · Lançamentos · original",
+      "is_interactive": true
+    },
+    "Escuro-Desktop-Lancamentos-Estado-Carregando.dc.html": {
+      "x": 2760,
+      "y": 76100,
+      "w": 2560,
+      "h": 1440,
+      "title": "Desktop · Lançamentos · carregando",
+      "is_interactive": true
+    },
+    "Escuro-Desktop-Lancamentos-Estado-Erro.dc.html": {
+      "x": 5520,
+      "y": 76100,
+      "w": 2560,
+      "h": 1440,
+      "title": "Desktop · Lançamentos · erro de conexão",
+      "is_interactive": true
+    },
+    "Escuro-Desktop-Lancamentos-Estado-Sem-Internet.dc.html": {
+      "x": 8280,
+      "y": 76100,
+      "w": 2560,
+      "h": 1440,
+      "title": "Desktop · Lançamentos · sem internet",
+      "is_interactive": true
+    },
+    "Escuro-Desktop-Lancamentos-Estado-Vazio.dc.html": {
+      "x": 11040,
+      "y": 76100,
+      "w": 2560,
+      "h": 1440,
+      "title": "Desktop · Lançamentos · vazio",
+      "is_interactive": true
+    },
+    "Escuro-Desktop-Lancamentos-Estado-Vazio-Filtro.dc.html": {
+      "x": 13800,
+      "y": 76100,
+      "w": 2560,
+      "h": 1440,
+      "title": "Desktop · Lançamentos · vazio por filtro",
+      "is_interactive": true
+    },
+    "Escuro-Tablet-Lancamentos.dc.html": {
+      "x": 0,
+      "y": 77660,
+      "w": 820,
+      "h": 2040,
+      "title": "Tablet · Lançamentos · original",
+      "is_interactive": true
+    },
+    "Escuro-Tablet-Lancamentos-Estado-Carregando.dc.html": {
+      "x": 940,
+      "y": 77660,
+      "w": 820,
+      "h": 2040,
+      "title": "Tablet · Lançamentos · carregando",
+      "is_interactive": true
+    },
+    "Escuro-Tablet-Lancamentos-Estado-Erro.dc.html": {
+      "x": 1880,
+      "y": 77660,
+      "w": 820,
+      "h": 2040,
+      "title": "Tablet · Lançamentos · erro de conexão",
+      "is_interactive": true
+    },
+    "Escuro-Tablet-Lancamentos-Estado-Sem-Internet.dc.html": {
+      "x": 2820,
+      "y": 77660,
+      "w": 820,
+      "h": 2040,
+      "title": "Tablet · Lançamentos · sem internet",
+      "is_interactive": true
+    },
+    "Escuro-Tablet-Lancamentos-Estado-Vazio.dc.html": {
+      "x": 3760,
+      "y": 77660,
+      "w": 820,
+      "h": 2040,
+      "title": "Tablet · Lançamentos · vazio",
+      "is_interactive": true
+    },
+    "Escuro-Tablet-Lancamentos-Estado-Vazio-Filtro.dc.html": {
+      "x": 4700,
+      "y": 77660,
+      "w": 820,
+      "h": 2040,
+      "title": "Tablet · Lançamentos · vazio por filtro",
+      "is_interactive": true
+    },
+    "Escuro-Mobile-Lancamentos.dc.html": {
+      "x": 0,
+      "y": 79820,
+      "w": 393,
+      "h": 2020,
+      "title": "Mobile · Lançamentos · original",
+      "is_interactive": true
+    },
+    "Escuro-Mobile-Lancamentos-Estado-Carregando.dc.html": {
+      "x": 473,
+      "y": 79820,
+      "w": 393,
+      "h": 2020,
+      "title": "Mobile · Lançamentos · carregando",
+      "is_interactive": true
+    },
+    "Escuro-Mobile-Lancamentos-Estado-Erro.dc.html": {
+      "x": 946,
+      "y": 79820,
+      "w": 393,
+      "h": 2020,
+      "title": "Mobile · Lançamentos · erro de conexão",
+      "is_interactive": true
+    },
+    "Escuro-Mobile-Lancamentos-Estado-Sem-Internet.dc.html": {
+      "x": 1419,
+      "y": 79820,
+      "w": 393,
+      "h": 2020,
+      "title": "Mobile · Lançamentos · sem internet",
+      "is_interactive": true
+    },
+    "Escuro-Mobile-Lancamentos-Estado-Vazio.dc.html": {
+      "x": 1892,
+      "y": 79820,
+      "w": 393,
+      "h": 2020,
+      "title": "Mobile · Lançamentos · vazio",
+      "is_interactive": true
+    },
+    "Escuro-Mobile-Lancamentos-Estado-Vazio-Filtro.dc.html": {
+      "x": 2365,
+      "y": 79820,
+      "w": 393,
+      "h": 2020,
+      "title": "Mobile · Lançamentos · vazio por filtro",
+      "is_interactive": true
+    },
+    "Escuro-Desktop-Metas.dc.html": {
+      "x": 0,
+      "y": 82560,
+      "w": 2560,
+      "h": 1440,
+      "title": "Desktop · Metas · original",
+      "is_interactive": true
+    },
+    "Escuro-Desktop-Metas-Estado-Carregando.dc.html": {
+      "x": 2760,
+      "y": 82560,
+      "w": 2560,
+      "h": 1440,
+      "title": "Desktop · Metas · carregando",
+      "is_interactive": true
+    },
+    "Escuro-Desktop-Metas-Estado-Erro.dc.html": {
+      "x": 5520,
+      "y": 82560,
+      "w": 2560,
+      "h": 1440,
+      "title": "Desktop · Metas · erro de conexão",
+      "is_interactive": true
+    },
+    "Escuro-Desktop-Metas-Estado-Sem-Internet.dc.html": {
+      "x": 8280,
+      "y": 82560,
+      "w": 2560,
+      "h": 1440,
+      "title": "Desktop · Metas · sem internet",
+      "is_interactive": true
+    },
+    "Escuro-Desktop-Metas-Estado-Vazio.dc.html": {
+      "x": 11040,
+      "y": 82560,
+      "w": 2560,
+      "h": 1440,
+      "title": "Desktop · Metas · vazio",
+      "is_interactive": true
+    },
+    "Escuro-Tablet-Metas.dc.html": {
+      "x": 0,
+      "y": 84120,
+      "w": 820,
+      "h": 1180,
+      "title": "Tablet · Metas · original",
+      "is_interactive": true
+    },
+    "Escuro-Tablet-Metas-Estado-Carregando.dc.html": {
+      "x": 940,
+      "y": 84120,
+      "w": 820,
+      "h": 1180,
+      "title": "Tablet · Metas · carregando",
+      "is_interactive": true
+    },
+    "Escuro-Tablet-Metas-Estado-Erro.dc.html": {
+      "x": 1880,
+      "y": 84120,
+      "w": 820,
+      "h": 1180,
+      "title": "Tablet · Metas · erro de conexão",
+      "is_interactive": true
+    },
+    "Escuro-Tablet-Metas-Estado-Sem-Internet.dc.html": {
+      "x": 2820,
+      "y": 84120,
+      "w": 820,
+      "h": 1180,
+      "title": "Tablet · Metas · sem internet",
+      "is_interactive": true
+    },
+    "Escuro-Tablet-Metas-Estado-Vazio.dc.html": {
+      "x": 3760,
+      "y": 84120,
+      "w": 820,
+      "h": 1180,
+      "title": "Tablet · Metas · vazio",
+      "is_interactive": true
+    },
+    "Escuro-Mobile-Metas.dc.html": {
+      "x": 0,
+      "y": 85420,
+      "w": 393,
+      "h": 1310,
+      "title": "Mobile · Metas · original",
+      "is_interactive": true
+    },
+    "Escuro-Mobile-Metas-Estado-Carregando.dc.html": {
+      "x": 473,
+      "y": 85420,
+      "w": 393,
+      "h": 1310,
+      "title": "Mobile · Metas · carregando",
+      "is_interactive": true
+    },
+    "Escuro-Mobile-Metas-Estado-Erro.dc.html": {
+      "x": 946,
+      "y": 85420,
+      "w": 393,
+      "h": 1310,
+      "title": "Mobile · Metas · erro de conexão",
+      "is_interactive": true
+    },
+    "Escuro-Mobile-Metas-Estado-Sem-Internet.dc.html": {
+      "x": 1419,
+      "y": 85420,
+      "w": 393,
+      "h": 1310,
+      "title": "Mobile · Metas · sem internet",
+      "is_interactive": true
+    },
+    "Escuro-Mobile-Metas-Estado-Vazio.dc.html": {
+      "x": 1892,
+      "y": 85420,
+      "w": 393,
+      "h": 1310,
+      "title": "Mobile · Metas · vazio",
+      "is_interactive": true
+    },
+    "Escuro-Desktop-Posicoes.dc.html": {
+      "x": 0,
+      "y": 87450,
+      "w": 2560,
+      "h": 1850,
+      "title": "Desktop · Posições · original",
+      "is_interactive": true
+    },
+    "Escuro-Desktop-Posicoes-Estado-Carregando.dc.html": {
+      "x": 2760,
+      "y": 87450,
+      "w": 2560,
+      "h": 1850,
+      "title": "Desktop · Posições · carregando",
+      "is_interactive": true
+    },
+    "Escuro-Desktop-Posicoes-Estado-Erro.dc.html": {
+      "x": 5520,
+      "y": 87450,
+      "w": 2560,
+      "h": 1850,
+      "title": "Desktop · Posições · erro de conexão",
+      "is_interactive": true
+    },
+    "Escuro-Desktop-Posicoes-Estado-Sem-Internet.dc.html": {
+      "x": 8280,
+      "y": 87450,
+      "w": 2560,
+      "h": 1850,
+      "title": "Desktop · Posições · sem internet",
+      "is_interactive": true
+    },
+    "Escuro-Desktop-Posicoes-Estado-Vazio.dc.html": {
+      "x": 11040,
+      "y": 87450,
+      "w": 2560,
+      "h": 1850,
+      "title": "Desktop · Posições · vazio",
+      "is_interactive": true
+    },
+    "Escuro-Desktop-Posicoes-Estado-Vazio-Filtro.dc.html": {
+      "x": 13800,
+      "y": 87450,
+      "w": 2560,
+      "h": 1850,
+      "title": "Desktop · Posições · vazio por filtro",
+      "is_interactive": true
+    },
+    "Escuro-Tablet-Posicoes.dc.html": {
+      "x": 0,
+      "y": 89420,
+      "w": 820,
+      "h": 1780,
+      "title": "Tablet · Posições · original",
+      "is_interactive": true
+    },
+    "Escuro-Tablet-Posicoes-Estado-Carregando.dc.html": {
+      "x": 940,
+      "y": 89420,
+      "w": 820,
+      "h": 1780,
+      "title": "Tablet · Posições · carregando",
+      "is_interactive": true
+    },
+    "Escuro-Tablet-Posicoes-Estado-Erro.dc.html": {
+      "x": 1880,
+      "y": 89420,
+      "w": 820,
+      "h": 1780,
+      "title": "Tablet · Posições · erro de conexão",
+      "is_interactive": true
+    },
+    "Escuro-Tablet-Posicoes-Estado-Sem-Internet.dc.html": {
+      "x": 2820,
+      "y": 89420,
+      "w": 820,
+      "h": 1780,
+      "title": "Tablet · Posições · sem internet",
+      "is_interactive": true
+    },
+    "Escuro-Tablet-Posicoes-Estado-Vazio.dc.html": {
+      "x": 3760,
+      "y": 89420,
+      "w": 820,
+      "h": 1780,
+      "title": "Tablet · Posições · vazio",
+      "is_interactive": true
+    },
+    "Escuro-Tablet-Posicoes-Estado-Vazio-Filtro.dc.html": {
+      "x": 4700,
+      "y": 89420,
+      "w": 820,
+      "h": 1780,
+      "title": "Tablet · Posições · vazio por filtro",
+      "is_interactive": true
+    },
+    "Escuro-Mobile-Posicoes.dc.html": {
+      "x": 0,
+      "y": 91320,
+      "w": 393,
+      "h": 2020,
+      "title": "Mobile · Posições · original",
+      "is_interactive": true
+    },
+    "Escuro-Mobile-Posicoes-Estado-Carregando.dc.html": {
+      "x": 473,
+      "y": 91320,
+      "w": 393,
+      "h": 2020,
+      "title": "Mobile · Posições · carregando",
+      "is_interactive": true
+    },
+    "Escuro-Mobile-Posicoes-Estado-Erro.dc.html": {
+      "x": 946,
+      "y": 91320,
+      "w": 393,
+      "h": 2020,
+      "title": "Mobile · Posições · erro de conexão",
+      "is_interactive": true
+    },
+    "Escuro-Mobile-Posicoes-Estado-Sem-Internet.dc.html": {
+      "x": 1419,
+      "y": 91320,
+      "w": 393,
+      "h": 2020,
+      "title": "Mobile · Posições · sem internet",
+      "is_interactive": true
+    },
+    "Escuro-Mobile-Posicoes-Estado-Vazio.dc.html": {
+      "x": 1892,
+      "y": 91320,
+      "w": 393,
+      "h": 2020,
+      "title": "Mobile · Posições · vazio",
+      "is_interactive": true
+    },
+    "Escuro-Mobile-Posicoes-Estado-Vazio-Filtro.dc.html": {
+      "x": 2365,
+      "y": 91320,
+      "w": 393,
+      "h": 2020,
+      "title": "Mobile · Posições · vazio por filtro",
+      "is_interactive": true
+    },
+    "Escuro-Desktop-Simulacoes.dc.html": {
+      "x": 0,
+      "y": 94060,
+      "w": 2560,
+      "h": 1440,
+      "title": "Desktop · Simulações salvas · original",
+      "is_interactive": true
+    },
+    "Escuro-Desktop-Simulacoes-Estado-Carregando.dc.html": {
+      "x": 2760,
+      "y": 94060,
+      "w": 2560,
+      "h": 1440,
+      "title": "Desktop · Simulações salvas · carregando",
+      "is_interactive": true
+    },
+    "Escuro-Desktop-Simulacoes-Estado-Erro.dc.html": {
+      "x": 5520,
+      "y": 94060,
+      "w": 2560,
+      "h": 1440,
+      "title": "Desktop · Simulações salvas · erro de conexão",
+      "is_interactive": true
+    },
+    "Escuro-Desktop-Simulacoes-Estado-Sem-Internet.dc.html": {
+      "x": 8280,
+      "y": 94060,
+      "w": 2560,
+      "h": 1440,
+      "title": "Desktop · Simulações salvas · sem internet",
+      "is_interactive": true
+    },
+    "Escuro-Desktop-Simulacoes-Estado-Vazio.dc.html": {
+      "x": 11040,
+      "y": 94060,
+      "w": 2560,
+      "h": 1440,
+      "title": "Desktop · Simulações salvas · vazio",
+      "is_interactive": true
+    },
+    "Escuro-Desktop-Simulacoes-Estado-Excluida.dc.html": {
+      "x": 13800,
+      "y": 94060,
+      "w": 2560,
+      "h": 1440,
+      "title": "Desktop · Simulações salvas · depois de excluir",
+      "is_interactive": true
+    },
+    "Escuro-Tablet-Simulacoes.dc.html": {
+      "x": 0,
+      "y": 95620,
+      "w": 820,
+      "h": 1180,
+      "title": "Tablet · Simulações salvas · original",
+      "is_interactive": true
+    },
+    "Escuro-Tablet-Simulacoes-Estado-Carregando.dc.html": {
+      "x": 940,
+      "y": 95620,
+      "w": 820,
+      "h": 1180,
+      "title": "Tablet · Simulações salvas · carregando",
+      "is_interactive": true
+    },
+    "Escuro-Tablet-Simulacoes-Estado-Erro.dc.html": {
+      "x": 1880,
+      "y": 95620,
+      "w": 820,
+      "h": 1180,
+      "title": "Tablet · Simulações salvas · erro de conexão",
+      "is_interactive": true
+    },
+    "Escuro-Tablet-Simulacoes-Estado-Sem-Internet.dc.html": {
+      "x": 2820,
+      "y": 95620,
+      "w": 820,
+      "h": 1180,
+      "title": "Tablet · Simulações salvas · sem internet",
+      "is_interactive": true
+    },
+    "Escuro-Tablet-Simulacoes-Estado-Vazio.dc.html": {
+      "x": 3760,
+      "y": 95620,
+      "w": 820,
+      "h": 1180,
+      "title": "Tablet · Simulações salvas · vazio",
+      "is_interactive": true
+    },
+    "Escuro-Tablet-Simulacoes-Estado-Excluida.dc.html": {
+      "x": 4700,
+      "y": 95620,
+      "w": 820,
+      "h": 1180,
+      "title": "Tablet · Simulações salvas · depois de excluir",
+      "is_interactive": true
+    },
+    "Escuro-Mobile-Simulacoes.dc.html": {
+      "x": 0,
+      "y": 96920,
+      "w": 393,
+      "h": 852,
+      "title": "Mobile · Simulações salvas · original",
+      "is_interactive": true
+    },
+    "Escuro-Mobile-Simulacoes-Estado-Carregando.dc.html": {
+      "x": 473,
+      "y": 96920,
+      "w": 393,
+      "h": 852,
+      "title": "Mobile · Simulações salvas · carregando",
+      "is_interactive": true
+    },
+    "Escuro-Mobile-Simulacoes-Estado-Erro.dc.html": {
+      "x": 946,
+      "y": 96920,
+      "w": 393,
+      "h": 852,
+      "title": "Mobile · Simulações salvas · erro de conexão",
+      "is_interactive": true
+    },
+    "Escuro-Mobile-Simulacoes-Estado-Sem-Internet.dc.html": {
+      "x": 1419,
+      "y": 96920,
+      "w": 393,
+      "h": 852,
+      "title": "Mobile · Simulações salvas · sem internet",
+      "is_interactive": true
+    },
+    "Escuro-Mobile-Simulacoes-Estado-Vazio.dc.html": {
+      "x": 1892,
+      "y": 96920,
+      "w": 393,
+      "h": 852,
+      "title": "Mobile · Simulações salvas · vazio",
+      "is_interactive": true
+    },
+    "Escuro-Mobile-Simulacoes-Estado-Excluida.dc.html": {
+      "x": 2365,
+      "y": 96920,
+      "w": 393,
+      "h": 852,
+      "title": "Mobile · Simulações salvas · depois de excluir",
+      "is_interactive": true
+    }
+  },
+  "order": [
+    "Main.dc.html",
+    "Escuro-Desktop-Inicio-Estado-Carregando.dc.html",
+    "Escuro-Desktop-Inicio-Estado-Erro.dc.html",
+    "Escuro-Desktop-Inicio-Estado-Sem-Internet.dc.html",
+    "Escuro-Desktop-Inicio-Estado-Vazio.dc.html",
+    "Escuro-Tablet-Painel.dc.html",
+    "Escuro-Tablet-Inicio-Estado-Carregando.dc.html",
+    "Escuro-Tablet-Inicio-Estado-Erro.dc.html",
+    "Escuro-Tablet-Inicio-Estado-Sem-Internet.dc.html",
+    "Escuro-Tablet-Inicio-Estado-Vazio.dc.html",
+    "Escuro-Mobile-Inicio.dc.html",
+    "Escuro-Mobile-Inicio-Estado-Carregando.dc.html",
+    "Escuro-Mobile-Inicio-Estado-Erro.dc.html",
+    "Escuro-Mobile-Inicio-Estado-Sem-Internet.dc.html",
+    "Escuro-Mobile-Inicio-Estado-Vazio.dc.html",
+    "Escuro-Desktop-Gastos.dc.html",
+    "Escuro-Desktop-Gastos-Estado-Carregando.dc.html",
+    "Escuro-Desktop-Gastos-Estado-Erro.dc.html",
+    "Escuro-Desktop-Gastos-Estado-Sem-Internet.dc.html",
+    "Escuro-Desktop-Gastos-Estado-Vazio.dc.html",
+    "Escuro-Tablet-Gastos.dc.html",
+    "Escuro-Tablet-Gastos-Estado-Carregando.dc.html",
+    "Escuro-Tablet-Gastos-Estado-Erro.dc.html",
+    "Escuro-Tablet-Gastos-Estado-Sem-Internet.dc.html",
+    "Escuro-Tablet-Gastos-Estado-Vazio.dc.html",
+    "Escuro-Mobile-Gastos.dc.html",
+    "Escuro-Mobile-Gastos-Estado-Carregando.dc.html",
+    "Escuro-Mobile-Gastos-Estado-Erro.dc.html",
+    "Escuro-Mobile-Gastos-Estado-Sem-Internet.dc.html",
+    "Escuro-Mobile-Gastos-Estado-Vazio.dc.html",
+    "Escuro-Desktop-Investimentos.dc.html",
+    "Escuro-Desktop-Investimentos-Estado-Carregando.dc.html",
+    "Escuro-Desktop-Investimentos-Estado-Erro.dc.html",
+    "Escuro-Desktop-Investimentos-Estado-Sem-Internet.dc.html",
+    "Escuro-Desktop-Investimentos-Estado-Vazio.dc.html",
+    "Escuro-Tablet-Investimentos.dc.html",
+    "Escuro-Tablet-Investimentos-Estado-Carregando.dc.html",
+    "Escuro-Tablet-Investimentos-Estado-Erro.dc.html",
+    "Escuro-Tablet-Investimentos-Estado-Sem-Internet.dc.html",
+    "Escuro-Tablet-Investimentos-Estado-Vazio.dc.html",
+    "Escuro-Mobile-Investimentos.dc.html",
+    "Escuro-Mobile-Investimentos-Estado-Carregando.dc.html",
+    "Escuro-Mobile-Investimentos-Estado-Erro.dc.html",
+    "Escuro-Mobile-Investimentos-Estado-Sem-Internet.dc.html",
+    "Escuro-Mobile-Investimentos-Estado-Vazio.dc.html",
+    "Escuro-Desktop-Ativo.dc.html",
+    "Escuro-Desktop-Ativo-Estado-Carregando.dc.html",
+    "Escuro-Desktop-Ativo-Estado-Erro.dc.html",
+    "Escuro-Desktop-Ativo-Estado-Sem-Internet.dc.html",
+    "Escuro-Desktop-Ativo-Estado-Vazio.dc.html",
+    "Escuro-Tablet-Ativo.dc.html",
+    "Escuro-Tablet-Ativo-Estado-Carregando.dc.html",
+    "Escuro-Tablet-Ativo-Estado-Erro.dc.html",
+    "Escuro-Tablet-Ativo-Estado-Sem-Internet.dc.html",
+    "Escuro-Tablet-Ativo-Estado-Vazio.dc.html",
+    "Escuro-Mobile-Ativo.dc.html",
+    "Escuro-Mobile-Ativo-Estado-Carregando.dc.html",
+    "Escuro-Mobile-Ativo-Estado-Erro.dc.html",
+    "Escuro-Mobile-Ativo-Estado-Sem-Internet.dc.html",
+    "Escuro-Mobile-Ativo-Estado-Vazio.dc.html",
+    "Escuro-Desktop-Relatorio.dc.html",
+    "Escuro-Desktop-Relatorio-Estado-Carregando.dc.html",
+    "Escuro-Desktop-Relatorio-Estado-Erro.dc.html",
+    "Escuro-Desktop-Relatorio-Estado-Sem-Internet.dc.html",
+    "Escuro-Desktop-Relatorio-Estado-Vazio.dc.html",
+    "Escuro-Desktop-Relatorio-Estado-Vazio-Filtro.dc.html",
+    "Escuro-Tablet-Relatorio.dc.html",
+    "Escuro-Tablet-Relatorio-Estado-Carregando.dc.html",
+    "Escuro-Tablet-Relatorio-Estado-Erro.dc.html",
+    "Escuro-Tablet-Relatorio-Estado-Sem-Internet.dc.html",
+    "Escuro-Tablet-Relatorio-Estado-Vazio.dc.html",
+    "Escuro-Tablet-Relatorio-Estado-Vazio-Filtro.dc.html",
+    "Escuro-Mobile-Relatorio.dc.html",
+    "Escuro-Mobile-Relatorio-Estado-Carregando.dc.html",
+    "Escuro-Mobile-Relatorio-Estado-Erro.dc.html",
+    "Escuro-Mobile-Relatorio-Estado-Sem-Internet.dc.html",
+    "Escuro-Mobile-Relatorio-Estado-Vazio.dc.html",
+    "Escuro-Mobile-Relatorio-Estado-Vazio-Filtro.dc.html",
+    "Escuro-Desktop-Alertas.dc.html",
+    "Escuro-Desktop-Alertas-Estado-Carregando.dc.html",
+    "Escuro-Desktop-Alertas-Estado-Erro.dc.html",
+    "Escuro-Desktop-Alertas-Estado-Sem-Internet.dc.html",
+    "Escuro-Desktop-Alertas-Estado-Vazio.dc.html",
+    "Escuro-Desktop-Alertas-Estado-Vazio-Filtro.dc.html",
+    "Escuro-Tablet-Alertas.dc.html",
+    "Escuro-Tablet-Alertas-Estado-Carregando.dc.html",
+    "Escuro-Tablet-Alertas-Estado-Erro.dc.html",
+    "Escuro-Tablet-Alertas-Estado-Sem-Internet.dc.html",
+    "Escuro-Tablet-Alertas-Estado-Vazio.dc.html",
+    "Escuro-Tablet-Alertas-Estado-Vazio-Filtro.dc.html",
+    "Escuro-Mobile-Alertas.dc.html",
+    "Escuro-Mobile-Alertas-Estado-Carregando.dc.html",
+    "Escuro-Mobile-Alertas-Estado-Erro.dc.html",
+    "Escuro-Mobile-Alertas-Estado-Sem-Internet.dc.html",
+    "Escuro-Mobile-Alertas-Estado-Vazio.dc.html",
+    "Escuro-Mobile-Alertas-Estado-Vazio-Filtro.dc.html",
+    "Escuro-Desktop-Assinaturas.dc.html",
+    "Escuro-Desktop-Assinaturas-Estado-Carregando.dc.html",
+    "Escuro-Desktop-Assinaturas-Estado-Erro.dc.html",
+    "Escuro-Desktop-Assinaturas-Estado-Sem-Internet.dc.html",
+    "Escuro-Desktop-Assinaturas-Estado-Vazio.dc.html",
+    "Escuro-Desktop-Assinaturas-Estado-Vazio-Filtro.dc.html",
+    "Escuro-Tablet-Assinaturas.dc.html",
+    "Escuro-Tablet-Assinaturas-Estado-Carregando.dc.html",
+    "Escuro-Tablet-Assinaturas-Estado-Erro.dc.html",
+    "Escuro-Tablet-Assinaturas-Estado-Sem-Internet.dc.html",
+    "Escuro-Tablet-Assinaturas-Estado-Vazio.dc.html",
+    "Escuro-Tablet-Assinaturas-Estado-Vazio-Filtro.dc.html",
+    "Escuro-Mobile-Assinaturas.dc.html",
+    "Escuro-Mobile-Assinaturas-Estado-Carregando.dc.html",
+    "Escuro-Mobile-Assinaturas-Estado-Erro.dc.html",
+    "Escuro-Mobile-Assinaturas-Estado-Sem-Internet.dc.html",
+    "Escuro-Mobile-Assinaturas-Estado-Vazio.dc.html",
+    "Escuro-Mobile-Assinaturas-Estado-Vazio-Filtro.dc.html",
+    "Escuro-Desktop-Notificacoes.dc.html",
+    "Escuro-Desktop-Notificacoes-Estado-Carregando.dc.html",
+    "Escuro-Desktop-Notificacoes-Estado-Erro.dc.html",
+    "Escuro-Desktop-Notificacoes-Estado-Sem-Internet.dc.html",
+    "Escuro-Desktop-Notificacoes-Estado-Vazio.dc.html",
+    "Escuro-Desktop-Notificacoes-Estado-Vazio-Filtro.dc.html",
+    "Escuro-Tablet-Notificacoes.dc.html",
+    "Escuro-Tablet-Notificacoes-Estado-Carregando.dc.html",
+    "Escuro-Tablet-Notificacoes-Estado-Erro.dc.html",
+    "Escuro-Tablet-Notificacoes-Estado-Sem-Internet.dc.html",
+    "Escuro-Tablet-Notificacoes-Estado-Vazio.dc.html",
+    "Escuro-Tablet-Notificacoes-Estado-Vazio-Filtro.dc.html",
+    "Escuro-Mobile-Notificacoes.dc.html",
+    "Escuro-Mobile-Notificacoes-Estado-Carregando.dc.html",
+    "Escuro-Mobile-Notificacoes-Estado-Erro.dc.html",
+    "Escuro-Mobile-Notificacoes-Estado-Sem-Internet.dc.html",
+    "Escuro-Mobile-Notificacoes-Estado-Vazio.dc.html",
+    "Escuro-Mobile-Notificacoes-Estado-Vazio-Filtro.dc.html",
+    "Escuro-Desktop-Meta-Detalhe.dc.html",
+    "Escuro-Desktop-Meta-Detalhe-Estado-Carregando.dc.html",
+    "Escuro-Desktop-Meta-Detalhe-Estado-Erro.dc.html",
+    "Escuro-Desktop-Meta-Detalhe-Estado-Sem-Internet.dc.html",
+    "Escuro-Desktop-Meta-Detalhe-Estado-Vazio.dc.html",
+    "Escuro-Tablet-Meta-Detalhe.dc.html",
+    "Escuro-Tablet-Meta-Detalhe-Estado-Carregando.dc.html",
+    "Escuro-Tablet-Meta-Detalhe-Estado-Erro.dc.html",
+    "Escuro-Tablet-Meta-Detalhe-Estado-Sem-Internet.dc.html",
+    "Escuro-Tablet-Meta-Detalhe-Estado-Vazio.dc.html",
+    "Escuro-Mobile-Meta-Detalhe.dc.html",
+    "Escuro-Mobile-Meta-Detalhe-Estado-Carregando.dc.html",
+    "Escuro-Mobile-Meta-Detalhe-Estado-Erro.dc.html",
+    "Escuro-Mobile-Meta-Detalhe-Estado-Sem-Internet.dc.html",
+    "Escuro-Mobile-Meta-Detalhe-Estado-Vazio.dc.html",
+    "Escuro-Desktop-Lancamento-Detalhe.dc.html",
+    "Escuro-Desktop-Lancamento-Detalhe-Estado-Carregando.dc.html",
+    "Escuro-Desktop-Lancamento-Detalhe-Estado-Erro.dc.html",
+    "Escuro-Desktop-Lancamento-Detalhe-Estado-Sem-Internet.dc.html",
+    "Escuro-Desktop-Lancamento-Detalhe-Estado-Vazio.dc.html",
+    "Escuro-Tablet-Lancamento-Detalhe.dc.html",
+    "Escuro-Tablet-Lancamento-Detalhe-Estado-Carregando.dc.html",
+    "Escuro-Tablet-Lancamento-Detalhe-Estado-Erro.dc.html",
+    "Escuro-Tablet-Lancamento-Detalhe-Estado-Sem-Internet.dc.html",
+    "Escuro-Tablet-Lancamento-Detalhe-Estado-Vazio.dc.html",
+    "Escuro-Mobile-Lancamento-Detalhe.dc.html",
+    "Escuro-Mobile-Lancamento-Detalhe-Estado-Carregando.dc.html",
+    "Escuro-Mobile-Lancamento-Detalhe-Estado-Erro.dc.html",
+    "Escuro-Mobile-Lancamento-Detalhe-Estado-Sem-Internet.dc.html",
+    "Escuro-Mobile-Lancamento-Detalhe-Estado-Vazio.dc.html",
+    "Escuro-Desktop-Lancamentos.dc.html",
+    "Escuro-Desktop-Lancamentos-Estado-Carregando.dc.html",
+    "Escuro-Desktop-Lancamentos-Estado-Erro.dc.html",
+    "Escuro-Desktop-Lancamentos-Estado-Sem-Internet.dc.html",
+    "Escuro-Desktop-Lancamentos-Estado-Vazio.dc.html",
+    "Escuro-Desktop-Lancamentos-Estado-Vazio-Filtro.dc.html",
+    "Escuro-Tablet-Lancamentos.dc.html",
+    "Escuro-Tablet-Lancamentos-Estado-Carregando.dc.html",
+    "Escuro-Tablet-Lancamentos-Estado-Erro.dc.html",
+    "Escuro-Tablet-Lancamentos-Estado-Sem-Internet.dc.html",
+    "Escuro-Tablet-Lancamentos-Estado-Vazio.dc.html",
+    "Escuro-Tablet-Lancamentos-Estado-Vazio-Filtro.dc.html",
+    "Escuro-Mobile-Lancamentos.dc.html",
+    "Escuro-Mobile-Lancamentos-Estado-Carregando.dc.html",
+    "Escuro-Mobile-Lancamentos-Estado-Erro.dc.html",
+    "Escuro-Mobile-Lancamentos-Estado-Sem-Internet.dc.html",
+    "Escuro-Mobile-Lancamentos-Estado-Vazio.dc.html",
+    "Escuro-Mobile-Lancamentos-Estado-Vazio-Filtro.dc.html",
+    "Escuro-Desktop-Metas.dc.html",
+    "Escuro-Desktop-Metas-Estado-Carregando.dc.html",
+    "Escuro-Desktop-Metas-Estado-Erro.dc.html",
+    "Escuro-Desktop-Metas-Estado-Sem-Internet.dc.html",
+    "Escuro-Desktop-Metas-Estado-Vazio.dc.html",
+    "Escuro-Tablet-Metas.dc.html",
+    "Escuro-Tablet-Metas-Estado-Carregando.dc.html",
+    "Escuro-Tablet-Metas-Estado-Erro.dc.html",
+    "Escuro-Tablet-Metas-Estado-Sem-Internet.dc.html",
+    "Escuro-Tablet-Metas-Estado-Vazio.dc.html",
+    "Escuro-Mobile-Metas.dc.html",
+    "Escuro-Mobile-Metas-Estado-Carregando.dc.html",
+    "Escuro-Mobile-Metas-Estado-Erro.dc.html",
+    "Escuro-Mobile-Metas-Estado-Sem-Internet.dc.html",
+    "Escuro-Mobile-Metas-Estado-Vazio.dc.html",
+    "Escuro-Desktop-Posicoes.dc.html",
+    "Escuro-Desktop-Posicoes-Estado-Carregando.dc.html",
+    "Escuro-Desktop-Posicoes-Estado-Erro.dc.html",
+    "Escuro-Desktop-Posicoes-Estado-Sem-Internet.dc.html",
+    "Escuro-Desktop-Posicoes-Estado-Vazio.dc.html",
+    "Escuro-Desktop-Posicoes-Estado-Vazio-Filtro.dc.html",
+    "Escuro-Tablet-Posicoes.dc.html",
+    "Escuro-Tablet-Posicoes-Estado-Carregando.dc.html",
+    "Escuro-Tablet-Posicoes-Estado-Erro.dc.html",
+    "Escuro-Tablet-Posicoes-Estado-Sem-Internet.dc.html",
+    "Escuro-Tablet-Posicoes-Estado-Vazio.dc.html",
+    "Escuro-Tablet-Posicoes-Estado-Vazio-Filtro.dc.html",
+    "Escuro-Mobile-Posicoes.dc.html",
+    "Escuro-Mobile-Posicoes-Estado-Carregando.dc.html",
+    "Escuro-Mobile-Posicoes-Estado-Erro.dc.html",
+    "Escuro-Mobile-Posicoes-Estado-Sem-Internet.dc.html",
+    "Escuro-Mobile-Posicoes-Estado-Vazio.dc.html",
+    "Escuro-Mobile-Posicoes-Estado-Vazio-Filtro.dc.html",
+    "Escuro-Desktop-Simulacoes.dc.html",
+    "Escuro-Desktop-Simulacoes-Estado-Carregando.dc.html",
+    "Escuro-Desktop-Simulacoes-Estado-Erro.dc.html",
+    "Escuro-Desktop-Simulacoes-Estado-Sem-Internet.dc.html",
+    "Escuro-Desktop-Simulacoes-Estado-Vazio.dc.html",
+    "Escuro-Desktop-Simulacoes-Estado-Excluida.dc.html",
+    "Escuro-Tablet-Simulacoes.dc.html",
+    "Escuro-Tablet-Simulacoes-Estado-Carregando.dc.html",
+    "Escuro-Tablet-Simulacoes-Estado-Erro.dc.html",
+    "Escuro-Tablet-Simulacoes-Estado-Sem-Internet.dc.html",
+    "Escuro-Tablet-Simulacoes-Estado-Vazio.dc.html",
+    "Escuro-Tablet-Simulacoes-Estado-Excluida.dc.html",
+    "Escuro-Mobile-Simulacoes.dc.html",
+    "Escuro-Mobile-Simulacoes-Estado-Carregando.dc.html",
+    "Escuro-Mobile-Simulacoes-Estado-Erro.dc.html",
+    "Escuro-Mobile-Simulacoes-Estado-Sem-Internet.dc.html",
+    "Escuro-Mobile-Simulacoes-Estado-Vazio.dc.html",
+    "Escuro-Mobile-Simulacoes-Estado-Excluida.dc.html"
+  ],
+  "notes": {
+    "sec-inicio": {
+      "x": 0,
+      "y": 0,
+      "text": "Início · original e estados",
+      "kind": "title1",
+      "maxW": 16560
+    },
+    "sec-gastos": {
+      "x": 0,
+      "y": 8060,
+      "text": "Gastos · original e estados",
+      "kind": "title1",
+      "maxW": 16560
+    },
+    "sec-investimentos": {
+      "x": 0,
+      "y": 16350,
+      "text": "Investimentos · original e estados",
+      "kind": "title1",
+      "maxW": 16560
+    },
+    "sec-ativo": {
+      "x": 0,
+      "y": 28840,
+      "text": "Detalhe do ativo (PETR4) · original e estados",
+      "kind": "title1",
+      "maxW": 16560
+    },
+    "sec-relatorio": {
+      "x": 0,
+      "y": 40580,
+      "text": "Relatório · original e estados",
+      "kind": "title1",
+      "maxW": 16560
+    },
+    "sec-alertas": {
+      "x": 0,
+      "y": 48720,
+      "text": "Alertas · original e estados",
+      "kind": "title1",
+      "maxW": 16560
+    },
+    "sec-assinaturas": {
+      "x": 0,
+      "y": 53850,
+      "text": "Assinaturas · original e estados",
+      "kind": "title1",
+      "maxW": 16560
+    },
+    "sec-notificacoes": {
+      "x": 0,
+      "y": 59040,
+      "text": "Notificações · original e estados",
+      "kind": "title1",
+      "maxW": 16560
+    },
+    "sec-meta-detalhe": {
+      "x": 0,
+      "y": 64430,
+      "text": "Detalhe da meta · original e estados",
+      "kind": "title1",
+      "maxW": 16560
+    },
+    "sec-lancamento-detalhe": {
+      "x": 0,
+      "y": 70680,
+      "text": "Detalhe do lançamento · original e estados",
+      "kind": "title1",
+      "maxW": 16560
+    },
+    "sec-lancamentos": {
+      "x": 0,
+      "y": 75800,
+      "text": "Lançamentos · original e estados",
+      "kind": "title1",
+      "maxW": 16560
+    },
+    "sec-metas": {
+      "x": 0,
+      "y": 82260,
+      "text": "Metas · original e estados",
+      "kind": "title1",
+      "maxW": 16560
+    },
+    "sec-posicoes": {
+      "x": 0,
+      "y": 87150,
+      "text": "Posições · original e estados",
+      "kind": "title1",
+      "maxW": 16560
+    },
+    "sec-simulacoes": {
+      "x": 0,
+      "y": 93760,
+      "text": "Simulações salvas · original e estados",
+      "kind": "title1",
+      "maxW": 16560
+    }
+  },
+  "designSystems": []
+}
