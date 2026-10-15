@@ -228,7 +228,9 @@ subtitle/body/lead/label/caption/micro`, ou `size`/`weight`/`serif` explícitos)
   callback nem funções auxiliares locais — viram "Remote Function" e quebram no aparelho (os testes
   não pegam). Use laços simples ou funções de módulo com `'worklet'` (veja `InteractiveGlobe`). Leia e
   escreva shared values com `.get()`/`.set()` (o React Compiler recusa `.value =`) e use
-  `scheduleOnRN` (react-native-worklets) no lugar de `runOnJS`.
+  `scheduleOnRN` (react-native-worklets) no lugar de `runOnJS`. O Babel só transforma em worklet sozinho os callbacks
+  de hooks que ele conhece pelo nome (`useFrameCallback`, `useDerivedValue`…): passando por um
+  apelido, escreva `'worklet'` no começo do callback.
 - **Gesto dentro de página que rola:** um dedo só assume depois de movimento horizontal
   (`activeOffsetX` + `failOffsetY`); deixe o vertical para a rolagem e ofereça dois dedos.
 - **Gestos:** prefira `react-native-gesture-handler` (`Gesture.Pan().runOnJS(true)`) a

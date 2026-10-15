@@ -18,7 +18,7 @@ const MARKERS: GlobeMarker[] = EXPOSURE.flatMap((item) =>
     ? [
         {
           key: item.key,
-          label: item.label,
+          label: `${item.label} · ${item.share}%`,
           lat: item.place.lat,
           lon: item.place.lon,
           color: item.color,
@@ -28,11 +28,14 @@ const MARKERS: GlobeMarker[] = EXPOSURE.flatMap((item) =>
     : [],
 );
 const NO_COUNTRY = EXPOSURE.find((item) => item.place === null);
+// The satellite's chip names what is in it ("Bitcoin · 10%"), as on the web.
 const ORBIT = NO_COUNTRY
-  ? { key: NO_COUNTRY.key, label: NO_COUNTRY.label, color: NO_COUNTRY.color }
+  ? {
+      key: NO_COUNTRY.key,
+      label: `${EXPOSURE_ASSETS[NO_COUNTRY.key][0]?.name ?? NO_COUNTRY.label} · ${NO_COUNTRY.share}%`,
+      color: NO_COUNTRY.color,
+    }
   : undefined;
-const BRAZIL = MARKERS.find((marker) => marker.key === 'BR');
-const START = { lat: (BRAZIL?.lat ?? 0) + 8, lon: (BRAZIL?.lon ?? 0) - 12 };
 
 const SUMMARY = EXPOSURE.map((item) => `${item.label} ${item.share}%`).join(', ');
 
@@ -174,14 +177,15 @@ export function ExposureCard() {
             orbit={ORBIT}
             selectedKey={selected}
             onSelect={select}
-            initialCenter={START}
             autoRotate={!reduceMotion}
             accessibilityLabel={`Globo com a exposição por país: ${SUMMARY}`}
           />
-          <Text size={12} tone="subtle" align="center">
-            Arraste para os lados ou use dois dedos para girar · pinça para aproximar · toque num
-            país
-          </Text>
+          <View className="flex-row items-center justify-center gap-1.5">
+            <Icon name="refresh" size={14} color={colors.foreground.subtle} />
+            <Text size={12} tone="subtle">
+              Arraste para girar · toque num país
+            </Text>
+          </View>
         </View>
         <View className={isTablet ? 'min-w-0 flex-1 gap-3.5' : 'gap-3.5'}>
           <AllocationBar

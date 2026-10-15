@@ -108,7 +108,7 @@ export function BalanceCard() {
                 </Text>
                 <MoneyText value={balance.value} masked={masked} variant="hero" numberOfLines={1} />
               </View>
-              <HideValuesButton variant="outline" />
+              <HideValuesButton />
             </View>
             <View className="gap-1">
               <FlowRow

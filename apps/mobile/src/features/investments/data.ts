@@ -318,8 +318,8 @@ export const PERFORMANCE = {
 export const EXPOSURE = [
   {
     key: 'BR',
-    /** ISO 3166-1 numeric code and the marker position on the globe. */
-    place: { countryId: 76, lat: -10.6, lon: -53.2 },
+    /** ISO 3166-1 numeric code and the marker on the globe: the exchange (B3, São Paulo). */
+    place: { countryId: 76, lat: -23.55, lon: -46.63 },
     label: 'Brasil',
     /** "Ativos no Brasil". */
     where: 'no Brasil',
@@ -330,7 +330,8 @@ export const EXPOSURE = [
   },
   {
     key: 'US',
-    place: { countryId: 840, lat: 39.5, lon: -98.4 },
+    /** S&P 500, New York. */
+    place: { countryId: 840, lat: 40.71, lon: -74.01 },
     label: 'Estados Unidos',
     where: 'nos Estados Unidos',
     detail: 'Via IVVB11, que segue o S&P 500',

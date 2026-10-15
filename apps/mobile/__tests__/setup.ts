@@ -6,7 +6,11 @@ import 'react-native-gesture-handler/jestSetup';
 
 // Official mocks for animation-heavy libraries (Reanimated 4 runs on react-native-worklets).
 jest.mock('react-native-worklets', () => jest.requireActual('react-native-worklets/src/mock'));
-jest.mock('react-native-reanimated', () => jest.requireActual('react-native-reanimated/mock'));
+jest.mock('react-native-reanimated', () => ({
+  ...jest.requireActual<object>('react-native-reanimated/mock'),
+  // Not in the official mock: frame callbacks never run in tests.
+  useFrameCallback: () => ({ setActive: () => undefined, isActive: false, callbackId: -1 }),
+}));
 jest.mock('@gorhom/bottom-sheet', () => jest.requireActual('@gorhom/bottom-sheet/mock'));
 
 // Safe-area hooks work without a provider (official mock, fixed metrics).

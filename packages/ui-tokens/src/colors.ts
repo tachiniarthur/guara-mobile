@@ -124,6 +124,8 @@ export const colors = {
     oceanLight: '#1D2B24',
     oceanDark: '#0E1512',
     land: '#4A5E52',
+    /** Chips of the places over the globe ("Brasil · 82%"): Mata à noite at 80%. */
+    chip: 'rgba(11, 17, 14, 0.8)',
   },
   /** Translucent dark buttons over the Mata texture ("Editar" on the profile card). */
   veil: 'rgba(11, 17, 14, 0.7)',
