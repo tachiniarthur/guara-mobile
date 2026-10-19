@@ -14,22 +14,34 @@ export type Institution = z.infer<typeof InstitutionSchema>;
 
 /**
  * Lifecycle of an Open Finance consent:
- * `expiring` = still valid but ends soon (the user should renew); `expired` = needs a new
- * consent; `revoked` = cancelled by the user; `error` = sync failing at the institution.
+ * `expiring` = still valid but ends soon (the user should renew); `paused` = beyond the plan's
+ * limit after a downgrade (stops syncing, keeps the data); `expired` = needs a new consent;
+ * `revoked` = cancelled by the user; `error` = sync failing at the institution.
  */
 export const BankConnectionStatusSchema = z.enum([
   'active',
   'expiring',
+  'paused',
   'expired',
   'revoked',
   'error',
 ]);
 export type BankConnectionStatus = z.infer<typeof BankConnectionStatusSchema>;
 
+/** What the user allowed the institution to share ("O que o Guará vê"). */
+export const ConsentPermissionSchema = z.enum([
+  'registration_data',
+  'accounts',
+  'credit_cards',
+  'investments',
+]);
+export type ConsentPermission = z.infer<typeof ConsentPermissionSchema>;
+
 export const BankConnectionSchema = z.object({
   id: BankConnectionIdSchema,
   institution: InstitutionSchema,
   status: BankConnectionStatusSchema,
+  permissions: z.array(ConsentPermissionSchema),
   /** When the consent stops being valid. */
   consentExpiresAt: IsoDateTimeSchema.nullable(),
   lastSyncedAt: IsoDateTimeSchema.nullable(),

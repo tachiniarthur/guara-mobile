@@ -25,9 +25,13 @@ export const GoalStorageSchema = z.object({
 });
 export type GoalStorage = z.infer<typeof GoalStorageSchema>;
 
+/** Icon of the goal card, kebab case like the categories' ("shield-check"). */
+export const GoalIconSchema = z.string().regex(/^[a-z0-9-]+$/);
+
 export const GoalSchema = z.object({
   id: GoalIdSchema,
   name: z.string().min(1),
+  icon: GoalIconSchema.nullable(),
   /** Short explanation of the amount ("6 meses de custo de vida"). */
   note: z.string().min(1).nullable(),
   target: PositiveCentsSchema,
@@ -89,6 +93,7 @@ export type GoalDetail = z.infer<typeof GoalDetailSchema>;
 
 export const CreateGoalBodySchema = z.object({
   name: z.string().min(1).max(80),
+  icon: GoalIconSchema.nullable().optional(),
   note: z.string().min(1).max(120).nullable().optional(),
   target: PositiveCentsSchema,
   saved: NonNegativeCentsSchema.optional(),

@@ -22,6 +22,10 @@ export const NotificationTypeSchema = z.enum([
   'consent_expiring',
   'subscription_price_increase',
   'report_ready',
+  'goal_milestone',
+  'goal_behind',
+  'goal_deposit_reminder',
+  'investment_duplicate',
 ]);
 export type NotificationType = z.infer<typeof NotificationTypeSchema>;
 

@@ -28,6 +28,23 @@ export type PlanUsage = z.infer<typeof PlanUsageSchema>;
 export const AccountPlanSchema = z.object({ plan: PlanSchema, usage: PlanUsageSchema });
 export type AccountPlan = z.infer<typeof AccountPlanSchema>;
 
+export const TextSizeSchema = z.enum(['default', 'large', 'larger']);
+export type TextSize = z.infer<typeof TextSizeSchema>;
+
+/**
+ * Appearance settings that follow the account across the app and the web ("Aparência e
+ * acessibilidade"). Biometrics stays on each device.
+ */
+export const UserPreferencesSchema = z.object({
+  textSize: TextSizeSchema,
+  reduceMotion: z.boolean(),
+  hideValuesOnOpen: z.boolean(),
+});
+export type UserPreferences = z.infer<typeof UserPreferencesSchema>;
+
+export const UpdateUserPreferencesBodySchema = UserPreferencesSchema.partial();
+export type UpdateUserPreferencesBody = z.infer<typeof UpdateUserPreferencesBodySchema>;
+
 export const UserSchema = z.object({
   id: UserIdSchema,
   email: z.email(),

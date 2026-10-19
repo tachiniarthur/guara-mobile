@@ -6,6 +6,8 @@ import {
   NotificationPreferencesSchema,
   SubmitInvestorProfileBodySchema,
   UpdateProfileBodySchema,
+  UpdateUserPreferencesBodySchema,
+  UserPreferencesSchema,
   UserSchema,
 } from '../../domain';
 import { NoContentSchema, defineEndpoints } from '../define';
@@ -38,6 +40,19 @@ export const accountEndpoints = defineEndpoints({
     summary: 'Replace notification channels',
     body: NotificationPreferencesSchema,
     response: NotificationPreferencesSchema,
+  },
+  'me.preferences': {
+    method: 'GET',
+    path: '/v1/me/preferences',
+    summary: 'Appearance settings that follow the account',
+    response: UserPreferencesSchema,
+  },
+  'me.updatePreferences': {
+    method: 'PATCH',
+    path: '/v1/me/preferences',
+    summary: 'Update appearance settings',
+    body: UpdateUserPreferencesBodySchema,
+    response: UserPreferencesSchema,
   },
   'me.exportData': {
     method: 'POST',

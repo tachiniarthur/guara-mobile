@@ -44,6 +44,11 @@ const TYPE_AREA: Record<NotificationType, NotificationArea> = {
   unusual_transaction: 'spending',
   subscription_price_increase: 'spending',
   price_alert: 'investments',
+  investment_duplicate: 'investments',
+  // The design has no goals filter; goals are savings, next to investments.
+  goal_milestone: 'investments',
+  goal_behind: 'investments',
+  goal_deposit_reminder: 'investments',
   consent_expiring: 'account',
   report_ready: 'account',
 };
