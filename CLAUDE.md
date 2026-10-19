@@ -118,6 +118,8 @@ packages/
   utils/               funções puras e testadas (money, date, percent, decimal, empty, text)
   tsconfig/            base.json, react-native.json
   eslint-config/       base (TS puro) e expo (app)
+supabase/
+  migrations/          SQL do banco (Supabase), em ordem — veja "Banco de dados"
 ```
 
 ### Convenções
@@ -332,6 +334,55 @@ tipado e o transporte HTTP já existem e serão usados quando a API chegar:
   O TanStack só repete `network`, `internal` e `unavailable`.
 - **Validação de respostas:** em dev/testes, `schema.parse` (lança `ContractViolationError`);
   em produção, `safeParse` + `logger.error`, sem derrubar o app.
+
+## Banco de dados (Supabase)
+
+Um banco só para o mobile e o web: projeto Supabase **GuaraDados** (`fbnritavomahzllgslak`,
+São Paulo, Postgres 17), acessado pelo plugin do Supabase (MCP).
+
+- **Quem acessa:** só a API NestJS e os workers, com a service role. Os apps nunca leem nem gravam
+  tabelas; a única exceção é o login (Supabase Auth). Por isso o `.env` do app só tem a URL e a
+  chave pública do projeto.
+- **RLS em todas as tabelas**, como segunda camada: o usuário logado lê só as próprias linhas.
+  Dados de referência (planos, categorias, instituições, alocação-alvo, ativos e cotações da Brapi)
+  são legíveis por qualquer usuário logado. O usuário só grava `profiles` e as preferências de
+  notificação; todo o resto passa pela API. `bank_connection_secrets` não tem política de
+  propósito (só a service role lê) — o verificador avisa e o aviso pode ser ignorado.
+- **Migrações:** `supabase/migrations/<versão>_<nome>.sql`, aplicadas com `apply_migration`. O
+  arquivo leva a **mesma versão que o banco registra** (confira com `list_migrations`). Nunca
+  edite uma migração já aplicada: crie outra. Depois de aplicar, rode `get_advisors` (segurança e
+  desempenho); "Unused Index" é normal enquanto o banco está vazio.
+
+| Migração            | Conteúdo                                                                                                                                                                                                       |
+| ------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `base`              | planos, perfis (criados por gatilho no cadastro do Supabase Auth; acompanham a troca de e-mail), categorias e subcategorias, preferências de notificação                                                       |
+| `open_finance`      | instituições, conexões da Malvo (segredos criptografados pela API, cobranças de consentimento), contas e cartões, lançamentos, regras de categoria por loja; `open_finance_fk_indexes` completa os índices     |
+| `spending_alerts`   | tetos (histórico mensal e avisos enviados), assinaturas, compras fora do padrão, caixa de notificações com entrega por canal, aparelhos de push, exportações de relatório (bucket privado `report-exports`)    |
+| `investments`       | perfil de investidor, alocação-alvo, cache da Brapi (ativos, cotações, histórico, proventos, eventos, balanços, CDI), posições, movimentações, duplicidades, fotos mensais da carteira, bens, alertas de preço |
+| `goals_simulations` | simulações salvas, metas e movimentações das metas                                                                                                                                                             |
+| `chat`              | conversas, mensagens, anexos (bucket privado `chat-attachments`), contador mensal de perguntas (`consume_ai_message`), uso de tokens e custo de cada chamada ao Claude                                         |
+
+### Convenções do banco
+
+- **Espelha `@guara/types`:** nomes em inglês e `snake_case`, enums com os mesmos valores dos
+  schemas zod. O comentário do topo de cada migração diz quais arquivos ela espelha; mudou o
+  contrato, mude o banco (migração nova) no mesmo commit.
+- **Dinheiro:** `bigint` com sufixo `_cents`. Quantidades fracionárias e valores abaixo de 1
+  centavo: `numeric` (o `DecimalString` do contrato). Percentuais: `numeric` em pontos percentuais.
+- **Datas:** `timestamptz` para instantes, `date` para dias de São Paulo; mês = `date` no dia 1
+  (há `check` garantindo). Ausente é `null`, nunca `0` nem `''`.
+- **Chaves:** `id uuid default gen_random_uuid()`; `created_at`/`updated_at` com o gatilho
+  `set_updated_at()`. Tabelas do usuário têm `user_id` e as chaves estrangeiras entre elas são
+  compostas `(id, user_id)`: uma linha só aponta para outra do mesmo dono.
+- **Regras no banco:** `check` e gatilhos garantem o que não pode quebrar (limite de bancos e de
+  alertas do plano, saldo da meta, contador de perguntas atômico, um aviso por teto e valor no
+  mês). Funções levam `set search_path = ''` e têm o `execute` revogado de `public`, `anon` e
+  `authenticated`; `security definer` só nos gatilhos de `auth.users`.
+- **Excluir a conta** (`auth.users`) apaga tudo do usuário em cascata.
+- **Desconectar um banco mantém o histórico:** a conexão fica `revoked` (com `revoked_at`), a API
+  para de consultar a Malvo e ela deixa de contar no limite do plano. Reconectar a mesma
+  instituição reaproveita a conexão. Não guardamos o JSON bruto da Malvo.
+- **Categorias sem ícone** ficam com `icon = null` até o design definir (só 5 têm hoje).
 
 ## Versões fixadas de propósito
 
